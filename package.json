@@ -1,0 +1,23 @@
+{
+  "name": "favstash-shortform-skills",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Agent skills and a local studio harness for vertical short-form video and carousel production.",
+  "type": "module",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "doctor": "node scripts/doctor.mjs",
+    "setup": "node scripts/init-workspace.mjs",
+    "new-edit": "node scripts/new-edit.mjs",
+    "index-broll": "node scripts/index-broll.mjs",
+    "analyze-reference": "node scripts/reference-analyze.mjs",
+    "generate:sfx": "node scripts/generate-sfx.mjs",
+    "sync:runtime": "node scripts/sync-runtime-bundle.mjs",
+    "enable:remotion": "node scripts/enable-remotion.mjs",
+    "test": "node --test",
+    "validate": "node scripts/validate-repo.mjs"
+  },
+  "license": "Apache-2.0"
+}

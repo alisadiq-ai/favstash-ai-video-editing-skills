@@ -1,0 +1,6 @@
+interface:
+  display_name: "Short-Form Captions"
+  short_description: "Transcribe, segment, style, and verify readable captions"
+  default_prompt: "Use $shortform-captions to add accurate, phone-readable captions to this active short-form edit."
+policy:
+  allow_implicit_invocation: true

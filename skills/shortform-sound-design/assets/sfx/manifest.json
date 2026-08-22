@@ -1,0 +1,226 @@
+{
+  "schemaVersion": 1,
+  "title": "FavStash Original Short-Form SFX Starter Pack",
+  "generatedBy": "scripts/generate-sfx.mjs",
+  "license": "Apache-2.0",
+  "guidance": "Use effects as narrative punctuation. Keep them below intelligible speech and avoid adding one merely to satisfy a cadence rule.",
+  "count": 12,
+  "sounds": [
+    {
+      "id": "soft-click",
+      "title": "Soft Click",
+      "file": "soft-click.wav",
+      "durationSeconds": 0.075,
+      "sampleRate": 48000,
+      "channels": 1,
+      "bitDepth": 16,
+      "tags": [
+        "ui",
+        "caption",
+        "subtle"
+      ],
+      "recommendedUse": "Small text changes, ticks, or quiet interface moments.",
+      "sha256": "96d33ae5a97286c099de8febb6c4dc5be248c2e1e261966e326c14a76409498c",
+      "license": "Apache-2.0",
+      "provenance": "Deterministically synthesized by scripts/generate-sfx.mjs; contains no third-party recording."
+    },
+    {
+      "id": "hard-click",
+      "title": "Hard Click",
+      "file": "hard-click.wav",
+      "durationSeconds": 0.09,
+      "sampleRate": 48000,
+      "channels": 1,
+      "bitDepth": 16,
+      "tags": [
+        "ui",
+        "cut",
+        "punchy"
+      ],
+      "recommendedUse": "Decisive UI selection or a sharp visual cut.",
+      "sha256": "e6608869f3a7882ad6e155984057891f608b7c988cc969fefa9e6920c19c3452",
+      "license": "Apache-2.0",
+      "provenance": "Deterministically synthesized by scripts/generate-sfx.mjs; contains no third-party recording."
+    },
+    {
+      "id": "clean-pop",
+      "title": "Clean Pop",
+      "file": "clean-pop.wav",
+      "durationSeconds": 0.16,
+      "sampleRate": 48000,
+      "channels": 1,
+      "bitDepth": 16,
+      "tags": [
+        "text",
+        "reveal",
+        "friendly"
+      ],
+      "recommendedUse": "Word, icon, or lightweight graphic reveals.",
+      "sha256": "066dcc66bb53ebd9438ba18d16c5b9fc722309123d4bdf25d6a026aeca53f260",
+      "license": "Apache-2.0",
+      "provenance": "Deterministically synthesized by scripts/generate-sfx.mjs; contains no third-party recording."
+    },
+    {
+      "id": "clean-ding",
+      "title": "Clean Ding",
+      "file": "clean-ding.wav",
+      "durationSeconds": 0.55,
+      "sampleRate": 48000,
+      "channels": 1,
+      "bitDepth": 16,
+      "tags": [
+        "success",
+        "reveal",
+        "bright"
+      ],
+      "recommendedUse": "A positive result or satisfying completion; use sparingly.",
+      "sha256": "26f2540b63529cc1dcedfc8037ad314a93dc7d24073c7026f7a6bf101e3d5834",
+      "license": "Apache-2.0",
+      "provenance": "Deterministically synthesized by scripts/generate-sfx.mjs; contains no third-party recording."
+    },
+    {
+      "id": "error-buzz",
+      "title": "Error Buzz",
+      "file": "error-buzz.wav",
+      "durationSeconds": 0.32,
+      "sampleRate": 48000,
+      "channels": 1,
+      "bitDepth": 16,
+      "tags": [
+        "error",
+        "contrast",
+        "comic"
+      ],
+      "recommendedUse": "A clear mistake or contrast beat; avoid under serious narration.",
+      "sha256": "6ba481406781c0baf8bf8748ee152b2243a20e8d75721af72d55af4c054b2e96",
+      "license": "Apache-2.0",
+      "provenance": "Deterministically synthesized by scripts/generate-sfx.mjs; contains no third-party recording."
+    },
+    {
+      "id": "soft-whoosh",
+      "title": "Soft Whoosh",
+      "file": "soft-whoosh.wav",
+      "durationSeconds": 0.42,
+      "sampleRate": 48000,
+      "channels": 1,
+      "bitDepth": 16,
+      "tags": [
+        "transition",
+        "gentle",
+        "movement"
+      ],
+      "recommendedUse": "Slow pans, card movement, or a soft scene transition.",
+      "sha256": "be56b46890d59b8d132a306692c574c231c354c595d1880100cedc9090d145a4",
+      "license": "Apache-2.0",
+      "provenance": "Deterministically synthesized by scripts/generate-sfx.mjs; contains no third-party recording."
+    },
+    {
+      "id": "fast-whoosh",
+      "title": "Fast Whoosh",
+      "file": "fast-whoosh.wav",
+      "durationSeconds": 0.19,
+      "sampleRate": 48000,
+      "channels": 1,
+      "bitDepth": 16,
+      "tags": [
+        "transition",
+        "fast",
+        "swipe"
+      ],
+      "recommendedUse": "A motivated whip, swipe, or rapid reframing transition.",
+      "sha256": "cef2b4db32e38ca64b5c9f6b4c5ff6e25db3ce2c2c0c73a21a0b082454aac379",
+      "license": "Apache-2.0",
+      "provenance": "Deterministically synthesized by scripts/generate-sfx.mjs; contains no third-party recording."
+    },
+    {
+      "id": "deep-whoosh",
+      "title": "Deep Whoosh",
+      "file": "deep-whoosh.wav",
+      "durationSeconds": 0.68,
+      "sampleRate": 48000,
+      "channels": 1,
+      "bitDepth": 16,
+      "tags": [
+        "transition",
+        "cinematic",
+        "low"
+      ],
+      "recommendedUse": "A major section change or slower high-stakes reveal.",
+      "sha256": "2f7316f3aa6cb98e9073938e1e89ccc575f703a928cb6620b29a0b4ba1ef031d",
+      "license": "Apache-2.0",
+      "provenance": "Deterministically synthesized by scripts/generate-sfx.mjs; contains no third-party recording."
+    },
+    {
+      "id": "short-riser",
+      "title": "Short Riser",
+      "file": "short-riser.wav",
+      "durationSeconds": 0.82,
+      "sampleRate": 48000,
+      "channels": 1,
+      "bitDepth": 16,
+      "tags": [
+        "anticipation",
+        "build",
+        "reveal"
+      ],
+      "recommendedUse": "Build toward a reveal; resolve it rather than leaving tension hanging.",
+      "sha256": "86812c3572419cd16e0fb2250ba3bb980e2a00ed5b087999487ee6023288e7ba",
+      "license": "Apache-2.0",
+      "provenance": "Deterministically synthesized by scripts/generate-sfx.mjs; contains no third-party recording."
+    },
+    {
+      "id": "sub-impact",
+      "title": "Sub Impact",
+      "file": "sub-impact.wav",
+      "durationSeconds": 0.64,
+      "sampleRate": 48000,
+      "channels": 1,
+      "bitDepth": 16,
+      "tags": [
+        "impact",
+        "reveal",
+        "low"
+      ],
+      "recommendedUse": "One important claim, number, or final reveal—not every cut.",
+      "sha256": "c910408bd9f2ca52ceff846cda65207ed218e928ccde1d494694de81c694b157",
+      "license": "Apache-2.0",
+      "provenance": "Deterministically synthesized by scripts/generate-sfx.mjs; contains no third-party recording."
+    },
+    {
+      "id": "typing-tick",
+      "title": "Typing Tick",
+      "file": "typing-tick.wav",
+      "durationSeconds": 0.055,
+      "sampleRate": 48000,
+      "channels": 1,
+      "bitDepth": 16,
+      "tags": [
+        "typing",
+        "caption",
+        "ui"
+      ],
+      "recommendedUse": "Occasional typed-character accents; never repeat on every letter for long copy.",
+      "sha256": "343a4fb37d25eded633c23cdd035c188b5be07c7313224a8ed33728b0ebfe3dc",
+      "license": "Apache-2.0",
+      "provenance": "Deterministically synthesized by scripts/generate-sfx.mjs; contains no third-party recording."
+    },
+    {
+      "id": "sparkle",
+      "title": "Sparkle",
+      "file": "sparkle.wav",
+      "durationSeconds": 0.72,
+      "sampleRate": 48000,
+      "channels": 1,
+      "bitDepth": 16,
+      "tags": [
+        "delight",
+        "highlight",
+        "bright"
+      ],
+      "recommendedUse": "A delightful payoff or premium highlight; keep below the voice.",
+      "sha256": "ac0bed2ac2ff2fe4cf1c42ec5914d4e4d9e271fc8d4801c5f3f293fb06dbf846",
+      "license": "Apache-2.0",
+      "provenance": "Deterministically synthesized by scripts/generate-sfx.mjs; contains no third-party recording."
+    }
+  ]
+}

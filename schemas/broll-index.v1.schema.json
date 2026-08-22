@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://www.favstash.app/schemas/shortform/broll-index.v1.schema.json",
+  "title": "FavStash B-roll index",
+  "type": "object",
+  "required": ["schemaVersion", "generatedAt", "brollDirectory", "count", "assets"],
+  "properties": {
+    "schemaVersion": { "const": 1 },
+    "generatedAt": { "type": "string", "format": "date-time" },
+    "brollDirectory": { "type": "string" },
+    "count": { "type": "integer", "minimum": 0 },
+    "assets": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "relativePath", "description", "keywords", "sha256"],
+        "properties": {
+          "id": { "type": "string" },
+          "relativePath": { "type": "string" },
+          "description": { "type": "string" },
+          "keywords": { "type": "array", "items": { "type": "string" }, "uniqueItems": true },
+          "take": { "type": ["integer", "null"] },
+          "sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+          "technical": { "type": ["object", "null"] },
+          "probeError": { "type": ["string", "null"] }
+        }
+      }
+    }
+  }
+}

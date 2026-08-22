@@ -1,0 +1,22 @@
+node_modules/
+.DS_Store
+*.log
+
+# Local creator workspaces and rendered media
+.favstash-studio/
+edits/
+dist/
+tmp/
+
+# Private maintainer research. This directory exists locally but is never public.
+.dev-private/
+
+# Secrets and machine-specific settings
+.env
+.env.*
+!.env.example
+
+# Optional adapter installs
+package-lock.json
+pnpm-lock.yaml
+yarn.lock

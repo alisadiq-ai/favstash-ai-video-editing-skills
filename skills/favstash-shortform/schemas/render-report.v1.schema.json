@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://www.favstash.app/schemas/shortform/render-report.v1.schema.json",
+  "title": "FavStash render report",
+  "type": "object",
+  "required": ["schemaVersion", "runId", "renderedAt", "engine", "output", "technicalChecks"],
+  "properties": {
+    "schemaVersion": { "const": 1 },
+    "runId": { "type": "string" },
+    "renderedAt": { "type": "string", "format": "date-time" },
+    "engine": { "enum": ["hyperframes", "remotion", "ffmpeg"] },
+    "engineVersion": { "type": "string" },
+    "output": { "type": "string" },
+    "sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+    "technicalChecks": { "type": "object" },
+    "warnings": { "type": "array", "items": { "type": "string" } }
+  },
+  "additionalProperties": true
+}

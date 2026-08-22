@@ -1,0 +1,57 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://www.favstash.app/schemas/shortform/edit-plan.v1.schema.json",
+  "title": "FavStash short-form edit plan",
+  "type": "object",
+  "required": ["schemaVersion", "runId", "format", "style", "sourceMode", "canvas", "beats", "text", "audio"],
+  "properties": {
+    "schemaVersion": { "const": 1 },
+    "runId": { "type": "string" },
+    "format": { "enum": ["video", "carousel"] },
+    "style": { "type": "string" },
+    "objective": { "type": "string" },
+    "audience": { "type": "string" },
+    "platformTargets": { "type": "array", "items": { "enum": ["instagram", "tiktok", "youtube", "linkedin"] }, "uniqueItems": true },
+    "sourceMode": { "enum": ["fresh", "stash-selected", "stash-recommended"] },
+    "hypothesis": { "type": "string" },
+    "canvas": {
+      "type": "object",
+      "required": ["width", "height"],
+      "properties": {
+        "width": { "type": "integer", "minimum": 1 },
+        "height": { "type": "integer", "minimum": 1 },
+        "fps": { "type": "number", "exclusiveMinimum": 0 },
+        "unit": { "const": "px" }
+      }
+    },
+    "beats": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "purpose"],
+        "properties": {
+          "id": { "type": "string" },
+          "startSeconds": { "type": "number", "minimum": 0 },
+          "endSeconds": { "type": "number", "minimum": 0 },
+          "purpose": { "type": "string" },
+          "visual": { "type": "string" },
+          "copy": { "type": "string" },
+          "audio": { "type": "string" }
+        },
+        "additionalProperties": true
+      }
+    },
+    "text": { "type": "array", "items": { "type": "object" } },
+    "audio": {
+      "type": "object",
+      "required": ["voice", "music", "sfx"],
+      "properties": {
+        "voice": { "type": ["object", "string", "null"] },
+        "music": { "type": ["object", "string", "null"] },
+        "sfx": { "type": "array", "items": { "type": "object" } }
+      }
+    },
+    "reviewNotes": { "type": "array", "items": { "type": "string" } }
+  },
+  "additionalProperties": true
+}

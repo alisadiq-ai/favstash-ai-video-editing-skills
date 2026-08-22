@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://www.favstash.app/schemas/shortform/performance-feedback.v1.schema.json",
+  "title": "FavStash performance feedback",
+  "type": "object",
+  "required": ["schemaVersion", "runId", "measuredAt", "platform", "window", "metrics", "interpretation", "nextHypothesis"],
+  "properties": {
+    "schemaVersion": { "const": 1 },
+    "runId": { "type": "string" },
+    "measuredAt": { "type": "string", "format": "date-time" },
+    "platform": { "enum": ["instagram", "tiktok", "youtube", "linkedin"] },
+    "accountId": { "type": "string" },
+    "window": { "type": "string" },
+    "metrics": { "type": "object", "additionalProperties": { "type": ["number", "integer", "null"] } },
+    "interpretation": { "type": "string" },
+    "confounders": { "type": "array", "items": { "type": "string" } },
+    "nextHypothesis": { "type": "string" }
+  }
+}

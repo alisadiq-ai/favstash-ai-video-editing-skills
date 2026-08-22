@@ -1,0 +1,6 @@
+interface:
+  display_name: "Short-Form Sound Design"
+  short_description: "Mix voice, licensed music, and purposeful original SFX"
+  default_prompt: "Use $shortform-sound-design to give this active short a clear voice-led mix and restrained narrative sound cues."
+policy:
+  allow_implicit_invocation: true

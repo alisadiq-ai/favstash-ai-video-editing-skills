@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://www.favstash.app/schemas/shortform/asset-ledger.v1.schema.json",
+  "title": "FavStash asset ledger",
+  "type": "object",
+  "required": ["schemaVersion", "runId", "assets"],
+  "properties": {
+    "schemaVersion": { "const": 1 },
+    "runId": { "type": "string" },
+    "assets": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "kind", "path", "rights"],
+        "properties": {
+          "id": { "type": "string", "minLength": 1 },
+          "kind": { "type": "string", "minLength": 1 },
+          "path": { "type": "string", "minLength": 1 },
+          "sourceUrl": { "type": ["string", "null"], "format": "uri" },
+          "sourceId": { "type": "string" },
+          "sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+          "rights": {
+            "type": "object",
+            "required": ["status", "reusableInOutput"],
+            "properties": {
+              "status": { "enum": ["analysis-only", "owned", "licensed", "public-domain", "cc0", "cc-by"] },
+              "reusableInOutput": { "type": "boolean" },
+              "assertedByUser": { "type": "boolean" },
+              "rightsNote": { "type": ["string", "null"] },
+              "attribution": { "type": ["string", "null"] }
+            }
+          }
+        },
+        "additionalProperties": true
+      }
+    }
+  }
+}

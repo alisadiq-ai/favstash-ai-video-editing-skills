@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "id": "contributor-style-id",
+  "title": "Human-readable style name",
+  "format": "video",
+  "bestFor": [],
+  "avoidWhen": [],
+  "creativePrinciples": [],
+  "defaultRanges": {
+    "durationSeconds": [10, 35],
+    "cutSeconds": [0.7, 3.5]
+  },
+  "requiredReview": [],
+  "examples": []
+}

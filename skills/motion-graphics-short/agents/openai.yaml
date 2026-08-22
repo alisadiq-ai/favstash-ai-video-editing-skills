@@ -1,0 +1,6 @@
+interface:
+  display_name: "Motion-Graphics Short"
+  short_description: "Create message-led kinetic type and graphic sequences"
+  default_prompt: "Use $motion-graphics-short to express this single idea as a restrained, branded vertical motion piece."
+policy:
+  allow_implicit_invocation: true

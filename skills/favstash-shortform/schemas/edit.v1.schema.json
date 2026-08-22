@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://www.favstash.app/schemas/shortform/edit.v1.schema.json",
+  "title": "FavStash edit run",
+  "type": "object",
+  "required": ["schemaVersion", "runId", "createdAt", "style", "sourceMode", "status"],
+  "properties": {
+    "schemaVersion": { "const": 1 },
+    "runId": { "type": "string", "pattern": "^\\d{4}-\\d{2}-\\d{2}-\\d{6}-.+-[a-f0-9]{6}$" },
+    "createdAt": { "type": "string", "format": "date-time" },
+    "workspace": { "type": "string" },
+    "style": { "type": "string", "minLength": 1 },
+    "sourceMode": { "enum": ["fresh", "stash-selected", "stash-recommended"] },
+    "status": { "enum": ["planning", "editing", "review", "approved", "delivered", "published"] },
+    "selectedExport": { "type": ["string", "null"] },
+    "publishConfirmation": { "type": ["object", "null"] }
+  },
+  "additionalProperties": true
+}
