@@ -1,6 +1,0 @@
-interface:
-  display_name: "Short-Form Review"
-  short_description: "Audit editorial, visual, audio, rights, and render quality"
-  default_prompt: "Use $shortform-review to inspect this encoded short and give timestamped blockers, warnings, and optional improvements."
-policy:
-  allow_implicit_invocation: true

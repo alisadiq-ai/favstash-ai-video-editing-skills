@@ -1,6 +1,0 @@
-interface:
-  display_name: "Text Over B-Roll"
-  short_description: "Build relatable text-led reels from meaningful B-roll"
-  default_prompt: "Use $text-over-broll to make an original, phone-first reel from this idea and my approved B-roll."
-policy:
-  allow_implicit_invocation: true

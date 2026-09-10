@@ -45,9 +45,5 @@ export function assertInside(parent, candidate, label = "path") {
 }
 
 export function resolveEditDirectory(editValue) {
-  const edit = path.resolve(editValue);
-  if (!path.basename(edit).match(/^\d{4}-\d{2}-\d{2}-\d{6}-.+-[a-f0-9]{6}$/)) {
-    throw new Error("--edit must point to a dated run created by scripts/new-edit.mjs");
-  }
-  return edit;
+  return path.resolve(editValue);
 }

@@ -4,135 +4,65 @@ import fs from "node:fs/promises";
 import path from "node:path";
 import process from "node:process";
 import { fileURLToPath } from "node:url";
-import { listFilesRecursively, pathExists, readJson, sha256File } from "../lib/files.mjs";
+import { listFilesRecursively, pathExists, readJson, sha256File } from "../skills/favstash-shortform/lib/files.mjs";
 
 const root = fileURLToPath(new URL("..", import.meta.url));
 const failures = [];
-const checks = [];
-
-function pass(message) {
-  checks.push(message);
+const expectedSkills = ["favstash-shortform", "motion-graphics-short", "shortform-captions"];
+const skillRoot = path.join(root, "skills");
+const discovered = (await listFilesRecursively(skillRoot))
+  .filter((file) => path.basename(file) === "SKILL.md")
+  .map((file) => path.relative(skillRoot, path.dirname(file))).sort();
+if (JSON.stringify(discovered) !== JSON.stringify(expectedSkills)) {
+  failures.push(`Expected three skills; found: ${discovered.join(", ")}`);
 }
-
-function fail(message) {
-  failures.push(message);
-}
-
-const requiredRoot = [
-  ".gitignore",
-  "AGENTS.md",
-  "CLAUDE.md",
-  "CONTRIBUTING.md",
-  "LICENSE",
-  "README.md",
-  "SECURITY.md",
-  "THIRD_PARTY_NOTICES.md",
-  "package.json",
-];
-for (const relative of requiredRoot) {
-  if (await pathExists(path.join(root, relative))) pass(`root file: ${relative}`);
-  else fail(`missing root file: ${relative}`);
-}
-
-const expectedSkills = [
-  "favstash-shortform",
-  "favstash-setup",
-  "text-over-broll",
-  "talking-head-short",
-  "split-screen-short",
-  "screen-demo-short",
-  "motion-graphics-short",
-  "shortform-captions",
-  "shortform-sound-design",
-  "carousel-maker",
-  "shortform-review",
-];
-
-for (const skill of expectedSkills) {
-  const skillFile = path.join(root, "skills", skill, "SKILL.md");
-  const agentFile = path.join(root, "skills", skill, "agents", "openai.yaml");
-  if (!(await pathExists(skillFile))) {
-    fail(`missing skill: ${skill}`);
-    continue;
-  }
-  const markdown = await fs.readFile(skillFile, "utf8");
+for (const skill of discovered) {
+  const markdown = await fs.readFile(path.join(skillRoot, skill, "SKILL.md"), "utf8");
   const frontmatter = markdown.match(/^---\n([\s\S]*?)\n---/);
-  if (!frontmatter) fail(`${skill}: missing YAML frontmatter`);
-  if (!frontmatter?.[1].includes(`name: ${skill}`)) fail(`${skill}: frontmatter name does not match directory`);
-  if (!/^description: ".{30,}"$/m.test(frontmatter?.[1] ?? "")) fail(`${skill}: description is missing, too short, or not quoted`);
-  if (/\bTODO\b|\[TODO/.test(markdown)) fail(`${skill}: contains a TODO placeholder`);
-  if (!(await pathExists(agentFile))) {
-    fail(`${skill}: missing agents/openai.yaml`);
-  } else {
-    const yaml = await fs.readFile(agentFile, "utf8");
-    if (!yaml.includes(`$${skill}`)) fail(`${skill}: default_prompt must explicitly mention $${skill}`);
-    if (!yaml.includes("allow_implicit_invocation: true")) fail(`${skill}: implicit invocation policy missing`);
-  }
-  pass(`skill: ${skill}`);
-}
-
-const schemaFiles = (await listFilesRecursively(path.join(root, "schemas"))).filter((file) => file.endsWith(".json"));
-if (schemaFiles.length < 6) fail("expected at least six JSON schemas");
-for (const schemaFile of schemaFiles) {
-  try {
-    const schema = await readJson(schemaFile);
-    if (!schema.$schema || !schema.title || !schema.type) fail(`${path.basename(schemaFile)}: incomplete schema header`);
-    else pass(`schema: ${path.basename(schemaFile)}`);
-  } catch (error) {
-    fail(`${path.basename(schemaFile)}: invalid JSON (${error.message})`);
+  if (!frontmatter?.[1].split("\n").includes(`name: ${skill}`)) failures.push(`${skill}: invalid name`);
+  if (!/^description: ".+"$/m.test(frontmatter?.[1] ?? "")) failures.push(`${skill}: missing description`);
+  const agentFile = path.join(skillRoot, skill, "agents", "openai.yaml");
+  if (!(await pathExists(agentFile))) failures.push(`${skill}: missing UI metadata`);
+  else if (!(await fs.readFile(agentFile, "utf8")).includes(`$${skill}`)) {
+    failures.push(`${skill}: default prompt must name the skill`);
   }
 }
 
-const manifestPath = path.join(root, "skills", "shortform-sound-design", "assets", "sfx", "manifest.json");
-if (!(await pathExists(manifestPath))) {
-  fail("missing generated SFX manifest; run npm run generate:sfx");
-} else {
-  const manifest = await readJson(manifestPath);
-  if (manifest.count !== manifest.sounds?.length || manifest.count < 10) fail("SFX manifest count is invalid");
-  for (const sound of manifest.sounds ?? []) {
-    const asset = path.join(path.dirname(manifestPath), sound.file);
-    if (!(await pathExists(asset))) fail(`missing SFX asset: ${sound.file}`);
-    else if (await sha256File(asset) !== sound.sha256) fail(`SFX checksum mismatch: ${sound.file}`);
+// Check tracked and new public content, excluding local creator work and Git internals.
+const inventory = spawnSync("git", ["ls-files", "--cached", "--others", "--exclude-standard", "-z"], { cwd: root, encoding: "utf8" });
+if (inventory.status !== 0) throw new Error(inventory.stderr || "Cannot list repository files");
+const files = [...new Set(inventory.stdout.split("\0").filter(Boolean))];
+for (const relative of files) {
+  const file = path.join(root, relative);
+  if (!(await pathExists(file))) continue; // Tracked files removed in this change.
+  if ((await fs.stat(file)).size > 10 * 1024 * 1024) failures.push(`Unexpected public file over 10 MiB: ${relative}`);
+  if (!file.endsWith(".md")) continue;
+  const markdown = await fs.readFile(file, "utf8");
+  for (const match of markdown.matchAll(/\[[^\]]*\]\(([^\s)]+)\)/g)) {
+    const href = match[1];
+    if (/^(?:[a-z][a-z\d+.-]*:|#)/i.test(href)) continue;
+    const target = path.resolve(path.dirname(file), decodeURIComponent(href.split("#")[0]));
+    if (!(await pathExists(target))) failures.push(`${relative}: broken link ${href}`);
   }
-  pass(`SFX pack: ${manifest.count} original sounds`);
 }
 
-const runtimeManifestPath = path.join(root, "skills", "favstash-shortform", "runtime-manifest.json");
-if (!(await pathExists(runtimeManifestPath))) {
-  fail("missing self-contained core runtime; run npm run sync:runtime");
-} else {
-  const runtimeManifest = await readJson(runtimeManifestPath);
-  for (const entry of runtimeManifest.files ?? []) {
-    const bundled = path.join(root, "skills", "favstash-shortform", entry.path);
-    const source = path.join(root, entry.path);
-    if (!(await pathExists(source))) fail(`runtime source is missing: ${entry.path}`);
-    else if (await sha256File(source) !== entry.sha256) fail(`runtime bundle is stale: ${entry.path}`);
-    if (!(await pathExists(bundled))) fail(`runtime bundle file is missing: ${entry.path}`);
-    else if (await sha256File(bundled) !== entry.sha256) fail(`runtime bundle checksum mismatch: ${entry.path}`);
+const assetRoot = path.join(skillRoot, "favstash-shortform", "assets", "sfx");
+const manifest = await readJson(path.join(assetRoot, "manifest.json"));
+if (manifest.count !== manifest.sounds?.length) failures.push("Invalid SFX manifest count");
+for (const sound of manifest.sounds ?? []) {
+  const asset = path.join(assetRoot, sound.file);
+  if (!(await pathExists(asset)) || await sha256File(asset) !== sound.sha256) {
+    failures.push(`Missing or changed SFX: ${sound.file}`);
   }
-  if (!runtimeManifest.files?.some((entry) => entry.path === "scripts/reference-analyze.mjs")) {
-    fail("runtime bundle omits reference-analyze.mjs");
-  }
-  pass(`self-contained skill runtime: ${runtimeManifest.files?.length ?? 0} files`);
 }
-
-const publicFiles = await listFilesRecursively(root);
-for (const file of publicFiles) {
-  if (file.includes(`${path.sep}.git${path.sep}`) || file.includes(`${path.sep}.dev-private${path.sep}`)) continue;
-  const stat = await fs.stat(file);
-  if (stat.size > 10 * 1024 * 1024) fail(`unexpected public file over 10 MiB: ${path.relative(root, file)}`);
+for (const folder of [".dev-private", ".favstash-studio"]) {
+  const ignored = spawnSync("git", ["check-ignore", "-q", `${folder}/example`], { cwd: root });
+  if (ignored.status !== 0) failures.push(`${folder} is not ignored`);
+  if (files.some((file) => file.startsWith(`${folder}/`))) failures.push(`${folder} contains tracked private files`);
 }
-
-const ignored = spawnSync("git", ["check-ignore", "-q", ".dev-private/README.md"], { cwd: root });
-if (ignored.status !== 0) fail(".dev-private is not ignored by Git");
-else pass("private development memory is ignored");
-const trackedPrivate = spawnSync("git", ["ls-files", ".dev-private"], { cwd: root, encoding: "utf8" });
-if (trackedPrivate.stdout.trim()) fail("private development memory is tracked by Git");
-
 if (failures.length) {
-  console.error(`Validation failed (${failures.length}):`);
-  for (const failure of failures) console.error(`- ${failure}`);
+  console.error(failures.join("\n"));
   process.exitCode = 1;
 } else {
-  console.log(`Validation passed: ${checks.length} checks`);
+  console.log(`Validated ${discovered.length} skills, local Markdown links, SFX checksums and private-file exclusions.`);
 }

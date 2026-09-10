@@ -1,6 +1,6 @@
 interface:
-  display_name: "FavStash Short-Form Studio"
-  short_description: "Route and produce an original vertical social video"
+  display_name: "Adaptive Short-Form Editing"
+  short_description: "Edit reels adaptively from the story and footage"
   default_prompt: "Use $favstash-shortform to turn my brief and available media into an organized, reviewed vertical short."
 policy:
   allow_implicit_invocation: true

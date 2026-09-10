@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { describeBrollFilename, summarizeProbe } from "../lib/media.mjs";
+import { describeBrollFilename, summarizeProbe } from "../skills/favstash-shortform/lib/media.mjs";
 
 test("descriptive B-roll names become searchable hints", () => {
   assert.deepEqual(describeBrollFilename("typing-on-laptop-dark-desk-closeup-02.mov"), {

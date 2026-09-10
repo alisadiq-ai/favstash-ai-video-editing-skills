@@ -1,6 +1,0 @@
-interface:
-  display_name: "Screen-Demo Short"
-  short_description: "Make product walkthroughs readable and focused on mobile"
-  default_prompt: "Use $screen-demo-short to turn this owned recording into a concise, phone-readable feature demo."
-policy:
-  allow_implicit_invocation: true

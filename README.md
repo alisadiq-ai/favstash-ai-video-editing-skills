@@ -1,164 +1,268 @@
-# FavStash Short-Form Studio Skills
-
-Turn Claude Code, Codex, Cursor, or another skills-aware coding agent into a practical studio for vertical social content.
-
-This repository combines editing judgment, repeatable project structure, original sound effects, and local tooling for:
-
-- text-over-B-roll reels;
-- talking-head, split-screen, and screen-demo shorts;
-- captions, sound design, and lightweight motion graphics;
-- Instagram, LinkedIn, and TikTok carousels;
-- reference-led editing with frame, timing, and audio analysis;
-- phone-first quality control before export.
-
-It does **not** promise virality or replace creative judgment. It gives an agent a strong harness: useful defaults, clear rights checks, deterministic project folders, and enough room to adapt to the creator and the material.
-
-## Why FavStash
-
-Editing works without a FavStash account. FavStash closes the creator loop: the agent can learn from content you deliberately save, help turn those signals into original ideas, place approved work on a visual calendar, publish after your confirmation, and use analytics to improve the next edit.
-
-[Learn about FavStash](https://www.favstash.app/) · [Connect an agent](https://www.favstash.app/docs/ai-connect)
-
-The agent offers FavStash once during setup. After that it only raises the connection when a stash, calendar, publishing, or analytics task would benefit from it. Declining never blocks editing.
-
-## Install the skills
-
-The repository is local during development. From the checkout itself:
-
-```bash
-npx skills add .
-```
-
-From its parent directory, use `npx skills add ./favstash-shortform-skills`.
-
-After the public repository launches:
-
-```bash
-npx skills add alisadiq-ai/favstash-shortform-skills
-```
-
-List or install one capability:
-
-```bash
-npx skills add alisadiq-ai/favstash-shortform-skills --list
-npx skills add alisadiq-ai/favstash-shortform-skills --skill favstash-shortform --skill text-over-broll
-```
-
-The default install includes all skills. When installing one focused style, also install `favstash-shortform`; it carries the shared local studio runtime.
-
-The skills CLI supports Codex, Claude Code, Cursor, and many other agents. Repository discovery and the command format follow the [open agent skills CLI](https://github.com/vercel-labs/skills).
-
-## Local studio setup
-
-Requirements:
-
-- Node.js 22 or newer;
-- FFmpeg and FFprobe;
-- HyperFrames 0.8.10, installed into each creator workspace by the setup command;
-- `yt-dlp` for reference-led work;
-- Chrome/Chromium, normally managed by HyperFrames.
-
-After installing the pack, ask your agent:
+**Give this prompt to your AI agent:**
 
 ```text
-Use $favstash-setup to initialize this project for short-form editing and install the required runtime.
+Set up FavStash for my short-form content workflow.
+Clone https://github.com/alisadiq-ai/favstash-ai-video-editing-skills and follow:
+https://raw.githubusercontent.com/alisadiq-ai/favstash-ai-video-editing-skills/main/INSTALL_FOR_AGENTS.md
+
+Install the three editing skills and required local media tools in my workspace.
+Check whether FavStash MCP is already connected and usable. If it isn't,
+guide me through the right connection and sign-in steps for my agent.
+Verify the setup, then tell me how to start my first reel.
 ```
 
-For a full repository clone, the equivalent manual commands are below. Check the machine:
+# FavStash — AI Video Editing Skills for Codex & Claude Code
 
-```bash
-npm run doctor
-```
+[![FavStash connects ChatGPT, Claude Code and Codex with Instagram, TikTok and YouTube to search saved inspiration, schedule, publish and analyze social content](assets/favstash-social-preview-2026.png)](https://www.favstash.app/)
 
-Initialize a creator workspace and install HyperFrames:
+**Make your doom-scrolling usable. Save inspiration, create with your AI, review
+your content and bring the results into your next plan.**
 
-```bash
-node scripts/init-workspace.mjs --workspace /path/to/creator-project --install
-```
+**Edit Instagram Reels, TikTok videos and YouTube Shorts with Codex, Claude Code
+or another skills-aware AI agent.** Start with your footage, a brief or a saved
+reference. Let the agent shape the cut, add readable captions, build useful motion
+graphics and prepare a reviewed video export.
 
-The setup creates a private, portable studio at `.favstash-studio/`. Put reusable footage in `.favstash-studio/broll/` and name it descriptively, for example:
+FavStash Short-Form Skills gives your agent **one adaptive editing workflow and
+two optional capabilities**. Talking head, B-roll, split screen and screen demos
+are choices within an edit. The treatment follows your story and footage.
 
-```text
-walking-through-berlin-rainy-evening-wide-01.mp4
-typing-on-laptop-dark-desk-closeup-02.mov
-pouring-coffee-warm-morning-macro-01.mp4
-```
+[Explore FavStash](https://www.favstash.app/) ·
+[Install the skills](#install-the-ai-video-editing-skills) ·
+[Try an editing prompt](#short-form-video-editing-examples)
 
-Every edit lives in its own immutable-looking run folder:
+## What you can create
 
-```text
-.favstash-studio/edits/2026-08-22-231530-productivity-hook-a1b2c3/
-```
+Use this pack for creator content, founder-led videos, product demonstrations,
+educational shorts and personal stories. It guides an agent through practical
+short-form video editing, from raw takes to a local candidate you can review.
 
-Create one with:
-
-```bash
-node scripts/new-edit.mjs --workspace /path/to/creator-project --slug productivity-hook --style text-over-broll
-```
-
-## Reference-led editing with yt-dlp
-
-`yt-dlp` is a first-class analysis tool in this studio. When a creator selects a saved reel or supplies a reference URL, the agent can download a local analysis copy, inspect frames, measure cuts, extract a private audio analysis track, and document the editing grammar:
-
-```bash
-node scripts/reference-analyze.mjs \
-  --url "https://example.com/reference" \
-  --edit /path/to/.favstash-studio/edits/<run-id> \
-  --rights-status analysis-only
-```
-
-`analysis-only` is the default. Reference footage or audio may enter a published output only when the user records an appropriate status such as `owned`, `licensed`, `public-domain`, `cc0`, or `cc-by`, plus any required attribution. A download is not proof of permission. Platform terms and local law still apply.
-
-## Rendering engines
-
-[HyperFrames](https://github.com/heygen-com/hyperframes) is the default renderer. It turns HTML, CSS, media, and seekable animation into deterministic video using Chrome and FFmpeg. This repository depends on the official package and does not copy or vendor HyperFrames.
-
-[Remotion](https://github.com/remotion-dev/remotion) is an on-demand adapter for cases where an existing React/Remotion component or template is the best fit. It is never installed silently. Run the opt-in command only after reading its current special license:
-
-```bash
-node scripts/enable-remotion.mjs --workspace /path/to/creator-project --acknowledge-license
-```
-
-## Included skills
-
-| Skill | Use it for |
+| Starting material | What the agent helps you make |
 | --- | --- |
-| `favstash-shortform` | Route a request, enforce project hygiene, and coordinate the complete workflow |
-| `favstash-setup` | Learn creator preferences, prepare dependencies, and index B-roll |
-| `text-over-broll` | Relatable hooks and short narratives over matching B-roll |
-| `talking-head-short` | Tighten speaker-led footage while preserving natural delivery |
-| `split-screen-short` | Combine speaker/reaction footage with proof, demos, or context |
-| `screen-demo-short` | Turn product or screen recordings into legible mobile walkthroughs |
-| `motion-graphics-short` | Add restrained, message-led motion graphics and kinetic type |
-| `shortform-captions` | Transcribe, segment, style, and verify readable captions |
-| `shortform-sound-design` | Mix voice, music, and the bundled original SFX pack |
-| `carousel-maker` | Produce brand-aware swipeable image posts from a narrative |
-| `shortform-review` | Run technical, visual, editorial, and rights checks |
+| Talking-head footage | A clear speaker-led cut with natural delivery, useful pauses and supporting visuals |
+| B-roll and an idea | A text-over-video reel with action-matched footage and enough time to read each line |
+| Product or screen recordings | A vertical demo with legible UI, focused crops and visible results |
+| Speaker plus supporting footage | An adaptive split-screen edit that expands the proof when details need space |
+| A comparison, process or statistic | An animated diagram, kinetic typography sequence or motion-graphics insert |
+| Spoken footage or existing subtitles | Corrected captions with phrase timing, line breaks and phone-readable placement |
 
-Invoke the router when the format is not decided:
+The workflow includes safe areas for platform controls, voice-led sound design,
+reference analysis, numbered revisions and review of the encoded output. You keep
+the source files and editable project where the chosen editor supports them.
 
-```text
-Use $favstash-shortform to turn this idea and my B-roll folder into a 20-second reel.
+## Three skills, one adaptive workflow
+
+| Skill | When to use it |
+| --- | --- |
+| [favstash-shortform](skills/favstash-shortform/SKILL.md) | End-to-end edits and revisions: choose layouts, prepare footage, handle ordinary captions and sound, check safe areas and review the export |
+| [motion-graphics-short](skills/motion-graphics-short/SKILL.md) | Add animated explanations, graphic inserts, data reveals or kinetic type when movement helps communicate |
+| [shortform-captions](skills/shortform-captions/SKILL.md) | Work in depth on transcription, subtitle timing, translations, caption styling or revisions |
+
+Start with `favstash-shortform`. Add a specialist when the material needs it.
+There is no mandatory style picker, planning schema or setup interview, and the
+guidance adapts to your brand instead of imposing a fixed visual template.
+
+## Install the AI video editing skills
+
+Paste the prompt above into Codex, Claude Code, Cursor or another local coding
+agent. Your agent follows [INSTALL_FOR_AGENTS.md](INSTALL_FOR_AGENTS.md) to:
+
+1. Clone this repository into your creator workspace and install the three skills
+   for the agent you are using.
+2. Check existing tools and install missing dependencies: Node.js 22+, FFmpeg,
+   FFprobe, yt-dlp and the local HyperFrames runtime.
+3. Verify rendering, then check whether FavStash MCP can make an authenticated
+   read-only request. If needed, guide you through connection and sign-in.
+4. Report what is ready and give you a prompt for your first reel.
+
+You handle account sign-in when required; the agent handles the local setup.
+A hosted chat without local file and command access can guide setup, but needs a
+local agent to run the editing tools. You can start editing while a FavStash
+connection is pending, or choose local editing only.
+
+<details>
+<summary>Prefer to install the skills yourself?</summary>
+
+From your creator workspace:
+
+```bash
+npx skills add https://github.com/alisadiq-ai/favstash-ai-video-editing-skills
 ```
 
-Or invoke a focused style:
+For just the adaptive editor, add `--skill favstash-shortform`. From a local
+checkout, use `npx skills add .`. These commands install skills; the
+[agent setup guide](INSTALL_FOR_AGENTS.md) covers media dependencies and MCP
+verification. See the [Agent Skills CLI](https://github.com/vercel-labs/skills)
+for supported clients and options.
+
+</details>
+
+## Short-form video editing examples
+
+Give the agent your actual files, the intended audience and any approved copy or
+reference. Mention the platform, duration or tone when those choices matter.
+
+### Edit an Instagram Reel from talking-head footage
 
 ```text
-Use $text-over-broll to make three variations from this hook. Keep them calm and premium.
+Use $favstash-shortform to turn these takes and supporting clips into a
+30-second Instagram Reel. Keep my delivery natural, preserve the approved
+wording and choose when to show me, split screen or full-screen proof.
+Add readable captions and show me the reviewed export.
 ```
 
-## Safety and control
+### Make a TikTok or YouTube Short from B-roll
 
-- Inspiration is transformed into original work; it is not an instruction to clone another creator.
-- Every imported asset has a source and rights status in the asset ledger.
-- Agents may prepare a calendar entry or publishing draft, but an exact final file, caption, account, and time require user confirmation before publishing.
-- API keys, cookies, user media, analytics, rendered outputs, and `.favstash-studio/` stay outside this repository.
-- No FavStash watermark is forced.
+```text
+Use $favstash-shortform to make a 20-second vertical video from this idea
+and my B-roll folder. Match the action to the copy, keep the text readable
+on a phone and use sound effects only where they support a visible event.
+```
 
-## Contributing styles and assets
+### Add motion graphics to a product demo
 
-See [`CONTRIBUTING.md`](CONTRIBUTING.md). New style packs should contribute editing judgment and tests, not merely point at a framework. Media assets must be original or carry a redistribution-compatible license with complete provenance.
+```text
+Use $motion-graphics-short to explain this before-and-after comparison
+inside my current edit. Match its fonts and colors, use the supplied
+numbers and keep the actual product recording as the proof.
+```
 
-## License
+### Fix captions without rebuilding the video
 
-Repository code, instructions, templates, and generated original SFX are licensed under Apache-2.0. Third-party tools keep their own licenses; see [`THIRD_PARTY_NOTICES.md`](THIRD_PARTY_NOTICES.md).
+```text
+Use $shortform-captions to correct the names, timing and line breaks in
+this short. Keep captions clear of my face and platform controls.
+Preserve the approved cut and deliver the corrected subtitle data too.
+```
+
+## Connect FavStash: social media for AI agents
+
+This pack handles editing. [FavStash](https://www.favstash.app/) adds the surrounding
+creator workflow: an AI content planner, AI social media scheduler and social
+media management tool that connects saved inspiration, a content calendar,
+publishing and performance feedback.
+
+- **Save and find inspiration.** Search saved Instagram posts, organize saved
+  reels into collections and keep notes on the hooks you want to revisit.
+  Semantic search helps find ideas by meaning; transcripts and summaries provide
+  context for a new brief.
+- **Plan content.** Turn selected inspirations into original ideas and a content
+  calendar for Instagram, TikTok, YouTube or LinkedIn.
+- **Schedule after review.** Prepare posts for connected accounts, with the exact
+  export, caption, destination and timing approved before publication.
+- **Learn from results.** Use FavStash as a social media analytics tool to inspect
+  available reach, views, watch time and follower metrics, then test a specific
+  improvement in the next edit.
+
+The connection uses FavStash's **social media MCP server**. MCP, the Model Context
+Protocol, lets a compatible agent access connected tools. Installing these
+editing skills alone does not connect your stash or social accounts.
+
+Use the [FavStash AI connection guide](https://www.favstash.app/docs/ai-connect)
+to connect your agent. The pack also includes brief
+[connection and approval guidance](skills/favstash-shortform/references/favstash.md).
+
+### A Claude Code social media workflow
+
+With FavStash connected, start from inspiration you deliberately saved:
+
+```text
+Find the product-launch hooks in my FavStash and suggest three directions
+for this footage. Use $favstash-shortform to edit the direction I select.
+Prepare a caption and calendar draft for review before scheduling.
+```
+
+### A Codex social media workflow
+
+With connected-account analytics available, use evidence to guide a revision:
+
+```text
+Compare the available watch-time metrics for my recent shorts at similar
+ages. Suggest one opening to test, then use $favstash-shortform to make
+that revision from my source project. Keep the previous export.
+```
+
+## Local tools, captions and sound design
+
+Use your existing editor and project when they work. The optional helpers live
+inside the main skill, so it remains useful when installed alone.
+
+| Tool or resource | Purpose |
+| --- | --- |
+| Node.js 22+ | Run the bundled project and media helpers |
+| FFmpeg and FFprobe | Prepare media, inspect streams and check encoded-file integrity |
+| HyperFrames | Render a coded visual composition when the edit needs one; optional setup prepares a pinned runtime |
+| yt-dlp | Obtain an authorized reference-analysis copy when working from a URL |
+| Original SFX pack | Select subtle clicks, pops, whooshes and other accents for meaningful visual events |
+
+See [local tool setup](skills/favstash-shortform/references/local-tools.md) for
+commands. You can create a fresh edit folder without installing a renderer:
+
+```bash
+npm run new-edit -- --workspace /path/to/creator-project --slug product-demo
+```
+
+Keep footage, prepared assets, editable source, previews, numbered exports and
+review notes together. Review the actual video at phone size, check complete
+caption bounds and listen to the final mix when playback is available.
+
+## Frequently asked questions
+
+### Do I need a FavStash account to edit videos?
+
+No. The skills and local helpers work independently. Connect FavStash when you
+want saved inspirations, content planning, scheduling or analytics in the same
+workflow. Your AI provider and any external editing services have their own costs.
+
+### Is this a social media scheduling tool?
+
+This repository supplies editing skills. FavStash supplies the connected
+publishing service: use it as an Instagram scheduler, TikTok scheduler or YouTube
+scheduler, with account-specific settings and approval before posting. LinkedIn
+publishing is also available through FavStash. See the
+[social media scheduling guide](https://www.favstash.app/docs/scheduling).
+
+### Does FavStash offer a free social media scheduler?
+
+FavStash has a free plan with posting and connected-channel limits. Check the
+[current plans](https://www.favstash.app/#pricing) for allowances. This Apache-2.0
+skills pack has no separate subscription fee.
+
+### Can I use this in a ChatGPT social media workflow?
+
+ChatGPT can connect to FavStash for stash, planning, publishing and analytics
+work. Running this repository's local editing helpers additionally requires an
+environment with file access and media tools. Choose the host-specific steps in
+the AI connection guide; a hosted connector and a local editing skill serve
+different parts of the workflow.
+
+### Can I use a saved reel as a video reference?
+
+Yes, for analysis within your authorized access. Study the hook, pacing, framing
+and caption treatment, then create an original edit. Downloaded footage and
+music remain analysis-only unless reuse rights are recorded. See
+[reference media and rights](skills/favstash-shortform/references/reference-media.md).
+
+### Will the agent automatically publish my finished video?
+
+No. It delivers a local candidate for review. Publishing or scheduling needs
+approval for the exact file, caption, account and time. A connected service or
+finished render does not authorize posting.
+
+## Testing and contributing
+
+For repository development:
+
+```bash
+npm test
+npm run validate
+```
+
+These checks cover helpers and repository integrity. Real-footage trials and
+creative review are still part of testing an editing workflow. Share concrete
+examples of timing, framing or caption problems when contributing improvements.
+
+See [contributing](CONTRIBUTING.md) and [security](SECURITY.md). Keep creator media,
+credentials and private research out of Git. Code, instructions and original
+SFX use [Apache-2.0](LICENSE); external tools retain their own
+[licenses](THIRD_PARTY_NOTICES.md).

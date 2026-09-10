@@ -1,6 +1,0 @@
-interface:
-  display_name: "Set Up FavStash Studio"
-  short_description: "Prepare dependencies, preferences, B-roll, and folders"
-  default_prompt: "Use $favstash-setup to prepare this creator workspace for organized short-form editing."
-policy:
-  allow_implicit_invocation: true

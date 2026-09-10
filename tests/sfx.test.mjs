@@ -4,7 +4,7 @@ import fs from "node:fs/promises";
 import path from "node:path";
 import test from "node:test";
 import { fileURLToPath } from "node:url";
-import { SOUND_DEFINITIONS, wavBuffer } from "../lib/sfx.mjs";
+import { SOUND_DEFINITIONS, wavBuffer } from "../skills/favstash-shortform/lib/sfx.mjs";
 
 const root = fileURLToPath(new URL("..", import.meta.url));
 
@@ -18,7 +18,7 @@ test("SFX synthesis is deterministic and emits PCM WAV", () => {
 });
 
 test("generated SFX manifest matches definitions and files", async () => {
-  const assetRoot = path.join(root, "skills", "shortform-sound-design", "assets", "sfx");
+  const assetRoot = path.join(root, "skills", "favstash-shortform", "assets", "sfx");
   const manifest = JSON.parse(await fs.readFile(path.join(assetRoot, "manifest.json"), "utf8"));
   assert.equal(manifest.count, SOUND_DEFINITIONS.length);
   for (const sound of manifest.sounds) {

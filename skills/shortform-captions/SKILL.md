@@ -1,21 +1,38 @@
 ---
 name: shortform-captions
-description: "Create and quality-check timed captions for a short-form video: transcribe speech, segment readable phrases, style a quiet caption rail or selective emphasis, and verify names, numbers, timing, and platform-safe placement. Use as a finishing pass for spoken or narrated shorts, or when the user explicitly requests burned-in subtitles."
+description: "Create or revise accurate timed captions for short-form video. Use for transcription, phrase segmentation, subtitle styling, translations and detailed caption checks in an existing edit."
 ---
 
-# Short-Form Captions
+# Short-form captions
 
-Captions are language first and animation second. Accuracy, timing, and readability outrank flashy word effects.
+Use the active edit and its visual language. Captions are language first:
+accuracy, sync and reading comfort matter more than word effects.
 
-## Workflow
+- Transcribe actual speech and keep corrected timed data in SRT, VTT or the
+  editor's editable format. Check names, brands, numbers, units, negations and
+  qualifiers against the audio. Never silently substitute an approved script
+  for different spoken words.
+- Segment by meaning, breath and syntax, normally one or two lines. Keep related
+  words together and avoid orphaned articles/prepositions. Change line breaks
+  without rewriting speech. Hold phrases long enough to read without showing
+  the next thought early; re-time after any speech edit.
+- Prefer a stable phrase caption with selective emphasis. Use karaoke only when
+  requested or supported by the creator's established treatment. Do not reserve
+  a large empty bottom band or add a second burned-in transcript layer.
+- Follow the existing font and contrast treatment. Start around 46–68 px at
+  1080-wide resolution, then inspect the rendered size rather than trusting an
+  editor's font units. Use a panel, outline or shadow only as needed.
+- Follow the adaptive editor's [safe-area guidance](../favstash-shortform/SKILL.md#compose-for-a-phone)
+  when installed. Center main captions on the whole canvas; check the complete
+  text, backing and shadow, not only the anchor. Keep the face and demonstrated
+  detail unobstructed. If using this skill alone, measure against the intended
+  platform preview and check the longest captions at phone size.
+- Watch an encoded proof with sound and silently when playback is available.
+  Check phrase boundaries, changing backgrounds, speaker changes, two-line
+  bounds and the ending. Report a missing listening pass explicitly.
 
-1. Read the shared [short-form rules](../favstash-shortform/references/shortform-rules.md) and [`references/caption-guide.md`](references/caption-guide.md).
-2. Work inside an existing edit run. Transcribe locally when possible; preserve a time-aligned source (`.srt`, `.vtt`, or structured JSON) in `analysis/`.
-3. Compare the transcript with audio. Correct names, brands, numbers, acronyms, punctuation, and meaningful disfluencies manually.
-4. Segment by spoken thought and reading rhythm. Avoid single-word karaoke unless the user wants that visual identity and it remains comfortable to read.
-5. Choose one model: quiet verbatim rail, phrase cards, or selective embedded emphasis. Do not make every word the climax.
-6. Place captions in context with faces, on-screen text, and platform UI. Test high-contrast and complex-background frames.
-7. Render a caption proof and watch in real time with sound on and off. Check that each phrase appears when it is spoken and remains long enough to read.
-8. Save the corrected transcript, caption data, and any disclosure/translation notes in the run.
-
-Do not invent speech the audio does not contain. Label paraphrased on-screen summaries separately from verbatim captions.
+Label translations and paraphrased summaries when material; distinguish them
+from verbatim captions. Deliver the corrected timed source with the revised
+video or subtitle file requested. Preserve previous versions and the rest of
+an approved edit. If the creator will add captions in their own app, provide
+clean footage and subtitle data as needed instead of baking them in twice.

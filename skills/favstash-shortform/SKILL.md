@@ -1,53 +1,110 @@
 ---
 name: favstash-shortform
-description: "Route and execute an end-to-end vertical short-form video request using the FavStash studio harness. Use when the user wants a reel, TikTok, YouTube Short, social video, reference-led recreation, or an edit whose specialized style is not yet clear. Coordinates setup, rights, planning, HyperFrames rendering, captions, sound, review, and the optional FavStash creator loop. Do not use for long-form video or a carousel-only request."
+description: "Edit reels, TikToks and YouTube Shorts adaptively from a brief, footage or reference. Use for assembly, revisions, sound, safe captions and export review; choose layouts from the material instead of a fixed style template."
 ---
 
-# FavStash Short-Form Studio
+# Adaptive short-form editing
 
-Create a strong original short while keeping the creator in control.
+Make the treatment fit the story and actual footage. Talking head, text over
+B-roll, split screen, screen demos and full-screen proof are layouts within one
+edit. A natural reflection can stay simple; a product claim may need moving proof.
 
-## Locate the bundled studio tools
+## Start from what exists
 
-Resolve the directory containing this `SKILL.md` as `<studio-skill>`. All operational tooling needed after a skills-CLI install lives under `<studio-skill>/scripts/`, with its supporting code and schemas beside it. Never assume the user's current project contains this repository's root `scripts/` directory.
+- Read the brief, supplied references and any creator preferences. Resume the
+  existing project for revisions and preserve prior cuts. Keep approved copy
+  and the mix during a layout-only revision.
+- Inspect representative frames and listen to the takes when playback is
+  available. Transcribe speech when needed; preserve meaning, qualifiers and
+  natural pauses. Do not invent spoken words or silently rewrite an approved claim.
+- Use the existing editor and run structure when they work. For a fresh project,
+  keep inputs, assets, editable source, previews, exports and review notes in one
+  dated folder. The [local helpers](references/local-tools.md) can create this;
+  they are optional, and editing does not require an onboarding questionnaire.
+- Use the creator's brand and references to choose type, color, energy and
+  composition. When unspecified, make a restrained first cut. Do not impose a
+  fixed glass treatment, palette, camera split or editing app.
 
-Examples below use commands such as:
+## Build the cut
 
-```bash
-node <studio-skill>/scripts/new-edit.mjs --workspace <creator-project> --slug <slug> --style <style>
-```
+Find the strongest honest opening and the minimum context needed for its payoff.
+Choose each shot for what the viewer needs to see at that moment:
 
-When working from a full clone of this repository, the root `scripts/` commands are equivalent.
+| Material | Useful treatment |
+| --- | --- |
+| Personal delivery or emotion | Full camera; remove false starts while retaining meaningful breaths, humor and pauses |
+| Voice plus a visible action/result | Speaker and proof together while both remain legible; expand the proof for detail |
+| Desktop or phone demo | Crop to the actual action, preserve spatial continuity and hold the result long enough to inspect |
+| Copy over footage | Match action or emotion to the line; give each phrase time to read without adding an unnecessary speaker |
+| Relationship or idea that needs explanation | A purposeful graphic insert; use `$motion-graphics-short` if available for the animation pass |
 
-## Route the request
+Own the supporting work: source, capture, trim and inspect the footage available
+within the task. Ask for a specific missing asset only when access or recording
+requires the creator. Show real product behavior; label mockups and conceptual
+graphics. Check screen captures for private data across moving frames.
 
-1. Read [`references/shortform-rules.md`](references/shortform-rules.md).
-2. If `.favstash-studio/` is missing or preferences are blank, invoke `$favstash-setup` first.
-3. Choose the primary style:
-   - text or a short narrative over footage → `$text-over-broll`;
-   - speaker-led source → `$talking-head-short`;
-   - speaker/reaction plus simultaneous proof → `$split-screen-short`;
-   - software or phone walkthrough → `$screen-demo-short`;
-   - design-led kinetic type/data/graphics → `$motion-graphics-short`.
-4. Add `$shortform-captions` and `$shortform-sound-design` only when their passes are needed.
-5. End with `$shortform-review`.
+Use a reference for timing, composition and sound patterns. A transcript alone
+does not establish its visual treatment. See [reference media](references/reference-media.md)
+when analyzing a URL or reusing third-party material. Keep source/rights notes
+for output assets; downloadable does not mean reusable.
 
-For a carousel-only request, invoke `$carousel-maker` directly.
+## Compose for a phone
 
-## Operate the studio
+Default to 1080×1920, 9:16, normally 30 fps unless the brief or source calls for
+something else. Keep faces proportionate and complete; inspect crops and blurred
+fills for a second ghost face. Enlarge useful detail instead of fitting an
+unreadable desktop into a tiny panel. Change layout on meaningful beats.
 
-Follow [`references/workflow.md`](references/workflow.md). Create a dated run with the bundled `new-edit.mjs` before generating files; see [`references/project-structure.md`](references/project-structure.md). Populate the plan and asset ledger as you work. Use HyperFrames by default and follow [`references/engine-routing.md`](references/engine-routing.md).
+For an unknown destination, use this **conservative working mask** at 1080×1920:
+essential text, captions and demonstrated UI detail within **x=72..900,
+y=269..1248**. Scale proportionally for another 9:16 resolution. This is a house
+guide, not an official platform specification; check the intended app's current
+preview before publication. Footage and decorative panels can extend beyond it.
 
-When given a social URL or saved inspiration whose visual treatment matters, use the bundled `reference-analyze.mjs` and the workflow in [`references/rights-and-reference-media.md`](references/rights-and-reference-media.md). Default to `analysis-only`. Never move downloaded footage or extracted audio into an export unless the user explicitly confirms a reusable rights status and the ledger records it.
+Center main captions and cards on the **whole canvas, x=540**. A centered critical
+box can be at most **720 px wide** under that mask. Inset or wrap essential contents
+inside wider panels instead of shifting the whole design left. Measure the whole
+text box, backing, outline and shadow, including animated extremes; a safe anchor
+alone does not establish safe placement. Keep eyes, mouth and focal actions clear
+of captions and expected app controls.
 
-Use creator preferences as guidance rather than a straitjacket. When preferences are unknown, create a restrained first preview and make the creative choice visible in the review notes.
+Use one coherent type hierarchy and colors that work with the real footage.
+Start captions around 46–68 px on a 1080-wide export, usually one or two meaningful
+lines, then inspect at phone size. Preserve the actual words and keep caption
+changes aligned with speech. Use `$shortform-captions` if available for detailed
+timing, translations or caption revisions. Avoid competing transcript layers.
 
-## Close the creator loop when relevant
+## Sound and motion
 
-Follow [`references/favstash-loop.md`](references/favstash-loop.md). Offer FavStash once during onboarding, then only when saved inspirations, planning, publishing, or analytics are relevant. Editing must continue if the user declines.
+Speech comes first. Trim with short fades, preserve natural tone and remove
+unwanted source/demo audio. Duck music and SFX under speech; silence is valid.
+Use owned or licensed music. If the creator will add native platform music,
+deliver the appropriate cut without a music bed and note the intended timing.
 
-Prepare publishing drafts but never publish or schedule until the user confirms the exact file, caption, account, platform, and time/action.
+Make SFX follow visible events: a click for an action, pop for an arrival, swish
+for motivated travel. Align the audible transient, accounting for leading silence,
+and listen for overlapping effects. Subtitle changes do not each need a sound.
+The optional [original SFX pack](assets/sfx/manifest.json) lives with this skill;
+copy only selected sounds into the edit and record their source.
 
-## Deliver
+Keep editable source and separate audio/caption tracks when the editor supports
+them. Use FFmpeg for straightforward trims/assembly and HyperFrames when a coded
+composition helps. Read [local tools](references/local-tools.md) only when setup
+or analysis helpers are needed. Render a representative treated sample, inspect
+it, then finish the requested cut; do not multiply variants before it works.
 
-Return the selected export path, the creative hypothesis, important rights/attribution notes, and any unresolved review issue. Never promise virality.
+## Review and deliver
+
+Inspect the **encoded candidate**, following [review](references/review.md):
+opening, changing layouts, longest captions, moving proof, sound and ending.
+Verify streams and full decode as well as visual quality. Report only checks
+actually performed; measurements do not prove a listening pass.
+
+Keep numbered exports and the recoverable project/source. Show the actual video,
+summarize what changed and state remaining limitations. Technical validity,
+creative acceptance and publication approval are separate.
+
+Editing works without FavStash. When saved inspirations, calendar work or results
+are relevant, use the [optional FavStash connection](references/favstash.md).
+Never publish, schedule or upload merely because a cut is finished or a service
+is connected; obtain approval for the exact outward action.

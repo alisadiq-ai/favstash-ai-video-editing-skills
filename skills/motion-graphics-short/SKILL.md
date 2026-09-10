@@ -1,21 +1,36 @@
 ---
 name: motion-graphics-short
-description: "Create a short vertical motion-graphics piece where kinetic typography, shapes, icons, charts, numbers, or UI states carry the message. Use for animated hooks, stat reveals, explainers, title sequences, product announcements, and branded graphic inserts. Prefer another style when live footage or spoken performance is the main value."
+description: "Add purposeful motion graphics to a short-form edit: animated diagrams, kinetic type, comparisons, data reveals or graphic inserts. Use when animation explains a beat, including a fully animated short when requested."
 ---
 
-# Motion-Graphics Short
+# Motion graphics
 
-Motion must explain, connect, reveal, or punctuate. Decorative movement alone is not a concept.
+Work inside the current edit, with its palette, typography, timing and source
+files. An animated insert does not require a second project or a new editing
+style. For a standalone request, start from the supplied brief and assets.
 
-## Workflow
+1. Decide what animation helps the viewer understand: reveal order, a relationship,
+   a comparison, progress or an important change. Use real footage when the claim
+   depends on actual product behavior; label conceptual UI and mockups.
+2. Design the important paused states first. Set a clear hierarchy and one main
+   motion idea per beat. Carry shapes or direction between states when it helps
+   continuity. Avoid perpetual floating and the same pop-in on every element.
+3. Use the current editor when suitable. For coded graphics, use a seekable
+   HyperFrames composition, consulting the installed CLI's help or current
+   official documentation for APIs. Drive animation from timeline time; keep
+   media/fonts local and loaded before rendering. Do not invent renderer commands.
+4. Fit the insert to the speech and edit: fast entrances for familiar labels,
+   longer holds for unfamiliar diagrams or claims, deliberate stillness when
+   needed. Keep text readable during movement and check extreme bounds as well
+   as resting positions.
+5. Use verified values and meaningful axes, units and source labels for data.
+   Decorative charts must not imply measured evidence. Record asset provenance.
+6. Render a short sample, inspect the encoded motion and joins, then integrate it
+   into the existing timeline. Check flashes, font loading, clipping, unexpected
+   black frames, audio timing and first/middle/last states. Keep editable source.
 
-1. Read the shared [short-form rules](../favstash-shortform/references/shortform-rules.md), [engine routing](../favstash-shortform/references/engine-routing.md), and [`references/motion-guide.md`](references/motion-guide.md).
-2. Create a dated run with style `motion-graphics-short`.
-3. Reduce the brief to one message and map 3–7 visual states. Define what changes and why at each beat.
-4. Establish a small visual system from preferences: type roles, palette, shape language, line weight, depth, and motion character.
-5. Build a seekable HyperFrames composition. Use the official upstream HyperFrames core/animation guidance for APIs; this skill supplies editorial taste and short-form constraints.
-6. Use directional continuity and carrier elements so scenes feel connected. Insert stillness before an important reveal when contrast helps.
-7. Add real data/source labels when showing facts. Do not make a decorative chart imply evidence it does not contain.
-8. Preview keyframes and the full encoded motion at phone size. Finish with `$shortform-review`.
-
-Use the bundled SFX only as accents. When a motion graphic becomes a long narrated explainer, it is outside this pack's short-form focus.
+Use the adaptive editor's [composition and safe-area guidance](../favstash-shortform/SKILL.md#compose-for-a-phone)
+and [final review](../favstash-shortform/references/review.md) when installed.
+If using this skill alone, keep critical contents away from platform controls,
+measure whole text bounds at phone size, and inspect the actual exported clip
+with sound. Deliver a local candidate; publication is a separate user action.

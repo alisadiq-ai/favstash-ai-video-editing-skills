@@ -1,6 +1,0 @@
-interface:
-  display_name: "Talking-Head Short"
-  short_description: "Tighten speaker-led footage without losing authenticity"
-  default_prompt: "Use $talking-head-short to turn this creator-owned footage into a clear, natural vertical short."
-policy:
-  allow_implicit_invocation: true

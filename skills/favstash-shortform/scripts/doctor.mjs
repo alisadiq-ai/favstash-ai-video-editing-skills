@@ -45,7 +45,7 @@ const report = {
     !checks.node.available && "Install Node.js 22 or newer.",
     (!checks.ffmpeg.available || !checks.ffprobe.available) && "Install an FFmpeg build that includes ffprobe.",
     !checks.ytDlp.available && "Install yt-dlp before URL-based reference analysis (for example: brew install yt-dlp or follow the official installer).",
-    !checks.hyperframes.available && "Initialize this workspace with: node scripts/init-workspace.mjs --workspace <path> --install",
+    !checks.hyperframes.available && "If this edit needs HyperFrames, run: node <skill>/scripts/init-workspace.mjs --workspace <path> --install",
   ].filter(Boolean),
 };
 
@@ -53,7 +53,7 @@ if (args.json) {
   process.stdout.write(`${JSON.stringify(report, null, 2)}\n`);
 } else {
   const icon = (ready) => ready ? "✓" : "✗";
-  console.log("FavStash Short-Form Studio doctor");
+  console.log("FavStash optional media tools");
   console.log(`Workspace: ${workspace}`);
   console.log(`${icon(checks.node.available)} Node ${checks.node.version} (requires ${checks.node.required})`);
   console.log(`${icon(checks.npm.available)} npm${checks.npm.version ? ` ${checks.npm.version}` : ""}`);

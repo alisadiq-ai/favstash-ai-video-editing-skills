@@ -12,7 +12,7 @@ import { createRightsRecord, isReusableInOutput, validateRightsStatus } from "..
 
 const args = parseArgs(process.argv.slice(2));
 if (args.help) {
-  console.log("Usage: node scripts/reference-analyze.mjs --url <url> --edit <run-dir> [--rights-status analysis-only|owned|licensed|public-domain|cc0|cc-by] [--confirm-rights] [--rights-note <text>] [--attribution <text>] [--reuse-audio] [--reuse-video] [--frame-interval 2]");
+  console.log("Usage: node <skill>/scripts/reference-analyze.mjs --url <url> --edit <run-dir> [--rights-status analysis-only|owned|licensed|public-domain|cc0|cc-by] [--confirm-rights] [--rights-note <text>] [--attribution <text>] [--reuse-audio] [--reuse-video] [--frame-interval 2]");
   process.exit(0);
 }
 

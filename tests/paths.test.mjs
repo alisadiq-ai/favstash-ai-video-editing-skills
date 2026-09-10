@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import path from "node:path";
 import test from "node:test";
-import { assertInside, compactTimestamp, createRunId, sanitizeSlug } from "../lib/paths.mjs";
+import { assertInside, compactTimestamp, createRunId, sanitizeSlug } from "../skills/favstash-shortform/lib/paths.mjs";
 
 test("sanitizes creator-facing slugs", () => {
   assert.equal(sanitizeSlug("  Café: Launch / V2!  "), "cafe-launch-v2");

@@ -8,53 +8,58 @@ import { fileURLToPath } from "node:url";
 
 const root = fileURLToPath(new URL("..", import.meta.url));
 
-test("workspace setup is repeatable and edit runs are isolated", async (context) => {
-  const temporary = await fs.mkdtemp(path.join(os.tmpdir(), "favstash-studio-test-"));
+test("the main skill works alone, creates edits without setup and preserves creator work", async (context) => {
+  const temporary = await fs.mkdtemp(path.join(os.tmpdir(), "favstash-skill-test-"));
   context.after(async () => fs.rm(temporary, { recursive: true, force: true }));
+  // Simulate an installed skill with no repository-root tooling or sibling skills.
+  const installed = path.join(temporary, "installed", "favstash-shortform");
+  await fs.cp(path.join(root, "skills", "favstash-shortform"), installed, { recursive: true });
+  const workspace = path.join(temporary, "creator project");
+  const scripts = path.join(installed, "scripts");
+  const invoke = (name, args = []) => execFileSync(process.execPath, [
+    path.join(scripts, name), "--workspace", workspace, ...args,
+  ], { cwd: temporary, encoding: "utf8" }).trim();
 
-  const init = path.join(root, "scripts", "init-workspace.mjs");
-  execFileSync(process.execPath, [init, "--workspace", temporary], { encoding: "utf8" });
-  const studio = path.join(temporary, ".favstash-studio");
-  const preferences = path.join(studio, "preferences.md");
-  assert.match(await fs.readFile(preferences, "utf8"), /# Creator preferences/);
-
-  await fs.appendFile(preferences, "\nCreator marker\n");
-  execFileSync(process.execPath, [init, "--workspace", temporary], { encoding: "utf8" });
-  assert.match(await fs.readFile(preferences, "utf8"), /Creator marker/);
-
-  const runtimePackage = JSON.parse(await fs.readFile(path.join(studio, "runtime", "package.json"), "utf8"));
-  assert.equal(runtimePackage.dependencies.hyperframes, "0.8.10");
-
-  const create = path.join(root, "scripts", "new-edit.mjs");
-  const output = execFileSync(process.execPath, [
-    create,
-    "--workspace", temporary,
-    "--slug", "A Better Hook",
-    "--style", "text-over-broll",
-    "--source-mode", "fresh",
-  ], { encoding: "utf8" }).trim();
-
-  assert.match(path.basename(output), /^\d{4}-\d{2}-\d{2}-\d{6}-a-better-hook-[a-f0-9]{6}$/);
+  const output = invoke("new-edit.mjs", ["--slug", "A Better Hook"]);
+  const studio = path.join(workspace, ".favstash-studio");
   assert.equal(path.dirname(output), path.join(studio, "edits"));
-  for (const relative of ["edit.json", "edit-plan.json", "asset-ledger.json", "analysis", "assets", "exports", "previews", "references", "reports", "work"]) {
+  for (const relative of ["edit.json", "asset-ledger.json", "input", "analysis", "assets", "exports", "previews", "references", "reports", "work"]) {
     await fs.access(path.join(output, relative));
   }
+  const original = path.join(output, "input", "take.txt");
+  await fs.writeFile(original, "untouched source");
+  const another = invoke("new-edit.mjs", ["--slug", "A Better Hook"]);
+  assert.notEqual(another, output);
+  assert.equal(await fs.readFile(original, "utf8"), "untouched source");
 
+  // Custom project names are supported too, when the metadata is present.
+  const resumed = path.join(temporary, "existing edit");
+  await fs.rename(output, resumed);
   const reference = spawnSync(process.execPath, [
-    path.join(root, "scripts", "reference-analyze.mjs"),
-    "--url", "https://example.com/reference",
-    "--edit", output,
-    "--reuse-audio",
-  ], { encoding: "utf8" });
+    path.join(scripts, "reference-analyze.mjs"), "--url", "https://example.com/reference",
+    "--edit", resumed, "--reuse-audio",
+  ], { cwd: temporary, encoding: "utf8" });
   assert.notEqual(reference.status, 0);
   assert.match(reference.stderr, /analysis-only references cannot be copied/);
 
-  const remotion = path.join(root, "scripts", "enable-remotion.mjs");
-  const unacknowledged = spawnSync(process.execPath, [remotion, "--workspace", temporary, "--no-install"], { encoding: "utf8" });
-  assert.equal(unacknowledged.status, 2);
-  assert.match(unacknowledged.stderr, /special license/);
-  execFileSync(process.execPath, [remotion, "--workspace", temporary, "--acknowledge-license", "--no-install"], { encoding: "utf8" });
-  const optedInPackage = JSON.parse(await fs.readFile(path.join(studio, "runtime", "package.json"), "utf8"));
-  assert.equal(optedInPackage.dependencies.remotion, "4.0.515");
-  await fs.access(path.join(studio, "runtime", "remotion-license-acknowledgment.json"));
+  invoke("init-workspace.mjs");
+  const preferences = path.join(studio, "preferences.md");
+  await fs.appendFile(preferences, "\nCreator marker\n");
+  const runtimeFile = path.join(studio, "runtime", "package.json");
+  const runtime = JSON.parse(await fs.readFile(runtimeFile, "utf8"));
+  assert.equal(runtime.dependencies.hyperframes, "0.8.10");
+  runtime.dependencies.hyperframes = "0.8.9";
+  runtime.dependencies["creator-package"] = "1.0.0";
+  await fs.writeFile(runtimeFile, JSON.stringify(runtime));
+  invoke("init-workspace.mjs");
+  assert.match(await fs.readFile(preferences, "utf8"), /Creator marker/);
+  const retained = JSON.parse(await fs.readFile(runtimeFile, "utf8"));
+  assert.equal(retained.dependencies.hyperframes, "0.8.9");
+  assert.equal(retained.dependencies["creator-package"], "1.0.0");
+  assert.equal(await fs.readFile(path.join(resumed, "input", "take.txt"), "utf8"), "untouched source");
+
+  invoke("index-broll.mjs");
+  const index = JSON.parse(await fs.readFile(path.join(studio, "broll-index.v1.json"), "utf8"));
+  assert.equal(index.count, 0);
+  await fs.access(path.join(installed, "assets", "sfx", "manifest.json"));
 });

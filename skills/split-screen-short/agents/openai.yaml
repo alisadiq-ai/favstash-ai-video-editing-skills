@@ -1,6 +1,0 @@
-interface:
-  display_name: "Split-Screen Short"
-  short_description: "Pair speaker, proof, reaction, or comparison with purpose"
-  default_prompt: "Use $split-screen-short to combine these approved sources into a legible, purposeful vertical edit."
-policy:
-  allow_implicit_invocation: true

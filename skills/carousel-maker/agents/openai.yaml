@@ -1,6 +1,0 @@
-interface:
-  display_name: "Carousel Maker"
-  short_description: "Build brand-aware, code-rendered swipeable image stories"
-  default_prompt: "Use $carousel-maker to turn this idea into a concise, branded social carousel with ordered export images."
-policy:
-  allow_implicit_invocation: true

@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { createRightsRecord, isReusableInOutput, validateRightsEvidence, validateRightsStatus } from "../lib/rights.mjs";
+import { createRightsRecord, isReusableInOutput, validateRightsEvidence, validateRightsStatus } from "../skills/favstash-shortform/lib/rights.mjs";
 
 test("analysis-only is never reusable in output", () => {
   assert.equal(isReusableInOutput("analysis-only"), false);

@@ -2,11 +2,11 @@
 import fs from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import { SOUND_DEFINITIONS, soundManifestEntry, wavBuffer } from "../lib/sfx.mjs";
-import { writeJson } from "../lib/files.mjs";
+import { SOUND_DEFINITIONS, soundManifestEntry, wavBuffer } from "../skills/favstash-shortform/lib/sfx.mjs";
+import { writeJson } from "../skills/favstash-shortform/lib/files.mjs";
 
 const root = fileURLToPath(new URL("..", import.meta.url));
-const output = path.join(root, "skills", "shortform-sound-design", "assets", "sfx");
+const output = path.join(root, "skills", "favstash-shortform", "assets", "sfx");
 await fs.mkdir(output, { recursive: true });
 const sounds = [];
 
