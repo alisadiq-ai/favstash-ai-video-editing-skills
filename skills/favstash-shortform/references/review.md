@@ -5,6 +5,14 @@ that will actually be delivered, not just the composition preview.
 
 - Watch the opening, each layout change, critical proof and ending. The hook
   should agree with the payoff, and trimmed speech should retain its meaning.
+- At normal speed, can a viewer follow speech and proof without reading a second
+  explanation? Remove redundant titles, labels and footers. Paused readability
+  alone is not enough; check the hook's movement and sound as one timed event.
+- Compare the opening's first/peak frames and a representative body sequence.
+  Did source movement cancel the push? Does the body demonstrate a state change
+  rather than a slide or oversized icon? Verify overlays in the encoded pixels;
+  an editor's diagnostic grid is not an exported effect, and transparent assets
+  can contain invisible lines even when their RGB channels look correct.
 - Inspect at phone size, including the longest caption, both sides of transitions
   and animated extremes. Follow the main skill's [safe-area guidance](../SKILL.md#compose-for-a-phone).
   Measure complete text/backing/shadow bounds; check face crops, ghost faces in

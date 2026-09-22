@@ -61,5 +61,5 @@ node <skill>/scripts/index-broll.mjs --workspace /path/to/project
 
 The index records file descriptions, hashes and technical metadata; filenames
 and successful indexing do not establish rights or visual suitability. The
-[original SFX pack](../assets/sfx/manifest.json) is available directly from this
+[SFX pack](../assets/sfx/manifest.json) is available directly from this
 skill; there is no separate sound skill or required library-copy step.

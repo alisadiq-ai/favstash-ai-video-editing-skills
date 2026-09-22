@@ -48,12 +48,19 @@ does not establish its visual treatment. See [reference media](references/refere
 when analyzing a URL or reusing third-party material. Keep source/rights notes
 for output assets; downloadable does not mean reusable.
 
+Design the opening's picture, emphasis and sound together. For a tension/reveal
+hook, make the initial push visibly register and resolve the build at the payoff.
+Check source movement: a speaker stepping back can cancel a digital zoom. A
+framing grid or kinetic phrase can suit the reference, but is not a universal style.
+
 ## Compose for a phone
 
 Default to 1080×1920, 9:16, normally 30 fps unless the brief or source calls for
 something else. Keep faces proportionate and complete; inspect crops and blurred
 fills for a second ghost face. Enlarge useful detail instead of fitting an
-unreadable desktop into a tiny panel. Change layout on meaningful beats.
+unreadable desktop into a tiny panel. Screen proof normally fills its pane;
+decorative cards and headings should not shrink or obscure it. Use full-screen
+proof when detail needs it. Change layout on meaningful beats.
 
 For an unknown destination, use this **conservative working mask** at 1080×1920:
 essential text, captions and demonstrated UI detail within **x=72..900,
@@ -73,6 +80,15 @@ Start captions around 46–68 px on a 1080-wide export, usually one or two meani
 lines, then inspect at phone size. Preserve the actual words and keep caption
 changes aligned with speech. Use `$shortform-captions` if available for detailed
 timing, translations or caption revisions. Avoid competing transcript layers.
+Alongside captions, normally use only one brief supplementary emphasis. Headings,
+eyebrows and footers are optional, not a template to fill. Demonstrate the feature
+through motion or actual caption behavior instead of explaining the edit in text.
+Keep production notes in the report; disclose a mockup on screen when needed to
+prevent it being mistaken for real evidence. When B-roll is absent, animate the
+relevant idea rather than leave an empty pane or substitute a text-heavy slide.
+Simplifying does not mean one oversized icon: show connected state changes with
+relevant assets, such as footage entering a timeline and gaps closing. Carry an
+object through related beats; keep compact object labels subordinate to speech.
 
 ## Sound and motion
 
@@ -81,11 +97,16 @@ unwanted source/demo audio. Duck music and SFX under speech; silence is valid.
 Use owned or licensed music. If the creator will add native platform music,
 deliver the appropriate cut without a music bed and note the intended timing.
 
-Make SFX follow visible events: a click for an action, pop for an arrival, swish
-for motivated travel. Align the audible transient, accounting for leading silence,
-and listen for overlapping effects. Subtitle changes do not each need a sound.
-The optional [original SFX pack](assets/sfx/manifest.json) lives with this skill;
-copy only selected sounds into the edit and record their source.
+Make SFX follow visible events: click for a UI action, pop for an element arrival,
+shutter for a meaningful camera/cut change, swish for a motivated zoom. A short
+riser can build into a reveal; resolve it at the visual payoff. Merge nearby cues
+and keep ordinary caption changes silent. Prefer the creator's established sounds;
+otherwise start with the curated sounds in the [SFX pack](assets/sfx/manifest.json).
+Copy only selected files, align audible transients rather than file starts, and
+audition them against speech. Generated alternatives remain available in the pack.
+Suggested gains are starting points, not a volume ceiling: a demonstrated click
+or reveal build must be audible. Trim/time-stretch a riser to the reveal and check
+the combined mix, not isolated cue levels.
 
 Keep editable source and separate audio/caption tracks when the editor supports
 them. Use FFmpeg for straightforward trims/assembly and HyperFrames when a coded
