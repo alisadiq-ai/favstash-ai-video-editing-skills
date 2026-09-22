@@ -193,7 +193,7 @@ inside the main skill, so it remains useful when installed alone.
 | FFmpeg and FFprobe | Prepare media, inspect streams and check encoded-file integrity |
 | HyperFrames | Render a coded visual composition when the edit needs one; optional setup prepares a pinned runtime |
 | yt-dlp | Obtain an authorized reference-analysis copy when working from a URL |
-| Original SFX pack | Select subtle clicks, pops, whooshes and other accents for meaningful visual events |
+| SFX pack | Curated shutters, clicks, pops, zoom swishes and reveal accents, plus generated alternatives; match sounds to visible events |
 
 See [local tool setup](skills/favstash-shortform/references/local-tools.md) for
 commands. You can create a fresh edit folder without installing a renderer:
