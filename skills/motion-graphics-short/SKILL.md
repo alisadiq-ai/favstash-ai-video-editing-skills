@@ -17,11 +17,17 @@ style. For a standalone request, start from the supplied brief and assets.
    controls and shapes at balanced scale, not an isolated giant icon in empty space.
    Carry an object or direction across related beats; use compact object labels
    instead of a second narrative. Avoid perpetual floating and identical pop-ins.
-   Glass is optional styling, not a required frame around proof.
+   Glass is optional styling, not a required frame around proof. With the
+   editor's [adaptive glass style](../favstash-shortform/references/adaptive-glass.md),
+   move a glass surface at full opacity and let one surface travel through
+   connected states rather than cutting between separate cards.
 3. Use the current editor when suitable. For coded graphics, use a seekable
    HyperFrames composition, consulting the installed CLI's help or current
    official documentation for APIs. Drive animation from timeline time; keep
-   media/fonts local and loaded before rendering. Do not invent renderer commands.
+   media/fonts local and loaded before rendering. Set frame-0 state explicitly
+   and avoid animating CSS filters over large video; see the editor's
+   [render reliability](../favstash-shortform/references/local-tools.md#render-reliably)
+   notes. Do not invent renderer commands.
 4. Fit the insert to the speech and edit: fast entrances for familiar labels,
    longer holds for unfamiliar diagrams or claims, deliberate stillness when
    needed. Keep text readable during movement and check extreme bounds as well

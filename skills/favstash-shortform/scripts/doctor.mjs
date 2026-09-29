@@ -12,6 +12,10 @@ const runtime = path.join(studioPath(workspace), "runtime");
 const hyperframesBinary = path.join(runtime, "node_modules", ".bin", "hyperframes");
 const hyperframesInstalled = await pathExists(hyperframesBinary);
 const hyperframesStatus = hyperframesInstalled ? commandStatus(hyperframesBinary, ["--version"], { timeout: 20_000 }) : null;
+const gsapFile = path.join(runtime, "node_modules", "gsap", "dist", "gsap.min.js");
+const favstash = commandStatus("favstash", ["--version"]);
+const favstashVersion = favstash.version?.match(/\d+\.\d+\.\d+/)?.[0] ?? null;
+const [favstashMajor = 0, favstashMinor = 0] = (favstashVersion ?? "").split(".").map(Number);
 
 const nodeMajor = Number(process.versions.node.split(".")[0]);
 const checks = {
@@ -27,9 +31,21 @@ const checks = {
   hyperframes: {
     available: Boolean(hyperframesStatus?.available),
     version: hyperframesStatus?.version ?? null,
-    expected: "0.8.10",
+    expected: "0.8.32",
     location: hyperframesBinary,
     error: hyperframesStatus?.error ?? null,
+  },
+  gsap: {
+    available: await pathExists(gsapFile),
+    expected: "3.14.2",
+    location: gsapFile,
+  },
+  // Optional: the preferred FavStash route for local coding agents.
+  favstashCli: {
+    available: favstash.available && (favstashMajor > 0 || favstashMinor >= 4),
+    version: favstashVersion,
+    required: ">=0.4.0",
+    note: "Installation only. Run favstash doctor for the authenticated connection check.",
   },
 };
 
@@ -40,12 +56,14 @@ const report = {
   coreReady: checks.node.available && checks.npm.available && checks.ffmpeg.available && checks.ffprobe.available,
   referenceAnalysisReady: checks.ytDlp.available,
   renderReady: checks.node.available && checks.ffmpeg.available && checks.ffprobe.available && checks.hyperframes.available,
+  glassReady: checks.node.available && checks.ffprobe.available && checks.hyperframes.available && checks.gsap.available,
   checks,
   guidance: [
     !checks.node.available && "Install Node.js 22 or newer.",
     (!checks.ffmpeg.available || !checks.ffprobe.available) && "Install an FFmpeg build that includes ffprobe.",
     !checks.ytDlp.available && "Install yt-dlp before URL-based reference analysis (for example: brew install yt-dlp or follow the official installer).",
-    !checks.hyperframes.available && "If this edit needs HyperFrames, run: node <skill>/scripts/init-workspace.mjs --workspace <path> --install",
+    (!checks.hyperframes.available || !checks.gsap.available) && "If this edit needs HyperFrames or the glass scaffold, run: node <skill>/scripts/init-workspace.mjs --workspace <path> --install",
+    !checks.favstashCli.available && "Optional: for FavStash in Codex or Claude Code, install the CLI with npm install -g @sketric/favstash-mcp@latest (see references/favstash.md).",
   ].filter(Boolean),
 };
 
@@ -61,6 +79,8 @@ if (args.json) {
   console.log(`${icon(checks.ffprobe.available)} FFprobe`);
   console.log(`${icon(checks.ytDlp.available)} yt-dlp — required for URL reference analysis`);
   console.log(`${icon(checks.hyperframes.available)} HyperFrames ${checks.hyperframes.version ?? checks.hyperframes.expected} workspace runtime`);
+  console.log(`${icon(checks.gsap.available)} GSAP ${checks.gsap.expected} for the glass scaffold`);
+  console.log(`${icon(checks.favstashCli.available)} FavStash CLI${checks.favstashCli.version ? ` ${checks.favstashCli.version}` : ""} — optional, for planning and publishing`);
   if (report.guidance.length) {
     console.log("\nNext steps:");
     for (const item of report.guidance) console.log(`- ${item}`);

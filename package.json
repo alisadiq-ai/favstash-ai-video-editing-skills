@@ -2,7 +2,7 @@
   "name": "favstash-ai-video-editing-skills",
   "version": "0.1.0",
   "private": true,
-  "description": "One adaptive short-form editing skill with optional motion graphics and captions.",
+  "description": "Short-form scripting and adaptive editing skills with a bundled glass style, SFX, motion graphics and captions.",
   "type": "module",
   "engines": {
     "node": ">=22"
@@ -13,6 +13,7 @@
     "new-edit": "node skills/favstash-shortform/scripts/new-edit.mjs",
     "index-broll": "node skills/favstash-shortform/scripts/index-broll.mjs",
     "analyze-reference": "node skills/favstash-shortform/scripts/reference-analyze.mjs",
+    "scaffold-glass": "node skills/favstash-shortform/scripts/scaffold-glass.mjs",
     "generate:sfx": "node scripts/generate-sfx.mjs",
     "test": "node --test",
     "validate": "node scripts/validate-repo.mjs"

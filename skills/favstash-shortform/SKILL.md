@@ -1,6 +1,6 @@
 ---
 name: favstash-shortform
-description: "Edit reels, TikToks and YouTube Shorts adaptively from a brief, footage or reference. Use for assembly, revisions, sound, safe captions and export review; choose layouts from the material instead of a fixed style template."
+description: "Edit reels, TikToks and YouTube Shorts adaptively from a brief, footage or reference. Use for assembly, revisions, sound, safe captions, the bundled adaptive glass style, export review and FavStash publishing handoff; choose layouts from the material."
 ---
 
 # Adaptive short-form editing
@@ -11,19 +11,26 @@ edit. A natural reflection can stay simple; a product claim may need moving proo
 
 ## Start from what exists
 
-- Read the brief, supplied references and any creator preferences. Resume the
-  existing project for revisions and preserve prior cuts. Keep approved copy
-  and the mix during a layout-only revision.
+- Read the brief, supplied references and any creator preferences. A brief from
+  `$shortform-scripting` carries the approved openings, body, proof map and
+  must-keep claims. Resume the existing project for revisions and preserve prior
+  cuts. Keep approved copy and the mix during a layout-only revision.
 - Inspect representative frames and listen to the takes when playback is
   available. Transcribe speech when needed; preserve meaning, qualifiers and
   natural pauses. Do not invent spoken words or silently rewrite an approved claim.
+- Find retakes before cutting. Creators often restart a line and say it again in
+  full; keep the later complete attempt. One transcript of a whole take can hide
+  a restart, so [split at pauses](references/local-tools.md#find-retakes-before-cutting)
+  and transcribe the chunks separately.
 - Use the existing editor and run structure when they work. For a fresh project,
   keep inputs, assets, editable source, previews, exports and review notes in one
   dated folder. The [local helpers](references/local-tools.md) can create this;
   they are optional, and editing does not require an onboarding questionnaire.
 - Use the creator's brand and references to choose type, color, energy and
-  composition. When unspecified, make a restrained first cut. Do not impose a
-  fixed glass treatment, palette, camera split or editing app.
+  composition. When unspecified, use the bundled [adaptive glass style](references/adaptive-glass.md)
+  for talking-head product, tool and explainer reels, with a palette taken from
+  the footage. Keep personal reflections and jokes over footage simple. Don't
+  force glass, a camera split or an editing app on material that doesn't need it.
 
 ## Build the cut
 
@@ -110,22 +117,27 @@ the combined mix, not isolated cue levels.
 
 Keep editable source and separate audio/caption tracks when the editor supports
 them. Use FFmpeg for straightforward trims/assembly and HyperFrames when a coded
-composition helps. Read [local tools](references/local-tools.md) only when setup
-or analysis helpers are needed. Render a representative treated sample, inspect
-it, then finish the requested cut; do not multiply variants before it works.
+composition helps; the glass style has a [scaffold helper](references/local-tools.md#build-a-glass-composition).
+Read [local tools](references/local-tools.md) when setup, analysis or rendering
+helpers are needed, including its [render reliability](references/local-tools.md#render-reliably)
+notes. Render a representative treated sample, inspect it, then finish the
+requested cut; do not multiply variants before it works.
 
 ## Review and deliver
 
 Inspect the **encoded candidate**, following [review](references/review.md):
-opening, changing layouts, longest captions, moving proof, sound and ending.
-Verify streams and full decode as well as visual quality. Report only checks
-actually performed; measurements do not prove a listening pass.
+frame 1 and the first 3 seconds of every variant, changing layouts, longest
+captions, moving proof, sound and ending. Verify streams and full decode as well
+as visual quality. Report only checks actually performed; measurements do not
+prove a listening pass.
 
 Keep numbered exports and the recoverable project/source. Show the actual video,
 summarize what changed and state remaining limitations. Technical validity,
 creative acceptance and publication approval are separate.
 
 Editing works without FavStash. When saved inspirations, calendar work or results
-are relevant, use the [optional FavStash connection](references/favstash.md).
-Never publish, schedule or upload merely because a cut is finished or a service
-is connected; obtain approval for the exact outward action.
+are relevant, use the [optional FavStash connection](references/favstash.md); for
+an approved cut, follow [publishing](references/publishing.md) for the delivery
+export, covers, Trial Reels and upload. Never publish, schedule or upload merely
+because a cut is finished or a service is connected; obtain approval for the
+exact outward action.

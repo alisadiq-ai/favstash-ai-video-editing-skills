@@ -8,13 +8,13 @@ import { listFilesRecursively, pathExists, readJson, sha256File } from "../skill
 
 const root = fileURLToPath(new URL("..", import.meta.url));
 const failures = [];
-const expectedSkills = ["favstash-shortform", "motion-graphics-short", "shortform-captions"];
+const expectedSkills = ["favstash-shortform", "motion-graphics-short", "shortform-captions", "shortform-scripting"];
 const skillRoot = path.join(root, "skills");
 const discovered = (await listFilesRecursively(skillRoot))
   .filter((file) => path.basename(file) === "SKILL.md")
   .map((file) => path.relative(skillRoot, path.dirname(file))).sort();
 if (JSON.stringify(discovered) !== JSON.stringify(expectedSkills)) {
-  failures.push(`Expected three skills; found: ${discovered.join(", ")}`);
+  failures.push(`Expected ${expectedSkills.length} skills; found: ${discovered.join(", ")}`);
 }
 for (const skill of discovered) {
   const markdown = await fs.readFile(path.join(skillRoot, skill, "SKILL.md"), "utf8");
