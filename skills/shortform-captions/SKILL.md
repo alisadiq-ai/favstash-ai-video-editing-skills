@@ -11,7 +11,10 @@ accuracy, sync and reading comfort matter more than word effects.
 - Transcribe actual speech and keep corrected timed data in SRT, VTT or the
   editor's editable format. Check names, brands, numbers, units, negations and
   qualifiers against the audio. Never silently substitute an approved script
-  for different spoken words.
+  for different spoken words. When a take contains restarts, transcribe
+  pause-split chunks separately so a repeated line is not merged into one clean
+  sentence; the editor's [local tools](../favstash-shortform/references/local-tools.md#find-retakes-before-cutting)
+  show how.
 - Segment by meaning, breath and syntax, normally one or two lines. Keep related
   words together and avoid orphaned articles/prepositions. Change line breaks
   without rewriting speech. Hold phrases long enough to read without showing

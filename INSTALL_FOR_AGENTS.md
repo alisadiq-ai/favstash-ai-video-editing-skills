@@ -1,9 +1,9 @@
 # Install FavStash short-form skills
 
-Use this guide when the user asks to set up this pack. Install the three skills,
-prepare the local editing tools and verify FavStash MCP. Reuse what already
-works; ask the user only for a needed workspace choice, system permission or
-account sign-in. This setup does not authorize publishing, scheduling or uploads.
+Use this guide when the user asks to set up this pack. Install the four skills,
+prepare the local editing tools and connect FavStash. Reuse what already works;
+ask the user only for a needed workspace choice, system permission or account
+sign-in. This setup does not authorize publishing, scheduling or uploads.
 
 Repository: [alisadiq-ai/favstash-ai-video-editing-skills](https://github.com/alisadiq-ai/favstash-ai-video-editing-skills).
 
@@ -43,16 +43,18 @@ and [yt-dlp](https://github.com/yt-dlp/yt-dlp#installation) installation routes.
 Check the resulting Node version; a distribution's default may be too old.
 Request system elevation only if the chosen installation actually requires it.
 
-Run the pack's setup to install its pinned HyperFrames runtime locally:
+Run the pack's setup to install its pinned HyperFrames runtime and GSAP locally:
 
 ```bash
 node "<pack>/skills/favstash-shortform/scripts/init-workspace.mjs" --workspace "<workspace>" --install
 ```
 
 This prepares `.favstash-studio/runtime/`, a B-roll inbox and optional preferences.
-It preserves existing preferences and an existing HyperFrames version. Keep this
-runtime separate from the creator application's dependencies. Use the official
-renderer package; no global renderer install or extra style pack is necessary.
+It preserves existing preferences and existing HyperFrames or GSAP versions. Keep
+this runtime separate from the creator application's dependencies. Use the
+official renderer package; no global renderer install or extra style pack is
+necessary. The runtime also provides local transcription (`hyperframes
+transcribe`), which downloads a Whisper model on first use.
 
 ## 3. Install the skills for the current agent
 
@@ -61,14 +63,15 @@ workspace**, using the clone as its source. Choose the actual host identifier
 (for example `codex`, `claude-code` or `cursor`); inspect CLI help for other hosts.
 
 ```bash
-npx --yes skills add "<pack>" --agent <agent-id> --skill favstash-shortform --skill motion-graphics-short --skill shortform-captions --copy --yes
+npx --yes skills add "<pack>" --agent <agent-id> --skill shortform-scripting --skill favstash-shortform --skill motion-graphics-short --skill shortform-captions --copy --yes
 ```
 
 Install for this project by default. Use global scope only if the user asks for
 availability across projects. Do not target every installed agent. Verify that
-all three skills and the main skill's scripts, references and SFX were installed.
-Check `npx skills list --agent <agent-id>` from the same workspace. If the host
-needs a reload for discovery, tell the user exactly what to reload.
+all four skills and the main skill's scripts, references, glass assets and SFX
+were installed. Check `npx skills list --agent <agent-id>` from the same
+workspace. If the host needs a reload for discovery, tell the user exactly what
+to reload.
 
 ## 4. Verify local editing
 
@@ -76,9 +79,10 @@ needs a reload for discovery, tell the user exactly what to reload.
 node "<pack>/skills/favstash-shortform/scripts/doctor.mjs" --workspace "<workspace>" --json --strict
 ```
 
-Check the report, not just the exit code: Node, npm, FFmpeg, FFprobe, yt-dlp and
-HyperFrames must each be available for the complete setup. A missing downloader
-can leave local editing usable but reference-URL analysis pending.
+Check the report, not just the exit code: Node, npm, FFmpeg, FFprobe, yt-dlp,
+HyperFrames and GSAP must each be available for the complete setup (`renderReady`
+and `glassReady`). A missing downloader can leave local editing usable but
+reference-URL analysis pending.
 
 A CLI version check alone does not verify rendering. Use the installed
 `.favstash-studio/runtime/node_modules/.bin/hyperframes` executable (on Windows,
@@ -92,54 +96,71 @@ Probe and fully decode the resulting MP4 with FFprobe/FFmpeg, and inspect its
 frames. Report a rendering failure separately from a successful skill install;
 do not call the whole setup ready when only packages installed successfully.
 
-## 5. Check FavStash MCP before asking the user to configure it
+## 5. Connect FavStash
 
-Discover FavStash tools in the current session. If present, make a small,
-authenticated read-only request using their current schema: for example
-`get_stash_summary` with no date filter. A successful empty result is valid.
-Do not import content, create a post or upload a video as a connection test.
+First check whether FavStash already works. Discover FavStash tools in the current
+session. If present, make a small, authenticated read-only request using their
+current schema, such as `get_stash_summary` with no filters. A successful empty
+result is valid. Do not import content, create a post or upload a video as a
+connection test. If the call succeeds, keep the existing connection and skip to
+the account check below. Do not reinstall a configured server merely because this
+session has not loaded its tools; distinguish a missing entry, expired sign-in,
+pending reload and a service error.
 
-If the call succeeds, retain the existing connection and skip configuration.
-If tools are absent or fail authentication, inspect the host's MCP list/status
-and distinguish a missing entry, expired sign-in, pending reload and a service
-error. An entry in a config file or a public health response is not proof that
-an authenticated user request works. Do not reinstall a configured server merely
-because this session has not loaded its tools.
+**For Codex and Claude Code, prefer the FavStash CLI.** It signs in through the
+browser and includes a local bridge that can upload files from the workspace.
+Check `npm view @sketric/favstash-mcp version` first; the commands below need
+0.4.0 or newer.
 
-When setup or reauthentication is needed, explain what is missing and guide the
-user through [FavStash's agent connection router](https://www.favstash.app/INSTALL_FOR_AGENTS.md).
-Select the guide for the detected host from
-[AI connection setup](https://www.favstash.app/docs/ai-connect); use the supplied
-host-specific flow, including its endpoint and OAuth steps. Do not guess one
-configuration format for every agent or build a local MCP server.
+```bash
+npm install -g @sketric/favstash-mcp@latest
+favstash auth login
+favstash setup --agent codex
+favstash doctor
+```
 
-Use OAuth when supported and let the user complete browser sign-in. Preserve
-other MCP entries. Never ask for social-provider passwords or tokens. If the
-host truly requires a FavStash API key fallback, have the user store it in local
-secret storage, not in chat, the repository or preferences.
+Use `--agent claude-code` for Claude Code, and `--dry-run` to preview the change.
+Install globally, not from a temporary npx cache: setup pins the bridge to the
+installed Node and script paths. The user completes sign-in and consent in the
+browser; never ask for tokens or passwords in chat. Setup adds only the
+`favstash` entry and preserves other servers. `doctor` verifies the authenticated
+handshake; the host still needs its own read-only call after a reload. For SSH,
+containers and other headless cases, follow the [CLI guide](https://www.favstash.app/cli.md).
 
-After configuration, reload if needed and repeat the read-only call. If the
-user must restart the host, report **configured, awaiting reload** and name the
+**For other hosts,** follow [FavStash's agent install guide](https://www.favstash.app/INSTALL_FOR_AGENTS.md)
+and its host-specific remote MCP and OAuth steps. Do not guess one configuration
+format for every agent or build a local MCP server. If a host truly requires an
+API key, have the user store it in local secret storage, not in chat, the
+repository or preferences.
+
+After configuration, reload if needed and repeat the read-only call. If the user
+must restart the host, report **configured, awaiting reload** and name the
 verification still needed. If the service is unavailable, report that result
-without repeatedly changing settings. If the user declines connection, finish
-local editing setup and record the connection as skipped only in local notes.
+without repeatedly changing settings. If the user declines, finish local editing
+setup and record the connection as skipped only in local notes.
 
-Finally, when MCP works, check `list_connected_social_accounts` if available.
-No connected social account is different from a broken MCP connection: stash
-access may work while publishing or analytics needs an account connection.
-Show the returned secure setup link when needed; the user connects providers
-inside FavStash. Never claim all platforms are ready from one successful call.
+When the connection works, check `list_connected_social_accounts`. No connected
+social account is different from a broken connection: stash access may work while
+publishing or analytics needs an account. Show the returned secure setup link
+when needed; the user connects providers inside FavStash. Never claim all
+platforms are ready from one successful call.
 
 ## 6. Hand off a ready workspace
 
 Report briefly:
 
-- where the three skills and creator workspace live;
+- where the four skills and creator workspace live;
 - dependency versions and the smoke-render result;
-- whether FavStash MCP is verified, pending sign-in/reload, unavailable or skipped;
+- whether FavStash is verified, pending sign-in/reload, unavailable or skipped,
+  and through which route (CLI bridge or remote MCP);
 - whether social accounts are connected, or the exact remaining connection step.
 
-Then offer a concrete first-edit prompt:
+Then offer concrete first prompts:
+
+```text
+Use $shortform-scripting to turn this saved reel into three openings and a
+shared body in my voice, then prepare the editor brief.
+```
 
 ```text
 Use $favstash-shortform to turn these takes and supporting clips into a reel.

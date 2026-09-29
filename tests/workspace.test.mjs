@@ -47,7 +47,8 @@ test("the main skill works alone, creates edits without setup and preserves crea
   await fs.appendFile(preferences, "\nCreator marker\n");
   const runtimeFile = path.join(studio, "runtime", "package.json");
   const runtime = JSON.parse(await fs.readFile(runtimeFile, "utf8"));
-  assert.equal(runtime.dependencies.hyperframes, "0.8.10");
+  assert.equal(runtime.dependencies.hyperframes, "0.8.32");
+  assert.equal(runtime.dependencies.gsap, "3.14.2");
   runtime.dependencies.hyperframes = "0.8.9";
   runtime.dependencies["creator-package"] = "1.0.0";
   await fs.writeFile(runtimeFile, JSON.stringify(runtime));

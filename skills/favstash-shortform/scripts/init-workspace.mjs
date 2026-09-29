@@ -8,7 +8,9 @@ import { copyIfMissing, pathExists, readJson, writeJson } from "../lib/files.mjs
 import { resolveWorkspace, studioPath } from "../lib/paths.mjs";
 import { run } from "../lib/process.mjs";
 
-const HYPERFRAMES_VERSION = "0.8.10";
+const HYPERFRAMES_VERSION = "0.8.32";
+// Coded compositions load GSAP from a local copy, so renders need no network.
+const GSAP_VERSION = "3.14.2";
 const skill = fileURLToPath(new URL("..", import.meta.url));
 const args = parseArgs(process.argv.slice(2));
 if (args.help) {
@@ -34,9 +36,11 @@ const runtimePackage = await pathExists(packageTarget) ? await readJson(packageT
 };
 runtimePackage.private = true;
 runtimePackage.dependencies ||= {};
-// Preserve a creator's working renderer instead of changing it during setup.
-if (!runtimePackage.dependencies.hyperframes && !runtimePackage.devDependencies?.hyperframes) {
-  runtimePackage.dependencies.hyperframes = HYPERFRAMES_VERSION;
+// Preserve a creator's working renderer and libraries instead of changing them during setup.
+for (const [name, version] of [["hyperframes", HYPERFRAMES_VERSION], ["gsap", GSAP_VERSION]]) {
+  if (!runtimePackage.dependencies[name] && !runtimePackage.devDependencies?.[name]) {
+    runtimePackage.dependencies[name] = version;
+  }
 }
 await writeJson(packageTarget, runtimePackage);
 
@@ -45,4 +49,4 @@ if (args.install) {
 }
 console.log(`Runtime: ${path.join(studio, "runtime")}`);
 console.log(`Optional preferences: ${preferences}`);
-if (!args.install) console.log("Files prepared only. Use --install when this edit needs HyperFrames.");
+if (!args.install) console.log("Files prepared only. Use --install when this edit needs HyperFrames or the glass scaffold.");

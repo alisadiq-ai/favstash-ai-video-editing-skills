@@ -5,6 +5,10 @@ that will actually be delivered, not just the composition preview.
 
 - Watch the opening, each layout change, critical proof and ending. The hook
   should agree with the payoff, and trimmed speech should retain its meaning.
+- Inspect frame 1 and the first 3 seconds of every variant on their own. Frame 1
+  must already show the hook's subject or motion: never a black or blank frame,
+  an empty panel or a heading over unreadable UI. The steepest drop-off usually
+  happens here, so a weak opening outweighs polish later in the cut.
 - At normal speed, can a viewer follow speech and proof without reading a second
   explanation? Remove redundant titles, labels and footers. Paused readability
   alone is not enough; check the hook's movement and sound as one timed event.
