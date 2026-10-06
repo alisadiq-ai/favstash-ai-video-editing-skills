@@ -19,4 +19,4 @@ The adaptive glass CSS is an original implementation informed by the optical-lay
 
 Generated WAVs are original synthesis covered by Apache-2.0. The separately marked curated recordings were supplied by the maintainer from his public/non-copyright sound library and included at his request; they are not repository-generated recordings or newly relicensed by the code license.
 
-The style preview images in `assets/previews/` show the maintainer's own footage and are included with his permission; they are not covered by the code license for reuse as stock footage.
+The style preview images in `assets/previews/` come from the maintainer's own reels, with the speaker replaced by a placeholder figure, and are included with his permission; they are not covered by the code license for reuse as stock footage.

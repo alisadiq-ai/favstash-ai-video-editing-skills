@@ -152,5 +152,5 @@ npm run validate
 
 See [contributing](CONTRIBUTING.md) and [security](SECURITY.md). Code, instructions
 and original SFX use [Apache-2.0](LICENSE); external tools and the bundled Montserrat
-font keep their own [licenses](THIRD_PARTY_NOTICES.md). The style previews use the
-maintainer's own footage.
+font keep their own [licenses](THIRD_PARTY_NOTICES.md). The style previews come from
+the maintainer's own reels, with the speaker replaced by a placeholder.
