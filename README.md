@@ -1,181 +1,99 @@
-**Give this prompt to your AI agent:**
+# FavStash Creator Skills: find ideas, script, edit and publish short videos with Claude Code or Codex
+
+[![FavStash connects Claude Code, Codex and ChatGPT with Instagram, TikTok and YouTube to save inspiration, schedule, publish and analyze short videos](assets/favstash-social-preview-2026.png)](https://www.favstash.app/)
+
+**Give your AI agent the whole short-form loop.** These free, open-source skills
+teach Claude Code, Codex or any skills-aware agent to find proven ideas, write
+scroll-stopping scripts in your voice, edit Reels, TikToks and Shorts in four
+finished styles, then publish and learn from the results.
+
+**Give this prompt to your agent:**
 
 ```text
-Set up FavStash for my short-form content workflow.
+Set up FavStash creator skills for my short-form workflow.
 Clone https://github.com/alisadiq-ai/favstash-ai-video-editing-skills and follow:
 https://raw.githubusercontent.com/alisadiq-ai/favstash-ai-video-editing-skills/main/INSTALL_FOR_AGENTS.md
 
-Install the four skills (scripting, editing, motion graphics, captions) and the
-local media tools they need in my workspace. Check whether FavStash is already
-connected and usable. If it isn't, connect it with the FavStash CLI when you're
-Codex or Claude Code, or guide me through the right sign-in for my agent.
-Verify the setup, then tell me how to start my first reel.
+Install all eight skills and the local media tools they need in my workspace.
+Check whether FavStash is connected; if not, connect it with the FavStash CLI
+(Codex or Claude Code) or guide me through sign-in. Verify the setup, then tell
+me how to start my first reel.
 ```
 
-# FavStash — AI Video Editing & Scripting Skills for Codex & Claude Code
+## The creator loop
 
-[![FavStash connects ChatGPT, Claude Code and Codex with Instagram, TikTok and YouTube to search saved inspiration, schedule, publish and analyze social content](assets/favstash-social-preview-2026.png)](https://www.favstash.app/)
+```mermaid
+flowchart LR
+  R[1 · Research<br/>find-ideas] --> S[2 · Script<br/>write-script]
+  S --> E[3 · Edit<br/>edit-video + a style]
+  E --> P[4 · Publish & learn<br/>publish-and-analyze]
+  P -->|results pick the next idea| R
+```
 
-**Make your doom-scrolling usable. Save inspiration, create with your AI, review
-your content and bring the results into your next plan.**
+| Stage | Skill | What your agent does |
+| --- | --- | --- |
+| 1 · Research | [find-ideas](skills/1-research/find-ideas/SKILL.md) | Finds proven reels to adapt (3× their creator's median), reads saved inspiration and suggests what to make next |
+| 2 · Script | [write-script](skills/2-scripting/write-script/SKILL.md) | Copies the proven hook, adds as many equally aggressive alternatives as you want to test, writes one shared body in your voice and hands over a filmable brief |
+| 3 · Edit | [edit-video](skills/3-editing/edit-video/SKILL.md) | Cuts your takes, removes retakes, adds captions, sound and motion graphics, keeps everything in safe areas and reviews the actual export |
+| 4 · Publish & learn | [publish-and-analyze](skills/4-publish-and-learn/publish-and-analyze/SKILL.md) | Exports at full quality, picks a real-frame cover, avoids duplicate holds on hook variants, schedules after your approval and compares results |
 
-**Script and edit Instagram Reels, TikTok videos and YouTube Shorts with Codex,
-Claude Code or another skills-aware AI agent.** Start with a saved reference, a
-topic or your footage. Let the agent write scroll-stopping hooks in your voice,
-shape the cut, add readable captions, build useful motion graphics and prepare
-a reviewed video export.
+Every skill works on its own. [FavStash](https://www.favstash.app/) closes the loop:
+your saved reels feed research, approved cuts go to Instagram, TikTok, YouTube or
+LinkedIn, and the analytics pick the next test.
 
-FavStash Short-Form Skills gives your agent **a scripting skill, one adaptive
-editing workflow and two optional capabilities**, plus a ready-made adaptive
-glass style and a curated sound-effects pack. Talking head, B-roll, split screen
-and screen demos are choices within an edit. The treatment follows your story
-and footage.
+## Editing styles
 
-[Explore FavStash](https://www.favstash.app/) ·
-[Install the skills](#install-the-ai-video-editing-skills) ·
-[Try a prompt](#short-form-scripting-and-editing-examples)
+`edit-video` is the base for every edit. Add the style that fits the story; each one
+lives in its own folder under [`skills/3-editing-styles/`](skills/3-editing-styles).
 
-## What you can create
+### [adaptive-glass](skills/3-editing-styles/adaptive-glass/SKILL.md): speaker plus moving proof in glass panels
 
-Use this pack for creator content, founder-led videos, product demonstrations,
-educational shorts and personal stories. It guides an agent from a saved idea
-through the script and raw takes to a local candidate you can review.
+![Adaptive glass: glass panels with real proof above the speaker](assets/previews/adaptive-glass.jpg)
 
-| Starting material | What the agent helps you make |
-| --- | --- |
-| A saved reel, reference or topic | Three scroll-stopping openings and one shared body in your voice, plus a filmable brief |
-| Talking-head footage | A clear speaker-led cut with natural delivery, useful pauses and supporting visuals |
-| B-roll and an idea | A text-over-video reel with action-matched footage and enough time to read each line |
-| Product or screen recordings | A vertical demo with legible UI, focused crops and visible results |
-| Speaker plus supporting footage | An adaptive split-screen edit in the glass style that expands the proof when details need space |
-| A comparison, process or statistic | An animated diagram, kinetic typography sequence or motion-graphics insert |
-| Spoken footage or existing subtitles | Corrected captions with phrase timing, line breaks and phone-readable placement |
+For product, tool and explainer reels with real screen proof. Palettes are matched to your footage.
 
-The workflow includes proven-hook adaptation, safe areas for platform controls,
-voice-led sound design, reference analysis, numbered revisions and review of the
-encoded output. You keep the source files and editable project where the chosen
-editor supports them.
+### [paper-grid](skills/3-editing-styles/paper-grid/SKILL.md): white grid pane, one animated UI artifact per line
 
-## Four skills, one workflow
+![Paper grid: white grid pane with animated UI cards above the speaker](assets/previews/paper-grid.jpg)
 
-| Skill | When to use it |
-| --- | --- |
-| [shortform-scripting](skills/shortform-scripting/SKILL.md) | Hooks and scripts: adapt a proven opening, write three openings and a shared body in your voice, and hand the editor a filmable brief |
-| [favstash-shortform](skills/favstash-shortform/SKILL.md) | End-to-end edits and revisions: choose layouts, prepare footage, apply the glass style, handle ordinary captions and sound, check safe areas, review the export and prepare publishing |
-| [motion-graphics-short](skills/motion-graphics-short/SKILL.md) | Add animated explanations, graphic inserts, data reveals or kinetic type when movement helps communicate |
-| [shortform-captions](skills/shortform-captions/SKILL.md) | Work in depth on transcription, subtitle timing, translations, caption styling or revisions |
+For tool, repo and feature explainers where every sentence names something to show.
 
-Script with `shortform-scripting`, then edit with `favstash-shortform`. Add a
-specialist when the material needs it. There is no mandatory style picker,
-planning schema or setup interview. The bundled
-[adaptive glass style](skills/favstash-shortform/references/adaptive-glass.md)
-gives a finished look out of the box, with palettes matched to your footage;
-your own brand fonts and colors take over when you have them.
+### [breakout-card](skills/3-editing-styles/breakout-card/SKILL.md): your head breaks out of a card at the bottom
 
-## Install the AI video editing skills
+![Breakout card: grid page, dark cards and one-word captions, with the speaker's head breaking out of a bottom card](assets/previews/breakout-card.jpg)
 
-Paste the prompt above into Codex, Claude Code, Cursor or another local coding
-agent. Your agent follows [INSTALL_FOR_AGENTS.md](INSTALL_FOR_AGENTS.md) to:
+For talking-head explainers that alternate graphics with personal lines. One-to-two-word captions in Montserrat.
 
-1. Clone this repository into your creator workspace and install the four skills
-   for the agent you are using.
-2. Check existing tools and install missing dependencies: Node.js 22+, FFmpeg,
-   FFprobe, yt-dlp and a local runtime with HyperFrames and GSAP.
-3. Verify rendering, then connect FavStash: the FavStash CLI for Codex and
-   Claude Code, or remote MCP sign-in for other agents.
-4. Report what is ready and give you a prompt for your first reel.
+### [text-over-footage](skills/3-editing-styles/text-over-footage/SKILL.md): one readable line over matching B-roll
 
-You handle account sign-in when required; the agent handles the local setup.
-A hosted chat without local file and command access can guide setup, but needs a
-local agent to run the editing tools. You can start editing while a FavStash
-connection is pending, or choose local editing only.
+![Text over footage: one line of text over B-roll that matches the joke](assets/previews/text-over-footage.jpg)
+
+For jokes, observations and setup/payoff reels, with footage matched to the line.
+
+## Free to use
+
+The skills are free and open source (Apache-2.0). FavStash's free plan includes
+unlimited saved items and stash searches, 100 transcript and AI enrichments, one
+connected channel and 10 posts a month. See the [current plans](https://www.favstash.app/#pricing).
+
+## Install
+
+Paste the prompt above into Claude Code, Codex, Cursor or another local coding agent.
+It follows [INSTALL_FOR_AGENTS.md](INSTALL_FOR_AGENTS.md) to install the skills,
+prepare FFmpeg, HyperFrames and GSAP in your workspace, render a smoke test and
+connect FavStash. You only sign in; the agent does the rest.
 
 <details>
-<summary>Prefer to install the skills yourself?</summary>
-
-From your creator workspace:
+<summary>Install the skills yourself</summary>
 
 ```bash
 npx skills add https://github.com/alisadiq-ai/favstash-ai-video-editing-skills
 ```
 
-For just the adaptive editor, add `--skill favstash-shortform`. From a local
-checkout, use `npx skills add .`. These commands install skills; the
-[agent setup guide](INSTALL_FOR_AGENTS.md) covers media dependencies and FavStash
-verification. See the [Agent Skills CLI](https://github.com/vercel-labs/skills)
-for supported clients and options.
+Add `--skill edit-video --skill paper-grid` (for example) to pick skills. The
+[agent setup guide](INSTALL_FOR_AGENTS.md) covers media tools and the FavStash connection.
 
-</details>
-
-## Short-form scripting and editing examples
-
-Give the agent your actual files, the intended audience and any approved copy or
-reference. Mention the platform, duration or tone when those choices matter.
-
-### Script a reel from a proven reference
-
-```text
-Use $shortform-scripting to adapt this reel for my audience. Keep its opening,
-swap anything that isn't true for me, and write two more openings that are just
-as aggressive plus one shared body. Prepare the editor brief.
-```
-
-### Edit an Instagram Reel from talking-head footage
-
-```text
-Use $favstash-shortform to turn these takes and supporting clips into a
-30-second Instagram Reel in the glass style. Keep my delivery natural, preserve
-the approved wording and choose when to show me, split screen or full-screen
-proof. Add readable captions and show me the reviewed export.
-```
-
-### Make a TikTok or YouTube Short from B-roll
-
-```text
-Use $favstash-shortform to make a 20-second vertical video from this idea
-and my B-roll folder. Match the action to the copy, keep the text readable
-on a phone and use sound effects only where they support a visible event.
-```
-
-### Add motion graphics to a product demo
-
-```text
-Use $motion-graphics-short to explain this before-and-after comparison
-inside my current edit. Match its fonts and colors, use the supplied
-numbers and keep the actual product recording as the proof.
-```
-
-### Fix captions without rebuilding the video
-
-```text
-Use $shortform-captions to correct the names, timing and line breaks in
-this short. Keep captions clear of my face and platform controls.
-Preserve the approved cut and deliver the corrected subtitle data too.
-```
-
-## Connect FavStash: social media for AI agents
-
-This pack handles scripting and editing. [FavStash](https://www.favstash.app/)
-adds the surrounding creator workflow: an AI content planner, AI social media
-scheduler and social media management tool that connects saved inspiration, a
-content calendar, publishing and performance feedback.
-
-- **Save and find inspiration.** Search saved Instagram posts, organize saved
-  reels into collections and keep notes on the hooks you want to revisit.
-  Semantic search helps find ideas by meaning; transcripts and summaries give the
-  scripting skill real openings to adapt.
-- **Plan content.** Turn selected inspirations into original ideas and a content
-  calendar for Instagram, TikTok, YouTube or LinkedIn.
-- **Schedule after review.** Prepare posts for connected accounts, with the exact
-  export, cover, caption, destination and timing approved before publication.
-  Each hook variant can go out as its own Trial Reel where supported.
-- **Learn from results.** Use FavStash as a social media analytics tool to inspect
-  available reach, views, watch time and follower metrics, then test a specific
-  improvement in the next edit.
-
-For Codex and Claude Code, the **FavStash CLI** is the preferred connection. It
-signs you in through the browser and includes a local bridge that uploads your
-approved exports straight from the workspace:
+For Claude Code or Codex, the FavStash CLI connects your stash and uploads local files:
 
 ```bash
 npm install -g @sketric/favstash-mcp@latest
@@ -184,126 +102,55 @@ favstash setup --agent claude-code
 favstash doctor
 ```
 
-Use `--agent codex` for Codex. Other agents connect to FavStash's **social media
-MCP server** with OAuth. MCP, the Model Context Protocol, lets a compatible agent
-access connected tools. Installing these skills alone does not connect your stash
-or social accounts. See the [FavStash CLI guide](https://www.favstash.app/cli),
-the [AI connection guide](https://www.favstash.app/docs/ai-connect) and this
-pack's [connection](skills/favstash-shortform/references/favstash.md) and
-[publishing](skills/favstash-shortform/references/publishing.md) guidance.
+Use `--agent codex` for Codex. Other agents connect through FavStash's MCP server
+with OAuth ([connection guide](https://www.favstash.app/docs/ai-connect)).
 
-### A Claude Code social media workflow
+</details>
 
-With FavStash connected, start from inspiration you deliberately saved:
+## Try it
 
 ```text
-Find the product-launch hooks in my FavStash. Use $shortform-scripting to
-adapt the strongest one into three openings for my footage, then use
-$favstash-shortform to edit the version I approve. Prepare a caption and
-calendar draft for review before scheduling.
+Use $find-ideas to find three proven reels about AI coding tools I could adapt.
 ```
-
-### A Codex social media workflow
-
-With connected-account analytics available, use evidence to guide a revision:
 
 ```text
-Compare the available watch-time metrics for my recent shorts at similar
-ages. Suggest one opening to test, then use $favstash-shortform to make
-that revision from my source project. Keep the previous export.
+Use $write-script to adapt this reel into a few hooks to test and one body in my voice.
 ```
 
-## Local tools, captions and sound design
-
-Use your existing editor and project when they work. The optional helpers live
-inside the main skill, so it remains useful when installed alone.
-
-| Tool or resource | Purpose |
-| --- | --- |
-| Node.js 22+ | Run the bundled project and media helpers |
-| FFmpeg and FFprobe | Prepare media, inspect streams and check encoded-file integrity |
-| HyperFrames | Render coded compositions and transcribe takes locally; setup prepares a pinned runtime |
-| GSAP | Animate the glass compositions; setup installs it into the same runtime |
-| yt-dlp | Obtain an authorized reference-analysis copy when working from a URL |
-| Adaptive glass style | Layouts, modern glass material, footage-matched palettes and a scaffold that builds the visual layer from a scene plan |
-| SFX pack | Curated shutters, clicks, pops, zoom swishes and reveal accents, plus generated alternatives; match sounds to visible events |
-| FavStash CLI | Optional sign-in, stash and calendar access, and local uploads for approved posts |
-
-See [local tool setup](skills/favstash-shortform/references/local-tools.md) for
-commands. You can create a fresh edit folder without installing a renderer:
-
-```bash
-npm run new-edit -- --workspace /path/to/creator-project --slug product-demo
+```text
+Use $edit-video with $breakout-card to edit these takes into a 40-second reel.
 ```
 
-Keep footage, prepared assets, editable source, previews, numbered exports and
-review notes together. Review the actual video at phone size, check complete
-caption bounds and listen to the final mix when playback is available.
+```text
+Use $publish-and-analyze to prepare covers and a caption for this cut, then compare
+last week's hook test once I approve.
+```
 
-## Frequently asked questions
+## FAQ
 
-### Do I need a FavStash account to edit videos?
+**Do I need FavStash?** No. Research, scripting and editing work without it. FavStash
+adds your saved inspiration, scheduling and analytics so the loop closes.
 
-No. The skills and local helpers work independently. Connect FavStash when you
-want saved inspirations, content planning, scheduling or analytics in the same
-workflow. Your AI provider and any external editing services have their own costs.
+**Will my agent post without asking?** No. It delivers a local cut. Posting needs your
+approval for the exact file, cover, caption, account and time.
 
-### Does it write scripts too?
+**What runs where?** Editing runs locally with FFmpeg and HyperFrames (Node 22+).
+`paper-grid`, `breakout-card` and the duplicate check also use Python. The
+breakout card's built-in person matte uses Apple Vision on macOS; on other systems,
+supply a matte from any segmentation tool.
 
-Yes. `shortform-scripting` adapts a proven reel's opening to what's true for you,
-writes two equally aggressive alternatives and one shared body in your voice,
-reviews them once and hands the editor a filmable brief. It never invents your
-results, background or product claims.
+**Can I use a saved reel as a reference?** Yes, for analysis. Adapt its hook,
+structure and pacing, and make the video from your own footage. Downloaded footage
+and music stay analysis-only unless you have reuse rights.
 
-### Is this a social media scheduling tool?
-
-This repository supplies scripting and editing skills. FavStash supplies the
-connected publishing service: use it as an Instagram scheduler, TikTok scheduler
-or YouTube scheduler, with account-specific settings and approval before posting.
-LinkedIn publishing is also available through FavStash. See the
-[social media scheduling guide](https://www.favstash.app/docs/scheduling).
-
-### Does FavStash offer a free social media scheduler?
-
-FavStash has a free plan with posting and connected-channel limits. Check the
-[current plans](https://www.favstash.app/#pricing) for allowances. This Apache-2.0
-skills pack has no separate subscription fee.
-
-### Can I use this in a ChatGPT social media workflow?
-
-ChatGPT can connect to FavStash for stash, planning, publishing and analytics
-work. Running this repository's local editing helpers additionally requires an
-environment with file access and media tools. Choose the host-specific steps in
-the AI connection guide; a hosted connector and a local editing skill serve
-different parts of the workflow.
-
-### Can I use a saved reel as a video reference?
-
-Yes, for analysis within your authorized access. Adapt the hook, pacing, framing
-and caption treatment, then create an original edit with your own footage.
-Downloaded footage and music remain analysis-only unless reuse rights are
-recorded. See [reference media and rights](skills/favstash-shortform/references/reference-media.md).
-
-### Will the agent automatically publish my finished video?
-
-No. It delivers a local candidate for review. Publishing or scheduling needs
-approval for the exact file, cover, caption, account and time. A connected
-service or finished render does not authorize posting.
-
-## Testing and contributing
-
-For repository development:
+## Contributing
 
 ```bash
 npm test
 npm run validate
 ```
 
-These checks cover helpers and repository integrity. Real-footage trials and
-creative review are still part of testing an editing workflow. Share concrete
-examples of timing, framing or caption problems when contributing improvements.
-
-See [contributing](CONTRIBUTING.md) and [security](SECURITY.md). Keep creator media,
-credentials and private research out of Git. Code, instructions and original
-SFX use [Apache-2.0](LICENSE); external tools retain their own
-[licenses](THIRD_PARTY_NOTICES.md).
+See [contributing](CONTRIBUTING.md) and [security](SECURITY.md). Code, instructions
+and original SFX use [Apache-2.0](LICENSE); external tools and the bundled Montserrat
+font keep their own [licenses](THIRD_PARTY_NOTICES.md). The style previews come from
+the maintainer's own reels, with the speaker replaced by a placeholder.

@@ -1,6 +1,0 @@
-interface:
-  display_name: "Short-Form Scripting"
-  short_description: "Write scroll-stopping hooks and filmable scripts"
-  default_prompt: "Use $shortform-scripting to adapt this reference into three openings and a shared body in my voice, then prepare the editor brief."
-policy:
-  allow_implicit_invocation: true

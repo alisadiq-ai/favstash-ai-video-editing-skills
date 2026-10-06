@@ -6,7 +6,7 @@ import test from "node:test";
 import os from "node:os";
 import { spawnSync } from "node:child_process";
 import { fileURLToPath } from "node:url";
-import { SOUND_DEFINITIONS, wavBuffer } from "../skills/favstash-shortform/lib/sfx.mjs";
+import { SOUND_DEFINITIONS, wavBuffer } from "../skills/3-editing/edit-video/lib/sfx.mjs";
 
 const root = fileURLToPath(new URL("..", import.meta.url));
 
@@ -20,7 +20,7 @@ test("SFX synthesis is deterministic and emits PCM WAV", () => {
 });
 
 test("generated SFX manifest matches definitions and files", async () => {
-  const assetRoot = path.join(root, "skills", "favstash-shortform", "assets", "sfx");
+  const assetRoot = path.join(root, "skills", "3-editing", "edit-video", "assets", "sfx");
   const manifest = JSON.parse(await fs.readFile(path.join(assetRoot, "manifest.json"), "utf8"));
   const curated = manifest.sounds.filter(sound => sound.origin === "curated");
   assert.equal(manifest.count, SOUND_DEFINITIONS.length + curated.length);
@@ -38,7 +38,7 @@ test("generated SFX manifest matches definitions and files", async () => {
 test("regeneration preserves curated recordings and metadata", async () => {
   const temporary = await fs.mkdtemp(path.join(os.tmpdir(), "favstash-sfx-"));
   try {
-    const source = path.join(root, "skills", "favstash-shortform", "assets", "sfx");
+    const source = path.join(root, "skills", "3-editing", "edit-video", "assets", "sfx");
     await fs.cp(source, temporary, { recursive: true });
     const before = JSON.parse(await fs.readFile(path.join(temporary, "manifest.json"), "utf8"));
     const generated = spawnSync(process.execPath, [path.join(root, "scripts/generate-sfx.mjs"), temporary], { encoding: "utf8" });
@@ -57,7 +57,7 @@ test("regeneration preserves curated recordings and metadata", async () => {
 test("regeneration rejects a changed curated recording before overwriting output", async () => {
   const temporary = await fs.mkdtemp(path.join(os.tmpdir(), "favstash-sfx-integrity-"));
   try {
-    const source = path.join(root, "skills", "favstash-shortform", "assets", "sfx");
+    const source = path.join(root, "skills", "3-editing", "edit-video", "assets", "sfx");
     await fs.cp(source, temporary, { recursive: true });
     const manifestBefore = await fs.readFile(path.join(temporary, "manifest.json"));
     const manifest = JSON.parse(manifestBefore);

@@ -12,8 +12,8 @@ test("the main skill works alone, creates edits without setup and preserves crea
   const temporary = await fs.mkdtemp(path.join(os.tmpdir(), "favstash-skill-test-"));
   context.after(async () => fs.rm(temporary, { recursive: true, force: true }));
   // Simulate an installed skill with no repository-root tooling or sibling skills.
-  const installed = path.join(temporary, "installed", "favstash-shortform");
-  await fs.cp(path.join(root, "skills", "favstash-shortform"), installed, { recursive: true });
+  const installed = path.join(temporary, "installed", "edit-video");
+  await fs.cp(path.join(root, "skills", "3-editing", "edit-video"), installed, { recursive: true });
   const workspace = path.join(temporary, "creator project");
   const scripts = path.join(installed, "scripts");
   const invoke = (name, args = []) => execFileSync(process.execPath, [

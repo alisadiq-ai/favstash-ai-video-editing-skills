@@ -3,11 +3,11 @@ import fs from "node:fs/promises";
 import crypto from "node:crypto";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import { SOUND_DEFINITIONS, soundManifestEntry, wavBuffer } from "../skills/favstash-shortform/lib/sfx.mjs";
-import { writeJson } from "../skills/favstash-shortform/lib/files.mjs";
+import { SOUND_DEFINITIONS, soundManifestEntry, wavBuffer } from "../skills/3-editing/edit-video/lib/sfx.mjs";
+import { writeJson } from "../skills/3-editing/edit-video/lib/files.mjs";
 
 const root = fileURLToPath(new URL("..", import.meta.url));
-const output = process.argv[2] ? path.resolve(process.argv[2]) : path.join(root, "skills", "favstash-shortform", "assets", "sfx");
+const output = process.argv[2] ? path.resolve(process.argv[2]) : path.join(root, "skills", "3-editing", "edit-video", "assets", "sfx");
 await fs.mkdir(output, { recursive: true });
 const sounds = [];
 // The checked-in manifest owns curated metadata; synthesis never replaces recordings.

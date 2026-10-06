@@ -4,26 +4,36 @@ import fs from "node:fs/promises";
 import path from "node:path";
 import process from "node:process";
 import { fileURLToPath } from "node:url";
-import { listFilesRecursively, pathExists, readJson, sha256File } from "../skills/favstash-shortform/lib/files.mjs";
+import { listFilesRecursively, pathExists, readJson, sha256File } from "../skills/3-editing/edit-video/lib/files.mjs";
 
 const root = fileURLToPath(new URL("..", import.meta.url));
 const failures = [];
-const expectedSkills = ["favstash-shortform", "motion-graphics-short", "shortform-captions", "shortform-scripting"];
+const expectedSkills = [
+  "1-research/find-ideas",
+  "2-scripting/write-script",
+  "3-editing/edit-video",
+  "3-editing-styles/adaptive-glass",
+  "3-editing-styles/breakout-card",
+  "3-editing-styles/paper-grid",
+  "3-editing-styles/text-over-footage",
+  "4-publish-and-learn/publish-and-analyze",
+];
 const skillRoot = path.join(root, "skills");
 const discovered = (await listFilesRecursively(skillRoot))
   .filter((file) => path.basename(file) === "SKILL.md")
   .map((file) => path.relative(skillRoot, path.dirname(file))).sort();
-if (JSON.stringify(discovered) !== JSON.stringify(expectedSkills)) {
+if (JSON.stringify(discovered) !== JSON.stringify([...expectedSkills].sort())) {
   failures.push(`Expected ${expectedSkills.length} skills; found: ${discovered.join(", ")}`);
 }
 for (const skill of discovered) {
+  const name = path.basename(skill);
   const markdown = await fs.readFile(path.join(skillRoot, skill, "SKILL.md"), "utf8");
   const frontmatter = markdown.match(/^---\n([\s\S]*?)\n---/);
-  if (!frontmatter?.[1].split("\n").includes(`name: ${skill}`)) failures.push(`${skill}: invalid name`);
+  if (!frontmatter?.[1].split("\n").includes(`name: ${name}`)) failures.push(`${skill}: name must match its folder`);
   if (!/^description: ".+"$/m.test(frontmatter?.[1] ?? "")) failures.push(`${skill}: missing description`);
   const agentFile = path.join(skillRoot, skill, "agents", "openai.yaml");
   if (!(await pathExists(agentFile))) failures.push(`${skill}: missing UI metadata`);
-  else if (!(await fs.readFile(agentFile, "utf8")).includes(`$${skill}`)) {
+  else if (!(await fs.readFile(agentFile, "utf8")).includes(`$${name}`)) {
     failures.push(`${skill}: default prompt must name the skill`);
   }
 }
@@ -43,10 +53,15 @@ for (const relative of files) {
     if (/^(?:[a-z][a-z\d+.-]*:|#)/i.test(href)) continue;
     const target = path.resolve(path.dirname(file), decodeURIComponent(href.split("#")[0]));
     if (!(await pathExists(target))) failures.push(`${relative}: broken link ${href}`);
+    // Skills install one folder each, so a skill's links must stay inside its own folder.
+    const owner = discovered.find((skill) => file.startsWith(path.join(skillRoot, skill) + path.sep));
+    if (owner && !target.startsWith(path.join(skillRoot, owner) + path.sep)) {
+      failures.push(`${relative}: link ${href} leaves the ${path.basename(owner)} skill; name the other skill instead`);
+    }
   }
 }
 
-const assetRoot = path.join(skillRoot, "favstash-shortform", "assets", "sfx");
+const assetRoot = path.join(skillRoot, "3-editing", "edit-video", "assets", "sfx");
 const manifest = await readJson(path.join(assetRoot, "manifest.json"));
 if (manifest.count !== manifest.sounds?.length) failures.push("Invalid SFX manifest count");
 for (const sound of manifest.sounds ?? []) {

@@ -1,6 +1,6 @@
-# Install FavStash short-form skills
+# Install FavStash creator skills
 
-Use this guide when the user asks to set up this pack. Install the four skills,
+Use this guide when the user asks to set up this pack. Install the eight skills,
 prepare the local editing tools and connect FavStash. Reuse what already works;
 ask the user only for a needed workspace choice, system permission or account
 sign-in. This setup does not authorize publishing, scheduling or uploads.
@@ -46,7 +46,7 @@ Request system elevation only if the chosen installation actually requires it.
 Run the pack's setup to install its pinned HyperFrames runtime and GSAP locally:
 
 ```bash
-node "<pack>/skills/favstash-shortform/scripts/init-workspace.mjs" --workspace "<workspace>" --install
+node "<pack>/skills/3-editing/edit-video/scripts/init-workspace.mjs" --workspace "<workspace>" --install
 ```
 
 This prepares `.favstash-studio/runtime/`, a B-roll inbox and optional preferences.
@@ -56,6 +56,15 @@ official renderer package; no global renderer install or extra style pack is
 necessary. The runtime also provides local transcription (`hyperframes
 transcribe`), which downloads a Whisper model on first use.
 
+The `paper-grid` and `breakout-card` styles and the duplicate check also use
+Python 3. When the creator wants them, install the packages into a virtual
+environment or the user's own Python (not system-wide with elevation):
+`numpy opencv-python` for breakout-card plates, `pdqhash scipy numpy` for the
+duplicate check and, optionally, `playwright` for paper-grid page captures. The
+breakout card's built-in person matte compiles with `swiftc` on macOS; elsewhere
+it takes a matte video from another tool. Skip these when the creator only needs
+the other styles.
+
 ## 3. Install the skills for the current agent
 
 Run the [Agent Skills CLI](https://github.com/vercel-labs/skills) **from the creator
@@ -63,26 +72,27 @@ workspace**, using the clone as its source. Choose the actual host identifier
 (for example `codex`, `claude-code` or `cursor`); inspect CLI help for other hosts.
 
 ```bash
-npx --yes skills add "<pack>" --agent <agent-id> --skill shortform-scripting --skill favstash-shortform --skill motion-graphics-short --skill shortform-captions --copy --yes
+npx --yes skills add "<pack>" --agent <agent-id> --skill find-ideas --skill write-script --skill edit-video --skill adaptive-glass --skill paper-grid --skill breakout-card --skill text-over-footage --skill publish-and-analyze --copy --yes
 ```
 
 Install for this project by default. Use global scope only if the user asks for
 availability across projects. Do not target every installed agent. Verify that
-all four skills and the main skill's scripts, references, glass assets and SFX
-were installed. Check `npx skills list --agent <agent-id>` from the same
+all eight skills were installed with their scripts, references and assets
+(`edit-video`'s SFX, each style's builder, the breakout card's fonts). Check `npx skills list --agent <agent-id>` from the same
 workspace. If the host needs a reload for discovery, tell the user exactly what
 to reload.
 
 ## 4. Verify local editing
 
 ```bash
-node "<pack>/skills/favstash-shortform/scripts/doctor.mjs" --workspace "<workspace>" --json --strict
+node "<pack>/skills/3-editing/edit-video/scripts/doctor.mjs" --workspace "<workspace>" --json --strict
 ```
 
 Check the report, not just the exit code: Node, npm, FFmpeg, FFprobe, yt-dlp,
 HyperFrames and GSAP must each be available for the complete setup (`renderReady`
 and `glassReady`). A missing downloader can leave local editing usable but
-reference-URL analysis pending.
+reference-URL analysis pending. `paperGridReady`, `breakoutCardReady` and
+`duplicateCheckReady` report the optional Python pieces.
 
 A CLI version check alone does not verify rendering. Use the installed
 `.favstash-studio/runtime/node_modules/.bin/hyperframes` executable (on Windows,
@@ -149,7 +159,7 @@ platforms are ready from one successful call.
 
 Report briefly:
 
-- where the four skills and creator workspace live;
+- where the eight skills and creator workspace live;
 - dependency versions and the smoke-render result;
 - whether FavStash is verified, pending sign-in/reload, unavailable or skipped,
   and through which route (CLI bridge or remote MCP);
@@ -158,14 +168,14 @@ Report briefly:
 Then offer concrete first prompts:
 
 ```text
-Use $shortform-scripting to turn this saved reel into three openings and a
-shared body in my voice, then prepare the editor brief.
+Use $find-ideas to find three proven reels in my niche, then $write-script to
+turn the best one into a few hooks to test and a shared body in my voice.
 ```
 
 ```text
-Use $favstash-shortform to turn these takes and supporting clips into a reel.
-Use my brief and footage to choose the layout, add readable captions and
-show me the reviewed export before any publishing step.
+Use $edit-video to turn these takes into a reel in the style that fits
+(adaptive-glass, paper-grid, breakout-card or text-over-footage), and show me
+the reviewed export before any publishing step.
 ```
 
 Keep setup separate from creative approval. Do not publish, schedule, upload
