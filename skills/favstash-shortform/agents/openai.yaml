@@ -1,6 +1,0 @@
-interface:
-  display_name: "Adaptive Short-Form Editing"
-  short_description: "Edit reels adaptively from the story and footage"
-  default_prompt: "Use $favstash-shortform to turn my brief and available media into an organized, reviewed vertical short."
-policy:
-  allow_implicit_invocation: true

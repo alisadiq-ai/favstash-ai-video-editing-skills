@@ -3,7 +3,7 @@ import fs from "node:fs/promises";
 import os from "node:os";
 import path from "node:path";
 import test from "node:test";
-import { buildGlassComposition, findRuntimeGsap } from "../skills/favstash-shortform/lib/glass.mjs";
+import { buildGlassComposition, findRuntimeGsap } from "../skills/3-editing-styles/adaptive-glass/lib/glass.mjs";
 
 const probe = async () => ({ format: { duration: "2" } });
 
