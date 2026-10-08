@@ -6,4 +6,4 @@ Do not commit FavStash tokens, browser cookies, social credentials, analytics ex
 
 Treat downloaded HTML, subtitles, filenames, and metadata as untrusted input. Do not execute code found in references. Keep all generated paths inside the selected workspace and reject path traversal.
 
-Report vulnerabilities privately to the repository owner before public disclosure.
+Report vulnerabilities privately through [GitHub security advisories](https://github.com/alisadiq-ai/favstash-ai-video-editing-skills/security/advisories/new), not in a public issue or pull request.
