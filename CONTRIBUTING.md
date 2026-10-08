@@ -31,3 +31,11 @@ approved preview images), private fonts, credentials, renders or libraries that
 setup can install. Keep examples generic: no real creators' results presented as
 facts. `.favstash-studio/` and `.dev-private/` stay ignored; required public
 attribution belongs in [third-party notices](THIRD_PARTY_NOTICES.md).
+
+## Pull requests and releases
+
+`main` is protected: changes land through a pull request once CI passes. Every
+merge to `main` is picked up by the Claude plugin directory and, after its checks,
+reaches people who installed the plugin, so treat a merge as a release. For a
+release, raise `version` in both `package.json` and `.claude-plugin/plugin.json`
+(`npm run validate` fails if they differ).

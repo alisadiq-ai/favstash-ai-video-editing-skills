@@ -83,6 +83,11 @@ for (const sound of manifest.sounds ?? []) {
     failures.push(`Missing or changed SFX: ${sound.file}`);
   }
 }
+// Every bundled sound ships to users, so each one must be listed in the manifest.
+const listedSounds = new Set((manifest.sounds ?? []).map((sound) => path.join(assetRoot, sound.file)));
+for (const file of await listFilesRecursively(assetRoot)) {
+  if (file.endsWith(".wav") && !listedSounds.has(file)) failures.push(`SFX not in manifest: ${path.relative(root, file)}`);
+}
 for (const folder of [".dev-private", ".favstash-studio"]) {
   const ignored = spawnSync("git", ["check-ignore", "-q", `${folder}/example`], { cwd: root });
   if (ignored.status !== 0) failures.push(`${folder} is not ignored`);
