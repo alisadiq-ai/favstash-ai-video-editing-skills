@@ -43,3 +43,19 @@ cover. A punch-in on the camera layer alone leaves captions and graphics identic
 and still scored borderline. Give each variant a different amount, anchor and grade
 so they also clear each other. Speed or pitch changes alone are not a fix. Work from
 the master, rerun the delivery checks and this check, and record the recipe.
+
+**The punch-in has a ceiling.** Tall phones already crop a 9:16 video's sides (a
+20:9 phone shows about x 108..972 of 1080), and a punch-in pushes everything outward:
+a point at x lands at 540 − (540 − x) × zoom. Keep the outermost text, captions and
+cards inside x 108..972 after the zoom, and check the treated file the way
+`edit-video` describes for tall phones.
+
+When the layout leaves no room, as motion graphics with text near the margins
+usually do, rebuild the variant instead of cropping it: shrink the whole foreground
+toward a point inside the frame (for example to 93% for one variant and to 90%
+toward a different point for another) over a full-bleed background, give it its own
+side margins and grade, and render again. Shrink the whole foreground, presenter and
+all; resizing only the cards leaves the big shapes identical and still scored
+borderline. Rebuilt this way, variants scored 0.00 against the original and each
+other with every line on screen, where the same edits with punch-ins went out with
+text cut off on an iPhone.

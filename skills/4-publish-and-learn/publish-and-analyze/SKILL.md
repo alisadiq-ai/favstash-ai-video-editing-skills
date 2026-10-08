@@ -48,7 +48,11 @@ route or changing the audio doesn't prevent it.
 - Post the strongest variant first and untouched; the first upload counts as the original.
 - Give each other variant a different **whole-frame** treatment before posting:
   about an 8% punch-in anchored slightly high, a changed grade and its own cover.
-  Treat the composited frame, not only the camera layer.
+  Treat the composited frame, not only the camera layer. A punch-in pushes edge
+  content outward and tall phones already crop the sides, so keep the outermost
+  text and cards inside x 108..972 after it. For motion-graphics edits with text
+  near the margins, rebuild the variant with a slightly smaller foreground instead
+  (see the [duplicate check](references/duplicate-check.md#fix-a-flagged-variant)).
 - A shared end card counts too; give each reel's card its own background.
 - Check every file with the [duplicate check](references/duplicate-check.md) against
   the account's earlier posts and its siblings. Never re-upload a held file; only a

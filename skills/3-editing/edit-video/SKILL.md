@@ -81,10 +81,25 @@ decorative cards and headings should not shrink or obscure it. Use full-screen
 proof when detail needs it. Change layout on meaningful beats.
 
 For an unknown destination, use this **conservative working mask** at 1080×1920:
-essential text, captions and demonstrated UI detail within **x=72..900,
+essential text, captions and demonstrated UI detail within **x=108..900,
 y=269..1248**. Scale proportionally for another 9:16 resolution. This is a house
 guide, not an official platform specification; check the intended app's current
 preview before publication. Footage and decorative panels can extend beyond it.
+
+**Tall phones crop the sides.** Instagram fills a tall screen with a 9:16 video by
+cutting its sides: a 19.5:9 iPhone shows about x 52..1028 of a 1080-wide frame, a
+20:9 Android phone about x 108..972. That crop is why the mask starts at x 108.
+Keep cards and panels that hold text or the explained UI inside x 108..972 as a
+whole, not only their text. A layout made for a 4:5 or square canvas needs new side
+margins for 9:16, and any punch-in (such as a duplicate-check treatment) pushes edge
+content further out. Before delivery, look at what a 20:9 phone shows of the final
+file, one frame a second:
+
+```bash
+ffmpeg -i final.mp4 -vf "fps=1,crop=864:1920:108:0,scale=216:-1,tile=8x6" -frames:v 1 phone-view.jpg
+```
+
+No caption, headline or card text may touch the sheet's edges.
 
 Center main captions and cards on the **whole canvas, x=540**. A centered critical
 box can be at most **720 px wide** under that mask. Inset or wrap essential contents

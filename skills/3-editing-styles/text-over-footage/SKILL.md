@@ -26,7 +26,8 @@ readable text block, visible from the first frame.
 - Avoid a stretch where they're visibly talking to someone unless the line is about
   talking. Slow, idle typing doesn't read as busy.
 - Use another creator's clip only for a shot the creator explicitly names. Then
-  soften its burned-in text, punch in about 10% and change the grade.
+  soften its burned-in text, punch in about 10% and change the grade. Punch in on
+  the footage under the text, so the text block keeps its safe placement.
 - A clip that has already been posted needs a punch-in and a new grade, or the
   platform's duplicate check may hold the reel (see `publish-and-analyze`).
 
