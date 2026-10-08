@@ -1,0 +1,31 @@
+{
+  "name": "favstash-creator-skills",
+  "displayName": "FavStash Creator Skills",
+  "version": "0.2.0",
+  "description": "Find proven ideas, write hooks and scripts, edit Reels, TikToks and YouTube Shorts in four finished styles, then publish and learn from results with FavStash.",
+  "author": {
+    "name": "FavStash",
+    "url": "https://www.favstash.app"
+  },
+  "homepage": "https://www.favstash.app",
+  "repository": "https://github.com/alisadiq-ai/favstash-ai-video-editing-skills",
+  "license": "Apache-2.0",
+  "documentationUrl": "https://github.com/alisadiq-ai/favstash-ai-video-editing-skills#readme",
+  "supportUrl": "https://github.com/alisadiq-ai/favstash-ai-video-editing-skills/issues",
+  "privacyPolicyUrl": "https://www.favstash.app/privacy",
+  "termsOfServiceUrl": "https://www.favstash.app/terms",
+  "keywords": ["short-form-video", "video-editing", "reels", "tiktok", "youtube-shorts", "captions", "content-creation", "social-media"],
+  "skills": [
+    "./skills/1-research/",
+    "./skills/2-scripting/",
+    "./skills/3-editing/",
+    "./skills/3-editing-styles/",
+    "./skills/4-publish-and-learn/"
+  ],
+  "mcpServers": {
+    "favstash": {
+      "type": "http",
+      "url": "https://mcp.favstash.app/mcp"
+    }
+  }
+}

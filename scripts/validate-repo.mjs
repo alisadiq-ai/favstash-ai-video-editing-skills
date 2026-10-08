@@ -38,6 +38,19 @@ for (const skill of discovered) {
   }
 }
 
+// The Claude plugin manifest must load every skill and release with the package version.
+const pluginManifest = await readJson(path.join(root, ".claude-plugin", "plugin.json"));
+const manifestSkillDirs = (pluginManifest.skills ?? []).map((dir) => path.resolve(root, dir));
+for (const skill of discovered) {
+  if (!manifestSkillDirs.includes(path.dirname(path.join(skillRoot, skill)))) {
+    failures.push(`.claude-plugin/plugin.json: skills does not load ${skill}`);
+  }
+}
+const packageVersion = (await readJson(path.join(root, "package.json"))).version;
+if (pluginManifest.version !== packageVersion) {
+  failures.push(`.claude-plugin/plugin.json: version ${pluginManifest.version} must match package.json ${packageVersion}`);
+}
+
 // Check tracked and new public content, excluding local creator work and Git internals.
 const inventory = spawnSync("git", ["ls-files", "--cached", "--others", "--exclude-standard", "-z"], { cwd: root, encoding: "utf8" });
 if (inventory.status !== 0) throw new Error(inventory.stderr || "Cannot list repository files");
