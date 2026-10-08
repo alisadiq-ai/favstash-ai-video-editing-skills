@@ -49,8 +49,8 @@ export async function loadPalette(config, resolve) {
   if (!base) throw new Error(`Unknown palette "${name}". Choose one of: ${Object.keys(catalogue.palettes).join(", ")}`);
   const overrides = config.paletteFile ? await readJson(resolve(config.paletteFile)) : {};
   const palette = { name, ...base, ...overrides };
-  for (const key of [...Object.values(PALETTE_VARIABLES), "captionBacking", "captionBackingOpacity"]) {
-    if (palette[key] === undefined) throw new Error(`Palette is missing ${key}`);
+  for (const field of [...Object.values(PALETTE_VARIABLES), "captionBacking", "captionBackingOpacity"]) {
+    if (palette[field] === undefined) throw new Error(`Palette is missing ${field}`);
   }
   return palette;
 }
@@ -149,7 +149,7 @@ export async function buildGlassComposition(configPath, outputPath, options = {}
   }
   await fs.copyFile(gsap, path.join(output, "assets", "gsap.min.js"));
 
-  const variables = `:root{${Object.entries(PALETTE_VARIABLES).map(([name, key]) => `--${name}:${palette[key]}`).join(";")}}`;
+  const variables = `:root{${Object.entries(PALETTE_VARIABLES).map(([name, field]) => `--${name}:${palette[field]}`).join(";")}}`;
   const css = `${await fs.readFile(path.join(GLASS_ASSETS, "glass.css"), "utf8")}\n${variables}\n`;
   await fs.writeFile(path.join(output, "style.css"), css);
   await writeJson(path.join(output, "palette.json"), palette);
