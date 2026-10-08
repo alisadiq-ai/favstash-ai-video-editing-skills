@@ -107,6 +107,24 @@ with OAuth ([connection guide](https://www.favstash.app/docs/ai-connect)).
 
 </details>
 
+<details>
+<summary>Install as a Claude plugin</summary>
+
+This repository is also a Claude plugin, `favstash-creator-skills`, with all eight
+skills and the FavStash connector. Load it in Claude Code for one session:
+
+```bash
+claude --plugin-dir ./favstash-ai-video-editing-skills
+```
+
+Skills are namespaced under the plugin, for example
+`/favstash-creator-skills:edit-video`, and Claude also picks them up when your
+request fits. Connect FavStash from the plugin's connectors with OAuth. The editing
+skills need the local media tools in the [agent setup guide](INSTALL_FOR_AGENTS.md),
+so use the plugin in Claude Code or in Cowork on your own computer.
+
+</details>
+
 ## Try it
 
 ```text
@@ -138,6 +156,14 @@ approval for the exact file, cover, caption, account and time.
 `paper-grid`, `breakout-card` and the duplicate check also use Python. The
 breakout card's built-in person matte uses Apple Vision on macOS; on other systems,
 supply a matte from any segmentation tool.
+
+**What does it send, and where?** The bundled scripts run on your machine and make no
+network requests; your footage, renders and preferences stay in your workspace.
+Data leaves your machine only through FavStash tools you connect: the remote MCP
+server at `https://mcp.favstash.app/mcp` (OAuth) or the FavStash CLI. They search
+your stash, read your connected accounts' analytics, and upload and schedule a
+post only after you approve the exact file, caption, account and time. See the
+[FavStash privacy policy](https://www.favstash.app/privacy).
 
 **Can I use a saved reel as a reference?** Yes, for analysis. Adapt its hook,
 structure and pacing, and make the video from your own footage. Downloaded footage
