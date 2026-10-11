@@ -1,12 +1,5 @@
 # FavStash Creator Skills: find ideas, script, edit and publish short videos with Claude Code or Codex
 
-[![FavStash connects Claude Code, Codex and ChatGPT with Instagram, TikTok and YouTube to save inspiration, schedule, publish and analyze short videos](assets/favstash-social-preview-2026.png)](https://www.favstash.app/)
-
-**Give your AI agent the whole short-form loop.** These free, open-source skills
-teach Claude Code, Codex or any skills-aware agent to find proven ideas, write
-scroll-stopping scripts in your voice, edit Reels, TikToks and Shorts in four
-finished styles, then publish and learn from the results.
-
 **Give this prompt to your agent:**
 
 ```text
@@ -19,6 +12,13 @@ Check whether FavStash is connected; if not, connect it with the FavStash CLI
 (Codex or Claude Code) or guide me through sign-in. Verify the setup, then tell
 me how to start my first reel.
 ```
+
+**Give your AI agent the whole short-form loop.** These free, open-source skills
+teach Claude Code, Codex or any skills-aware agent to find proven ideas, write
+scroll-stopping scripts in your voice, edit Reels, TikToks and Shorts in four
+finished styles, then publish and learn from the results.
+
+[![FavStash connects Claude Code, Codex and ChatGPT with Instagram, TikTok and YouTube to save inspiration, schedule, publish and analyze short videos](assets/favstash-social-preview-2026.png)](https://www.favstash.app/)
 
 ## The creator loop
 
