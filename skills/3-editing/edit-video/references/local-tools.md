@@ -100,4 +100,6 @@ node <skill>/scripts/index-broll.mjs --workspace /path/to/project
 The index records file descriptions, hashes and technical metadata; filenames
 and successful indexing do not establish rights or visual suitability. The
 [SFX pack](../assets/sfx/manifest.json) is available directly from this
-skill; there is no separate sound skill or required library-copy step.
+skill; there is no separate sound skill or required library-copy step. To put
+each sound on the frame that shows its event, mix a cue sheet with
+`scripts/sfx-sync.mjs` ([sound on the frame](sound-sync.md)).

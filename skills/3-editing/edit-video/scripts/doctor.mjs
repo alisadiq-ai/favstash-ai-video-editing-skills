@@ -66,6 +66,7 @@ const report = {
   referenceAnalysisReady: checks.ytDlp.available,
   renderReady: checks.node.available && checks.ffmpeg.available && checks.ffprobe.available && checks.hyperframes.available,
   glassReady: checks.node.available && checks.ffprobe.available && checks.hyperframes.available && checks.gsap.available,
+  oneCameraReady: checks.node.available && checks.ffmpeg.available && checks.hyperframes.available && checks.gsap.available,
   paperGridReady: checks.hyperframes.available && checks.gsap.available && checks.python.available,
   breakoutCardReady: checks.hyperframes.available && checks.gsap.available && checks.pythonNumpy.available && checks.pythonOpenCv.available,
   duplicateCheckReady: checks.ffmpeg.available && checks.pythonNumpy.available && checks.pythonPdq.available,
@@ -74,7 +75,7 @@ const report = {
     !checks.node.available && "Install Node.js 22 or newer.",
     (!checks.ffmpeg.available || !checks.ffprobe.available) && "Install an FFmpeg build that includes ffprobe.",
     !checks.ytDlp.available && "Install yt-dlp before URL-based reference analysis (for example: brew install yt-dlp or follow the official installer).",
-    (!checks.hyperframes.available || !checks.gsap.available) && "If this edit needs HyperFrames or the glass scaffold, run: node <skill>/scripts/init-workspace.mjs --workspace <path> --install",
+    (!checks.hyperframes.available || !checks.gsap.available) && "If this edit needs HyperFrames, the glass scaffold or the one-camera builder, run: node <skill>/scripts/init-workspace.mjs --workspace <path> --install",
     !checks.python.available && "Optional: install Python 3 for the paper-grid and breakout-card styles and the duplicate check.",
     checks.python.available && !(checks.pythonNumpy.available && checks.pythonOpenCv.available) && "Optional: pip install numpy opencv-python for breakout-card plates.",
     checks.python.available && !checks.pythonPdq.available && "Optional: pip install pdqhash scipy numpy for the duplicate check.",
@@ -94,7 +95,7 @@ if (args.json) {
   console.log(`${icon(checks.ffprobe.available)} FFprobe`);
   console.log(`${icon(checks.ytDlp.available)} yt-dlp — required for URL reference analysis`);
   console.log(`${icon(checks.hyperframes.available)} HyperFrames ${checks.hyperframes.version ?? checks.hyperframes.expected} workspace runtime`);
-  console.log(`${icon(checks.gsap.available)} GSAP ${checks.gsap.expected} for the glass scaffold`);
+  console.log(`${icon(checks.gsap.available)} GSAP ${checks.gsap.expected} for the glass and one-camera builders`);
   console.log(`${icon(checks.python.available)} Python 3 — optional, for paper-grid, breakout-card and the duplicate check`);
   console.log(`${icon(report.breakoutCardReady)} breakout-card plates (numpy, opencv-python)${checks.swiftc.available ? " with the built-in macOS matte" : ""}`);
   console.log(`${icon(report.duplicateCheckReady)} duplicate check (pdqhash, scipy)`);
