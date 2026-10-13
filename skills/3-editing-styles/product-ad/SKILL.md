@@ -1,0 +1,112 @@
+---
+name: product-ad
+description: "Style for edit-video: a vertical motion-graphics ad built in code from the product itself (its code, site, app or screenshots), with an optional voiceover and every sound on its frame. No camera footage needed. Use when a creator wants to promote something they built, a tool, template or free resource, a comment-to-DM giveaway, or asks for a motion-graphics or launch video for Reels, TikTok or Shorts."
+---
+
+# Product ad
+
+A style on top of `edit-video`, which owns the voice, captions, sound mix and
+review. The whole reel is motion graphics made from the real product: its
+interface, copy and flow, animated as one continuous piece where each scene turns
+into the next, with sound locked to the picture. This skill is a method, not a
+template: the product decides what appears, and you design every scene for it.
+
+Fits a reel that sells or explains one thing someone built: an app, a tool, a
+template, a skill file, a free resource behind a comment keyword. Skip it when the
+creator's face carries the story (use a footage style) or the product has nothing
+to show yet.
+
+## Creative laws
+
+- **The first second decides.** Frame 0 must look finished and already say what
+  the reel is about: the hook in large type over the product's world, the product
+  visible. Never an empty canvas, a logo sting or raw code/markdown, which reads as
+  broken formatting.
+- **Show the product in use.** Entry → key action → result beats a landing page
+  describing it. Reuse the real interface, copy, colors and assets; rebuild only
+  what you can't reuse. No abstract filler.
+- **Every claim is grounded.** Names, numbers, features and quotes must exist in
+  the product, its README, its UI or the creator's brief. Hooks, jokes and
+  connective lines are free to invent; claims are not. Label a mockup or a staged
+  demo as an example on screen.
+- **One object carries the story.** Each scene turns into the next through
+  something the viewer is already watching: a file falls into a screen and becomes
+  a chip, an input grows into the prompt card, a card flips into a DM. A cut to an
+  unrelated layout restarts attention. See [motion](references/motion.md).
+- **Readable at speed.** Pace comes from motion, not from pulling text early: a
+  short label holds ~0.8 s settled, a sentence ~0.3 s per word.
+- **Sound on the frame.** Every hit plays on the first frame that shows its event.
+- **One look.** The product's palette and type (or the creator's brand), one
+  accent, consistent motion. Keep critical text inside `edit-video`'s safe area.
+- **An honest ending.** The call to action matches what the creator actually
+  offers: a comment keyword that really sends the thing, a link that works, a
+  limit or price they will honor.
+
+## Workflow
+
+Work in the run's folder from `edit-video` (or a new folder for a standalone ad):
+`plan/`, `work/` for the composition, `audio/`, `previews/`, `exports/`, `review/`.
+
+1. **Inspect the product.** Read its code (main page, styles, routes, key
+   components) or capture its site, plus any screenshots, demo clips and the
+   creator's brief. Note the exact colors and fonts, the strongest visual, the
+   copy you may quote and the 2–3 beats of the product in use. Never carry secrets,
+   tokens, internal URLs or real customer data into the ad; swap in plausible
+   stand-ins and say so.
+2. **Plan** in `plan/ad-plan.md` with the [story guide](references/story.md):
+   angle, hook, beats, the handover between every pair of scenes, on-screen text,
+   voiceover lines, the call to action and the sound events. Get the creator's OK
+   on the plan when they are present.
+3. **Voiceover first, when there is one.** Generate or record it, transcribe it to
+   word timings and take every beat's frame from them: the click lands on "send",
+   the reveal on its word. Without a voiceover, set the beats to the music or to
+   reading time.
+4. **Build** a HyperFrames composition (Node 22+ and the workspace runtime from
+   `edit-video`'s `init-workspace.mjs --install`). If HyperFrames' own skills are
+   installed (`hyperframes-core`, `hyperframes-animation`, `hyperframes-keyframes`),
+   read them for the composition contract and animation mechanics; they track the
+   current renderer. Their `product-launch-video` workflow can build from your plan
+   when the creator wants its presets; keep the format at 1080×1920 and your plan as
+   the brief. Otherwise write the composition yourself following
+   [motion](references/motion.md). Either way, write `cues.json` beside it: one
+   sound cue per visible event (format in `edit-video`'s sound-sync reference).
+5. **Check and look before rendering.**
+   `.favstash-studio/runtime/node_modules/.bin/hyperframes check <comp>` must pass
+   with no errors; treat layout warnings as defects unless the overlap is
+   deliberate. Snapshot frame 0 and every handover at its start, middle and end
+   (`hyperframes snapshot <comp> --at …`), look at them, fix and repeat.
+6. **Render** with `hyperframes render <comp> --fps 30 --quality high --output
+   previews/ad-vNN.mp4`.
+7. **Sound.** Mix the voice and `cues.json` onto the render with `edit-video`'s
+   `scripts/sfx-sync.mjs mix … --voice … --video … --mux exports/ad-vNN.mp4`, then
+   `sfx-sync.mjs check … --strips review/sync-vNN` and look at the strips: each red
+   frame should be the first that shows its event. Music, when used, sits under the
+   voice; its key hits can carry the biggest reveals.
+8. **Review and deliver** with `edit-video`: the encoded export, frame 0 and the
+   first 3 seconds, every handover at phone size, safe areas, a full decode, and the
+   claims against the source. Keep numbered versions; never publish without the
+   creator's approval of the exact post.
+
+## Pitfalls already paid for
+
+- A later element that isn't hidden at frame 0 shows before its cue. Set the
+  starting state of everything explicitly.
+- Frame times rounded up (29.0667 s for frame 872) fire a hard switch one frame
+  late and put its sound a frame early. Compute times from frame numbers and round
+  down.
+- A fade-in's first visible frame is the one after it starts; a hard switch shows
+  on its own frame. Cue each accordingly.
+- Font stacks with quotes break an inline `style` attribute and silently fall back
+  to Times. Put design tokens in a stylesheet.
+- A big move into a new world (rising into space, diving into a screen) goes black
+  for a frame if the old layer leaves before the new one arrives. Bring the new
+  layer in first.
+- Tilted or layered text trips the layout checker. Mark only the specific
+  deliberate blocks with `data-layout-allow-overlap`; anything else is a real
+  collision.
+- Text over a busy crossfade turns to mud. Stagger it: old out, new in, or carry
+  one object across instead.
+
+The inspect → plan → build method and the grounding and reading-time rules are
+informed by [brag](https://github.com/latent-spaces/brag) (MIT); no third-party text
+or code is included.

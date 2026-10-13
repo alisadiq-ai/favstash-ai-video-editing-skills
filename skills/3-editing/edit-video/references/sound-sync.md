@@ -29,7 +29,7 @@ for timeline editors; the mixer measures each file's exact sync point instead.
 ## Cue sheet
 
 JSON with the reel's `fps`, optional `total` (seconds) and a `cues` list. Style
-builders such as `one-camera` write it for you; otherwise write it from the edit:
+builds such as `product-ad` write it as they go; otherwise write it from the edit:
 
 ```json
 {

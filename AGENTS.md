@@ -8,7 +8,7 @@ installation, follow [INSTALL_FOR_AGENTS.md](INSTALL_FOR_AGENTS.md).
 | 1 · Research | [find-ideas](skills/1-research/find-ideas/SKILL.md) | Find proven references and choose the next idea |
 | 2 · Script | [write-script](skills/2-scripting/write-script/SKILL.md) | Write one or more hooks to test, one shared body and the editor brief |
 | 3 · Edit | [edit-video](skills/3-editing/edit-video/SKILL.md) | Cut, caption, sound, motion graphics, safe areas and review: the base for every edit |
-| 3 · Edit, style | [adaptive-glass](skills/3-editing-styles/adaptive-glass/SKILL.md), [paper-grid](skills/3-editing-styles/paper-grid/SKILL.md), [breakout-card](skills/3-editing-styles/breakout-card/SKILL.md), [one-camera](skills/3-editing-styles/one-camera/SKILL.md), [text-over-footage](skills/3-editing-styles/text-over-footage/SKILL.md) | Add exactly one finished look on top of `edit-video` |
+| 3 · Edit, style | [adaptive-glass](skills/3-editing-styles/adaptive-glass/SKILL.md), [paper-grid](skills/3-editing-styles/paper-grid/SKILL.md), [breakout-card](skills/3-editing-styles/breakout-card/SKILL.md), [product-ad](skills/3-editing-styles/product-ad/SKILL.md), [text-over-footage](skills/3-editing-styles/text-over-footage/SKILL.md) | Add exactly one finished look on top of `edit-video` |
 | 4 · Publish & learn | [publish-and-analyze](skills/4-publish-and-learn/publish-and-analyze/SKILL.md) | Export, cover, variants, scheduling after approval and results |
 
 Each skill installs as its own folder, so it must work alone: keep its helpers,

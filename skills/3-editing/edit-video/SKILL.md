@@ -1,6 +1,6 @@
 ---
 name: edit-video
-description: "Edit Reels, TikToks and YouTube Shorts from a brief, footage or reference: cut, captions, sound, motion graphics, safe areas and review of the encoded export. The base for every edit; add one style skill (adaptive-glass, paper-grid, breakout-card, one-camera, text-over-footage) for the finished look."
+description: "Edit Reels, TikToks and YouTube Shorts from a brief, footage or reference: cut, captions, sound, motion graphics, safe areas and review of the encoded export. The base for every edit; add one style skill (adaptive-glass, paper-grid, breakout-card, product-ad, text-over-footage) for the finished look."
 ---
 
 # Edit video
@@ -17,7 +17,7 @@ stay simple; a product claim may need moving proof.
 | `adaptive-glass` | Speaker with moving proof in footage-matched glass panels | Product, tool and explainer reels with real screen proof |
 | `paper-grid` | White grid pane above the speaker, one animated UI artifact per line | Tool, repo and feature explainers where every sentence names a thing |
 | `breakout-card` | Grid page, speaker in a bottom card with their head breaking out, one-to-two-word captions | Talking-head explainers that alternate graphics and personal lines |
-| `one-camera` | Full motion graphics: a sky world filmed by one camera, every scene turning into the next | Voiceover reels that sell or explain one thing, giveaways and comment-to-DM promos |
+| `product-ad` | Motion graphics built from the product itself, one continuous piece where each scene turns into the next | Promoting something the creator built, free resources and comment-to-DM giveaways; no camera footage needed |
 | `text-over-footage` | One readable line over B-roll that matches it | Jokes, observations and short setup/payoff reels |
 
 Use the creator's own brand and references when they have them. Without a style

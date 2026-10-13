@@ -64,11 +64,11 @@ For tool, repo and feature explainers where every sentence names something to sh
 
 For talking-head explainers that alternate graphics with personal lines. One-to-two-word captions in Montserrat.
 
-### [one-camera](skills/3-editing-styles/one-camera/SKILL.md): full motion graphics, one camera, every scene turns into the next
+### [product-ad](skills/3-editing-styles/product-ad/SKILL.md): a motion-graphics ad built from what you made
 
-![One camera: hook lines on a sky, a file card over a laptop playing an example, and a line in space above a glowing horizon](assets/previews/one-camera.jpg)
+![Product ad: frames from a vertical ad built from a product's own interface](assets/previews/product-ad.jpg)
 
-For voiceover reels that sell or explain one thing, giveaways and comment-to-DM promos. No camera footage needed, and every sound lands on its frame.
+For promoting something you built, a free resource or a comment-to-DM giveaway, with no camera footage. Your agent plans the story from the product itself, carries one object from scene to scene and locks every sound to its frame.
 
 ### [text-over-footage](skills/3-editing-styles/text-over-footage/SKILL.md): one readable line over matching B-roll
 
@@ -146,8 +146,8 @@ Use $edit-video with $breakout-card to edit these takes into a 40-second reel.
 ```
 
 ```text
-Use $edit-video with $one-camera to turn this voiceover into a motion-graphics reel
-for my free template, ending on "comment TEMPLATE".
+Use $edit-video with $product-ad to make a 25-second ad for my app from its code,
+ending on "comment TEMPLATE".
 ```
 
 ```text

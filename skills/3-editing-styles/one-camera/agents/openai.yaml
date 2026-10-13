@@ -1,6 +1,0 @@
-interface:
-  display_name: "Style: One Camera"
-  short_description: "Voiceover motion graphics: one camera, every scene turns into the next"
-  default_prompt: "Use $one-camera with $edit-video to build a motion-graphics reel from my voiceover, with every scene turning into the next and sound on the frame."
-policy:
-  allow_implicit_invocation: true
