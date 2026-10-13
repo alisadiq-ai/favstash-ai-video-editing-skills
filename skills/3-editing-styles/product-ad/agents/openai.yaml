@@ -1,6 +1,0 @@
-interface:
-  display_name: "Style: Product Ad"
-  short_description: "Vertical motion-graphics ad built from the product itself, sound on the frame"
-  default_prompt: "Use $product-ad with $edit-video to make a vertical motion-graphics ad for what I built, ending on my call to action."
-policy:
-  allow_implicit_invocation: true

@@ -66,7 +66,7 @@ const report = {
   referenceAnalysisReady: checks.ytDlp.available,
   renderReady: checks.node.available && checks.ffmpeg.available && checks.ffprobe.available && checks.hyperframes.available,
   glassReady: checks.node.available && checks.ffprobe.available && checks.hyperframes.available && checks.gsap.available,
-  productAdReady: checks.node.available && checks.ffmpeg.available && checks.hyperframes.available && checks.gsap.available,
+  productMotionAdsReady: checks.node.available && checks.ffmpeg.available && checks.hyperframes.available && checks.gsap.available,
   paperGridReady: checks.hyperframes.available && checks.gsap.available && checks.python.available,
   breakoutCardReady: checks.hyperframes.available && checks.gsap.available && checks.pythonNumpy.available && checks.pythonOpenCv.available,
   duplicateCheckReady: checks.ffmpeg.available && checks.pythonNumpy.available && checks.pythonPdq.available,

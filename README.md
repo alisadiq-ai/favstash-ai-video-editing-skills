@@ -64,9 +64,9 @@ For tool, repo and feature explainers where every sentence names something to sh
 
 For talking-head explainers that alternate graphics with personal lines. One-to-two-word captions in Montserrat.
 
-### [product-ad](skills/3-editing-styles/product-ad/SKILL.md): a motion-graphics ad built from what you made
+### [product-motion-ads](skills/3-editing-styles/product-motion-ads/SKILL.md): a motion-graphics ad built from what you made
 
-![Product ad: hook over the product's phone, the match screen, and the comment-to-DM ending, from an ad an agent built from a demo app's code](assets/previews/product-ad.jpg)
+![Product motion ads: hook over the product's phone, the match screen, and the comment-to-DM ending, from an ad an agent built from a demo app's code](assets/previews/product-motion-ads.jpg)
 
 For promoting something you built, a free resource or a comment-to-DM giveaway, with no camera footage. Your agent plans the story from the product itself, carries one object from scene to scene and locks every sound to its frame.
 
@@ -146,7 +146,7 @@ Use $edit-video with $breakout-card to edit these takes into a 40-second reel.
 ```
 
 ```text
-Use $edit-video with $product-ad to make a 25-second ad for my app from its code,
+Use $edit-video with $product-motion-ads to make a 25-second ad for my app from its code,
 ending on "comment TEMPLATE".
 ```
 

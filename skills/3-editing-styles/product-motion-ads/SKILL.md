@@ -1,9 +1,9 @@
 ---
-name: product-ad
+name: product-motion-ads
 description: "Style for edit-video: a vertical motion-graphics ad built in code from the product itself (its code, site, app or screenshots), with an optional voiceover and every sound on its frame. No camera footage needed. Use when a creator wants to promote something they built, a tool, template or free resource, a comment-to-DM giveaway, or asks for a motion-graphics or launch video for Reels, TikTok or Shorts."
 ---
 
-# Product ad
+# Product motion ads
 
 A style on top of `edit-video`, which owns the voice, captions, sound mix and
 review. The whole reel is motion graphics made from the real product: its
@@ -41,6 +41,24 @@ to show yet.
 - **An honest ending.** The call to action matches what the creator actually
   offers: a comment keyword that really sends the thing, a link that works, a
   limit or price they will honor.
+
+## The creator's direction comes first
+
+The laws above are defaults for when nobody has said otherwise. A creator's brand
+guide, style notes, reference reel or approved script overrides them: their fonts,
+colors, pacing, transitions and wording win, even where they differ from these
+defaults (hard cuts instead of handovers, a logo first, a longer read). Only the
+truth rules don't bend: grounded claims, labelled examples, an honest call to
+action. When their direction would hurt the ad, build it their way and say why
+in one line.
+
+- **Guides.** Read the whole guide or reference before planning, write the rules
+  you'll follow into the plan, and check the render against that list.
+- **Feedback.** Turn each comment into a concrete change in the plan, revise the
+  next numbered version, and leave everything they didn't mention alone (copy,
+  timing, sound). Re-check the scenes you touched and the handovers next to them,
+  then report what changed for each comment. If a comment is unclear, make your
+  best reading and say which one you chose.
 
 ## Workflow
 

@@ -56,7 +56,7 @@ official renderer package; no global renderer install or extra style pack is
 necessary. The runtime also provides local transcription (`hyperframes
 transcribe`), which downloads a Whisper model on first use.
 HyperFrames also publishes its own agent skills for composition mechanics, which
-`product-ad` reads when present. With the user's OK, install them with
+`product-motion-ads` reads when present. With the user's OK, install them with
 `.favstash-studio/runtime/node_modules/.bin/hyperframes skills`; they install for
 the user's AI tools globally, so skip them if the user prefers a project-only setup.
 
@@ -76,7 +76,7 @@ workspace**, using the clone as its source. Choose the actual host identifier
 (for example `codex`, `claude-code` or `cursor`); inspect CLI help for other hosts.
 
 ```bash
-npx --yes skills add "<pack>" --agent <agent-id> --skill find-ideas --skill write-script --skill edit-video --skill adaptive-glass --skill paper-grid --skill breakout-card --skill product-ad --skill text-over-footage --skill publish-and-analyze --copy --yes
+npx --yes skills add "<pack>" --agent <agent-id> --skill find-ideas --skill write-script --skill edit-video --skill adaptive-glass --skill paper-grid --skill breakout-card --skill product-motion-ads --skill text-over-footage --skill publish-and-analyze --copy --yes
 ```
 
 Install for this project by default. Use global scope only if the user asks for
@@ -94,7 +94,7 @@ node "<pack>/skills/3-editing/edit-video/scripts/doctor.mjs" --workspace "<works
 
 Check the report, not just the exit code: Node, npm, FFmpeg, FFprobe, yt-dlp,
 HyperFrames and GSAP must each be available for the complete setup (`renderReady`,
-`glassReady` and `productAdReady`). A missing downloader can leave local editing usable but
+`glassReady` and `productMotionAdsReady`). A missing downloader can leave local editing usable but
 reference-URL analysis pending. `paperGridReady`, `breakoutCardReady` and
 `duplicateCheckReady` report the optional Python pieces.
 
@@ -178,7 +178,7 @@ turn the best one into a few hooks to test and a shared body in my voice.
 
 ```text
 Use $edit-video to turn these takes into a reel in the style that fits
-(adaptive-glass, paper-grid, breakout-card, product-ad or text-over-footage), and show me
+(adaptive-glass, paper-grid, breakout-card, product-motion-ads or text-over-footage), and show me
 the reviewed export before any publishing step.
 ```
 
