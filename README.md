@@ -66,7 +66,7 @@ For talking-head explainers that alternate graphics with personal lines. One-to-
 
 ### [product-ad](skills/3-editing-styles/product-ad/SKILL.md): a motion-graphics ad built from what you made
 
-![Product ad: frames from a vertical ad built from a product's own interface](assets/previews/product-ad.jpg)
+![Product ad: hook over the product's phone, the match screen, and the comment-to-DM ending, from an ad an agent built from a demo app's code](assets/previews/product-ad.jpg)
 
 For promoting something you built, a free resource or a comment-to-DM giveaway, with no camera footage. Your agent plans the story from the product itself, carries one object from scene to scene and locks every sound to its frame.
 

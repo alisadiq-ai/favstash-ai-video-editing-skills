@@ -5,6 +5,7 @@
 //   node <skill>/scripts/sfx-sync.mjs mix <cues.json> --out <mix.wav> [--voice <voice.wav>] [--duck 6]
 //        [--lufs -14] [--true-peak -2.5] [--seconds N] [--video <silent.mp4> --mux <final.mp4>]
 //   node <skill>/scripts/sfx-sync.mjs check <video> --mix <mix.wav> [--cues <cues.json> --strips <dir>] [--min-gain -6]
+//        [--width 180] [--crop x,y,w,h]
 import fs from "node:fs/promises";
 import path from "node:path";
 import process from "node:process";
@@ -19,7 +20,7 @@ const USAGE = `Usage:
   sfx-sync.mjs points [sound ...] [--json out.json]        sync point of each sound (default: the whole pack)
   sfx-sync.mjs mix <cues.json> --out <mix.wav> [--voice <voice.wav>] [--duck 6] [--lufs -14] [--true-peak -2.5]
                [--seconds N] [--video <silent.mp4> --mux <final.mp4>]
-  sfx-sync.mjs check <video> --mix <mix.wav> [--cues <cues.json> --strips <dir>] [--min-gain -6]`;
+  sfx-sync.mjs check <video> --mix <mix.wav> [--cues <cues.json> --strips <dir>] [--min-gain -6] [--width 180] [--crop x,y,w,h]`;
 
 const args = parseArgs(process.argv.slice(2));
 const [command, ...rest] = args._;
@@ -107,7 +108,10 @@ async function check() {
     const fps = optionalNumber(args, "fps", sheet.fps ?? 30, { min: 1 });
     const minGain = optionalNumber(args, "min-gain", -6);
     const planned = (await planCues(sheet, { fps, baseDir: path.dirname(path.resolve(args.cues)) })).filter((cue) => (cue.gain ?? 0) >= minGain);
-    const sheets = await strips(video, planned, { fps, outDir: path.resolve(args.strips) });
+    const sheets = await strips(video, planned, {
+      fps, outDir: path.resolve(args.strips), width: optionalNumber(args, "width", 180, { min: 60, max: 1080 }),
+      crop: typeof args.crop === "string" ? args.crop : undefined,
+    });
     for (const { sheet: file, cues } of sheets) console.log(`${file}\n  ${cues.join("\n  ")}`);
     console.log("Each strip: seven frames, the red box = the frame the sound plays on. It should be the first frame that shows the event.");
   }

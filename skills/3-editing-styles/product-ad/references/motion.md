@@ -24,6 +24,9 @@ A HyperFrames composition is an HTML page rendered frame by frame:
 </script>
 ```
 
+- The timeline script stays **inline in `index.html`**; the checker looks for the
+  registration there and fails (`missing_timeline_registry`) if it lives in a
+  separate `.js` file. Styles can live in a stylesheet.
 - Copy GSAP from the workspace runtime
   (`.favstash-studio/runtime/node_modules/gsap/dist/gsap.min.js`) into the
   composition's `assets/`, with every image, clip and font it uses.
@@ -67,6 +70,18 @@ its own transform, including any floating motion at that moment), place the new
 element, or a clone, on that box, hide the old one on the same frame, then animate
 the new one into its role. The viewer sees one object change, not two objects swap.
 
+Get the box from your own layout numbers when you placed things absolutely, or
+measure it in the page: wait for `document.fonts.ready`, read
+`getBoundingClientRect()` with the timeline at that moment's state, build the rest
+of the timeline from the measurement and register it only then (HyperFrames
+supports registering after async setup). Check the swap frame in a snapshot: the
+two states should match pixel for pixel.
+
+When a new layer has fully covered an old one (a bloom, a full-screen card, a dive
+into a screen), hide the old layer on that frame. While the cover is still
+growing, mark the covering layer `data-layout-allow-occlusion` so the checker
+knows the text underneath is meant to disappear.
+
 | Handover | Picture | Notes |
 |---|---|---|
 | Drop into | An object shrinks and falls into a target (a file into a screen) and becomes part of it (a chip in the input) | Target reacts on landing: glow, pop; sound on the landing frame |
@@ -108,10 +123,13 @@ the format, the sync rules and the mixer.
 
 ## Look before you render
 
-- `hyperframes check <comp>`: no errors; read every warning.
+- `hyperframes check <comp> --at-transitions`: no errors; read every warning.
+- `--at-transitions` also samples every tween boundary, where most collisions
+  hide. Expect `text_occluded` on covered layers until you hide them (above).
 - Snapshots at frame 0, then each handover's start, middle and end
-  (`hyperframes snapshot <comp> --at 0,5.8,6.0,6.2,…`). Look for flashes, empty
-  frames, overflow, text collisions and anything outside the safe area.
-- After rendering, scan for black frames
-  (`ffmpeg -i ad.mp4 -vf blackdetect=d=0.03 -an -f null -`) and watch it once at
-  phone size with sound.
+  (`hyperframes snapshot <comp> --describe false --at 0,5.8,6.0,6.2,…`; seconds =
+  frame ÷ 30, rounded down to 4 decimals). Look for flashes, empty frames,
+  overflow, text collisions and anything outside the safe area.
+- After rendering, scan for black frames and dead holds (the command in the
+  skill's workflow) and watch it once at phone size with sound when you can play
+  video; otherwise say that no viewing or listening pass was done.

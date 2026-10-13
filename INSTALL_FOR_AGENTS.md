@@ -55,6 +55,10 @@ this runtime separate from the creator application's dependencies. Use the
 official renderer package; no global renderer install or extra style pack is
 necessary. The runtime also provides local transcription (`hyperframes
 transcribe`), which downloads a Whisper model on first use.
+HyperFrames also publishes its own agent skills for composition mechanics, which
+`product-ad` reads when present. With the user's OK, install them with
+`.favstash-studio/runtime/node_modules/.bin/hyperframes skills`; they install for
+the user's AI tools globally, so skip them if the user prefers a project-only setup.
 
 The `paper-grid` and `breakout-card` styles and the duplicate check also use
 Python 3. When the creator wants them, install the packages into a virtual

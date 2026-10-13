@@ -58,9 +58,11 @@ test("the mixer lands every struck sound on its frame", { skip: !ffmpeg && "ffmp
     { t: 0.5, sound: "late-click.wav", label: "own file" },
     { t: 1.0333, sound: "curated/ui-pop.wav", label: "pack file" },
     { frame: 50, t: 1.6, sound: "ui-click", label: "pack id" },
+    { frame: 55, sound: "curated/ui-pop.wav", label: "frame only" },
   ] };
   const planned = await planCues(sheet, { baseDir: work });
-  assert.deepEqual(planned.map((cue) => Math.round(cue.frameTime * 30)), [15, 31, 50]);
+  assert.deepEqual(planned.map((cue) => Math.round(cue.frameTime * 30)), [15, 31, 50, 55]);
+  await assert.rejects(planCues({ fps: 30, cues: [{ sound: "ui-pop" }] }), /needs a frame or a numeric t/);
   assert.ok(Math.abs(planned[0].start - (0.5 - 0.04)) < 0.003);
   for (const row of await verifyPlacement(planned)) assert.ok(Math.abs(row.errorMs) <= 2, JSON.stringify(row));
   const { buffer } = await renderCues(planned, sheet.total);
@@ -88,7 +90,7 @@ test("sfx-sync mixes, masters and muxes a cue sheet", { skip: !ffmpeg && "ffmpeg
   assert.ok(Math.abs(loud + 14) <= 0.5, mix.stdout);
   assert.ok(peak <= -2.4, mix.stdout);
   const check = spawnSync(process.execPath, [script, "check", path.join(work, "exports", "final.mp4"), "--mix", path.join(work, "mix.wav"),
-    "--cues", path.join(work, "cues.json"), "--strips", path.join(work, "strips")], { encoding: "utf8" });
+    "--cues", path.join(work, "cues.json"), "--strips", path.join(work, "strips"), "--crop", "0,0,108,96", "--width", "120"], { encoding: "utf8" });
   assert.equal(check.status, 0, check.stderr + check.stdout);
   assert.match(check.stdout, /audio track vs mix: 0 samples/);
   await fs.access(path.join(work, "strips", "sync-01.jpg"));

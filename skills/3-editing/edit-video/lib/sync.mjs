@@ -105,7 +105,7 @@ export async function planCues(sheet, { fps, baseDir = process.cwd(), pack } = {
   const points = new Map();
   const planned = [];
   for (const cue of sheet.cues) {
-    if (!Number.isFinite(cue.t)) throw new Error(`Cue ${JSON.stringify(cue)} needs a numeric t.`);
+    if (!Number.isInteger(cue.frame) && !Number.isFinite(cue.t)) throw new Error(`Cue ${JSON.stringify(cue)} needs a frame or a numeric t.`);
     const sound = resolveSound(cue.sound, sounds, baseDir);
     if (!points.has(sound.file)) {
       const stereo = await decodeStereo(sound.file);
@@ -275,8 +275,14 @@ export function alignment(track, reference, { maxMs = 200 } = {}) {
   return fine;
 }
 
-/** Seven frames around each cue as one strip, the frame its sound plays on boxed in red. Writes JPGs; returns their paths. */
-export async function strips(video, planned, { fps = 30, width = 180, outDir, perSheet = 8 } = {}) {
+/**
+ * Seven frames around each cue as one strip, the frame its sound plays on boxed in red. Writes JPGs; returns their paths.
+ * crop = "x,y,w,h" in video pixels zooms every frame to that region, for small UI details.
+ */
+export async function strips(video, planned, { fps = 30, width = 180, crop, outDir, perSheet = 8 } = {}) {
+  if (crop && !/^\d+,\d+,\d+,\d+$/.test(crop)) throw new Error(`--crop must be x,y,w,h in pixels, not "${crop}".`);
+  const [cx, cy, cw, ch] = crop ? crop.split(",") : [];
+  const cropFilter = crop ? `crop=${cw}:${ch}:${cx}:${cy},` : "";   // FFmpeg's order is w:h:x:y
   await fs.mkdir(outDir, { recursive: true });
   const rows = [];
   for (const [index, cue] of planned.entries()) {
@@ -286,7 +292,7 @@ export async function strips(video, planned, { fps = 30, width = 180, outDir, pe
     // Seek half a frame early: a seek time rounded up past a frame's timestamp would drop that frame and shift the strip.
     const row = path.join(outDir, `.row-${String(index).padStart(3, "0")}.jpg`);
     await run("ffmpeg", ["-v", "error", "-y", "-ss", (Math.max(0, first - 0.5) / fps).toFixed(4), "-i", video,
-      "-vf", `scale=${width}:-2,pad=iw+6:ih+6:3:3:0x141414,tile=7x1,drawbox=x=${red * (width + 6)}:y=0:w=${width + 6}:h=ih:color=0xff3c3c:t=4`,
+      "-vf", `${cropFilter}scale=${width}:-2,pad=iw+6:ih+6:3:3:0x141414,tile=7x1,drawbox=x=${red * (width + 6)}:y=0:w=${width + 6}:h=ih:color=0xff3c3c:t=4`,
       "-frames:v", "1", "-q:v", "4", row], { stdio: "inherit" });
     rows.push({ row, cue, index });
   }

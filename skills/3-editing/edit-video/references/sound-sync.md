@@ -17,8 +17,9 @@ the arithmetic and the checks. It needs Node 22+ and FFmpeg, nothing else.
    jumps 12 dB or more within 10 ms at that attack; swells climb more slowly. A
    two-note chime or a "ch-CHK" shutter synced on its loudest note plays its first
    note early, so the attack rule wins.
-3. **Beds start on their cue.** Typing loops or ambience have no single hit: mark
-   the cue `"bed": true` and the file starts on the frame.
+3. **Beds start on their cue.** Music, typing loops and ambience have no single
+   hit: mark the cue `"bed": true` and the file starts on the frame. The pack has no
+   music; use the creator's licensed track, one they own, or none.
 4. **Leave headroom for the encoder.** AAC overshoots sharp clicks, and some
    renderers turn the whole track down when its encoded true peak passes −1 dBTP.
    The mixer masters to −14 LUFS with a −2.5 dBTP ceiling by default.
@@ -47,8 +48,9 @@ builds such as `product-ad` write it as they go; otherwise write it from the edi
 - `sound`: a pack file (`curated/ui-pop.wav`), a pack id (`ui-pop`) or a path
   relative to the cue sheet.
 - `gain`: dB relative to the pack's suggested gain (0 dB for your own files).
-- `frame`, when present, wins over `t`. `pan` runs from −1 (left) to 1 (right);
-  `dur` trims the sound with a short fade.
+- Give each cue a `frame` (preferred: the first frame that shows the event) or a
+  time `t` in seconds; `frame` wins when both are present. `pan` runs from −1
+  (left) to 1 (right); `dur` trims the sound with a short fade.
 
 ## Commands
 
@@ -64,7 +66,7 @@ node <skill>/scripts/sfx-sync.mjs mix <cues.json> --out <run>/audio/mix-v01.wav 
 
 # Prove it on the export
 node <skill>/scripts/sfx-sync.mjs check <run>/exports/v01.mp4 --mix <run>/audio/mix-v01.wav \
-  [--cues <cues.json> --strips <run>/review/sync-v01] [--min-gain -6]
+  [--cues <cues.json> --strips <run>/reports/sync-v01] [--min-gain -6] [--width 180] [--crop x,y,w,h]
 ```
 
 `mix` writes the master (`mix-v01.wav`), the effects alone before ducking
@@ -76,8 +78,11 @@ true peak.
 
 `check` measures the offset between the video's audio and the mix (want 0
 samples) and its loudness. With `--cues` and `--strips` it writes contact sheets:
-seven frames around each cue at or above `--min-gain`, with the frame the sound
-plays on boxed in red. In every strip, the red frame should be the first that
+seven frames around each cue, with the frame the sound plays on boxed in red.
+`--min-gain` skips quiet cues (it compares each cue's `gain`, which is relative to
+the pack's suggested level, so −6 keeps everything at or above 6 dB under it).
+Small events (a badge pop, one highlighted word) need a closer look: `--crop
+x,y,w,h` zooms every strip to that region and `--width` sets each frame's size. In every strip, the red frame should be the first that
 shows the event. If a strip shows the event a frame earlier, move that cue to
 the earlier frame; if it shows later, the cue is early.
 
