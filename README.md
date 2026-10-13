@@ -7,7 +7,7 @@ Set up FavStash creator skills for my short-form workflow.
 Clone https://github.com/alisadiq-ai/favstash-ai-video-editing-skills and follow:
 https://raw.githubusercontent.com/alisadiq-ai/favstash-ai-video-editing-skills/main/INSTALL_FOR_AGENTS.md
 
-Install all eight skills and the local media tools they need in my workspace.
+Install all nine skills and the local media tools they need in my workspace.
 Check whether FavStash is connected; if not, connect it with the FavStash CLI
 (Codex or Claude Code) or guide me through sign-in. Verify the setup, then tell
 me how to start my first reel.
@@ -15,7 +15,7 @@ me how to start my first reel.
 
 **Give your AI agent the whole short-form loop.** These free, open-source skills
 teach Claude Code, Codex or any skills-aware agent to find proven ideas, write
-scroll-stopping scripts in your voice, edit Reels, TikToks and Shorts in four
+scroll-stopping scripts in your voice, edit Reels, TikToks and Shorts in five
 finished styles, then publish and learn from the results.
 
 [![FavStash connects Claude Code, Codex and ChatGPT with Instagram, TikTok and YouTube to save inspiration, schedule, publish and analyze short videos](assets/favstash-social-preview-2026.png)](https://www.favstash.app/)
@@ -64,6 +64,12 @@ For tool, repo and feature explainers where every sentence names something to sh
 
 For talking-head explainers that alternate graphics with personal lines. One-to-two-word captions in Montserrat.
 
+### [product-motion-ads](skills/3-editing-styles/product-motion-ads/SKILL.md): a motion-graphics ad built from what you made
+
+![Product motion ads: hook over the product's phone, the match screen, and the comment-to-DM ending, from an ad an agent built from a demo app's code](assets/previews/product-motion-ads.jpg)
+
+For promoting something you built, a free resource or a comment-to-DM giveaway, with no camera footage. Your agent plans the story from the product itself, carries one object from scene to scene and locks every sound to its frame.
+
 ### [text-over-footage](skills/3-editing-styles/text-over-footage/SKILL.md): one readable line over matching B-roll
 
 ![Text over footage: one line of text over B-roll that matches the joke](assets/previews/text-over-footage.jpg)
@@ -110,7 +116,7 @@ with OAuth ([connection guide](https://www.favstash.app/docs/ai-connect)).
 <details>
 <summary>Install as a Claude plugin</summary>
 
-This repository is also a Claude plugin, `favstash-creator-skills`, with all eight
+This repository is also a Claude plugin, `favstash-creator-skills`, with all nine
 skills and the FavStash connector. Load it in Claude Code for one session:
 
 ```bash
@@ -137,6 +143,11 @@ Use $write-script to adapt this reel into a few hooks to test and one body in my
 
 ```text
 Use $edit-video with $breakout-card to edit these takes into a 40-second reel.
+```
+
+```text
+Use $edit-video with $product-motion-ads to make a 25-second ad for my app from its code,
+ending on "comment TEMPLATE".
 ```
 
 ```text

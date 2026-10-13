@@ -1,6 +1,6 @@
 ---
 name: edit-video
-description: "Edit Reels, TikToks and YouTube Shorts from a brief, footage or reference: cut, captions, sound, motion graphics, safe areas and review of the encoded export. The base for every edit; add one style skill (adaptive-glass, paper-grid, breakout-card, text-over-footage) for the finished look."
+description: "Edit Reels, TikToks and YouTube Shorts from a brief, footage or reference: cut, captions, sound, motion graphics, safe areas and review of the encoded export. The base for every edit; add one style skill (adaptive-glass, paper-grid, breakout-card, product-motion-ads, text-over-footage) for the finished look."
 ---
 
 # Edit video
@@ -17,6 +17,7 @@ stay simple; a product claim may need moving proof.
 | `adaptive-glass` | Speaker with moving proof in footage-matched glass panels | Product, tool and explainer reels with real screen proof |
 | `paper-grid` | White grid pane above the speaker, one animated UI artifact per line | Tool, repo and feature explainers where every sentence names a thing |
 | `breakout-card` | Grid page, speaker in a bottom card with their head breaking out, one-to-two-word captions | Talking-head explainers that alternate graphics and personal lines |
+| `product-motion-ads` | Motion graphics built from the product itself, one continuous piece where each scene turns into the next | Promoting something the creator built, free resources and comment-to-DM giveaways; no camera footage needed |
 | `text-over-footage` | One readable line over B-roll that matches it | Jokes, observations and short setup/payoff reels |
 
 Use the creator's own brand and references when they have them. Without a style
@@ -125,6 +126,12 @@ audition them against speech. Generated alternatives remain available in the pac
 Suggested gains are starting points, not a volume ceiling: a demonstrated click
 or reveal build must be audible. Trim/time-stretch a riser to the reveal and check
 the combined mix, not isolated cue levels.
+
+When sounds follow on-screen events, put each one on the **first frame that shows
+its event**: struck sounds on their attack, swells on their peak.
+[Sound on the frame](references/sound-sync.md) explains the rules, and
+`scripts/sfx-sync.mjs` measures sync points, mixes a cue sheet under the voice,
+masters it with encoder headroom and draws strips that prove every hit on the export.
 
 Keep editable source and separate audio/caption tracks when the editor supports
 them. Use FFmpeg for straightforward trims/assembly and HyperFrames when a coded

@@ -15,6 +15,7 @@ const expectedSkills = [
   "3-editing-styles/adaptive-glass",
   "3-editing-styles/breakout-card",
   "3-editing-styles/paper-grid",
+  "3-editing-styles/product-motion-ads",
   "3-editing-styles/text-over-footage",
   "4-publish-and-learn/publish-and-analyze",
 ];

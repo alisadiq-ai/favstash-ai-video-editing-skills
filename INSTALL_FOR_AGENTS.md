@@ -1,6 +1,6 @@
 # Install FavStash creator skills
 
-Use this guide when the user asks to set up this pack. Install the eight skills,
+Use this guide when the user asks to set up this pack. Install the nine skills,
 prepare the local editing tools and connect FavStash. Reuse what already works;
 ask the user only for a needed workspace choice, system permission or account
 sign-in. This setup does not authorize publishing, scheduling or uploads.
@@ -55,6 +55,10 @@ this runtime separate from the creator application's dependencies. Use the
 official renderer package; no global renderer install or extra style pack is
 necessary. The runtime also provides local transcription (`hyperframes
 transcribe`), which downloads a Whisper model on first use.
+HyperFrames also publishes its own agent skills for composition mechanics, which
+`product-motion-ads` reads when present. With the user's OK, install them with
+`.favstash-studio/runtime/node_modules/.bin/hyperframes skills`; they install for
+the user's AI tools globally, so skip them if the user prefers a project-only setup.
 
 The `paper-grid` and `breakout-card` styles and the duplicate check also use
 Python 3. When the creator wants them, install the packages into a virtual
@@ -72,12 +76,12 @@ workspace**, using the clone as its source. Choose the actual host identifier
 (for example `codex`, `claude-code` or `cursor`); inspect CLI help for other hosts.
 
 ```bash
-npx --yes skills add "<pack>" --agent <agent-id> --skill find-ideas --skill write-script --skill edit-video --skill adaptive-glass --skill paper-grid --skill breakout-card --skill text-over-footage --skill publish-and-analyze --copy --yes
+npx --yes skills add "<pack>" --agent <agent-id> --skill find-ideas --skill write-script --skill edit-video --skill adaptive-glass --skill paper-grid --skill breakout-card --skill product-motion-ads --skill text-over-footage --skill publish-and-analyze --copy --yes
 ```
 
 Install for this project by default. Use global scope only if the user asks for
 availability across projects. Do not target every installed agent. Verify that
-all eight skills were installed with their scripts, references and assets
+all nine skills were installed with their scripts, references and assets
 (`edit-video`'s SFX, each style's builder, the breakout card's fonts). Check `npx skills list --agent <agent-id>` from the same
 workspace. If the host needs a reload for discovery, tell the user exactly what
 to reload.
@@ -89,8 +93,8 @@ node "<pack>/skills/3-editing/edit-video/scripts/doctor.mjs" --workspace "<works
 ```
 
 Check the report, not just the exit code: Node, npm, FFmpeg, FFprobe, yt-dlp,
-HyperFrames and GSAP must each be available for the complete setup (`renderReady`
-and `glassReady`). A missing downloader can leave local editing usable but
+HyperFrames and GSAP must each be available for the complete setup (`renderReady`,
+`glassReady` and `productMotionAdsReady`). A missing downloader can leave local editing usable but
 reference-URL analysis pending. `paperGridReady`, `breakoutCardReady` and
 `duplicateCheckReady` report the optional Python pieces.
 
@@ -159,7 +163,7 @@ platforms are ready from one successful call.
 
 Report briefly:
 
-- where the eight skills and creator workspace live;
+- where the nine skills and creator workspace live;
 - dependency versions and the smoke-render result;
 - whether FavStash is verified, pending sign-in/reload, unavailable or skipped,
   and through which route (CLI bridge or remote MCP);
@@ -174,7 +178,7 @@ turn the best one into a few hooks to test and a shared body in my voice.
 
 ```text
 Use $edit-video to turn these takes into a reel in the style that fits
-(adaptive-glass, paper-grid, breakout-card or text-over-footage), and show me
+(adaptive-glass, paper-grid, breakout-card, product-motion-ads or text-over-footage), and show me
 the reviewed export before any publishing step.
 ```
 
