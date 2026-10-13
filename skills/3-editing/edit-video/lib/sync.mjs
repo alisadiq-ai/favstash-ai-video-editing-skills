@@ -120,7 +120,10 @@ export async function planCues(sheet, { fps, baseDir = process.cwd(), pack } = {
   return planned;
 }
 
-/** Sum planned cues into a stereo buffer `seconds` long. Returns { buffer, clipped } where clipped counts cues that start before 0. */
+/**
+ * Sum planned cues into a stereo buffer `seconds` long. Returns { buffer, clipped }: clipped counts swells that start
+ * before 0 s and lose part of their build (a struck sound only loses the silence before its attack).
+ */
 export async function renderCues(planned, seconds) {
   const frames = Math.ceil(seconds * SAMPLE_RATE);
   const out = new Float32Array(frames * 2);
@@ -136,9 +139,9 @@ export async function renderCues(planned, seconds) {
     const length = Math.floor(src.length / 2);
     const limit = cue.dur ? Math.min(length, Math.round(cue.dur * SAMPLE_RATE)) : length;
     const fade = Math.round(0.01 * SAMPLE_RATE);
-    let offset = Math.round(cue.start * SAMPLE_RATE);
+    const offset = Math.round(cue.start * SAMPLE_RATE);
     let first = 0;
-    if (offset < 0) { first = -offset; clipped += 1; }
+    if (offset < 0) { first = -offset; if (!cue.struck) clipped += 1; }
     for (let i = first; i < limit; i += 1) {
       const at = offset + i;
       if (at >= frames) break;

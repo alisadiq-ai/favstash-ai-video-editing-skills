@@ -80,14 +80,14 @@ test("sfx-sync mixes, masters and muxes a cue sheet", { skip: !ffmpeg && "ffmpeg
   const made = spawnSync("ffmpeg", ["-v", "error", "-f", "lavfi", "-i", "color=c=blue:s=108x192:r=30:d=3", "-pix_fmt", "yuv420p", video]);
   assert.equal(made.status, 0, String(made.stderr));
   const mix = spawnSync(process.execPath, [script, "mix", path.join(work, "cues.json"), "--out", path.join(work, "mix.wav"),
-    "--video", video, "--mux", path.join(work, "final.mp4")], { encoding: "utf8" });
+    "--video", video, "--mux", path.join(work, "exports", "final.mp4")], { encoding: "utf8" });
   assert.equal(mix.status, 0, mix.stderr);
   assert.match(mix.stdout, /3 cues on 3\.00 s/);
   const loud = Number(mix.stdout.match(/loudness (-?[\d.]+) LUFS/)[1]);
   const peak = Number(mix.stdout.match(/true peak (-?[\d.]+) dBTP/)[1]);
   assert.ok(Math.abs(loud + 14) <= 0.5, mix.stdout);
   assert.ok(peak <= -2.4, mix.stdout);
-  const check = spawnSync(process.execPath, [script, "check", path.join(work, "final.mp4"), "--mix", path.join(work, "mix.wav"),
+  const check = spawnSync(process.execPath, [script, "check", path.join(work, "exports", "final.mp4"), "--mix", path.join(work, "mix.wav"),
     "--cues", path.join(work, "cues.json"), "--strips", path.join(work, "strips")], { encoding: "utf8" });
   assert.equal(check.status, 0, check.stderr + check.stdout);
   assert.match(check.stdout, /audio track vs mix: 0 samples/);

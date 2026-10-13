@@ -79,12 +79,13 @@ async function mix() {
   await fs.writeFile(`${base}.plan.json`, `${JSON.stringify({ fps, seconds, cues: planned.map(({ file, ...cue }) => ({ ...cue, file: path.relative(path.dirname(out), file) })) }, null, 2)}\n`);
 
   console.log(`${planned.length} cues on ${seconds.toFixed(2)} s at ${fps} fps${voice ? `, ducked ${args.duck ?? 6} dB under the voice` : ""}`);
-  if (clipped) console.log(`warning: ${clipped} cue(s) start before 0 s and lose their lead-in`);
+  if (clipped) console.log(`warning: ${clipped} swell(s) start before 0 s and lose part of their build; move them later or trim them`);
   if (worst) console.log(`sync: ${measured.length} struck cues placed, worst ${worst.errorMs} ms from its frame (${worst.label})${Math.abs(worst.errorMs) > 4 ? "  <- check this cue" : ""}`);
   console.log(`loudness ${result.after.integrated} LUFS, true peak ${result.after.truePeak} dBTP${result.limited ? " (limited)" : ""} -> ${out}`);
 
   if (typeof args.video === "string" || typeof args.mux === "string") {
     if (typeof args.video !== "string" || typeof args.mux !== "string") throw new Error("Pass both --video <silent.mp4> and --mux <final.mp4>.");
+    await fs.mkdir(path.dirname(path.resolve(args.mux)), { recursive: true });
     await run("ffmpeg", ["-v", "error", "-y", "-i", args.video, "-i", out, "-map", "0:v:0", "-map", "1:a:0", "-c:v", "copy",
       "-c:a", "aac", "-b:a", "256k", "-ar", String(SAMPLE_RATE), "-t", String(seconds), "-movflags", "+faststart", args.mux], { stdio: "inherit" });
     const encoded = await loudness(args.mux);
