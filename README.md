@@ -7,7 +7,7 @@ Set up FavStash creator skills for my short-form workflow.
 Clone https://github.com/alisadiq-ai/favstash-ai-video-editing-skills and follow:
 https://raw.githubusercontent.com/alisadiq-ai/favstash-ai-video-editing-skills/main/INSTALL_FOR_AGENTS.md
 
-Install all nine skills and the local media tools they need in my workspace.
+Install all ten skills and the local media tools they need in my workspace.
 Check whether FavStash is connected; if not, connect it with the FavStash CLI
 (Codex or Claude Code) or guide me through sign-in. Verify the setup, then tell
 me how to start my first reel.
@@ -70,6 +70,12 @@ For talking-head explainers that alternate graphics with personal lines. One-to-
 
 For promoting something you built, a free resource or a comment-to-DM giveaway, with no camera footage. Your agent plans the story from the product itself, carries one object from scene to scene and locks every sound to its frame.
 
+### [motion-effects](skills/3-editing-styles/motion-effects/SKILL.md): 16 named effects for any talking-head edit
+
+![Motion effects: a kinetic hook behind the speaker, a native prompt bar and a full-frame title card](assets/previews/motion-effects.jpg)
+
+Ask for an effect by name: kinetic hook, gravity drop, giant captions, prompt bar, storyboard deck, file drop, timeline, grade slider, eyedropper, film look, title card, phone frame, reel grid, real feed, video card and comment drop. Big words sit behind you, and your own frames, posts and waveform appear inside the UI. Each effect has a copy-paste prompt.
+
 ### [text-over-footage](skills/3-editing-styles/text-over-footage/SKILL.md): one readable line over matching B-roll
 
 ![Text over footage: one line of text over B-roll that matches the joke](assets/previews/text-over-footage.jpg)
@@ -116,7 +122,7 @@ with OAuth ([connection guide](https://www.favstash.app/docs/ai-connect)).
 <details>
 <summary>Install as a Claude plugin</summary>
 
-This repository is also a Claude plugin, `favstash-creator-skills`, with all nine
+This repository is also a Claude plugin, `favstash-creator-skills`, with all ten
 skills and the FavStash connector. Load it in Claude Code for one session:
 
 ```bash
@@ -148,6 +154,11 @@ Use $edit-video with $breakout-card to edit these takes into a 40-second reel.
 ```text
 Use $edit-video with $product-motion-ads to make a 25-second ad for my app from its code,
 ending on "comment TEMPLATE".
+```
+
+```text
+Use $edit-video with $motion-effects to add a kinetic hook, a timeline and a comment drop
+ending on "comment EDITOR" to my talking-head video.
 ```
 
 ```text
