@@ -134,7 +134,7 @@ The creator's real posts pop up behind their head.
   (190×338, 18px radius, soft shadow) in a 3×2 grid above and around the head,
   popping in with `back.out` and a 0.05s stagger; the head covers the lower row's edge.
 - **Sound:** a quiet pop per tile.
-- **Prompt:** `Add a post grid: my real posts pop up behind my head: six thumbnails from my own reels appearing one after another, with my head in front of them.`
+- **Prompt:** `Add a post grid: six thumbnails from my real posts pop up behind my head one after another, with my head in front of them.`
 
 ## 14. Real feed
 
