@@ -74,7 +74,7 @@ For promoting something you built, a free resource or a comment-to-DM giveaway, 
 
 ![Motion effects: a kinetic hook behind the speaker, a native prompt bar and a full-frame title card](assets/previews/motion-effects.jpg)
 
-Ask for an effect by name: kinetic hook, gravity drop, giant captions, prompt bar, storyboard deck, file drop, timeline, grade slider, eyedropper, film look, title card, phone frame, reel grid, real feed, video card and comment drop. Big words sit behind you, and your own frames, posts and waveform appear inside the UI. Each effect has a copy-paste prompt.
+Ask for an effect by name: kinetic hook, gravity drop, giant captions, prompt bar, storyboard deck, file drop, timeline, grade slider, eyedropper, film look, title card, phone frame, post grid, real feed, video card and comment drop. Big words sit behind you, and your own frames, posts and waveform appear inside the UI. Each effect has a copy-paste prompt.
 
 ### [text-over-footage](skills/3-editing-styles/text-over-footage/SKILL.md): one readable line over matching B-roll
 

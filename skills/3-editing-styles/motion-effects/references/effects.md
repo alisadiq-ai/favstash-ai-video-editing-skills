@@ -126,7 +126,7 @@ The camera comes back inside a phone and then fills the screen again.
 - **Sound:** a whoosh as it rises.
 - **Prompt:** `Put my video inside a phone frame: it slides up small with rounded corners and a light bezel on a dark background, then zooms back to full screen.`
 
-## 13. Reel grid
+## 13. Post grid
 
 The creator's real posts pop up behind their head.
 
@@ -134,7 +134,7 @@ The creator's real posts pop up behind their head.
   (190×338, 18px radius, soft shadow) in a 3×2 grid above and around the head,
   popping in with `back.out` and a 0.05s stagger; the head covers the lower row's edge.
 - **Sound:** a quiet pop per tile.
-- **Prompt:** `Pop up a grid of my real posts behind my head: six thumbnails from my own reels appearing one after another, with my head in front of them.`
+- **Prompt:** `Add a post grid: my real posts pop up behind my head: six thumbnails from my own reels appearing one after another, with my head in front of them.`
 
 ## 14. Real feed
 
