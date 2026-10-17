@@ -1,0 +1,6 @@
+interface:
+  display_name: "Style: Motion Effects"
+  short_description: "16 named motion effects with words behind you and your own footage inside the UI"
+  default_prompt: "Use $motion-effects with $edit-video to add a kinetic hook, a gravity drop and a comment drop to my talking-head video."
+policy:
+  allow_implicit_invocation: true
