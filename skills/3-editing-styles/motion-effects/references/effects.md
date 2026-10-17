@@ -166,3 +166,139 @@ The call to action shows the comment and the reply that follows.
   keyword slams in behind the head like the kinetic hook, with a two-line caption at chest height.
 - **Sound:** keys, a click on Post, a ding on the reply, an impact on the big keyword.
 - **Prompt:** `End with a comment drop: a comment field types my keyword and posts it, a reply from my account drops in saying "Sent. Check your DMs.", and the keyword slams in big behind my head.`
+
+## 17. Orbit
+
+The creator's real posts circle their head, passing behind and in front.
+
+- **Build:** six portrait thumbnails (150×266) on an ellipse around the head (about 400×120px), one turn every 1.1s. Keep two copies of each, one on the behind layer and one above the person, and show the front copy only while it is on the near half of the ellipse; scale it up slightly there.
+- **Sound:** one whoosh.
+- **Prompt:** `Add an orbit: six thumbnails from my real posts circle around my head, passing behind me and then in front of me.`
+
+## 18. Frame break
+
+The shot shrinks into a picture frame and the creator breaks out of it.
+
+- **Build:** scale the camera into a thick cream frame on the ink background, and draw a second copy of the person cutout at the same scale with no clipping, so head and hands overlap the frame's border.
+- **Sound:** a thud as the frame lands.
+- **Prompt:** `Add a frame break: my shot shrinks into a picture frame and my head and hands break out over the frame's edge.`
+
+## 19. UI world
+
+A chat app appears above the creator's head and types the request.
+
+- **Build:** a cream app card (about 860×440) in the top third with the assistant's name in the serif, a short greeting and an input box that types the request.
+- **Sound:** a whoosh, keys under the typing.
+- **Prompt:** `Add a UI world moment: a chat app card appears above my head with a greeting and an input box that types my request.`
+
+## 20. Digital zoom
+
+A crop zoom onto the face with a camera readout.
+
+- **Build:** zoom the camera to about 2.1× on the face in 3 frames, with white corner brackets, a red REC dot and a zoom readout that counts 1.0× → 2.1×.
+- **Sound:** a light shutter.
+- **Prompt:** `Add a digital zoom: crop in fast on my face with camera corner brackets, a REC dot and a zoom number counting up.`
+
+## 21. Checklist
+
+A native checklist ticks off three steps.
+
+- **Build:** a white card in the top third with three rows; each round checkbox fills green with a tick, 0.12s apart, and the row text darkens.
+- **Sound:** a click per tick.
+- **Prompt:** `Add a checklist: a clean white card with three steps that tick off one by one with green checkmarks.`
+
+## 22. Headline wall
+
+Titles of the creator's real posts are pinned up behind their head.
+
+- **Build:** six cream paper notes with tape, each holding one real post title in the serif, popping in staggered on the behind layer with slight tilts.
+- **Sound:** one pop.
+- **Prompt:** `Add a headline wall: the titles of six of my real posts appear as taped paper notes on the wall behind my head.`
+
+## 23. Zoom-through cut
+
+Punch into a lens of the glasses and come out the other side.
+
+- **Build:** zoom the camera to 7× into one lens with blur, flash white at the midpoint, then zoom back out from the other lens to 1×.
+- **Sound:** one fast whoosh.
+- **Prompt:** `Add a zoom-through cut: zoom fast into one lens of my glasses, flash white, then zoom back out from the other lens.`
+
+## 24. Spotlight
+
+Everything dims except a circle around the face.
+
+- **Build:** a radial dark overlay with a clear circle on the face and a thin glowing ring that pulses once.
+- **Sound:** a low thud.
+- **Prompt:** `Add a spotlight: dim everything except a soft circle around my face, with a thin glowing ring that pulses once.`
+
+## 25. Pull-back reveal
+
+The camera pulls back to show it's playing inside an editor.
+
+- **Build:** an editor window (title bar, a media bin of frames from the take, a filmstrip timeline with a playhead) sits under the camera layer; scale the camera down into the viewer area as the window scales in from 1.9×.
+- **Sound:** a whoosh.
+- **Prompt:** `Add a pull-back reveal: pull my shot back to show it's playing inside a video editor, with a media bin and a timeline of my own frames.`
+
+## 26. Green screen
+
+A green flash, then the creator is keyed onto another scene.
+
+- **Build:** hide the camera for 3 frames of solid green, then show a new background clip behind the person cutout, with a small "keyed" chip.
+- **Sound:** a pop.
+- **Prompt:** `Add a green screen moment: flash green for a split second, then key me onto a different background clip.`
+
+## 27. Paper cut
+
+A cut-paper collage with a sticker outline around the creator.
+
+- **Build:** a yellow halftone paper background with a torn cream sheet and tape, ransom-note letters in mixed fonts and colours dropping in, and the person cutout with a white sticker outline (stacked drop-shadows).
+- **Sound:** a strong shutter.
+- **Prompt:** `Add a paper cut look: a yellow paper collage background, ransom-note letters, and me cut out with a white sticker outline.`
+
+## 28. Doodle boil
+
+Hand-drawn doodles around the head, boiling.
+
+- **Build:** white marker doodles (a crown, sparkles, a swirl, an arrow, a heart) draw on, then jitter by a couple of pixels every 3 frames so the lines boil like hand animation.
+- **Sound:** a pop.
+- **Prompt:** `Add a doodle boil: white hand-drawn doodles around my head (a crown, sparkles, arrows) that draw on and jitter like hand animation.`
+
+## 29. Vertigo
+
+A dolly zoom: the room zooms in while the creator pulls back.
+
+- **Build:** replace the camera with a clean plate of the room (inpaint one frame where the cutout says "person") and scale it up to about 1.45 while the person cutout scales down to 0.8.
+- **Sound:** a riser.
+- **Prompt:** `Add a vertigo dolly zoom: the room behind me zooms in while I pull back, like the classic film shot.`
+
+## 30. Cover story
+
+A magazine cover with the masthead behind the head.
+
+- **Build:** a huge serif masthead on the behind layer, a small spaced issue line above it, two cover lines on the sides and a barcode, with the effect name still readable.
+- **Sound:** a light shutter.
+- **Prompt:** `Turn my shot into a magazine cover: a huge serif masthead behind my head, an issue line, cover lines on the sides and a barcode.`
+
+## 31. Glass type
+
+A frosted glass word behind the head.
+
+- **Build:** heavy condensed letters on the behind layer with a faint white fill, a bright thin outline and a soft blue glow, unblurring as they land.
+- **Sound:** a soft whoosh.
+- **Prompt:** `Add a glass type word behind my head: big see-through letters with a bright edge and a soft glow.`
+
+## 32. Rewind
+
+The shot scrubs backwards on a VHS overlay.
+
+- **Build:** play a reversed copy of the previous moment at double speed, with scanlines, a blinking "◀◀ REW" and a timecode counting down; hide the person layer meanwhile.
+- **Sound:** a whoosh.
+- **Prompt:** `Add a rewind: my shot plays backwards fast with VHS scanlines, a blinking REW label and a timecode counting down.`
+
+## 33. Light leak
+
+Warm light sweeps across the frame.
+
+- **Build:** two soft orange and pink radial glows in screen blend mode slide across the frame and fade.
+- **Sound:** a soft whoosh.
+- **Prompt:** `Add a light leak: warm orange and pink light sweeps across my shot and fades out.`
