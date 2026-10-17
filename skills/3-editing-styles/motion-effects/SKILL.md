@@ -1,6 +1,6 @@
 ---
 name: motion-effects
-description: "Style for edit-video: a library of 16 named motion effects for talking-head reels (kinetic hook, gravity drop, giant captions, prompt bar, storyboard deck, file drop, timeline, grade slider, eyedropper, film look, title card, phone frame, post grid, real feed, video card, comment drop), built in one design system with words behind the speaker and the creator's own footage inside the UI. Use when the creator names an effect, asks for heavy motion graphics, or wants an effects listicle."
+description: "Style for edit-video: a library of 33 named motion effects for talking-head reels (kinetic hook, gravity drop, timeline, title card, comment drop, orbit, frame break, vertigo, paper cut, rewind and more), built in one design system with words behind the speaker and the creator's own footage inside the UI. Use when the creator names an effect, asks for heavy motion graphics, or wants an effects listicle."
 ---
 
 # Motion effects
