@@ -46,7 +46,7 @@ Pick the ink from the actual footage; the rest of the table stays.
 Stack inside one camera wrapper so shakes, punch-ins and whips move everything together:
 
 1. the camera video
-2. the **behind** layer (big words, the reel grid)
+2. the **behind** layer (big words, the post grid)
 3. the person cutout video
 4. effect overlays (grades, film, wipes), then the UI, then a checklist and captions
 
