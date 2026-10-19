@@ -1,20 +1,21 @@
 ---
 name: product-motion-ads
-description: "Style for edit-video: a vertical motion-graphics ad built in code from the product itself (its code, site, app or screenshots), with an optional voiceover and every sound on its frame. No camera footage needed. Use when a creator wants to promote something they built, a tool, template or free resource, a comment-to-DM giveaway, or asks for a motion-graphics or launch video for Reels, TikTok or Shorts, or a 16:9 launch film for a landing page or YouTube."
+description: "Style for edit-video: a vertical motion-graphics ad built in code from the product itself (its app, site, screenshots, product photos, packaging or renders), with an optional voiceover and every sound on its frame. No camera footage needed. Use when a creator wants to promote a product, physical or digital (a gadget, a bottle, an app, a SaaS tool, a template or free resource), a comment-to-DM giveaway, or asks for a motion-graphics or launch video for Reels, TikTok or Shorts, or a 16:9 launch film for a landing page or YouTube."
 ---
 
 # Product motion ads
 
 A style on top of `edit-video`, which owns the voice, captions, sound mix and
 review. The whole reel is motion graphics made from the real product: its
-interface, copy and flow, animated as one continuous piece where each scene turns
-into the next, with sound locked to the picture. This skill is a method, not a
-template: the product decides what appears, and you design every scene for it.
+interface or its photos and packaging, its copy and its flow, animated as one
+continuous piece where each scene turns into the next, with sound locked to the
+picture. This skill is a method, not a template: the product decides what appears,
+and you design every scene for it.
 
-Fits a reel that sells or explains one thing someone built: an app, a tool, a
-template, a skill file, a free resource behind a comment keyword. Skip it when the
-creator's face carries the story (use a footage style) or the product has nothing
-to show yet.
+Fits a reel that sells or explains one product: a physical one (a gadget, a
+bottle, a bag), an app or SaaS tool, a template, a free resource behind a comment
+keyword. Skip it when the creator's face carries the story (use a footage style)
+or the product has nothing to show yet.
 
 The same method makes a 16:9 launch film for a landing page or YouTube. Build the
 scenes once and cut the vertical reel from them, re-laid for 1080×1920, rather than
@@ -29,20 +30,24 @@ starting over.
   pauses between voice lines under about 0.9 s. A 1.5 s silence there reads as the
   place to leave. Close a gap by trimming the scene's tail, not by re-timing its
   animation.
-- **Show the product in use.** Entry → key action → result beats a landing page
-  describing it. Reuse the real interface, copy, colors and assets; rebuild only
-  what you can't reuse. No abstract filler.
-- **Show a host app as itself.** When the product works inside another app (an AI
-  assistant, a terminal agent, a chat tool), make that host recognizable at a
-  glance: its official mark, from files the creator supplies and never altered,
-  and its real interface language, such as a terminal agent's transcript and
-  tool-call lines, or a chat app's own window color, tool-use row and connector
-  toggle. A neutral chat-card stand-in reads as generic.
+- **Show the product in use.** Entry → key action → result beats a page
+  describing it: open the app → the key action → the result, or pick the bottle
+  up → use it → what it gives you. Reuse the real interface or product photos,
+  copy, colors and assets; rebuild only what you can't reuse. No abstract filler.
+- **Show where it lives as itself.** When the product works inside another app (an
+  AI assistant, a terminal agent, a chat tool) or a real setting (a kitchen
+  counter, a desk, a gym bag), make that place recognizable at a glance. For an
+  app: its official mark, from files the creator supplies and never altered, and
+  its real interface language, such as a terminal agent's transcript or a chat
+  app's own window and controls. For a physical product: true proportions,
+  materials and scale next to familiar objects. A neutral stand-in reads as
+  generic.
 - **Every claim is grounded.** Names, numbers, features and quotes must exist in
-  the product, its README, its UI or the creator's brief. So must every interface
-  detail: use the exact button labels and states, and never show a screen or
-  feature the product doesn't have. Hooks, jokes and connective lines are free to
-  invent; claims are not. Label a mockup or a staged demo as an example on screen.
+  the product, its README or UI, its packaging and spec sheet, or the creator's
+  brief. So must every detail: use the exact labels, states, colors and finishes,
+  and never show a screen, feature, flavor or size the product doesn't have.
+  Hooks, jokes and connective lines are free to invent; claims are not. Label a
+  mockup or a staged demo as an example on screen.
 - **One object carries the story.** Each scene turns into the next through
   something the viewer is already watching: a file falls into a screen and becomes
   a chip, an input grows into the prompt card, a card flips into a DM. A cut to an
@@ -83,21 +88,27 @@ the composition, voice and mixes in `work/`, renders in `previews/`, finished
 videos in `exports/` and reviews and sync strips in `reports/`. Number every
 revision (`ad-v01`, `ad-v02`, …) and keep the earlier ones.
 
-1. **Inspect the product.** Read its code (main page, styles, routes, key
-   components) or capture its site, plus any screenshots, demo clips and the
-   creator's brief. Read the code on the default or deployed branch after a fetch,
-   not whatever the local checkout holds; one was 172 commits behind. Note the
-   exact colors and fonts, the strongest visual, the copy you may quote and the 2–3
-   beats of the product in use. Never carry secrets, tokens, internal URLs or real
-   customer data into the ad; swap in plausible stand-ins and say so.
-   - **Facts before story.** List the exact button labels, states and screens the
-     story touches, and what doesn't exist. They change the plan: a consent button
-     that says "Allow access", not "Approve"; no calendar picker, so a booking
-     shows as a tool row.
-   - **A kit from the real components.** Rebuild the components the story needs
-     from their real markup and CSS into a small kit in `assets/kit/`: each as live
+1. **Inspect the product** and the creator's brief.
+   - **Software:** read its code (main page, styles, routes, key components) or
+     capture its site, plus any screenshots and demo clips. Read the code on the
+     default or deployed branch after a fetch, not whatever the local checkout
+     holds; one was 172 commits behind.
+   - **A physical product:** photos from several angles (or renders), packaging and
+     label art, the spec sheet and the brand's site.
+
+   Note the exact colors and fonts, the strongest visual, the copy you may quote
+   and the 2–3 beats of the product in use. Never carry secrets, tokens, internal
+   URLs or real customer data into the ad; swap in plausible stand-ins and say so.
+   - **Facts before story.** List the exact labels, states, screens or variants
+     the story touches, and what doesn't exist. They change the plan: a consent
+     button that says "Allow access", not "Approve"; a bottle that comes in two
+     sizes, not three.
+   - **A kit from the real thing.** For software, rebuild the components the story
+     needs from their real markup and CSS into a small kit in `assets/kit/`: live
      markup with editable text, plus a 2x still that stays sharp through a
-     punch-in. Scenes reuse the kit instead of redrawing the product.
+     punch-in. For a physical product, cut each photo out of its background at 2x
+     and keep parts and labels on separate layers, so a scene can turn, open or
+     take it apart. Scenes reuse the kit instead of redrawing the product.
    - **Assets stay local and owned.** Use images, clips and fonts that are in the
      project or that the creator supplies. Don't download stock photos or fonts a
      page merely links to; ask for the files, or redraw the idea in code (shapes,
@@ -110,7 +121,7 @@ revision (`ad-v01`, `ad-v02`, …) and keep the earlier ones.
    lines, the call to action and the sound events. Get the creator's OK on the plan
    when they are present.
 3. **Voiceover first, when there is one.** The creator's own recording is best.
-   Otherwise use a voice service they already use, or HyperFrames' local
+   Otherwise add one with ElevenLabs if needed, or HyperFrames' local
    text-to-speech (`hyperframes tts`; it downloads a voice model once, then runs
    offline). Get word timings from a transcription or the service's alignment,
    and take every beat's frame from them: the click lands on "send", the reveal on
@@ -167,7 +178,8 @@ revision (`ad-v01`, `ad-v02`, …) and keep the earlier ones.
 
    A hold longer than ~1.5 s with nothing moving reads as a stall; give it motion
    or cut it.
-7. **Sound.** Mix the voice and `cues.json` onto the render with `edit-video`'s
+7. **Sound.** Pick each cue's sound from the sound map below. Mix the voice and
+   `cues.json` onto the render with `edit-video`'s
    `scripts/sfx-sync.mjs mix work/ad-vNN/cues.json --out work/mix-vNN.wav
    [--voice …] --video previews/ad-vNN.mp4 --mux exports/ad-vNN.mp4`, then
    `sfx-sync.mjs check exports/ad-vNN.mp4 --mix work/mix-vNN.wav --cues … --strips
@@ -193,6 +205,37 @@ revision (`ad-v01`, `ad-v02`, …) and keep the earlier ones.
    claims against the source. Say what you measured and what you could not judge
    (a listening pass). Keep numbered versions; never publish without the creator's
    approval of the exact post, and confirm the call to action really delivers.
+   - **YouTube.** Render the 16:9 film natively at 4K (`hyperframes render
+     --resolution landscape-4k`, same frames at twice the pixel density) and upload
+     that: YouTube's re-encode keeps small text far sharper from a 4K upload, even
+     for viewers watching in 1080p. Keep the file under the upload tool's size limit
+     by capping the bitrate (about 25 Mbps fits a one-minute film in 200 MB).
+   - **Thumbnail or cover.** A frame from the film rarely reads at feed size. Build
+     one from the kit: a short two-line headline and one big piece of the product,
+     then check it at about 250 px wide.
+
+## Sound map
+
+Start from these, all in `edit-video`'s SFX pack. Keep every sound short, dry and
+under the voice; ordinary text changes stay silent and cues closer than about 6
+frames merge.
+
+| Visible event | Sound | Note |
+|---|---|---|
+| Frame 1 of the hook | `curated/hook-impact.wav` | On the opening frame |
+| Product, card or panel arrives | `curated/ui-pop.wav` | Quieter for small chips |
+| Product or block settles into place | `thock.wav` | On the frame it lands |
+| Step, row or spec callout appears | `tick.wav` | One per step |
+| Dial, mechanism or progress moves | `ratchet.wav` | Trim it with `dur` for a short move |
+| Lid closes, clasp locks, account connects | `latch.wav` | Its main click lands on the event |
+| Highlight or sheen passes over the product | `shimmer.wav` | Peaks on the brightest frame |
+| Visible click or button press | `curated/ui-click.wav` | On the click |
+| Camera move, push-in or handover | `curated/zoom-swish.wav` | Peaks on the move's fastest moment |
+| Build into the reveal | `curated/metallic-riser.wav` | Resolve it on the reveal |
+| Earned completion | `clean-ding.wav` | Once |
+
+A creator's own library comes first when they have one; trim each file to just
+before its hit (`edit-video`'s sound-sync reference).
 
 ## Pitfalls already paid for
 

@@ -19,6 +19,62 @@ function chirp(time, startHz, endHz, duration, phase = 0) {
   return Math.sin(2 * Math.PI * (startHz * time + 0.5 * slope * time * time) + phase);
 }
 
+const TAU = 2 * Math.PI;
+
+// A band-pass resonator (constant 0 dB peak). Higher q rings longer.
+function resonator(hz, q) {
+  const w = (TAU * hz) / SAMPLE_RATE;
+  const alpha = Math.sin(w) / (2 * q);
+  const a0 = 1 + alpha;
+  const b0 = alpha / a0;
+  const a1 = (-2 * Math.cos(w)) / a0;
+  const a2 = (1 - alpha) / a0;
+  let x1 = 0, x2 = 0, y1 = 0, y2 = 0;
+  return {
+    reset() { x1 = x2 = y1 = y2 = 0; },
+    step(x) {
+      const y = b0 * x - b0 * x2 - a1 * y1 - a2 * y2;
+      x2 = x1; x1 = x; y2 = y1; y1 = y;
+      return y;
+    },
+  };
+}
+
+// Noise-burst clicks through a resonator bank: crisp, broadband mechanical hits.
+// events: [start seconds, gain]; bank: [[Hz, q, level], ...]. Filter state resets at time 0.
+function clicker({ events, bank, burstDecay = 900, direct = 0.5, dark = 0, body }) {
+  const filters = bank.map(([hz, q, level]) => ({ filter: resonator(hz, q), level }));
+  const bodyFilter = body ? resonator(body.hz, body.q) : null;
+  return ({ time, noise, smoothNoise }) => {
+    if (time === 0) {
+      for (const { filter } of filters) filter.reset();
+      bodyFilter?.reset();
+    }
+    const excitation = noise * (1 - dark) + 4 * smoothNoise * dark;
+    let burst = 0;
+    for (const [at, gain] of events) if (time >= at) burst += gain * excitation * Math.exp(-(time - at) * burstDecay);
+    let value = direct * burst;
+    for (const { filter, level } of filters) value += level * filter.step(burst);
+    if (bodyFilter) value += body.level * bodyFilter.step(burst);
+    return value;
+  };
+}
+
+// A rising wash of high, slightly inharmonic partials for the shimmer.
+const SHIMMER_PARTIALS = (() => {
+  const random = seededRandom(1709);
+  return Array.from({ length: 26 }, (_, index) => {
+    const position = index / 25;
+    return {
+      hz: (5200 + 7200 * position) * (0.98 + random() * 0.04),
+      onset: 0.03 + 0.4 * position + (random() - 0.5) * 0.05,
+      amp: 0.45 + random() * 0.55,
+      decay: 10 + random() * 8,
+    };
+  });
+})();
+const SHIMMER_AIR = resonator(10_500, 2.5);
+
 function synthesize(definition) {
   const length = Math.max(1, Math.round(definition.duration * SAMPLE_RATE));
   const samples = new Float64Array(length);
@@ -95,6 +151,87 @@ export const SOUND_DEFINITIONS = Object.freeze([
       const thirdTime = Math.max(0, time - 0.23);
       const third = time >= 0.23 ? 0.48 * Math.sin(2 * Math.PI * 2637 * thirdTime) * env(thirdTime, 10) : 0;
       return first + second + third;
+    },
+  },
+  {
+    id: "tick",
+    title: "Tick",
+    duration: 0.09,
+    seed: 1304,
+    tags: ["step", "mechanical", "precise"],
+    use: "One step, checklist row or spec callout landing; keep it quiet under the voice.",
+    sample: clicker({
+      events: [[0.004, 1], [0.013, 0.3]],
+      bank: [[3300, 120, 2.4], [6200, 160, 2.6], [9300, 220, 3.4], [12_400, 120, 1]],
+      burstDecay: 1100,
+      direct: 0.22,
+      dark: 0.35,
+    }),
+  },
+  {
+    id: "latch",
+    title: "Latch",
+    duration: 0.2,
+    seed: 1405,
+    tags: ["lock", "connected", "mechanical"],
+    use: "Something locks, closes or connects: a lid, a clasp, an account linked.",
+    sample: clicker({
+      events: [[0.004, 0.35], [0.05, 1], [0.088, 0.4]],
+      bank: [[1250, 25, 2.2], [2900, 90, 2.4], [5300, 130, 2.4], [8300, 150, 2.2]],
+      burstDecay: 800,
+      direct: 0.22,
+      dark: 0.4,
+      body: { hz: 190, q: 4, level: 3 },
+    }),
+  },
+  {
+    id: "ratchet",
+    title: "Ratchet",
+    duration: 0.4,
+    seed: 1506,
+    tags: ["progress", "mechanism", "mechanical"],
+    use: "Progress or a mechanism engaging: a dial turning, a setting stepping into place.",
+    sample: clicker({
+      events: [[0.004, 0.75], [0.056, 0.9], [0.105, 0.8], [0.152, 1], [0.197, 0.85], [0.24, 0.95], [0.282, 0.8], [0.323, 1]],
+      bank: [[1400, 20, 1.6], [2700, 110, 2.2], [4500, 140, 2.2], [7200, 170, 2.4], [10_600, 120, 1.2]],
+      burstDecay: 1000,
+      direct: 0.2,
+      dark: 0.35,
+    }),
+  },
+  {
+    id: "thock",
+    title: "Thock",
+    duration: 0.12,
+    seed: 1607,
+    tags: ["land", "settle", "wood"],
+    use: "A product, card or block settling into place.",
+    sample: clicker({
+      events: [[0.004, 1]],
+      bank: [[620, 7, 3.2], [1150, 9, 2.4], [2300, 10, 1.4], [4700, 7, 0.6]],
+      burstDecay: 650,
+      direct: 0.3,
+      dark: 0.35,
+      body: { hz: 240, q: 4, level: 4 },
+    }),
+  },
+  {
+    id: "shimmer",
+    title: "Shimmer",
+    duration: 0.9,
+    seed: 1708,
+    tags: ["highlight", "sheen", "premium"],
+    use: "A highlight or sheen passing over the product; syncs on its peak, keep it under the voice.",
+    sample: ({ time, noise }) => {
+      if (time === 0) SHIMMER_AIR.reset();
+      let value = 0;
+      for (const partial of SHIMMER_PARTIALS) {
+        const t = time - partial.onset;
+        if (t < 0) continue;
+        value += partial.amp * Math.sin(TAU * partial.hz * t) * (1 - Math.exp(-t * 220)) * Math.exp(-t * partial.decay);
+      }
+      const air = 0.3 * SHIMMER_AIR.step(noise) * Math.exp(-(((time - 0.28) / 0.17) ** 2));
+      return value / 8 + air;
     },
   },
 ]);

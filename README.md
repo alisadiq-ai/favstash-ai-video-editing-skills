@@ -64,11 +64,11 @@ For tool, repo and feature explainers where every sentence names something to sh
 
 For talking-head explainers that alternate graphics with personal lines. One-to-two-word captions in Montserrat.
 
-### [product-motion-ads](skills/3-editing-styles/product-motion-ads/SKILL.md): a motion-graphics ad built from what you made
+### [product-motion-ads](skills/3-editing-styles/product-motion-ads/SKILL.md): a motion-graphics ad built from your product
 
 ![Product motion ads: hook over the product's phone, the match screen, and the comment-to-DM ending, from an ad an agent built from a demo app's code](assets/previews/product-motion-ads.jpg)
 
-For promoting something you built, a free resource or a comment-to-DM giveaway, with no camera footage. Your agent plans the story from the product itself, carries one object from scene to scene and locks every sound to its frame.
+For promoting a product, physical or digital (a gadget, a bottle, an app, a SaaS tool), a free resource or a comment-to-DM giveaway, with no camera footage. Your agent plans the story from the product itself (its app, site, photos or packaging), carries one object from scene to scene and locks every sound to its frame. It also makes a 16:9 launch film for YouTube or a landing page.
 
 ### [motion-effects](skills/3-editing-styles/motion-effects/SKILL.md): 33 named effects for any talking-head edit
 

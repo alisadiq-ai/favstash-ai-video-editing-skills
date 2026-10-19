@@ -10,10 +10,11 @@ approved words and plan the picture around them.
 2. Who is it for, and what does it change for them?
 3. What is the most impressive or surprising true thing about it?
 4. What does using it look like (entry → key action → result), and where: in its
-   own app, or inside a host such as an AI assistant, a terminal agent or a chat
-   tool?
-5. What real material can appear: interface, copy, assets, demo clips? What are
-   the exact labels and states, and what doesn't exist?
+   own app, inside another app (an AI assistant, a terminal agent, a chat tool), or
+   in a real setting (a kitchen, a desk, a bag)?
+5. What real material can appear: interface, product photos, packaging, copy,
+   demo clips? What are the exact labels, states and variants, and what doesn't
+   exist?
 6. What is the hero object, the one thing the viewer follows through the reel
    (a file, a card, a phone, a product shot)?
 7. What should the viewer do at the end, and is the offer real?
@@ -37,7 +38,8 @@ from a fixed count.
 
 Moves that read as premium there: a big prompt card that morphs into a status pill,
 a punch-in to one huge button, a page section lifting out as a card while the rest
-blurs. [Motion](motion.md) covers how to build them. References are for analysis:
+blurs; for a physical product, a slow turn that lands on the hero angle, or the
+product opening into its parts. [Motion](motion.md) covers how to build them. References are for analysis:
 copy the move, never the footage, music or brand.
 
 ## Shape
@@ -86,16 +88,15 @@ Check the plan before building:
 List the visible events that deserve sound: arrivals, clicks, camera moves, a
 reveal, the call to action. Most get one short sound; ordinary text changes stay
 silent; cues closer than about 6 frames merge. `edit-video`'s SFX pack covers the
-usual set (pop, click, swish, shutter, impact, riser, ding, typing, sparkle). Exact
-frames come from the build, not the plan.
+usual set (pop, click, swish, shutter, impact, riser, ding, typing, sparkle) plus
+short mechanical sounds for product moments (tick, ratchet, latch, thock,
+shimmer); the style's sound map pairs them with events. Exact frames come from the
+build, not the plan.
 
-For a premium piece, generate a few sounds made for it with a sound service the
-creator uses: typing, soft pops, crisp clicks, mechanical ticks, a gear ratchet.
-They gave a launch film the premium feel its creator asked for. Keep them short,
-dry and under the voice. Generated files often open with silence or hit late, so
-trim each to its attack before cueing (`edit-video`'s sound-sync reference).
+Short, dry mechanical sounds make a product piece feel premium: a tick for each
+step, a ratchet for progress, a latch when something closes or connects, a thock
+when it settles. Keep them under the voice.
 
-A music bed generated or written section by section to the scene timings lands its
-drop on the turn. When scenes later move, offset the bed's start so the drop still
+A music bed timed section by section to the scenes lands its drop on the turn. When scenes later move, offset the bed's start so the drop still
 lands rather than making a new bed. Duck it under the voice (the mixer ducks every
 cue under `--voice`) and carve a little room for the voice with EQ.

@@ -117,12 +117,14 @@ Use owned or licensed music. If the creator will add native platform music,
 deliver the appropriate cut without a music bed and note the intended timing.
 
 Make SFX follow visible events: click for a UI action, pop for an element arrival,
-shutter for a meaningful camera/cut change, swish for a motivated zoom. A short
+shutter for a meaningful camera/cut change, swish for a motivated zoom, tick for a
+step, thock when something settles, latch when it locks or connects. A short
 riser can build into a reveal; resolve it at the visual payoff. Merge nearby cues
 and keep ordinary caption changes silent. Prefer the creator's established sounds;
 otherwise start with the curated sounds in the [SFX pack](assets/sfx/manifest.json).
 Copy only selected files, align audible transients rather than file starts, and
-audition them against speech. Generated alternatives remain available in the pack.
+audition them against speech. The pack's other one-shots (ding, sparkle, impact,
+typing tick, ratchet, shimmer) cover payoffs, typing and product moments.
 Suggested gains are starting points, not a volume ceiling: a demonstrated click
 or reveal build must be audible. Trim/time-stretch a riser to the reveal and check
 the combined mix, not isolated cue levels.
