@@ -1,6 +1,6 @@
 # Planning the ad
 
-Write `plan/ad-plan.md` before building. One page; it is the contract the build
+Write `analysis/ad-plan.md` before building. One page; it is the contract the build
 follows. If the creator brought a script or hooks from `write-script`, keep their
 approved words and plan the picture around them.
 
@@ -9,14 +9,36 @@ approved words and plan the picture around them.
 1. What is it, in one sentence a stranger understands?
 2. Who is it for, and what does it change for them?
 3. What is the most impressive or surprising true thing about it?
-4. What does using it look like: entry → key action → result?
-5. What real material can appear: interface, copy, assets, demo clips?
+4. What does using it look like (entry → key action → result), and where: in its
+   own app, or inside a host such as an AI assistant, a terminal agent or a chat
+   tool?
+5. What real material can appear: interface, copy, assets, demo clips? What are
+   the exact labels and states, and what doesn't exist?
 6. What is the hero object, the one thing the viewer follows through the reel
    (a file, a card, a phone, a product shot)?
 7. What should the viewer do at the end, and is the offer real?
 
 If an answer is missing, ask the creator or find it in the source. Don't fill it in
 with a guess.
+
+## Study references
+
+When polish matters (a launch film, a paid ad), study strong references before you
+shape the plan. Gather 6–10 launch films or ads in the same lane, the creator's
+picks first. `edit-video`'s reference helper samples frames; add your own around
+every beat and handover. For each scene of your plan, write what to copy and from
+which reference: a move, a layout, a type treatment, a sound.
+
+Measure the rhythm as well: picture changes per 10 s, and how many of them are hard
+cuts. In ten launch films studied, most changes were moves inside the shot
+(punch-ins, card morphs), with only 2–3 hard cuts per 10 s, and whoosh energy built
+about 0.3 s before each cut. Take your rhythm from your references' numbers, not
+from a fixed count.
+
+Moves that read as premium there: a big prompt card that morphs into a status pill,
+a punch-in to one huge button, a page section lifting out as a card while the rest
+blurs. [Motion](motion.md) covers how to build them. References are for analysis:
+copy the move, never the footage, music or brand.
 
 ## Shape
 
@@ -46,6 +68,7 @@ Voiceover: "…you just drop it in, type one line and hit enter."
 Handover in: the input box from scene 2 grows into this card.
 Handover out: pull back; the card shrinks into the laptop, which now plays the result.
 Sound: typing ticks while typing; swish on the push-in; click on "enter" (frame 288).
+Copy: reference 4 at 0:12–0:14, the punch-in that ends on one huge button.
 ```
 
 Check the plan before building:
@@ -53,6 +76,7 @@ Check the plan before building:
 - Every pair of scenes has a handover that carries an object or the camera, not a
   cut to an unrelated layout.
 - Every line of text has its reading time inside its scene.
+- No pause between voice lines in the first ~10 s runs past about 0.9 s.
 - Every claim traces to the source; staged examples are labelled.
 - The total fits the voiceover or the target length.
 - The ending shows the real offer.
@@ -64,3 +88,14 @@ reveal, the call to action. Most get one short sound; ordinary text changes stay
 silent; cues closer than about 6 frames merge. `edit-video`'s SFX pack covers the
 usual set (pop, click, swish, shutter, impact, riser, ding, typing, sparkle). Exact
 frames come from the build, not the plan.
+
+For a premium piece, generate a few sounds made for it with a sound service the
+creator uses: typing, soft pops, crisp clicks, mechanical ticks, a gear ratchet.
+They gave a launch film the premium feel its creator asked for. Keep them short,
+dry and under the voice. Generated files often open with silence or hit late, so
+trim each to its attack before cueing (`edit-video`'s sound-sync reference).
+
+A music bed generated or written section by section to the scene timings lands its
+drop on the turn. When scenes later move, offset the bed's start so the drop still
+lands rather than making a new bed. Duck it under the voice (the mixer ducks every
+cue under `--voice`) and carve a little room for the voice with EQ.

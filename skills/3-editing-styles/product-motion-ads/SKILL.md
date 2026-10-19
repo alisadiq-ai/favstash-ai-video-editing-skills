@@ -1,6 +1,6 @@
 ---
 name: product-motion-ads
-description: "Style for edit-video: a vertical motion-graphics ad built in code from the product itself (its code, site, app or screenshots), with an optional voiceover and every sound on its frame. No camera footage needed. Use when a creator wants to promote something they built, a tool, template or free resource, a comment-to-DM giveaway, or asks for a motion-graphics or launch video for Reels, TikTok or Shorts."
+description: "Style for edit-video: a vertical motion-graphics ad built in code from the product itself (its code, site, app or screenshots), with an optional voiceover and every sound on its frame. No camera footage needed. Use when a creator wants to promote something they built, a tool, template or free resource, a comment-to-DM giveaway, or asks for a motion-graphics or launch video for Reels, TikTok or Shorts, or a 16:9 launch film for a landing page or YouTube."
 ---
 
 # Product motion ads
@@ -16,19 +16,33 @@ template, a skill file, a free resource behind a comment keyword. Skip it when t
 creator's face carries the story (use a footage style) or the product has nothing
 to show yet.
 
+The same method makes a 16:9 launch film for a landing page or YouTube. Build the
+scenes once and cut the vertical reel from them, re-laid for 1080×1920, rather than
+starting over.
+
 ## Creative laws
 
 - **The first second decides.** Frame 0 must look finished and already say what
   the reel is about: the hook in large type over the product's world, the product
   visible. Never an empty canvas, a logo sting or raw code/markdown, which reads as
-  broken formatting.
+  broken formatting. Then keep the opening moving: in the first ~10 s, keep the
+  pauses between voice lines under about 0.9 s. A 1.5 s silence there reads as the
+  place to leave. Close a gap by trimming the scene's tail, not by re-timing its
+  animation.
 - **Show the product in use.** Entry → key action → result beats a landing page
   describing it. Reuse the real interface, copy, colors and assets; rebuild only
   what you can't reuse. No abstract filler.
+- **Show a host app as itself.** When the product works inside another app (an AI
+  assistant, a terminal agent, a chat tool), make that host recognizable at a
+  glance: its official mark, from files the creator supplies and never altered,
+  and its real interface language, such as a terminal agent's transcript and
+  tool-call lines, or a chat app's own window color, tool-use row and connector
+  toggle. A neutral chat-card stand-in reads as generic.
 - **Every claim is grounded.** Names, numbers, features and quotes must exist in
-  the product, its README, its UI or the creator's brief. Hooks, jokes and
-  connective lines are free to invent; claims are not. Label a mockup or a staged
-  demo as an example on screen.
+  the product, its README, its UI or the creator's brief. So must every interface
+  detail: use the exact button labels and states, and never show a screen or
+  feature the product doesn't have. Hooks, jokes and connective lines are free to
+  invent; claims are not. Label a mockup or a staged demo as an example on screen.
 - **One object carries the story.** Each scene turns into the next through
   something the viewer is already watching: a file falls into a screen and becomes
   a chip, an input grows into the prompt card, a card flips into a DM. A cut to an
@@ -58,7 +72,8 @@ in one line.
   next numbered version, and leave everything they didn't mention alone (copy,
   timing, sound). Re-check the scenes you touched and the handovers next to them,
   then report what changed for each comment. If a comment is unclear, make your
-  best reading and say which one you chose.
+  best reading and say which one you chose. For "a bit faster" overall, change the
+  tempo (step 7) instead of re-timing every scene.
 
 ## Workflow
 
@@ -70,10 +85,19 @@ revision (`ad-v01`, `ad-v02`, …) and keep the earlier ones.
 
 1. **Inspect the product.** Read its code (main page, styles, routes, key
    components) or capture its site, plus any screenshots, demo clips and the
-   creator's brief. Note the exact colors and fonts, the strongest visual, the
-   copy you may quote and the 2–3 beats of the product in use. Never carry secrets,
-   tokens, internal URLs or real customer data into the ad; swap in plausible
-   stand-ins and say so.
+   creator's brief. Read the code on the default or deployed branch after a fetch,
+   not whatever the local checkout holds; one was 172 commits behind. Note the
+   exact colors and fonts, the strongest visual, the copy you may quote and the 2–3
+   beats of the product in use. Never carry secrets, tokens, internal URLs or real
+   customer data into the ad; swap in plausible stand-ins and say so.
+   - **Facts before story.** List the exact button labels, states and screens the
+     story touches, and what doesn't exist. They change the plan: a consent button
+     that says "Allow access", not "Approve"; no calendar picker, so a booking
+     shows as a tool row.
+   - **A kit from the real components.** Rebuild the components the story needs
+     from their real markup and CSS into a small kit in `assets/kit/`: each as live
+     markup with editable text, plus a 2x still that stays sharp through a
+     punch-in. Scenes reuse the kit instead of redrawing the product.
    - **Assets stay local and owned.** Use images, clips and fonts that are in the
      project or that the creator supplies. Don't download stock photos or fonts a
      page merely links to; ask for the files, or redraw the idea in code (shapes,
@@ -81,27 +105,39 @@ revision (`ad-v01`, `ad-v02`, …) and keep the earlier ones.
      files or an installed font (`@font-face { src: local(...) }`); a web font URL
      makes the renderer fetch it at build time.
 2. **Plan** in `analysis/ad-plan.md` with the [story guide](references/story.md):
-   angle, hook, beats, the handover between every pair of scenes, on-screen text,
-   voiceover lines, the call to action and the sound events. Get the creator's OK
-   on the plan when they are present.
+   study strong references first when polish matters, then write the angle, hook,
+   beats, the handover between every pair of scenes, on-screen text, voiceover
+   lines, the call to action and the sound events. Get the creator's OK on the plan
+   when they are present.
 3. **Voiceover first, when there is one.** The creator's own recording is best.
    Otherwise use a voice service they already use, or HyperFrames' local
    text-to-speech (`hyperframes tts`; it downloads a voice model once, then runs
-   offline). Transcribe it to word timings and take every beat's frame from them:
-   the click lands on "send", the reveal on its word. Without a voiceover, pace the
-   beats by reading time and, if there is music, its strong hits. Music is the
-   creator's licensed track, one they own, a bed you make in code, or none; the SFX
-   pack has no music.
+   offline). Get word timings from a transcription or the service's alignment,
+   and take every beat's frame from them: the click lands on "send", the reveal on
+   its word. Cut and place whole lines on the audio's real silences instead
+   (`ffmpeg -i voice.wav -af silencedetect=n=-40dB:d=0.12 -f null -`): alignment
+   timestamps drifted up to ~0.4 s from the audio, and cutting a line on them
+   clipped its first word. Use word timings only for offsets inside a line.
+   Without a voiceover, pace the beats by reading time and, if there is music, its
+   strong hits. Music is the creator's licensed track, one they own, a bed you make
+   in code or generate for this piece, or none; the SFX pack has no music.
 4. **Build** a HyperFrames composition in `work/ad-vNN/` (Node 22+ and the
    workspace runtime from `edit-video`'s `init-workspace.mjs --install`). If
    HyperFrames' own skills are installed (`hyperframes-core`,
    `hyperframes-animation`, `hyperframes-keyframes`), read them for the composition
    contract and animation mechanics; they track the current renderer. Their
    `product-launch-video` workflow can build from your plan when the creator wants
-   its presets and has signed in to its services; keep the format at 1080×1920 and
-   your plan as the brief. Otherwise write the composition yourself following
-   [motion](references/motion.md). Either way, write `cues.json` beside it: one
-   sound cue per visible event (format in `edit-video`'s sound-sync reference).
+   its presets and has signed in to its services; keep your plan as the brief and
+   the reel at 1080×1920 (1920×1080 for a 16:9 film). Otherwise write the
+   composition yourself following [motion](references/motion.md). Either way, write
+   `cues.json` beside it: one sound cue per visible event (format in `edit-video`'s
+   sound-sync reference).
+   - **Longer pieces.** For a launch film with many scenes, put one scene per
+     sub-composition file, each with a fixed duration taken from the voice. Split
+     the build across parallel agents only past about six scenes; give each
+     builder its scene's plan block (handovers included), the design tokens and
+     the kit. Then assemble, run step 5 on the whole piece and snapshot every
+     scene, not just the handovers.
 5. **Check and look before rendering.** Run, from the workspace:
 
    ```bash
@@ -120,7 +156,8 @@ revision (`ad-v01`, `ad-v02`, …) and keep the earlier ones.
      frame ÷ 30, rounded down to 4 decimals). `--describe false` keeps frames off
      outside vision services. Look at every PNG, fix and repeat. Keep critical text
      inside `edit-video`'s safe area (x 72–900, y 269–1248 at 1080×1920) and measure
-     the widest line, not just its anchor.
+     the widest line, not just its anchor. The caption zone and safe area are the
+     vertical reel's; for a 16:9 film, set them from where it will play.
 6. **Render** with `hyperframes render work/ad-vNN --fps 30 --quality high --output
    previews/ad-vNN.mp4`, then scan it for black frames and dead holds:
 
@@ -136,6 +173,21 @@ revision (`ad-v01`, `ad-v02`, …) and keep the earlier ones.
    `sfx-sync.mjs check exports/ad-vNN.mp4 --mix work/mix-vNN.wav --cues … --strips
    reports/sync-vNN` and look at the strips: each red frame should be the first
    that shows its event. Use `--crop x,y,w,h` to zoom on small events.
+   - **Faster overall without re-authoring.** Render again at a whole frame rate
+     near 30 ÷ k, play it back at 30 fps and tempo-shift the finished mix by k with
+     pitch preserved. Every frame is still a real frame and every cue stays in
+     sync. k ≈ 1.1 reads as "a bit faster": render with `--fps 27` (k = 30/27) to
+     `previews/ad-vNN-27fps.mp4`, check sync on the normal-speed export above, then:
+
+     ```bash
+     ffmpeg -i previews/ad-vNN-27fps.mp4 -i work/mix-vNN.wav -filter_complex \
+       "[0:v]setpts=PTS*27/30[v];[1:a]atempo=1.111111,loudnorm=I=-14:TP=-2.5,aresample=48000[a]" \
+       -map "[v]" -map "[a]" -r 30 -c:v libx264 -crf 16 -c:a aac -b:a 192k \
+       exports/ad-vNN-fast.mp4
+     ```
+
+     The stretch shifts loudness, so re-normalize after it (−14 LUFS matches the
+     mix; −16 also suits social).
 8. **Review and deliver** with `edit-video`: the encoded export, frame 0 and the
    first 3 seconds, every handover at phone size, safe areas, a full decode, and the
    claims against the source. Say what you measured and what you could not judge
@@ -153,6 +205,9 @@ revision (`ad-v01`, `ad-v02`, …) and keep the earlier ones.
   on its own frame. Cue each accordingly.
 - Font stacks with quotes break an inline `style` attribute and silently fall back
   to Times. Put design tokens in a stylesheet.
+- Symbols such as ✻ ⏺ ⎿ ✓ › were missing from the shipped font files and rendered
+  as boxes or in a fallback face. Draw such symbols as inline SVG, or confirm the
+  font file covers them.
 - A big move into a new world (rising into space, diving into a screen) goes black
   for a frame if the old layer leaves before the new one arrives. Bring the new
   layer in first.

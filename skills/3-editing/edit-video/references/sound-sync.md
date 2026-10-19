@@ -16,10 +16,16 @@ the arithmetic and the checks. It needs Node 22+ and FFmpeg, nothing else.
    risers, shimmers) sync on their peak. A sound counts as struck when its level
    jumps 12 dB or more within 10 ms at that attack; swells climb more slowly. A
    two-note chime or a "ch-CHK" shutter synced on its loudest note plays its first
-   note early, so the attack rule wins.
+   note early, so the attack rule wins. Generated sounds often open with silence
+   or hit late: trim each to just before its attack and keep it short and dry. The
+   mixer measures the sync point either way (`points`); when you place sounds in
+   another editor, put that point, not the file start, on the event's frame. A
+   whoosh that leads a cut peaks a few frames before it; one on a camera move
+   peaks mid-move.
 3. **Beds start on their cue.** Music, typing loops and ambience have no single
    hit: mark the cue `"bed": true` and the file starts on the frame. The pack has no
-   music; use the creator's licensed track, one they own, or none.
+   music; use the creator's licensed track, one they own, one generated for this
+   reel, or none.
 4. **Leave headroom for the encoder.** AAC overshoots sharp clicks, and some
    renderers turn the whole track down when its encoded true peak passes −1 dBTP.
    The mixer masters to −14 LUFS with a −2.5 dBTP ceiling by default.
