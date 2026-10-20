@@ -3,7 +3,7 @@
   "title": "FavStash Short-Form SFX Pack",
   "generatedBy": "scripts/generate-sfx.mjs",
   "guidance": "Choose a sound for a visible event and audition it against speech. Prefer curated sounds or the creator's established library; ordinary caption changes stay silent.",
-  "count": 11,
+  "count": 16,
   "sounds": [
     {
       "id": "clean-ding",
@@ -74,6 +74,96 @@
       ],
       "recommendedUse": "A delightful payoff or premium highlight; keep below the voice.",
       "sha256": "ac0bed2ac2ff2fe4cf1c42ec5914d4e4d9e271fc8d4801c5f3f293fb06dbf846",
+      "license": "Apache-2.0",
+      "provenance": "Deterministically synthesized by scripts/generate-sfx.mjs; contains no third-party recording."
+    },
+    {
+      "id": "tick",
+      "title": "Tick",
+      "file": "tick.wav",
+      "durationSeconds": 0.09,
+      "sampleRate": 48000,
+      "channels": 1,
+      "bitDepth": 16,
+      "tags": [
+        "step",
+        "mechanical",
+        "precise"
+      ],
+      "recommendedUse": "One step, checklist row or spec callout landing; keep it quiet under the voice.",
+      "sha256": "2f3d2096c09a999a57a82553a644c34e79d34540b4bd724e7d94ae854c409b47",
+      "license": "Apache-2.0",
+      "provenance": "Deterministically synthesized by scripts/generate-sfx.mjs; contains no third-party recording."
+    },
+    {
+      "id": "latch",
+      "title": "Latch",
+      "file": "latch.wav",
+      "durationSeconds": 0.2,
+      "sampleRate": 48000,
+      "channels": 1,
+      "bitDepth": 16,
+      "tags": [
+        "lock",
+        "connected",
+        "mechanical"
+      ],
+      "recommendedUse": "Something locks, closes or connects: a lid, a clasp, an account linked.",
+      "sha256": "6ec7f81f74a19465d6ab4f1146a546b852bc02a37caedb56b33257149275e2e3",
+      "license": "Apache-2.0",
+      "provenance": "Deterministically synthesized by scripts/generate-sfx.mjs; contains no third-party recording."
+    },
+    {
+      "id": "ratchet",
+      "title": "Ratchet",
+      "file": "ratchet.wav",
+      "durationSeconds": 0.4,
+      "sampleRate": 48000,
+      "channels": 1,
+      "bitDepth": 16,
+      "tags": [
+        "progress",
+        "mechanism",
+        "mechanical"
+      ],
+      "recommendedUse": "Progress or a mechanism engaging: a dial turning, a setting stepping into place.",
+      "sha256": "3de2919ecc696c2094b376c82c1ed618538b36bca236fed941a6d3e08914909f",
+      "license": "Apache-2.0",
+      "provenance": "Deterministically synthesized by scripts/generate-sfx.mjs; contains no third-party recording."
+    },
+    {
+      "id": "thock",
+      "title": "Thock",
+      "file": "thock.wav",
+      "durationSeconds": 0.12,
+      "sampleRate": 48000,
+      "channels": 1,
+      "bitDepth": 16,
+      "tags": [
+        "land",
+        "settle",
+        "wood"
+      ],
+      "recommendedUse": "A product, card or block settling into place.",
+      "sha256": "cb319c3cdb55cf37685fdbfa21a365abfb4698acc8a3128f1ad34b145273acb1",
+      "license": "Apache-2.0",
+      "provenance": "Deterministically synthesized by scripts/generate-sfx.mjs; contains no third-party recording."
+    },
+    {
+      "id": "shimmer",
+      "title": "Shimmer",
+      "file": "shimmer.wav",
+      "durationSeconds": 0.9,
+      "sampleRate": 48000,
+      "channels": 1,
+      "bitDepth": 16,
+      "tags": [
+        "highlight",
+        "sheen",
+        "premium"
+      ],
+      "recommendedUse": "A highlight or sheen passing over the product; syncs on its peak, keep it under the voice.",
+      "sha256": "41d4a8f508794ed87b66201d08a34514b6e779f21d71599376a9620c955e736f",
       "license": "Apache-2.0",
       "provenance": "Deterministically synthesized by scripts/generate-sfx.mjs; contains no third-party recording."
     },

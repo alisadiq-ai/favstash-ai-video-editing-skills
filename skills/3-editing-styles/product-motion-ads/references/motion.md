@@ -1,7 +1,8 @@
 # Motion: one continuous piece
 
-How to build an ad where nothing cuts: the camera moves through one world and every
-scene grows out of the last. The snippets are patterns to adapt, not a library.
+How to build an ad that plays as one piece: the camera moves through one world and
+every scene grows out of the last. A longer film may take a few cuts; the rest stay
+handovers. The snippets are patterns to adapt, not a library.
 When HyperFrames' own skills are installed, they are the authority on the
 composition contract and current APIs; this page covers the craft on top.
 
@@ -39,6 +40,9 @@ A HyperFrames composition is an HTML page rendered frame by frame:
   up puts a switch one frame late.
 - Avoid two tweens on the same property of the same element at once; the checker
   flags it and the result jumps.
+- When scenes live in separate files, write each handover's screen box into both
+  scenes' plan blocks, so the outgoing scene's last frame and the incoming scene's
+  first frame put the carried object in the same place.
 
 ## One camera
 
@@ -55,10 +59,12 @@ Film a world instead of switching slides. Two wrappers make the camera:
 To look at world point (X, Y) at zoom S, set `#camPan` to x = 540 − X,
 y = 960 − Y and `#camScale` to scale S. A world point P then appears on screen at
 `540 + S·(P − X)` horizontally (and the same with 960 vertically). Keep that
-formula in the build script so a handover can find where things are.
+formula in the build script so a handover can find where things are. A 16:9 film
+uses its own centre (960, 540).
 
 - One move at a time; let a move settle before a handover starts from it.
-- Ease moves in and out (`power3.inOut`); a short swish sound peaks mid-move.
+- Ease moves in and out (`power3.inOut`); a short swish sound peaks mid-move, or a
+  few frames before a cut it leads.
 - Screen-space layers (captions, cards, the CTA) sit above `#cam` and don't move
   with it.
 
@@ -86,12 +92,15 @@ knows the text underneath is meant to disappear.
 |---|---|---|
 | Drop into | An object shrinks and falls into a target (a file into a screen) and becomes part of it (a chip in the input) | Target reacts on landing: glow, pop; sound on the landing frame |
 | Grow into | A small element expands into the next scene (an input box becomes the prompt card) | Scale the parent so the element fills the frame, then swap to the full-size version |
-| Push in / pull out | The camera dives toward a detail (the send button), then pulls back to show the result | Keep the detail on screen through the whole move |
+| Morph | A big card collapses into a small element that carries on its job (the prompt card becomes a status pill that keeps working) | Morph the box and corner radius together; fade the old text out before the pill's text arrives |
+| Push in / pull out | The camera dives toward a detail until one huge button fills the frame, then pulls back to show the result | Keep the detail on screen through the whole move; a 2x still keeps it sharp |
+| Lift out | A section of the page lifts out as a card and comes forward while the rest blurs and falls back | Start the card on the section's exact box; blur and dim the page, don't remove it |
 | Flip | A card turns edge-on and the next card comes round (profile → DM) | Swap at exactly 90°; use a large perspective so it reads as a card, not a door |
 | Bloom | A circle grows from the object and reveals the next layer | `clip-path: circle()` from the object's centre |
 | Stream | Copies fly out of one object into another ("every frame came from this file") | Stagger by 2–3 frames; quiet repeated sounds, panned |
 | Rise / dive | The whole world slides away for a tone change (into space for a dramatic line, back down after) | Bring the new layer's edge in **before** the old layer has left, or a frame goes black |
 | Match shape | Something with the same shape replaces it (a dot becomes a button) | Match size and position on the swap frame |
+| Cut | A hard cut to a new view of the same world, in a longer film | Keep cuts few (the [story guide](story.md) measures the rhythm); lead each with a whoosh |
 
 ## Text and objects
 
