@@ -32,4 +32,4 @@ The sample characters in `skills/3-editing-styles/cartoon-character/characters/`
 
 The `animated-explainer` preview (`assets/previews/animated-explainer.jpg`) is three frames of a reel the skill built from its worked example, with the Ali sample as the cursor and a Kokoro voice. The `cartoon-character` preview is composed from the two sample rigs.
 
-The `3d-character` method follows the code-built 3D films of [Lemo-Opuscar](https://github.com/lemomo-ai/lemo-opuscar) (three.js scenes rendered frame by frame, characters made from shapes in code); no text or code from it is included. Its preview (`assets/previews/3d-character.jpg`) shows frames of the worked example built by the skill.
+The `3d-character` preview (`assets/previews/3d-character.jpg`) shows frames of the worked example built by the skill.
