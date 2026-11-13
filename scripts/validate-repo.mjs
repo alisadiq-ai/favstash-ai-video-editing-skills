@@ -12,6 +12,7 @@ const expectedSkills = [
   "1-research/find-ideas",
   "2-scripting/write-script",
   "3-editing/edit-video",
+  "3-editing-styles/3d-character",
   "3-editing-styles/adaptive-glass",
   "3-editing-styles/animated-explainer",
   "3-editing-styles/breakout-card",

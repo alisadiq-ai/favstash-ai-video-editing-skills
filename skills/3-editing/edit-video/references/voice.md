@@ -1,7 +1,7 @@
 # Voice options
 
-An animated reel is timed to its voice, so the voice comes first. `scripts/voice.py`
-takes one take per line from any of the sources below and writes `voice/vo.wav` and
+An animated reel (`animated-explainer`, `3d-character`) is timed to its voice, so the voice
+comes first. This skill's `scripts/voice.py` takes one take per line from any of the sources below and writes `voice/vo.wav` and
 `voice/timing.json` with every word's start and end.
 
 | Source | Cost | Your own voice? | Word times | Engine |
@@ -21,7 +21,7 @@ Put one take per line in `work/<reel>/voice/takes/` as `00.wav`, `01.wav`, … i
 order of `LINES` (`.mp3` and `.m4a` work too), then:
 
 ```bash
-python3 <skill>/scripts/voice.py work/<reel> --engine files --tempo 1.05
+python3 <edit-video>/scripts/voice.py work/<reel> --engine files --tempo 1.05
 ```
 
 Each take is trimmed to its speech, levelled, sped up a little if asked (pitch kept)
@@ -68,7 +68,7 @@ for example `VOICES = {'host': 'am_michael', 'guest': 'bf_emma'}`
 (`hyperframes tts --list` shows them all), then:
 
 ```bash
-python3 <skill>/scripts/voice.py work/<reel> --engine hyperframes --tempo 1.05
+python3 <edit-video>/scripts/voice.py work/<reel> --engine hyperframes --tempo 1.05
 ```
 
 It needs the `kokoro-onnx` and `soundfile` Python packages; HyperFrames says so when

@@ -105,3 +105,24 @@ for (const character of ["ali", "stashy"]) {
     for (const part of ["pr-neutral", "pr-point", "pr-m-ah", "pr-m-oo", "pr-e-closed", "pr-u-worried"]) assert.match(html, new RegExp(part));
   });
 }
+
+test("3d-character builds a Three.js reel when installed alone", { skip: !python && "python3 not available" }, async (context) => {
+  const installed = await installAlone(context, "3d-character");
+  const { reel } = await tinyReel(context);
+  await fs.writeFile(path.join(reel, "spec.py"), [
+    "LINES = ['Hello there *world.*', '[Agent] Hi.']",
+    "CHARACTER = {'look': 'girl'}",
+    "def build(T):",
+    "    return dict(shots=[[0, 'full'], [T.L(1), 'close']], acts=[[T.L(1), 'wave']],",
+    "                card={'at': .5, 'lines': ['make(reel)']}, sfx=[[T.find('world'), 'ui-pop', 0]])",
+  ].join("\n"));
+  const result = spawnSync("python3", ["-B", path.join(installed, "scripts", "build.py"), reel], { encoding: "utf8" });
+  assert.equal(result.status, 0, result.stderr);
+  const html = await fs.readFile(path.join(reel, "index.html"), "utf8");
+  assert.match(html, /data-no-timeline/);
+  assert.match(html, /"look": "girl"/);
+  await fs.access(path.join(reel, "assets", "vendor", "three", "three.module.min.js"));
+  await fs.access(path.join(reel, "assets", "vendor", "three", "LICENSE"));
+  const cues = JSON.parse(await fs.readFile(path.join(reel, "cues.json"), "utf8"));
+  assert.deepEqual(cues.cues.map((cue) => cue.sound), ["ui-pop"]);
+});

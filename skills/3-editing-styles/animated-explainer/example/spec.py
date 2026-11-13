@@ -2,7 +2,7 @@
 Copy its structure, not its content: one scene per beat, one hero card per scene, every event on a word time.
 
     cp <skill>/example/spec.py <edit>/work/reel-six/spec.py
-    python3 <skill>/scripts/voice.py <edit>/work/reel-six --engine hyperframes
+    python3 <edit-video>/scripts/voice.py <edit>/work/reel-six --engine hyperframes
     python3 <skill>/scripts/build.py <edit>/work/reel-six
 """
 

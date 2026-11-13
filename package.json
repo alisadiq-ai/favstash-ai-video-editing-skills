@@ -2,7 +2,7 @@
   "name": "favstash-ai-video-editing-skills",
   "version": "0.8.0",
   "private": true,
-  "description": "Creator-loop skills for AI agents: find ideas, write scripts, edit short videos in six styles, with or without a camera, then publish and learn with FavStash.",
+  "description": "Creator-loop skills for AI agents: find ideas, write scripts, edit short videos in seven styles, with or without a camera, then publish and learn with FavStash.",
   "type": "module",
   "engines": {
     "node": ">=22"

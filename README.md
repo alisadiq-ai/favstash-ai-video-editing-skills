@@ -7,7 +7,7 @@ Set up FavStash creator skills for my short-form workflow.
 Clone https://github.com/alisadiq-ai/favstash-ai-video-editing-skills and follow:
 https://raw.githubusercontent.com/alisadiq-ai/favstash-ai-video-editing-skills/main/INSTALL_FOR_AGENTS.md
 
-Install all twelve skills and the local media tools they need in my workspace.
+Install all thirteen skills and the local media tools they need in my workspace.
 Check whether FavStash is connected; if not, connect it with the FavStash CLI
 (Codex or Claude Code) or guide me through sign-in. Verify the setup, then tell
 me how to start my first reel.
@@ -15,14 +15,15 @@ me how to start my first reel.
 
 **Give your AI agent the whole short-form loop.** These free, open-source skills
 teach Claude Code, Codex or any skills-aware agent to find proven ideas, write
-scroll-stopping scripts in your voice, edit Reels, TikToks and Shorts in six
+scroll-stopping scripts in your voice, edit Reels, TikToks and Shorts in seven
 finished styles, on camera or fully animated with no camera at all, then publish
 and learn from the results.
 
-**New: animated reels and your own cartoon.** Hand your agent a script and get a
-fully animated reel, timed word by word to the voice, with a lip-synced cartoon
-character as the presenter. Use the sample characters or make your own with any
-image AI, and voice it yourself, for free on your laptop or with ElevenLabs.
+**New: animated reels, a cute 3D character and your own cartoon.** Hand your agent a
+script and get a fully animated reel, timed word by word to the voice: in 2D with a
+lip-synced cartoon presenter, or in 3D with a chibi character, no Blender needed. Use
+the sample characters or make your own, and voice it yourself, for free on your laptop
+or with ElevenLabs.
 
 | [animated-explainer](skills/3-editing-styles/animated-explainer/SKILL.md) | [cartoon-character](skills/3-editing-styles/cartoon-character/SKILL.md) |
 | --- | --- |
@@ -63,6 +64,12 @@ lives in its own folder under [`skills/3-editing-styles/`](skills/3-editing-styl
 ![Animated explainer: a hook over a calendar card, a script card with an Animate button, a render card at 100%](assets/previews/animated-explainer.jpg)
 
 Give it a script and it makes the whole reel: one lit colour field and one big hero card per spoken beat, the line lighting up word by word, every click and sound on the frame of its word. Two voices can talk to each other, and a cartoon can drive the UI as a cursor. Rendered on your machine.
+
+#### [3d-character](skills/3-editing-styles/3d-character/SKILL.md): a cute 3D character that talks to camera
+
+![3D character: a chibi boy and girl talking on a pastel stage, a floating code card, and a happy wave](assets/previews/3d-character.jpg)
+
+A chibi boy or girl, built in Three.js from simple shapes, talks to camera on a soft pastel stage: lip-synced to the voice, nodding on the words that matter, pointing at a card that types itself, then waving. The camera cuts on the words. No Blender and nothing to install; it renders on your machine like every other style.
 
 #### [cartoon-character](skills/3-editing-styles/cartoon-character/SKILL.md): a lip-synced cartoon of you, or anyone you make
 
@@ -121,7 +128,7 @@ card, click and sound lands on the word it belongs to.
 | [ElevenLabs](https://elevenlabs.io) | Paid per character | The most natural read, voice clones and exact word timings |
 
 Clone only your own voice, or one you have permission to use. Setup and examples are
-in [voice options](skills/3-editing-styles/animated-explainer/references/voice.md).
+in [voice options](skills/3-editing/edit-video/references/voice.md).
 
 ## Free to use
 
@@ -163,7 +170,7 @@ with OAuth ([connection guide](https://www.favstash.app/docs/ai-connect)).
 <details>
 <summary>Install as a Claude plugin</summary>
 
-This repository is also a Claude plugin, `favstash-creator-skills`, with all twelve
+This repository is also a Claude plugin, `favstash-creator-skills`, with all thirteen
 skills and the FavStash connector. Load it in Claude Code for one session:
 
 ```bash
@@ -203,6 +210,11 @@ a 30-second animated reel with my cartoon as the cursor and a free local voice.
 ```
 
 ```text
+Use $edit-video with $3d-character to make a 15-second 3D reel where the chibi girl
+announces my launch, with camera cuts on the words and a wave at the end.
+```
+
+```text
 Use $cartoon-character to make a cartoon of me from these three photos with my image
 model, then build its rig and show me every pose.
 ```
@@ -226,8 +238,8 @@ adds your saved inspiration, scheduling and analytics so the loop closes.
 approval for the exact file, cover, caption, account and time.
 
 **What runs where?** Editing runs locally with FFmpeg and HyperFrames (Node 22+).
-`paper-grid`, `breakout-card`, `animated-explainer`, `cartoon-character` and the
-duplicate check also use Python. The
+`paper-grid`, `breakout-card`, `animated-explainer`, `3d-character`, `cartoon-character`
+and the duplicate check also use Python. The
 breakout card's built-in person matte uses Apple Vision on macOS; on other systems,
 supply a matte from any segmentation tool.
 

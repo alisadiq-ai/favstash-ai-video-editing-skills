@@ -5,7 +5,7 @@
 
 Writes <reel>/index.html (render it with `hyperframes render <reel>`), <reel>/cues.json (one sound per visible event,
 for edit-video's sfx-sync.mjs) and <reel>/assets/. Every picture and sound event is keyed to a word time in
-voice/timing.json, which scripts/voice.py writes.
+voice/timing.json, which edit-video's scripts/voice.py writes.
 
 spec.py defines:
   LINES      the spoken lines, in order. *word* = accent (serif italic, accent colour); " | " splits a line into two

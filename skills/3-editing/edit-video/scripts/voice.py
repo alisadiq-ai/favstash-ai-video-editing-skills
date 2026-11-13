@@ -1,16 +1,16 @@
 #!/usr/bin/env python3
-"""Lock the voice for an animated-explainer reel: one take per line, levelled, placed back to back, with every word's
+"""Lock the voice for an animated reel (animated-explainer, 3d-character): one take per line, levelled, placed back to back, with every word's
 start and end. Everything the reel shows or plays is keyed to these word times, so make the voice first.
 
-    python3 <skill>/scripts/voice.py <edit>/work/<reel> --engine files|hyperframes|elevenlabs [--tempo 1.05] [--redo 0,3]
+    python3 <edit-video>/scripts/voice.py <edit>/work/<reel> --engine files|hyperframes|elevenlabs [--tempo 1.05] [--redo 0,3]
 
-Engines (see references/voice.md):
+Engines (see edit-video's references/voice.md):
   files        takes you made elsewhere (your own recording, Chatterbox, any TTS): voice/takes/00.wav, 01.wav, ... one per
                line, in LINES order (.wav, .mp3 or .m4a). Word times come from `hyperframes transcribe`.
   hyperframes  free and local: HyperFrames' Kokoro voices (`hyperframes tts`), then `hyperframes transcribe`.
   elevenlabs   hosted: ElevenLabs with character timestamps (exact word times). Needs ELEVENLABS_API_KEY.
 
-spec.py supplies LINES (the same markup build.py reads), GUEST (default 'Agent'), SPOKEN = {'shown word': 'how it is
+The reel's spec.py supplies LINES (the same markup the style's build.py reads), GUEST (default 'Agent'), SPOKEN = {'shown word': 'how it is
 said'} for the voice only, and VOICES = {'host': '<voice>', 'guest': '<voice>'}: a Kokoro voice such as 'am_michael' for
 hyperframes, a voice id for elevenlabs. Writes voice/vo.wav and voice/timing.json. Existing takes are reused; --redo
 regenerates the listed lines. Needs python3, numpy and ffmpeg; HyperFrames comes from edit-video's workspace runtime

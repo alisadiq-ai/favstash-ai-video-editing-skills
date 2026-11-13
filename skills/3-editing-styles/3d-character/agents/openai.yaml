@@ -1,0 +1,6 @@
+interface:
+  display_name: "Style: 3D Character"
+  short_description: "A cute 3D chibi boy or girl that talks to camera on a pastel stage; Three.js, no Blender"
+  default_prompt: "Use $3d-character with $edit-video to turn this script into a cute 3D reel with the chibi girl talking to camera, a free local voice and camera cuts on the words."
+policy:
+  allow_implicit_invocation: true
