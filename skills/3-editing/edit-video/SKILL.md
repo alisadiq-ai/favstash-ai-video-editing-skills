@@ -1,6 +1,6 @@
 ---
 name: edit-video
-description: "Edit Reels, TikToks and YouTube Shorts from a brief, footage or reference: cut, captions, sound, motion graphics, safe areas and review of the encoded export. The base for every edit; add one style skill (adaptive-glass, paper-grid, breakout-card, product-motion-ads, text-over-footage) for the finished look."
+description: "Edit Reels, TikToks and YouTube Shorts from a brief, footage or reference: cut, captions, sound, motion graphics, safe areas and review of the encoded export. The base for every edit; add one style skill (adaptive-glass, paper-grid, breakout-card, product-motion-ads, text-over-footage, animated-explainer) for the finished look, and cartoon-character for a lip-synced character."
 ---
 
 # Edit video
@@ -19,6 +19,8 @@ stay simple; a product claim may need moving proof.
 | `breakout-card` | Grid page, speaker in a bottom card with their head breaking out, one-to-two-word captions | Talking-head explainers that alternate graphics and personal lines |
 | `product-motion-ads` | Motion graphics built from the product itself, one continuous piece where each scene turns into the next | Promoting something the creator built, free resources and comment-to-DM giveaways; no camera footage needed |
 | `text-over-footage` | One readable line over B-roll that matches it | Jokes, observations and short setup/payoff reels |
+| `animated-explainer` | Fully animated: a lit colour field and one big hero card per spoken beat, the line word-lit at the top, keyed to a locked voice | Tool, product and idea explainers and two-voice conversations when the creator doesn't film |
+| `cartoon-character` | A lip-synced 2D cartoon that talks, blinks and gestures (the creator's own, made with AI, or a sample) | A cursor in `animated-explainer`, a corner presenter on any reel, or a cartoon explainer |
 
 Use the creator's own brand and references when they have them. Without a style
 installed, follow this guide alone with clean full-camera framing.

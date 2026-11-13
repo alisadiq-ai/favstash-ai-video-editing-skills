@@ -1,6 +1,6 @@
 # Install FavStash creator skills
 
-Use this guide when the user asks to set up this pack. Install the ten skills,
+Use this guide when the user asks to set up this pack. Install the twelve skills,
 prepare the local editing tools and connect FavStash. Reuse what already works;
 ask the user only for a needed workspace choice, system permission or account
 sign-in. This setup does not authorize publishing, scheduling or uploads.
@@ -66,8 +66,11 @@ environment or the user's own Python (not system-wide with elevation):
 `numpy opencv-python` for breakout-card plates, `pdqhash scipy numpy` for the
 duplicate check and, optionally, `playwright` for paper-grid page captures. The
 breakout card's built-in person matte compiles with `swiftc` on macOS; elsewhere
-it takes a matte video from another tool. Skip these when the creator only needs
-the other styles.
+it takes a matte video from another tool. `animated-explainer` and
+`cartoon-character` need `numpy` for the voice and lip-sync steps, and
+`opencv-python` to build a new character. Their free local voice
+(`hyperframes tts`) needs `kokoro-onnx soundfile`. Skip these when the creator
+only needs the other styles.
 
 ## 3. Install the skills for the current agent
 
@@ -76,13 +79,13 @@ workspace**, using the clone as its source. Choose the actual host identifier
 (for example `codex`, `claude-code` or `cursor`); inspect CLI help for other hosts.
 
 ```bash
-npx --yes skills add "<pack>" --agent <agent-id> --skill find-ideas --skill write-script --skill edit-video --skill adaptive-glass --skill paper-grid --skill breakout-card --skill product-motion-ads --skill text-over-footage --skill publish-and-analyze --copy --yes
+npx --yes skills add "<pack>" --agent <agent-id> --skill find-ideas --skill write-script --skill edit-video --skill adaptive-glass --skill paper-grid --skill breakout-card --skill product-motion-ads --skill text-over-footage --skill animated-explainer --skill cartoon-character --skill publish-and-analyze --copy --yes
 ```
 
 Install for this project by default. Use global scope only if the user asks for
 availability across projects. Do not target every installed agent. Verify that
-all ten skills were installed with their scripts, references and assets
-(`edit-video`'s SFX, each style's builder, the breakout card's fonts). Check `npx skills list --agent <agent-id>` from the same
+all twelve skills were installed with their scripts, references and assets
+(`edit-video`'s SFX, each style's builder, the fonts, the sample characters). Check `npx skills list --agent <agent-id>` from the same
 workspace. If the host needs a reload for discovery, tell the user exactly what
 to reload.
 
@@ -163,7 +166,7 @@ platforms are ready from one successful call.
 
 Report briefly:
 
-- where the ten skills and creator workspace live;
+- where the twelve skills and creator workspace live;
 - dependency versions and the smoke-render result;
 - whether FavStash is verified, pending sign-in/reload, unavailable or skipped,
   and through which route (CLI bridge or remote MCP);
@@ -178,7 +181,8 @@ turn the best one into a few hooks to test and a shared body in my voice.
 
 ```text
 Use $edit-video to turn these takes into a reel in the style that fits
-(adaptive-glass, paper-grid, breakout-card, product-motion-ads or text-over-footage), and show me
+(adaptive-glass, paper-grid, breakout-card, product-motion-ads, text-over-footage or
+animated-explainer), and show me
 the reviewed export before any publishing step.
 ```
 

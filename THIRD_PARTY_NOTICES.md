@@ -1,6 +1,6 @@
 # Third-party notices
 
-This repository provides instructions and media helpers. Apart from the Montserrat font, it does not vendor the projects below; setup or the creator installs them.
+This repository provides instructions and media helpers. Apart from the fonts marked **bundled**, it does not vendor the projects below; setup or the creator installs them.
 
 | Project | Role | License note |
 | --- | --- | --- |
@@ -10,8 +10,12 @@ This repository provides instructions and media helpers. Apart from the Montserr
 | [yt-dlp](https://github.com/yt-dlp/yt-dlp) | User-authorized reference download and metadata | Unlicense upstream at time of integration; platform terms and media rights remain separate |
 | [FavStash CLI](https://www.npmjs.com/package/@sketric/favstash-mcp) | Optional sign-in, MCP bridge and local uploads for FavStash | MIT on npm at time of integration; the FavStash service has its own terms |
 | [Montserrat](https://github.com/JulietaUla/Montserrat) | Caption and graphics font **bundled** in `skills/3-editing-styles/breakout-card/assets/fonts/` | SIL Open Font License 1.1; the license text ships beside the fonts |
+| [Inter Tight](https://github.com/rsms/inter), [Instrument Serif](https://github.com/Instrument/instrument-serif), [Geist Mono](https://github.com/vercel/geist-font) | Type for animated-explainer, **bundled** in `skills/3-editing-styles/animated-explainer/assets/fonts/` | SIL Open Font License 1.1; the license text ships beside the fonts |
+| [Kokoro-82M](https://huggingface.co/hexgrad/Kokoro-82M) via `hyperframes tts` | Optional free local voice for animated reels | Apache-2.0 upstream; HyperFrames downloads the model, not distributed here |
+| [Chatterbox](https://github.com/resemble-ai/chatterbox) | Optional free local voice that clones the creator's own voice | MIT; archived by Resemble AI in August 2026; installed by the creator with pip; its output carries Resemble's Perth watermark |
+| [ElevenLabs](https://elevenlabs.io) | Optional hosted voice with word timestamps | A paid service with its own terms; used only with the creator's own API key |
 | [PDQ](https://github.com/facebook/ThreatExchange/tree/main/pdq) via `pdqhash` | Frame hashing for the optional duplicate check | BSD-style upstream license; installed with pip, verify the installed package |
-| [NumPy](https://numpy.org/), [SciPy](https://scipy.org/), [OpenCV](https://opencv.org/) | Optional duplicate check and breakout-card plates | BSD / Apache-2.0 upstream; installed with pip |
+| [NumPy](https://numpy.org/), [SciPy](https://scipy.org/), [OpenCV](https://opencv.org/) | Optional duplicate check, breakout-card plates, voice and lip-sync timing, and building a cartoon rig | BSD / Apache-2.0 upstream; installed with pip |
 | [Playwright](https://playwright.dev/python/) | Optional page captures and layout snapshots for paper-grid | Apache-2.0; installed with pip, uses the local Chrome |
 | Apple Vision | Built-in person matte for breakout-card on macOS | Part of macOS; not distributed here |
 
@@ -22,3 +26,7 @@ Generated WAVs are original synthesis covered by Apache-2.0. The separately mark
 The `product-motion-ads` method is informed by [brag](https://github.com/latent-spaces/brag) (MIT); no text or code from it is included. Its preview image (`assets/previews/product-motion-ads.jpg`) shows an ad an agent built with the skill from brag's MIT-licensed "Horse Tinder" example site, a fictional app; its artwork was drawn in code.
 
 The other style preview images in `assets/previews/` come from the maintainer's own reels, with the speaker replaced by a placeholder figure, and are included with his permission; they are not covered by the code license for reuse as stock footage.
+
+The sample characters in `skills/3-editing-styles/cartoon-character/characters/` (a cartoon of Ali, the maintainer, and Stashy, the FavStash mascot) are included at the maintainer's request for trying the skills. They are not covered by the code license; their [terms](skills/3-editing-styles/cartoon-character/characters/README.md) say how they may be used.
+
+The `animated-explainer` preview (`assets/previews/animated-explainer.jpg`) is three frames of a reel the skill built from its worked example, with the Ali sample as the cursor and a Kokoro voice. The `cartoon-character` preview is composed from the two sample rigs.

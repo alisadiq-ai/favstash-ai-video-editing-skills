@@ -1,0 +1,12 @@
+/* Cartoon presenter layers. Placement/size come inline from presenter.py; the rig is authored in 1024px space. */
+#presenter { position: absolute; z-index: 40; pointer-events: none;
+  -webkit-mask-image: linear-gradient(to bottom, #000 84%, rgba(0, 0, 0, 0) 100%);
+  mask-image: linear-gradient(to bottom, #000 84%, rgba(0, 0, 0, 0) 100%); }
+#pr-body { position: absolute; inset: 0; transform-origin: 50% 100%; }
+#pr-glow { position: absolute; inset: 0; }
+#pr-scale { position: absolute; left: 0; top: 0; width: 1024px; height: 1024px; transform-origin: 0 0; }
+#pr-scale img { position: absolute; display: block; }
+.pr-pose { left: 0; top: 0; width: 1024px; height: 1024px; opacity: 0; }
+.pr-patch { opacity: 0; }
+#pr-zzz { position: absolute; left: 640px; top: 120px; font: italic 400 90px/1 var(--serif, "Instrument Serif", Georgia, serif); color: #b6a6ff; opacity: 0; }
+#pr-zzz span { display: inline-block; }

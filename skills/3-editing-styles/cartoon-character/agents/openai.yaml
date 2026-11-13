@@ -1,0 +1,6 @@
+interface:
+  display_name: "Style: Cartoon Character"
+  short_description: "A lip-synced cartoon that talks, blinks and gestures: Ali, Stashy or your own made with AI"
+  default_prompt: "Use $cartoon-character with $edit-video to make a cartoon version of me with AI and add it as a lip-synced presenter to this reel."
+policy:
+  allow_implicit_invocation: true
