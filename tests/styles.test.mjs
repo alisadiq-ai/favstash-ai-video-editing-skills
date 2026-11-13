@@ -7,14 +7,16 @@ import test from "node:test";
 import { fileURLToPath, pathToFileURL } from "node:url";
 
 const root = fileURLToPath(new URL("..", import.meta.url));
-const styles = path.join(root, "skills", "3-editing-styles");
+const SHELF = { "adaptive-glass": "on-camera", "breakout-card": "on-camera", "motion-effects": "on-camera", "paper-grid": "on-camera", "text-over-footage": "on-camera",
+  "animated-explainer": "animated", "product-motion-ads": "animated", "film-styles": "animated", "cartoon-character": "characters", "3d-character": "characters" };
+const styleDir = (name) => path.join(root, "skills", `3-styles-${SHELF[name]}`, name);
 
 // Skills install one folder each, so every style has to work without its siblings.
 async function installAlone(context, name) {
   const temporary = await fs.mkdtemp(path.join(os.tmpdir(), `favstash-style-${name}-`));
   context.after(async () => fs.rm(temporary, { recursive: true, force: true }));
   const installed = path.join(temporary, name);
-  await fs.cp(path.join(styles, name), installed, { recursive: true });
+  await fs.cp(styleDir(name), installed, { recursive: true });
   return installed;
 }
 
@@ -41,7 +43,7 @@ for (const [name, module] of [["paper-grid", "paper_grid"], ["breakout-card", "b
 }
 
 test("breakout-card bundles its font license", async () => {
-  const fonts = await fs.readdir(path.join(styles, "breakout-card", "assets", "fonts"));
+  const fonts = await fs.readdir(path.join(styleDir("breakout-card"), "assets", "fonts"));
   assert.ok(fonts.includes("OFL.txt"));
   assert.ok(fonts.filter((file) => file.endsWith(".ttf")).length >= 4);
 });

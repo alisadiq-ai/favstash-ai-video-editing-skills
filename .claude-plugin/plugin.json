@@ -19,7 +19,9 @@
     "./skills/1-research/",
     "./skills/2-scripting/",
     "./skills/3-editing/",
-    "./skills/3-editing-styles/",
+    "./skills/3-styles-on-camera/",
+    "./skills/3-styles-animated/",
+    "./skills/3-styles-characters/",
     "./skills/4-publish-and-learn/"
   ],
   "mcpServers": {

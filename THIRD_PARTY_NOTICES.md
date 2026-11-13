@@ -9,9 +9,9 @@ This repository provides instructions and media helpers. Apart from the fonts ma
 | [FFmpeg](https://ffmpeg.org/) | Media probing, extraction, encoding, and QC | LGPL/GPL configuration varies by build; review the binary you install |
 | [yt-dlp](https://github.com/yt-dlp/yt-dlp) | User-authorized reference download and metadata | Unlicense upstream at time of integration; platform terms and media rights remain separate |
 | [FavStash CLI](https://www.npmjs.com/package/@sketric/favstash-mcp) | Optional sign-in, MCP bridge and local uploads for FavStash | MIT on npm at time of integration; the FavStash service has its own terms |
-| [Montserrat](https://github.com/JulietaUla/Montserrat) | Caption and graphics font **bundled** in `skills/3-editing-styles/breakout-card/assets/fonts/` | SIL Open Font License 1.1; the license text ships beside the fonts |
+| [Montserrat](https://github.com/JulietaUla/Montserrat) | Caption and graphics font **bundled** in `skills/3-styles-on-camera/breakout-card/assets/fonts/` | SIL Open Font License 1.1; the license text ships beside the fonts |
 | [Inter Tight](https://github.com/rsms/inter), [Instrument Serif](https://github.com/Instrument/instrument-serif), [Geist Mono](https://github.com/vercel/geist-font) | Type for animated-explainer and 3d-character, **bundled** in each skill's `assets/fonts/` | SIL Open Font License 1.1; the license text ships beside the fonts |
-| [three.js](https://github.com/mrdoob/three.js) r168 | 3D rendering for 3d-character, **bundled** in `skills/3-editing-styles/3d-character/assets/vendor/three/` (the core module plus two add-ons) | MIT; the license text ships beside it |
+| [three.js](https://github.com/mrdoob/three.js) r168 | 3D rendering for 3d-character, **bundled** in `skills/3-styles-characters/3d-character/assets/vendor/three/` (the core module plus two add-ons) | MIT; the license text ships beside it |
 | [Kokoro-82M](https://huggingface.co/hexgrad/Kokoro-82M) via `hyperframes tts` | Optional free local voice for animated reels | Apache-2.0 upstream; HyperFrames downloads the model, not distributed here |
 | [Chatterbox](https://github.com/resemble-ai/chatterbox) | Optional free local voice that clones the creator's own voice | MIT; archived by Resemble AI in August 2026; installed by the creator with pip; its output carries Resemble's Perth watermark |
 | [ElevenLabs](https://elevenlabs.io) | Optional hosted voice with word timestamps | A paid service with its own terms; used only with the creator's own API key |
@@ -28,7 +28,7 @@ The `product-motion-ads` method is informed by [brag](https://github.com/latent-
 
 The other style preview images in `assets/previews/` come from the maintainer's own reels, with the speaker replaced by a placeholder figure, and are included with his permission; they are not covered by the code license for reuse as stock footage.
 
-The sample characters in `skills/3-editing-styles/cartoon-character/characters/` (a cartoon of Ali, the maintainer, and Stashy, the FavStash mascot) are included at the maintainer's request for trying the skills. They are not covered by the code license; their [terms](skills/3-editing-styles/cartoon-character/characters/README.md) say how they may be used.
+The sample characters in `skills/3-styles-characters/cartoon-character/characters/` (a cartoon of Ali, the maintainer, and Stashy, the FavStash mascot) are included at the maintainer's request for trying the skills. They are not covered by the code license; their [terms](skills/3-styles-characters/cartoon-character/characters/README.md) say how they may be used.
 
 The `animated-explainer` preview (`assets/previews/animated-explainer.jpg`) is three frames of a reel the skill built from its worked example, with the Ali sample as the cursor and a Kokoro voice. The `cartoon-character` preview is composed from the two sample rigs.
 

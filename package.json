@@ -13,7 +13,7 @@
     "new-edit": "node skills/3-editing/edit-video/scripts/new-edit.mjs",
     "index-broll": "node skills/3-editing/edit-video/scripts/index-broll.mjs",
     "analyze-reference": "node skills/3-editing/edit-video/scripts/reference-analyze.mjs",
-    "scaffold-glass": "node skills/3-editing-styles/adaptive-glass/scripts/scaffold-glass.mjs",
+    "scaffold-glass": "node skills/3-styles-on-camera/adaptive-glass/scripts/scaffold-glass.mjs",
     "sfx-sync": "node skills/3-editing/edit-video/scripts/sfx-sync.mjs",
     "generate:sfx": "node scripts/generate-sfx.mjs",
     "test": "node --test",

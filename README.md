@@ -25,7 +25,7 @@ lip-synced cartoon presenter, or in 3D with a chibi character, no Blender needed
 the sample characters or make your own, and voice it yourself, for free on your laptop
 or with ElevenLabs.
 
-| [animated-explainer](skills/3-editing-styles/animated-explainer/SKILL.md) | [cartoon-character](skills/3-editing-styles/cartoon-character/SKILL.md) |
+| [animated-explainer](skills/3-styles-animated/animated-explainer/SKILL.md) | [cartoon-character](skills/3-styles-characters/cartoon-character/SKILL.md) |
 | --- | --- |
 | ![Animated explainer: three frames of a fully animated reel, each a lit colour field with one hero card, the spoken line at the top and a cartoon cursor](assets/previews/animated-explainer.jpg) | ![Cartoon character: Ali's cartoon, Stashy the FavStash mascot, and a tile showing how to make your own with AI](assets/previews/cartoon-character.jpg) |
 
@@ -55,29 +55,29 @@ LinkedIn, and the analytics pick the next test.
 ## Editing styles
 
 `edit-video` is the base for every edit. Add the style that fits the story; each one
-lives in its own folder under [`skills/3-editing-styles/`](skills/3-editing-styles).
+lives on a shelf: [on camera](skills/3-styles-on-camera), [animated](skills/3-styles-animated) or [characters](skills/3-styles-characters).
 
 ### No camera needed
 
-#### [animated-explainer](skills/3-editing-styles/animated-explainer/SKILL.md): a fully animated reel, keyed to the voice
+#### [animated-explainer](skills/3-styles-animated/animated-explainer/SKILL.md): a fully animated reel, keyed to the voice
 
 ![Animated explainer: a hook over a calendar card, a script card with an Animate button, a render card at 100%](assets/previews/animated-explainer.jpg)
 
 Give it a script and it makes the whole reel: one lit colour field and one big hero card per spoken beat, the line lighting up word by word, every click and sound on the frame of its word. Two voices can talk to each other, and a cartoon can drive the UI as a cursor. Rendered on your machine.
 
-#### [3d-character](skills/3-editing-styles/3d-character/SKILL.md): a cute 3D character that talks to camera
+#### [3d-character](skills/3-styles-characters/3d-character/SKILL.md): a cute 3D character that talks to camera
 
 ![3D character: a chibi boy and girl talking on a pastel stage, a floating code card, and a happy wave](assets/previews/3d-character.jpg)
 
 A chibi boy or girl, built in Three.js from simple shapes, talks to camera on a soft pastel stage: lip-synced to the voice, nodding on the words that matter, pointing at a card that types itself, then waving. The camera cuts on the words. No Blender and nothing to install; it renders on your machine like every other style.
 
-#### [cartoon-character](skills/3-editing-styles/cartoon-character/SKILL.md): a lip-synced cartoon of you, or anyone you make
+#### [cartoon-character](skills/3-styles-characters/cartoon-character/SKILL.md): a lip-synced cartoon of you, or anyone you make
 
 ![Cartoon character: Ali's cartoon, Stashy the FavStash mascot, and how to make your own](assets/previews/cartoon-character.jpg)
 
 A cut-out cartoon that talks, blinks, frowns, lights up and swaps poses on the beat. Two samples ship (Ali, who made this pack, and Stashy, FavStash's mascot). Make your own from a few photos with any image AI: one base image, a few edits, one command. Use it as the cursor in an animated explainer, a corner presenter on any reel or the star of a cartoon explainer.
 
-#### [product-motion-ads](skills/3-editing-styles/product-motion-ads/SKILL.md): a motion-graphics ad built from your product
+#### [product-motion-ads](skills/3-styles-animated/product-motion-ads/SKILL.md): a motion-graphics ad built from your product
 
 ![Product motion ads: hook over the product's phone, the match screen, and the comment-to-DM ending, from an ad an agent built from a demo app's code](assets/previews/product-motion-ads.jpg)
 
@@ -85,31 +85,31 @@ For promoting a product, physical or digital (a gadget, a bottle, an app, a SaaS
 
 ### With your face or footage
 
-#### [adaptive-glass](skills/3-editing-styles/adaptive-glass/SKILL.md): speaker plus moving proof in glass panels
+#### [adaptive-glass](skills/3-styles-on-camera/adaptive-glass/SKILL.md): speaker plus moving proof in glass panels
 
 ![Adaptive glass: glass panels with real proof above the speaker](assets/previews/adaptive-glass.jpg)
 
 For product, tool and explainer reels with real screen proof. Palettes are matched to your footage.
 
-#### [paper-grid](skills/3-editing-styles/paper-grid/SKILL.md): white grid pane, one animated UI artifact per line
+#### [paper-grid](skills/3-styles-on-camera/paper-grid/SKILL.md): white grid pane, one animated UI artifact per line
 
 ![Paper grid: white grid pane with animated UI cards above the speaker](assets/previews/paper-grid.jpg)
 
 For tool, repo and feature explainers where every sentence names something to show.
 
-#### [breakout-card](skills/3-editing-styles/breakout-card/SKILL.md): your head breaks out of a card at the bottom
+#### [breakout-card](skills/3-styles-on-camera/breakout-card/SKILL.md): your head breaks out of a card at the bottom
 
 ![Breakout card: grid page, dark cards and one-word captions, with the speaker's head breaking out of a bottom card](assets/previews/breakout-card.jpg)
 
 For talking-head explainers that alternate graphics with personal lines. One-to-two-word captions in Montserrat.
 
-#### [motion-effects](skills/3-editing-styles/motion-effects/SKILL.md): 33 named effects for any talking-head edit
+#### [motion-effects](skills/3-styles-on-camera/motion-effects/SKILL.md): 33 named effects for any talking-head edit
 
 ![Motion effects: a kinetic hook behind the speaker, a native prompt bar and a full-frame title card](assets/previews/motion-effects.jpg)
 
 Ask for an effect by name: kinetic hook, gravity drop, giant captions, timeline, grade slider, title card, comment drop, orbit, frame break, vertigo, paper cut, rewind and 21 more. Big words sit behind you, and your own frames, posts and waveform appear inside the UI. Each effect has a copy-paste prompt.
 
-#### [text-over-footage](skills/3-editing-styles/text-over-footage/SKILL.md): one readable line over matching B-roll
+#### [text-over-footage](skills/3-styles-on-camera/text-over-footage/SKILL.md): one readable line over matching B-roll
 
 ![Text over footage: one line of text over B-roll that matches the joke](assets/previews/text-over-footage.jpg)
 
@@ -252,7 +252,7 @@ post only after you approve the exact file, caption, account and time. See the
 [FavStash privacy policy](https://www.favstash.app/privacy).
 
 **Can I use Ali's cartoon or Stashy?** To try and demo the skills, yes. For your own
-channel, make your own character; the samples' [terms](skills/3-editing-styles/cartoon-character/characters/README.md)
+channel, make your own character; the samples' [terms](skills/3-styles-characters/cartoon-character/characters/README.md)
 say what's allowed.
 
 **Can I use a saved reel as a reference?** Yes, for analysis. Adapt its hook,
