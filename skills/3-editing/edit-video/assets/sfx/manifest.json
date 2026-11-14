@@ -189,7 +189,7 @@
       "id": "ui-click",
       "title": "UI Click",
       "file": "ui-click.wav",
-      "durationSeconds": 0.22,
+      "durationSeconds": 0.3,
       "sampleRate": 48000,
       "channels": 1,
       "bitDepth": 16,
@@ -199,7 +199,7 @@
       ],
       "recommendedUse": "A visible click, selection or editing action.",
       "suggestedGainDb": -13,
-      "sha256": "565fb6eb5c0630fca1f7ee10eded416c0c39acfdb3c8af4195cfdf89bb153bbe",
+      "sha256": "7a7c8d4f950b2735c526181984612c00aa5ff517aa04f4a78332e326c2968804",
       "license": "Apache-2.0",
       "provenance": "Deterministically synthesized by scripts/generate-sfx.mjs; contains no third-party recording."
     },
@@ -217,7 +217,7 @@
       ],
       "recommendedUse": "A substantial camera or layout change.",
       "suggestedGainDb": -11,
-      "sha256": "3953757facc59693a41b7b0dd1e28686187bee18cd751dbcc6c20da05df5788e",
+      "sha256": "4c1836fdec8413f11f9537bed2fd3a8a70866283796c3d174cfe51126ea8f791",
       "license": "Apache-2.0",
       "provenance": "Deterministically synthesized by scripts/generate-sfx.mjs; contains no third-party recording."
     },

@@ -1,4 +1,5 @@
 import crypto from "node:crypto";
+import { CAMERA_SHUTTER_PRINT, UI_CLICK_PRINT } from "./sfx-prints.mjs";
 
 export const SAMPLE_RATE = 48_000;
 
@@ -91,6 +92,25 @@ function rattle(from, to, level, clicks, hz = 3200) {
     if (time === 0) grit.reset();
     const window = time < from || time > to ? 0 : Math.sin(Math.PI * (time - from) / (to - from)) ** 0.6;
     return clicks(input) + level * window * grit.step(noise, hz, 0.9).band * (0.6 + 0.4 * Math.sin(TAU * 31 * time));
+  };
+}
+
+
+// A sound's spectral fingerprint played through noise: the level in log-spaced bands every few milliseconds, measured
+// once from a recording and kept as numbers (lib/sfx-prints.mjs), so the pack reproduces its timing and colour while
+// shipping no audio. Band gains are interpolated between frames.
+function noiseprint({ hop, bands, frames, q = 5 }) {
+  const filters = bands.map((hz) => resonator(hz, q));
+  const gains = frames.map((row) => row.map((db) => 10 ** (db / 20)));
+  return ({ time, noise }) => {
+    if (time === 0) for (const filter of filters) filter.reset();
+    const position = time / hop;
+    const i = Math.min(gains.length - 1, Math.floor(position));
+    const j = Math.min(gains.length - 1, i + 1);
+    const u = position - Math.floor(position);
+    let value = 0;
+    for (let k = 0; k < filters.length; k += 1) value += filters[k].step(noise) * (gains[i][k] * (1 - u) + gains[j][k] * u);
+    return value;
   };
 }
 
@@ -289,19 +309,12 @@ export const SOUND_DEFINITIONS = Object.freeze([
   {
     id: "ui-click",
     title: "UI Click",
-    duration: 0.22,
+    duration: 0.3,
     seed: 2202,
     gainDb: -13,
     tags: ["ui", "selection"],
     use: "A visible click, selection or editing action.",
-    sample: rattle(0.008, 0.14, 0.32, clicker({
-      events: [[0.006, 1], [0.026, 0.95], [0.086, 0.42], [0.106, 0.3]],
-      bank: [[1900, 6, 1.1], [3300, 8, 1.6], [4700, 16, 3.4], [6400, 18, 3.6], [8600, 20, 3.2], [11_500, 18, 2.4]],
-      burstDecay: 1000,
-      direct: 0.6,
-      dark: 0,
-      body: { hz: 900, q: 3, level: 0.5 },
-    }), 5200),
+    sample: noiseprint(UI_CLICK_PRINT),
   },
   {
     id: "camera-shutter",
@@ -311,16 +324,7 @@ export const SOUND_DEFINITIONS = Object.freeze([
     gainDb: -11,
     tags: ["camera", "cut"],
     use: "A substantial camera or layout change.",
-    sample: rattle(0.03, 0.27, 0.3, clicker({
-      events: [[0.01, 0.08], [0.03, 0.15], [0.045, 0.2], [0.06, 0.18], [0.08, 0.85], [0.13, 1], [0.142, 0.6], [0.155, 0.55],
-        [0.168, 0.5], [0.185, 0.45], [0.2, 0.4], [0.218, 0.3], [0.24, 0.22], [0.26, 0.12]],
-      bank: [[2500, 9, 1.6], [2950, 11, 2], [3450, 12, 2.2], [3950, 11, 2.2], [5200, 16, 3.2], [7000, 16, 3], [8600, 18, 2.8],
-        [11_000, 16, 2], [14_900, 14, 1]],
-      burstDecay: 1000,
-      direct: 0.4,
-      dark: 0.15,
-      body: { hz: 420, q: 5, level: 1.4 },
-    }), 4200),
+    sample: noiseprint(CAMERA_SHUTTER_PRINT),
   },
   {
     id: "camera-shutter-light",

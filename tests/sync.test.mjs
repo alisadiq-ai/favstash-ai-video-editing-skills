@@ -105,5 +105,6 @@ test("sfx-sync points reads the whole pack, making synthesized sounds on first u
   const rows = JSON.parse(await fs.readFile(out, "utf8"));
   assert.equal(rows.length, 16);
   const shutter = rows.find((row) => row.id === "camera-shutter");
-  assert.ok(shutter.sync > 0.1 && shutter.sync < 0.16, `camera-shutter syncs on its snap, got ${shutter.sync}`);
+  // Like the recording it replaced (0.084 s): the first strong click of the mechanism.
+  assert.ok(shutter.sync > 0.07 && shutter.sync < 0.1, `camera-shutter syncs on its first strong click, got ${shutter.sync}`);
 });
