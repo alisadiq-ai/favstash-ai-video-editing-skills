@@ -243,42 +243,61 @@ connected channel and 10 posts a month. See the [current plans](https://www.favs
 
 ## FAQ
 
-**Do I need FavStash?** No. Research, scripting and editing work without it. FavStash
-adds your saved inspiration, scheduling and analytics so the loop closes.
+<details>
+<summary><h3>Do I need FavStash?</h3></summary>
 
-**Will my agent post without asking?** No. It delivers a local file. Posting needs your
-approval for the exact file, cover, caption, account and time.
+No. Research, scripting and editing work without it. FavStash adds your saved inspiration, scheduling and analytics so the loop closes.
 
-**How long does a film-style video take?** The agent writes a treatment, draws two or
-three style frames for you to check, then builds and renders. Expect an agent session
-of about half an hour for a 30-second reel, longer for a YouTube explainer, plus the
-render (about ten seconds of rendering per second of video).
+</details>
 
-**Does it make YouTube videos?** Yes. Every film look has a 16:9 format for 2–8 minute
-explainers in chapters, with the first ten seconds and the thumbnail planned. The other
-styles are built for 9:16; `product-motion-ads` also cuts a 16:9 launch film.
+<details>
+<summary><h3>Will my agent post without asking?</h3></summary>
 
-**What runs where?** Editing runs locally with FFmpeg and HyperFrames (Node 22+).
-`paper-grid`, `breakout-card`, `animated-explainer`, `3d-character`, `cartoon-character`
-and the duplicate check also use Python. The
-breakout card's built-in person matte uses Apple Vision on macOS; on other systems,
-supply a matte from any segmentation tool.
+No. It delivers a local file. Posting needs your approval for the exact file, cover, caption, account and time.
 
-**What does it send, and where?** The bundled scripts run on your machine and make no
-network requests; your footage, renders and preferences stay in your workspace.
-Data leaves your machine only through FavStash tools you connect: the remote MCP
-server at `https://mcp.favstash.app/mcp` (OAuth) or the FavStash CLI. They search
-your stash, read your connected accounts' analytics, and upload and schedule a
-post only after you approve the exact file, caption, account and time. See the
-[FavStash privacy policy](https://www.favstash.app/privacy).
+</details>
 
-**Can I use Ali's cartoon or Stashy?** To try and demo the skills, yes. For your own
-channel, make your own character; the samples' [terms](skills/3-styles-characters/cartoon-character/characters/README.md)
-say what's allowed.
+<details>
+<summary><h3>How long does a film-style video take?</h3></summary>
 
-**Can I use a saved reel as a reference?** Yes, for analysis. Adapt its hook,
-structure and pacing, and make the video from your own footage. Downloaded footage
-and music stay analysis-only unless you have reuse rights.
+The agent writes a treatment, draws two or three style frames for you to check, then builds and renders. Expect an agent session of about half an hour for a 30-second reel, longer for a YouTube explainer, plus the render (about ten seconds of rendering per second of video).
+
+</details>
+
+<details>
+<summary><h3>Does it make YouTube videos?</h3></summary>
+
+Yes. Every film look has a 16:9 format for 2–8 minute explainers in chapters, with the first ten seconds and the thumbnail planned. The other styles are built for 9:16; `product-motion-ads` also cuts a 16:9 launch film.
+
+</details>
+
+<details>
+<summary><h3>What runs where?</h3></summary>
+
+Editing runs locally with FFmpeg and HyperFrames (Node 22+). `paper-grid`, `breakout-card`, `animated-explainer`, `3d-character`, `cartoon-character` and the duplicate check also use Python. The breakout card's built-in person matte uses Apple Vision on macOS; on other systems, supply a matte from any segmentation tool.
+
+</details>
+
+<details>
+<summary><h3>What does it send, and where?</h3></summary>
+
+The bundled scripts run on your machine and make no network requests; your footage, renders and preferences stay in your workspace. Data leaves your machine only through FavStash tools you connect: the remote MCP server at `https://mcp.favstash.app/mcp` (OAuth) or the FavStash CLI. They search your stash, read your connected accounts' analytics, and upload and schedule a post only after you approve the exact file, caption, account and time. See the [FavStash privacy policy](https://www.favstash.app/privacy).
+
+</details>
+
+<details>
+<summary><h3>Can I use Ali's cartoon or Stashy?</h3></summary>
+
+To try and demo the skills, yes. For your own channel, make your own character; the samples' [terms](skills/3-styles-characters/cartoon-character/characters/README.md) say what's allowed.
+
+</details>
+
+<details>
+<summary><h3>Can I use a saved reel as a reference?</h3></summary>
+
+Yes, for analysis. Adapt its hook, structure and pacing, and make the video from your own footage. Downloaded footage and music stay analysis-only unless you have reuse rights.
+
+</details>
 
 ## Contributing
 
