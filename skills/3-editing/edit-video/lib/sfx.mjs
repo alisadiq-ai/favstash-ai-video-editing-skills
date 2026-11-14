@@ -84,13 +84,13 @@ function glide() {
 
 
 // A mechanism's rattle: band-limited noise under a clicker between two times, so a shutter sounds gritty, not pinged.
-function rattle(from, to, level, clicks) {
+function rattle(from, to, level, clicks, hz = 3200) {
   const grit = sweepFilter();
   return (input) => {
     const { time, noise } = input;
     if (time === 0) grit.reset();
     const window = time < from || time > to ? 0 : Math.sin(Math.PI * (time - from) / (to - from)) ** 0.6;
-    return clicks(input) + level * window * grit.step(noise, 3200, 0.9).band * (0.6 + 0.4 * Math.sin(TAU * 31 * time));
+    return clicks(input) + level * window * grit.step(noise, hz, 0.9).band * (0.6 + 0.4 * Math.sin(TAU * 31 * time));
   };
 }
 
@@ -294,13 +294,14 @@ export const SOUND_DEFINITIONS = Object.freeze([
     gainDb: -13,
     tags: ["ui", "selection"],
     use: "A visible click, selection or editing action.",
-    sample: clicker({
+    sample: rattle(0.008, 0.14, 0.32, clicker({
       events: [[0.006, 1], [0.026, 0.95], [0.086, 0.42], [0.106, 0.3]],
-      bank: [[750, 6, 1.4], [1570, 8, 2.2], [1900, 9, 2.6], [2100, 8, 1.6], [4200, 10, 1], [7000, 12, 0.6]],
-      burstDecay: 1400,
-      direct: 0.15,
-      dark: 0.65,
-    }),
+      bank: [[1900, 6, 1.1], [3300, 8, 1.6], [4700, 16, 3.4], [6400, 18, 3.6], [8600, 20, 3.2], [11_500, 18, 2.4]],
+      burstDecay: 1000,
+      direct: 0.6,
+      dark: 0,
+      body: { hz: 900, q: 3, level: 0.5 },
+    }), 5200),
   },
   {
     id: "camera-shutter",
@@ -310,15 +311,16 @@ export const SOUND_DEFINITIONS = Object.freeze([
     gainDb: -11,
     tags: ["camera", "cut"],
     use: "A substantial camera or layout change.",
-    sample: rattle(0.03, 0.24, 0.22, clicker({
-      events: [[0.01, 0.06], [0.03, 0.12], [0.045, 0.15], [0.06, 0.13], [0.08, 0.6], [0.13, 1], [0.145, 0.5],
-        [0.16, 0.45], [0.175, 0.35], [0.2, 0.3], [0.215, 0.18], [0.24, 0.12]],
-      bank: [[2500, 9, 1.8], [2950, 11, 2.2], [3450, 12, 2.4], [3950, 11, 2.4], [7000, 8, 1.4], [11_000, 9, 1], [14_900, 14, 0.8]],
-      burstDecay: 900,
-      direct: 0.2,
-      dark: 0.62,
-      body: { hz: 420, q: 6, level: 1.2 },
-    })),
+    sample: rattle(0.03, 0.27, 0.3, clicker({
+      events: [[0.01, 0.08], [0.03, 0.15], [0.045, 0.2], [0.06, 0.18], [0.08, 0.85], [0.13, 1], [0.142, 0.6], [0.155, 0.55],
+        [0.168, 0.5], [0.185, 0.45], [0.2, 0.4], [0.218, 0.3], [0.24, 0.22], [0.26, 0.12]],
+      bank: [[2500, 9, 1.6], [2950, 11, 2], [3450, 12, 2.2], [3950, 11, 2.2], [5200, 16, 3.2], [7000, 16, 3], [8600, 18, 2.8],
+        [11_000, 16, 2], [14_900, 14, 1]],
+      burstDecay: 1000,
+      direct: 0.4,
+      dark: 0.15,
+      body: { hz: 420, q: 5, level: 1.4 },
+    }), 4200),
   },
   {
     id: "camera-shutter-light",
@@ -365,16 +367,18 @@ export const SOUND_DEFINITIONS = Object.freeze([
     tags: ["hook", "reveal"],
     use: "The payoff of a reveal, below speech.",
     sample: (() => {
-      const low = glide(), detuned = glide(), crack = resonator(2000, 1.2);
+      const low = glide(), detuned = glide(), kick = glide(), crack = resonator(2000, 1.2), knock = resonator(450, 1.5);
       return ({ time, noise }) => {
-        if (time === 0) { low.reset(); detuned.reset(); crack.reset(); }
+        if (time === 0) { low.reset(); detuned.reset(); kick.reset(); crack.reset(); knock.reset(); }
         const hz = 23.4 * (1 + 0.6 * Math.exp(-time * 14));
         const a = low.step(hz), b = detuned.step(hz * 1.012);
         let buzz = 0;
         for (const [n, level] of [[3, 0.8], [4, 1], [5, 0.85], [6, 0.7], [7, 0.4], [9, 0.3], [10, 0.25]]) buzz += level * (Math.sin(n * a) + 0.6 * Math.sin(n * b));
-        const tail = Math.exp(-time * 2.1);
-        const hit = 1.1 * crack.step(noise) * Math.exp(-time * 45) + 0.2 * noise * Math.exp(-time * 300);
-        return 1.2 * Math.tanh(0.6 * buzz) * tail + hit;
+        const tail = Math.exp(-time * 2);
+        const body = Math.sin(kick.step(55 + 170 * Math.exp(-time * 38))) * Math.exp(-time * 9);   // the punch
+        const thud = knock.step(noise) * Math.exp(-time * 60);
+        const hit = crack.step(noise) * Math.exp(-time * 45) + 0.2 * noise * Math.exp(-time * 300);
+        return Math.tanh(1.6 * (0.75 * Math.tanh(0.6 * buzz) * tail + 1.4 * body + 1.2 * thud + 0.8 * hit));
       };
     })(),
   },

@@ -199,7 +199,7 @@
       ],
       "recommendedUse": "A visible click, selection or editing action.",
       "suggestedGainDb": -13,
-      "sha256": "c2d91244885833b41d57c224b1271563720321d0b9c62f1fc5aa42317e91c6fe",
+      "sha256": "565fb6eb5c0630fca1f7ee10eded416c0c39acfdb3c8af4195cfdf89bb153bbe",
       "license": "Apache-2.0",
       "provenance": "Deterministically synthesized by scripts/generate-sfx.mjs; contains no third-party recording."
     },
@@ -217,7 +217,7 @@
       ],
       "recommendedUse": "A substantial camera or layout change.",
       "suggestedGainDb": -11,
-      "sha256": "d5856c34a574d73ea811e943521443639ab3289f47f0a0acd27bcf48a22ef3ca",
+      "sha256": "3953757facc59693a41b7b0dd1e28686187bee18cd751dbcc6c20da05df5788e",
       "license": "Apache-2.0",
       "provenance": "Deterministically synthesized by scripts/generate-sfx.mjs; contains no third-party recording."
     },
@@ -272,7 +272,7 @@
       ],
       "recommendedUse": "The payoff of a reveal, below speech.",
       "suggestedGainDb": -6,
-      "sha256": "1b72f04e2ca496d282c4634318819f27877c45551864f1a809b1b1cfc0d6add9",
+      "sha256": "a493793ad707fbbd4f1a366c03172d76e3ddaf73ae687157490b5be6346f58fa",
       "license": "Apache-2.0",
       "provenance": "Deterministically synthesized by scripts/generate-sfx.mjs; contains no third-party recording."
     },
