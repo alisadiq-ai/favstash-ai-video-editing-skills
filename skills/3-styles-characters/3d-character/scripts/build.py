@@ -4,7 +4,8 @@
     python3 <skill>/scripts/build.py <edit>/work/<reel>        # the folder that holds spec.py and voice/timing.json
 
 Writes <reel>/index.html (render it with `hyperframes render <reel>`), <reel>/cues.json (for edit-video's sfx-sync.mjs)
-and <reel>/assets/ (three.js, the stage, the character and the fonts, all bundled: nothing to install).
+and <reel>/assets/ (the stage, the character, the fonts and a copy of three.js). three.js 0.168.0 comes from the workspace
+runtime that edit-video's `scripts/init-workspace.mjs --install` prepares, or from FAVSTASH_THREE (a three package folder).
 
 spec.py defines:
   LINES       the spoken lines, in order. *word* = accent (serif italic, accent colour; the character nods on it);
@@ -19,12 +20,66 @@ spec.py defines:
      card    optional floating card: {'at': t, 'out': t?, 'lines': ['make(reel)', 'render()'], 'progress': True}
      sfx     [[t, sound, gain_db], ...]  t = the frame the event first shows; sound = a pack id such as "ui-pop"
 T (the voice timing): T.L(i) and T.E(i) are line i's start and end, T.find('word', line=i) a word's start, T.END the length.
-Needs python3 only.
+Needs python3, and three.js in the workspace runtime.
 """
-import importlib.util, json, pathlib, re, shutil, sys
+import importlib.util, json, os, pathlib, re, shutil, sys
 
 SKILL = pathlib.Path(__file__).resolve().parents[1]
 FPS = 30
+THREE_VERSION = '0.168.0'
+PATH = pathlib.Path
+
+
+FONT_WEIGHTS = {'thin': 100, 'extralight': 200, 'light': 300, 'regular': 400, 'medium': 500, 'semibold': 600,
+                'bold': 700, 'extrabold': 800, 'black': 900}
+
+
+def font_faces(folder, href, family=None):
+    """@font-face rules for every font in `folder`, read from its file name: <family>-<weight or var>[-<style>]."""
+    rules = []
+    for f in sorted(PATH(folder).iterdir()):
+        fmt = {'.woff2': 'woff2', '.woff': 'woff', '.ttf': 'truetype', '.otf': 'opentype'}.get(f.suffix.lower())
+        if not fmt:
+            continue
+        parts, style, weight = re.split(r'[-_]', f.stem), 'normal', '400'
+        if parts[-1].lower() in ('italic', 'normal'):
+            style = parts.pop().lower()
+        w = parts[-1].lower()
+        if w == 'var':
+            weight = '100 900'
+            parts.pop()
+        elif w.isdigit() or w in FONT_WEIGHTS:
+            weight = str(FONT_WEIGHTS.get(w, w))
+            parts.pop()
+        name = family or ' '.join(p[:1].upper() + p[1:] for p in parts)
+        rules.append(f'@font-face {{ font-family: "{name}"; font-style: {style}; font-weight: {weight}; '
+                     f'src: url("{href}{f.name}") format("{fmt}"); }}')
+    return '\n'.join(rules)
+
+
+def find_three(start):
+    """The three package (pinned 0.168.0) from the workspace runtime, or FAVSTASH_THREE."""
+    env = os.environ.get('FAVSTASH_THREE')
+    if env and (pathlib.Path(env) / 'build').is_dir():
+        return pathlib.Path(env)
+    for base in (pathlib.Path(start).resolve(), pathlib.Path.cwd()):
+        for p in [base, *base.parents]:
+            c = p / '.favstash-studio/runtime/node_modules/three'
+            if (c / 'build').is_dir():
+                return c
+    raise SystemExit(f"three.js not found. Run edit-video's scripts/init-workspace.mjs --workspace <project> --install "
+                     f"(it pins three@{THREE_VERSION}), or set FAVSTASH_THREE to a three package folder.")
+
+
+def copy_three(three, assets):
+    """three.js and the two add-ons the stage uses, copied next to the page so the render needs no network."""
+    vendor = assets / 'vendor' / 'three'
+    for src, dst in [('build/three.module.js', 'three.module.js'), ('LICENSE', 'LICENSE'),
+                     ('examples/jsm/environments/RoomEnvironment.js', 'addons/environments/RoomEnvironment.js'),
+                     ('examples/jsm/geometries/RoundedBoxGeometry.js', 'addons/geometries/RoundedBoxGeometry.js')]:
+        (vendor / dst).parent.mkdir(parents=True, exist_ok=True)
+        shutil.copy2(three / src, vendor / dst)
+
 
 
 class Timing:
@@ -77,16 +132,17 @@ def main(reel):
     data = dict(END=end, LINES=T.LN, ACC=ACC, PHRASES=PH, CHARACTER=getattr(spec, 'CHARACTER', {'look': 'boy'}),
                 BACKGROUND=getattr(spec, 'BACKGROUND', '#FFE9D6'), ACCENT=getattr(spec, 'ACCENT', '#3D6FE0'),
                 SHOTS=B.get('shots') or [[0, 'full']], ACTS=B.get('acts', []), CARD=B.get('card'))
+    three = find_three(reel)
     if (reel / 'assets').exists(): shutil.rmtree(reel / 'assets')
     shutil.copytree(SKILL / 'assets', reel / 'assets')
+    copy_three(three, reel / 'assets')
+    fonts = font_faces(SKILL / 'assets' / 'fonts', 'assets/fonts/')
     dark = '#231B3A'
     html = f'''<!doctype html>
 <html lang="en"><head><meta charset="UTF-8" /><meta name="viewport" content="width=1080, height=1920" />
-<script type="importmap">{{"imports": {{"three": "./assets/vendor/three/three.module.min.js", "three/addons/": "./assets/vendor/three/addons/"}}}}</script>
+<script type="importmap">{{"imports": {{"three": "./assets/vendor/three/three.module.js", "three/addons/": "./assets/vendor/three/addons/"}}}}</script>
 <style>
-@font-face {{ font-family: "Inter Tight"; font-weight: 100 900; src: url("assets/fonts/inter-tight-var.woff2") format("woff2"); }}
-@font-face {{ font-family: "Instrument Serif"; font-style: italic; src: url("assets/fonts/instrument-serif-400-italic.woff2") format("woff2"); }}
-@font-face {{ font-family: "Geist Mono"; font-weight: 500; src: url("assets/fonts/geist-mono-500-normal.woff2") format("woff2"); }}
+{fonts}
 html, body {{ margin: 0; background: #000; }}
 #root {{ position: relative; width: 1080px; height: 1920px; overflow: hidden; font-family: "Inter Tight", sans-serif; }}
 #gl {{ position: absolute; inset: 0; width: 1080px; height: 1920px; display: block; }}

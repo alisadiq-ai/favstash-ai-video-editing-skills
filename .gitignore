@@ -16,6 +16,9 @@ tmp/
 .env.*
 !.env.example
 
+# Synthesized SFX are made on first use, never committed (only curated recordings ship)
+skills/3-editing/edit-video/assets/sfx/*.wav
+
 # Optional adapter installs
 package-lock.json
 pnpm-lock.yaml

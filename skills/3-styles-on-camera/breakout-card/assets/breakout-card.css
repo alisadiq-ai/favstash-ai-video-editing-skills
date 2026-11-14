@@ -1,9 +1,4 @@
 /* Breakout-card components. Tokens come from breakout.TOKENS as CSS variables; fonts from assets/fonts (Montserrat, OFL). */
-@font-face{font-family:Mont;src:url(assets/fonts/Montserrat-Medium.ttf);font-weight:500}
-@font-face{font-family:Mont;src:url(assets/fonts/Montserrat-SemiBold.ttf);font-weight:600}
-@font-face{font-family:Mont;src:url(assets/fonts/Montserrat-Bold.ttf);font-weight:700}
-@font-face{font-family:Mont;src:url(assets/fonts/Montserrat-ExtraBold.ttf);font-weight:800}
-@font-face{font-family:Mont;src:url(assets/fonts/Montserrat-Black.ttf);font-weight:900}
 html,body{margin:0;background:var(--paper)}
 #root{position:relative;width:1080px;height:1920px;overflow:hidden;background:var(--paper);font-family:Mont,Helvetica Neue,sans-serif;-webkit-font-smoothing:antialiased}
 .bg{position:absolute;inset:0;background:var(--paper)}

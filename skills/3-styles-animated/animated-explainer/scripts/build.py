@@ -36,6 +36,33 @@ FPS = 30
 esc = lambda s: H.escape(str(s), quote=False)
 
 
+FONT_WEIGHTS = {'thin': 100, 'extralight': 200, 'light': 300, 'regular': 400, 'medium': 500, 'semibold': 600,
+                'bold': 700, 'extrabold': 800, 'black': 900}
+
+
+def font_faces(folder, href, family=None):
+    """@font-face rules for every font in `folder`, read from its file name: <family>-<weight or var>[-<style>]."""
+    rules = []
+    for f in sorted(pathlib.Path(folder).iterdir()):
+        fmt = {'.woff2': 'woff2', '.woff': 'woff', '.ttf': 'truetype', '.otf': 'opentype'}.get(f.suffix.lower())
+        if not fmt:
+            continue
+        parts, style, weight = re.split(r'[-_]', f.stem), 'normal', '400'
+        if parts[-1].lower() in ('italic', 'normal'):
+            style = parts.pop().lower()
+        w = parts[-1].lower()
+        if w == 'var':
+            weight = '100 900'
+            parts.pop()
+        elif w.isdigit() or w in FONT_WEIGHTS:
+            weight = str(FONT_WEIGHTS.get(w, w))
+            parts.pop()
+        name = family or ' '.join(p[:1].upper() + p[1:] for p in parts)
+        rules.append(f'@font-face {{ font-family: "{name}"; font-style: {style}; font-weight: {weight}; '
+                     f'src: url("{href}{f.name}") format("{fmt}"); }}')
+    return '\n'.join(rules)
+
+
 def find_gsap(start):
     """GSAP comes from the workspace runtime that edit-video's `init-workspace.mjs --install` prepares."""
     env = os.environ.get('FAVSTASH_GSAP')
@@ -183,6 +210,7 @@ def main(reel):
     doc = f'''<!doctype html>
 <html lang="en"><head><meta charset="UTF-8" /><meta name="viewport" content="width=1080, height=1920" />
 <script src="assets/gsap.min.js"></script>
+<style>{font_faces(ASSETS / 'fonts', 'assets/fonts/')}</style>
 {pres_links}<link rel="stylesheet" href="assets/explainer.css" />{'<link rel="stylesheet" href="assets/rail.css" />' if style == 'rail' else ''}
 <style>{B.get("css", "")}</style></head>
 <body>

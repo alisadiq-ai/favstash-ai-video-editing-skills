@@ -12,10 +12,37 @@ cards that blur in and out, one-to-two-word Montserrat captions. Everything is f
 """
 from pathlib import Path
 from contextlib import contextmanager
-import json, math, os, shutil, subprocess
+import json, math, os, re, shutil, subprocess
 
 HERE = Path(__file__).resolve().parent
 ASSETS = HERE.parent / 'assets'
+
+FONT_WEIGHTS = {'thin': 100, 'extralight': 200, 'light': 300, 'regular': 400, 'medium': 500, 'semibold': 600,
+                'bold': 700, 'extrabold': 800, 'black': 900}
+
+
+def font_faces(folder, href, family=None):
+    """@font-face rules for every font in `folder`, read from its file name: <family>-<weight or var>[-<style>]."""
+    rules = []
+    for f in sorted(Path(folder).iterdir()):
+        fmt = {'.woff2': 'woff2', '.woff': 'woff', '.ttf': 'truetype', '.otf': 'opentype'}.get(f.suffix.lower())
+        if not fmt:
+            continue
+        parts, style, weight = re.split(r'[-_]', f.stem), 'normal', '400'
+        if parts[-1].lower() in ('italic', 'normal'):
+            style = parts.pop().lower()
+        w = parts[-1].lower()
+        if w == 'var':
+            weight = '100 900'
+            parts.pop()
+        elif w.isdigit() or w in FONT_WEIGHTS:
+            weight = str(FONT_WEIGHTS.get(w, w))
+            parts.pop()
+        name = family or ' '.join(p[:1].upper() + p[1:] for p in parts)
+        rules.append(f'@font-face {{ font-family: "{name}"; font-style: {style}; font-weight: {weight}; '
+                     f'src: url("{href}{f.name}") format("{fmt}"); }}')
+    return '\n'.join(rules)
+
 
 def find_gsap(start=None):
     """GSAP comes from the workspace runtime that edit-video's `init-workspace.mjs --install` prepares.
@@ -411,7 +438,8 @@ class Reel:
         lay, self.J = self.J, J0
         js = '\n'.join(pre + lay + self.J + [f'tl.set({{}},{{}},{d});'])
         tok = ':root{' + ''.join(f'--{k}:{v};' for k, v in self.tokens.items()) + '}'
-        css = tok + (ASSETS / 'breakout-card.css').read_text() + '\n'.join(self.extra_css)
+        css = (font_faces(ASSETS / 'fonts', 'assets/fonts/', family='Mont') + '\n' + tok
+               + (ASSETS / 'breakout-card.css').read_text() + '\n'.join(self.extra_css))
         html = (f'<!doctype html><html lang="en"><head><meta charset="utf-8"><title>{title}</title><script src="assets/gsap.min.js"></script>'
                 f'<link rel="stylesheet" href="style.css"></head><body>{body}<script>{js}</script></body></html>')
         (out / 'index.html').write_text(html)

@@ -85,7 +85,7 @@ Zoom, the 3D Map Explainer, Isometric Infographic, Line-Art Cutaway or Data Stor
 
 <table><tr>
 <td width="33%" valign="top"><a href="skills/3-styles-characters/cartoon-character/SKILL.md"><img src="assets/previews/tiles/cartoon-character.jpg" width="100%" alt="Cartoon character: a cartoon of Ali, who made this pack"></a><br><b><a href="skills/3-styles-characters/cartoon-character/SKILL.md">cartoon-character</a></b><br><sub>A lip-synced 2D cartoon that talks, blinks and swaps poses. Two samples ship (Ali and Stashy); make your own from a few photos with any image AI.</sub></td>
-<td width="33%" valign="top"><a href="skills/3-styles-characters/3d-character/SKILL.md"><img src="assets/previews/tiles/3d-character.jpg" width="100%" alt="3D character: a chibi girl waving on a pastel stage"></a><br><b><a href="skills/3-styles-characters/3d-character/SKILL.md">3d-character</a></b><br><sub>A cute 3D chibi boy or girl talks to camera on a pastel stage, with camera cuts on the words. Three.js, no Blender, nothing to install.</sub></td>
+<td width="33%" valign="top"><a href="skills/3-styles-characters/3d-character/SKILL.md"><img src="assets/previews/tiles/3d-character.jpg" width="100%" alt="3D character: a chibi girl waving on a pastel stage"></a><br><b><a href="skills/3-styles-characters/3d-character/SKILL.md">3d-character</a></b><br><sub>A cute 3D chibi boy or girl talks to camera on a pastel stage, with camera cuts on the words. Built in Three.js, no Blender needed.</sub></td>
 <td width="33%" valign="top"></td>
 </tr></table>
 

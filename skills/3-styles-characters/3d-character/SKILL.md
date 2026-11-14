@@ -8,8 +8,9 @@ description: "Style for edit-video: a cute 3D character reel with no camera and 
 A style on top of `edit-video`, which owns the voice, sound mix and review. The whole
 reel is a small 3D scene drawn in code: a chibi character built from simple shapes,
 one pastel colour for the floor and the sky, soft light, and the camera cutting on
-the words. Three.js ships inside this skill, so nothing extra needs installing, and
-HyperFrames renders it like any other composition.
+the words. three.js (pinned 0.168.0) comes from the workspace runtime that `edit-video`'s
+`scripts/init-workspace.mjs --install` prepares, like GSAP; the builder copies it into each
+reel, and HyperFrames renders it like any other composition.
 
 ## The look: simple and cute
 

@@ -5,11 +5,14 @@
 // time t is drawn on frame ceil(t * fps), so cue times are snapped up to that frame. Each sound is placed so its sync
 // point plays on the cue: struck sounds (clicks, pops, dings, shutters, hits) on their first strong attack, swells
 // (whooshes, risers, shimmers) on their peak. A bed (typing, ambience) starts on its cue instead.
+import crypto from "node:crypto";
 import fs from "node:fs/promises";
+import os from "node:os";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { spawn } from "node:child_process";
 import { run } from "./process.mjs";
+import { SOUND_DEFINITIONS, wavBuffer } from "./sfx.mjs";
 
 export const SAMPLE_RATE = 48_000;
 export const SFX_DIR = fileURLToPath(new URL("../assets/sfx/", import.meta.url));
@@ -76,12 +79,36 @@ export function snapUp(t, fps) {
   return (Math.ceil(t * fps - 0.005) || 0) / fps;
 }
 
+// Synthesized pack sounds don't ship as audio: each is made from its definition in lib/sfx.mjs on first use, checked
+// against the manifest's checksum, and kept in a small cache.
+export const SYNTH_CACHE = path.join(os.tmpdir(), "favstash-sfx");
+
+/** The audio file for one manifest sound: the shipped recording, or the synthesized sound from the cache. */
+export async function packFile(dir, sound) {
+  const shipped = path.join(dir, sound.file);
+  if (sound.origin === "curated") return shipped;
+  try { await fs.access(shipped); return shipped; } catch {}
+  const cached = path.join(SYNTH_CACHE, `${sound.id}-${sound.sha256.slice(0, 12)}.wav`);
+  try { await fs.access(cached); return cached; } catch {}
+  const definition = SOUND_DEFINITIONS.find((d) => d.id === sound.id);
+  if (!definition) throw new Error(`No definition for the synthesized sound ${sound.id}`);
+  const buffer = wavBuffer(definition);
+  if (crypto.createHash("sha256").update(buffer).digest("hex") !== sound.sha256) {
+    throw new Error(`The synthesized ${sound.id} no longer matches its manifest checksum; run scripts/generate-sfx.mjs`);
+  }
+  await fs.mkdir(SYNTH_CACHE, { recursive: true });
+  const partial = `${cached}.${process.pid}.part`;
+  await fs.writeFile(partial, buffer);
+  await fs.rename(partial, cached);
+  return cached;
+}
+
 /** Read the pack manifest: id/file -> { file, gainDb }. */
 export async function loadPack(dir = SFX_DIR) {
   const manifest = JSON.parse(await fs.readFile(path.join(dir, "manifest.json"), "utf8"));
   const byKey = new Map();
   for (const sound of manifest.sounds) {
-    const entry = { id: sound.id, file: path.join(dir, sound.file), gainDb: sound.suggestedGainDb ?? -12 };
+    const entry = { id: sound.id, file: await packFile(dir, sound), gainDb: sound.suggestedGainDb ?? -12 };
     byKey.set(sound.id, entry);
     byKey.set(sound.file, entry);
   }

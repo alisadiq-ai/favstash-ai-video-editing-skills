@@ -7,7 +7,11 @@ import { SOUND_DEFINITIONS, soundManifestEntry, wavBuffer } from "../skills/3-ed
 import { writeJson } from "../skills/3-editing/edit-video/lib/files.mjs";
 
 const root = fileURLToPath(new URL("..", import.meta.url));
-const output = process.argv[2] ? path.resolve(process.argv[2]) : path.join(root, "skills", "3-editing", "edit-video", "assets", "sfx");
+// With no folder, refresh the pack's manifest only: synthesized sounds don't ship as audio (the plugin directory takes
+// no binaries), edit-video makes them on first use. With a folder, also write every synthesized WAV there to audition.
+const pack = path.join(root, "skills", "3-editing", "edit-video", "assets", "sfx");
+const output = process.argv[2] ? path.resolve(process.argv[2]) : pack;
+const writeAudio = Boolean(process.argv[2]);
 await fs.mkdir(output, { recursive: true });
 const sounds = [];
 // The checked-in manifest owns curated metadata; synthesis never replaces recordings.
@@ -27,9 +31,9 @@ for (const sound of curated) {
 
 for (const definition of SOUND_DEFINITIONS) {
   const buffer = wavBuffer(definition);
-  await fs.writeFile(path.join(output, `${definition.id}.wav`), buffer);
+  if (writeAudio) await fs.writeFile(path.join(output, `${definition.id}.wav`), buffer);
   sounds.push(soundManifestEntry(definition, buffer));
-  console.log(`Generated ${definition.id}.wav`);
+  console.log(`${writeAudio ? "Generated" : "Checked"} ${definition.id}.wav`);
 }
 
 sounds.push(...curated);

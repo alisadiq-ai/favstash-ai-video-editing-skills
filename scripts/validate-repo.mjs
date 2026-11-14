@@ -4,7 +4,9 @@ import fs from "node:fs/promises";
 import path from "node:path";
 import process from "node:process";
 import { fileURLToPath } from "node:url";
+import crypto from "node:crypto";
 import { listFilesRecursively, pathExists, readJson, sha256File } from "../skills/3-editing/edit-video/lib/files.mjs";
+import { SOUND_DEFINITIONS, wavBuffer } from "../skills/3-editing/edit-video/lib/sfx.mjs";
 
 const root = fileURLToPath(new URL("..", import.meta.url));
 const failures = [];
@@ -84,10 +86,16 @@ const assetRoot = path.join(skillRoot, "3-editing", "edit-video", "assets", "sfx
 const manifest = await readJson(path.join(assetRoot, "manifest.json"));
 if (manifest.count !== manifest.sounds?.length) failures.push("Invalid SFX manifest count");
 for (const sound of manifest.sounds ?? []) {
-  const asset = path.join(assetRoot, sound.file);
-  if (!(await pathExists(asset)) || await sha256File(asset) !== sound.sha256) {
-    failures.push(`Missing or changed SFX: ${sound.file}`);
+  if (sound.origin === "curated") {
+    const asset = path.join(assetRoot, sound.file);
+    if (!(await pathExists(asset)) || await sha256File(asset) !== sound.sha256) failures.push(`Missing or changed SFX: ${sound.file}`);
+    continue;
   }
+  // Synthesized sounds ship as their definition only; the manifest checksum must still match what they make.
+  const definition = SOUND_DEFINITIONS.find((d) => d.id === sound.id);
+  const made = definition && crypto.createHash("sha256").update(wavBuffer(definition)).digest("hex");
+  if (made !== sound.sha256) failures.push(`Synthesized SFX no longer matches its manifest: ${sound.id}`);
+  if (await pathExists(path.join(assetRoot, sound.file))) failures.push(`Synthesized SFX committed as audio: ${sound.file}`);
 }
 // Every bundled sound ships to users, so each one must be listed in the manifest.
 const listedSounds = new Set((manifest.sounds ?? []).map((sound) => path.join(assetRoot, sound.file)));

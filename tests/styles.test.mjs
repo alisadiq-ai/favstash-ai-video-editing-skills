@@ -76,7 +76,9 @@ test("animated-explainer builds a reel when installed alone", { skip: !python &&
   const { reel, env } = await tinyReel(context);
   const result = spawnSync("python3", ["-B", path.join(installed, "scripts", "build.py"), reel], { encoding: "utf8", env });
   assert.equal(result.status, 0, result.stderr);
-  assert.match(await fs.readFile(path.join(reel, "index.html"), "utf8"), /data-composition-id="main"/);
+  const page = await fs.readFile(path.join(reel, "index.html"), "utf8");
+  assert.match(page, /data-composition-id="main"/);
+  assert.match(page, /@font-face \{ font-family: "Instrument Serif"; font-style: italic; font-weight: 400;/);
   const cues = JSON.parse(await fs.readFile(path.join(reel, "cues.json"), "utf8"));
   assert.deepEqual(cues.cues.map((cue) => cue.sound), ["ui-pop"]);
   await fs.access(path.join(reel, "assets", "fonts", "OFL.txt"));
@@ -118,12 +120,20 @@ test("3d-character builds a Three.js reel when installed alone", { skip: !python
     "    return dict(shots=[[0, 'full'], [T.L(1), 'close']], acts=[[T.L(1), 'wave']],",
     "                card={'at': .5, 'lines': ['make(reel)']}, sfx=[[T.find('world'), 'ui-pop', 0]])",
   ].join("\n"));
-  const result = spawnSync("python3", ["-B", path.join(installed, "scripts", "build.py"), reel], { encoding: "utf8" });
+  // three.js comes from the workspace runtime; a stand-in package keeps the test offline.
+  const three = path.join(reel, "three-stand-in");
+  for (const file of ["build/three.module.js", "LICENSE", "examples/jsm/environments/RoomEnvironment.js", "examples/jsm/geometries/RoundedBoxGeometry.js"]) {
+    await fs.mkdir(path.dirname(path.join(three, file)), { recursive: true });
+    await fs.writeFile(path.join(three, file), `// ${file} stand-in`);
+  }
+  const result = spawnSync("python3", ["-B", path.join(installed, "scripts", "build.py"), reel], { encoding: "utf8", env: { ...process.env, FAVSTASH_THREE: three } });
   assert.equal(result.status, 0, result.stderr);
   const html = await fs.readFile(path.join(reel, "index.html"), "utf8");
   assert.match(html, /data-no-timeline/);
+  assert.match(html, /@font-face \{ font-family: "Inter Tight"/);
   assert.match(html, /"look": "girl"/);
-  await fs.access(path.join(reel, "assets", "vendor", "three", "three.module.min.js"));
+  await fs.access(path.join(reel, "assets", "vendor", "three", "three.module.js"));
+  await fs.access(path.join(reel, "assets", "vendor", "three", "addons", "geometries", "RoundedBoxGeometry.js"));
   await fs.access(path.join(reel, "assets", "vendor", "three", "LICENSE"));
   const cues = JSON.parse(await fs.readFile(path.join(reel, "cues.json"), "utf8"));
   assert.deepEqual(cues.cues.map((cue) => cue.sound), ["ui-pop"]);

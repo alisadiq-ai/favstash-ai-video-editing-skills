@@ -1,9 +1,6 @@
 /* Animated explainer: one full-bleed lit colour field per scene, one hero object, the spoken line big and word-lit at the
    top, and an optional cartoon character as a small cursor that drives the UI. 1080x1920.
    Text and explained UI stay inside the safe area; decoration and the cursor may leave it. */
-@font-face { font-family: "Inter Tight"; font-weight: 100 900; src: url("fonts/inter-tight-var.woff2") format("woff2"); }
-@font-face { font-family: "Instrument Serif"; font-style: italic; font-weight: 400; src: url("fonts/instrument-serif-400-italic.woff2") format("woff2"); }
-@font-face { font-family: "Geist Mono"; font-weight: 500; src: url("fonts/geist-mono-500-normal.woff2") format("woff2"); }
 :root { --cream: #FBF4EA; --ink: #15161A; --mut: #8A8578; --line: #E9E2D6; --yel: #F4C95D; --red: #C2412B; --ok: #1F8A5B;
   --pink: #F05AA6; --violet: #7C5CFF;
   --sans: "Inter Tight", "Helvetica Neue", sans-serif; --serif: "Instrument Serif", Georgia, serif; --mono: "Geist Mono", Menlo, monospace; }

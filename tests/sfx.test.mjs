@@ -27,7 +27,8 @@ test("generated SFX manifest matches definitions and files", async () => {
   assert.equal(new Set(manifest.sounds.map(sound => sound.id)).size, manifest.count);
   assert.ok(curated.some(sound => sound.tags.includes("camera")));
   for (const sound of manifest.sounds) {
-    const buffer = await fs.readFile(path.join(assetRoot, sound.file));
+    const definition = SOUND_DEFINITIONS.find(d => d.id === sound.id);
+    const buffer = sound.origin === "curated" ? await fs.readFile(path.join(assetRoot, sound.file)) : wavBuffer(definition);
     assert.equal(buffer.subarray(0, 4).toString("ascii"), "RIFF");
     assert.equal(buffer.subarray(8, 12).toString("ascii"), "WAVE");
     assert.equal(buffer.readUInt32LE(24), sound.sampleRate);
@@ -62,7 +63,8 @@ test("regeneration rejects a changed curated recording before overwriting output
     const manifestBefore = await fs.readFile(path.join(temporary, "manifest.json"));
     const manifest = JSON.parse(manifestBefore);
     const curated = manifest.sounds.find(sound => sound.origin === "curated");
-    const originalGenerated = await fs.readFile(path.join(temporary, manifest.sounds[0].file));
+    const originalGenerated = wavBuffer(SOUND_DEFINITIONS.find(d => d.id === manifest.sounds[0].id));
+    await fs.writeFile(path.join(temporary, manifest.sounds[0].file), originalGenerated);
     await fs.appendFile(path.join(temporary, curated.file), "changed");
     const result = spawnSync(process.execPath, [path.join(root, "scripts/generate-sfx.mjs"), temporary], { encoding: "utf8" });
     assert.notEqual(result.status, 0);
@@ -71,5 +73,16 @@ test("regeneration rejects a changed curated recording before overwriting output
     assert.deepEqual(await fs.readFile(path.join(temporary, manifest.sounds[0].file)), originalGenerated);
   } finally {
     await fs.rm(temporary, { recursive: true, force: true });
+  }
+});
+
+test("edit-video makes a synthesized sound on first use and checks it against the manifest", async () => {
+  const { loadPack } = await import("../skills/3-editing/edit-video/lib/sync.mjs");
+  const assetRoot = path.join(root, "skills", "3-editing", "edit-video", "assets", "sfx");
+  const manifest = JSON.parse(await fs.readFile(path.join(assetRoot, "manifest.json"), "utf8"));
+  const pack = await loadPack(assetRoot);
+  for (const sound of manifest.sounds) {
+    const bytes = await fs.readFile(pack.get(sound.id).file);
+    assert.equal(crypto.createHash("sha256").update(bytes).digest("hex"), sound.sha256, sound.id);
   }
 });
