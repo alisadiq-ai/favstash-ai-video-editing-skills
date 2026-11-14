@@ -222,16 +222,16 @@ frames merge.
 
 | Visible event | Sound | Note |
 |---|---|---|
-| Frame 1 of the hook | `curated/hook-impact.wav` | On the opening frame |
-| Product, card or panel arrives | `curated/ui-pop.wav` | Quieter for small chips |
+| Frame 1 of the hook | `hook-impact` | On the opening frame |
+| Product, card or panel arrives | `ui-pop` | Quieter for small chips |
 | Product or block settles into place | `thock.wav` | On the frame it lands |
 | Step, row or spec callout appears | `tick.wav` | One per step |
 | Dial, mechanism or progress moves | `ratchet.wav` | Trim it with `dur` for a short move |
 | Lid closes, clasp locks, account connects | `latch.wav` | Its main click lands on the event |
 | Highlight or sheen passes over the product | `shimmer.wav` | Peaks on the brightest frame |
-| Visible click or button press | `curated/ui-click.wav` | On the click |
-| Camera move, push-in or handover | `curated/zoom-swish.wav` | Peaks on the move's fastest moment |
-| Build into the reveal | `curated/metallic-riser.wav` | Resolve it on the reveal |
+| Visible click or button press | `ui-click` | On the click |
+| Camera move, push-in or handover | `zoom-swish` | Peaks on the move's fastest moment |
+| Build into the reveal | `metallic-riser` | Resolve it on the reveal |
 | Earned completion | `clean-ding.wav` | Once |
 
 A creator's own library comes first when they have one; trim each file to just

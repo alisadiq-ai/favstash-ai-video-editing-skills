@@ -45,7 +45,7 @@ HyperFrames project. Start by copying [the worked example](example/spec.py).
 1. **Script.** One idea, 15–40 s. A line that starts with `[Agent] ` (or the
    spec's `GUEST` name) is the second voice. Check every name, number and feature
    against its source; a first-person claim needs a real run.
-2. **Voice.** `edit-video`'s `scripts/voice.py work/<reel> --engine files|hyperframes|elevenlabs`
+2. **Voice.** `edit-video`'s `scripts/voice.py work/<reel> --engine files|hyperframes`
    writes `voice/vo.wav` and `voice/timing.json` (every word's start and end). Which
    engine, and how to clone your own voice for free, is in `edit-video`'s voice
    options (`references/voice.md`). Listen to the takes: timings can't catch a

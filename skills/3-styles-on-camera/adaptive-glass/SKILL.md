@@ -98,18 +98,18 @@ and a starting caption style to `captions.json` for the captioning tool.
 
 ## Sound map
 
-Use `edit-video`'s curated sounds (`assets/sfx/`) and the gains in its manifest
+Use `edit-video`'s sound pack (by id) and the gains in its manifest
 as starting points:
 
 | Visible event | Sound | Timing |
 | --- | --- | --- |
-| Frame 1 of the hook | `curated/hook-impact.wav` | On the opening frame |
-| Large layout or camera change | `curated/camera-shutter.wav` | About 4 frames before the cut |
-| Small framing or take change | `curated/camera-shutter-light.wav` | About 2 frames before |
-| Panel or element arrival | `curated/ui-pop.wav` | On the arrival frame |
-| Visible click or selection | `curated/ui-click.wav` | On the click |
-| Motivated zoom, crop or pan | `curated/zoom-swish.wav` | Its rise follows the move |
-| Build into a reveal | `curated/metallic-riser.wav` | Trim or stretch it to resolve on the reveal |
+| Frame 1 of the hook | `hook-impact` | On the opening frame |
+| Large layout or camera change | `camera-shutter` | About 4 frames before the cut |
+| Small framing or take change | `camera-shutter-light` | About 2 frames before |
+| Panel or element arrival | `ui-pop` | On the arrival frame |
+| Visible click or selection | `ui-click` | On the click |
+| Motivated zoom, crop or pan | `zoom-swish` | Its rise follows the move |
+| Build into a reveal | `metallic-riser` | Trim or stretch it to resolve on the reveal |
 | Earned completion | `clean-ding.wav` | Sparingly |
 
 Keep speech dominant and make demonstrated clicks and reveals audible. Put each

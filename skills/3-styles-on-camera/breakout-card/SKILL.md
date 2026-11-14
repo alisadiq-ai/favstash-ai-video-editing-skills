@@ -102,12 +102,12 @@ Needs the workspace runtime from `edit-video`'s `init-workspace.mjs --install`.
 
 | Visible event | Cue |
 |---|---|
-| Frame 1 | `curated/hook-impact.wav` |
-| Page ↔ camera | `curated/camera-shutter.wav` 4 frames early; the light shutter into a page |
-| Re-hook push | `curated/metallic-riser.wav`, resolving on the cut back to the page |
-| Graphic arrives | `curated/ui-pop.wav` (rows and chips quieter) |
-| Tick, click, count landing | `curated/ui-click.wav` |
-| Blur-away, line draws, file drops | `curated/zoom-swish.wav`; `sub-impact.wav` where something lands |
+| Frame 1 | `hook-impact` |
+| Page ↔ camera | `camera-shutter` 4 frames early; the light shutter into a page |
+| Re-hook push | `metallic-riser`, resolving on the cut back to the page |
+| Graphic arrives | `ui-pop` (rows and chips quieter) |
+| Tick, click, count landing | `ui-click` |
+| Blur-away, line draws, file drops | `zoom-swish`; `sub-impact` where something lands |
 | Earned yes | `clean-ding.wav`, once |
 
 ## Pitfalls already paid for

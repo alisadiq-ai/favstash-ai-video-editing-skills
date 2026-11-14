@@ -120,9 +120,9 @@ follows the real timing:
 
 ```json
 { "fps": 30, "total": 32, "cues": [
-  { "frame": 0,   "t": 0,      "sound": "curated/hook-impact.wav", "gain": -6, "label": "opening" },
-  { "frame": 45,  "t": 1.5,    "sound": "curated/ui-pop.wav",      "gain": -2, "label": "hook word" },
-  { "frame": 288, "t": 9.6,    "sound": "curated/ui-click.wav",    "gain": 2,  "label": "send pressed" }
+  { "frame": 0,   "t": 0,      "sound": "hook-impact", "gain": -6, "label": "opening" },
+  { "frame": 45,  "t": 1.5,    "sound": "ui-pop",      "gain": -2, "label": "hook word" },
+  { "frame": 288, "t": 9.6,    "sound": "ui-click",    "gain": 2,  "label": "send pressed" }
 ] }
 ```
 

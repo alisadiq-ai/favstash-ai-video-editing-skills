@@ -93,12 +93,12 @@ also need `pip install playwright` and Google Chrome.
 
 | Visible event | Cue |
 |---|---|
-| Frame 1 | `curated/hook-impact.wav` |
-| Split ↔ full camera | `curated/camera-shutter.wav`; the light shutter for a smaller change |
-| Re-hook build | `curated/metallic-riser.wav`, resolving on the reveal |
-| Card, chip or pill arrival | `curated/ui-pop.wav` (merge arrivals under ~6 frames apart) |
-| Toggle, highlight, button press | `curated/ui-click.wav` |
-| Expand, shrink, fly-away | `curated/zoom-swish.wav` |
+| Frame 1 | `hook-impact` |
+| Split ↔ full camera | `camera-shutter`; the light shutter for a smaller change |
+| Re-hook build | `metallic-riser`, resolving on the reveal |
+| Card, chip or pill arrival | `ui-pop` (merge arrivals under ~6 frames apart) |
+| Toggle, highlight, button press | `ui-click` |
+| Expand, shrink, fly-away | `zoom-swish` |
 | Typed text | `typing-tick.wav`, one cue per ~0.9s of typing |
 | Earned approval | `clean-ding.wav`, once |
 

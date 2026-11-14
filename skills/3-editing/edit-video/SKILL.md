@@ -125,7 +125,7 @@ shutter for a meaningful camera/cut change, swish for a motivated zoom, tick for
 step, thock when something settles, latch when it locks or connects. A short
 riser can build into a reveal; resolve it at the visual payoff. Merge nearby cues
 and keep ordinary caption changes silent. Prefer the creator's established sounds;
-otherwise start with the curated sounds in the [SFX pack](assets/sfx/manifest.json).
+otherwise start with the [SFX pack](assets/sfx/manifest.json).
 Copy only selected files, align audible transients rather than file starts, and
 audition them against speech. The pack's other one-shots (ding, sparkle, impact,
 typing tick, ratchet, shimmer) cover payoffs, typing and product moments.

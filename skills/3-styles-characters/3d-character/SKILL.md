@@ -51,7 +51,7 @@ folder `work/<reel>/` with its `spec.py` and `voice/`. Start from
 
 1. **Script.** One idea, 10–40 s, short lines. Mark the word to stress with
    `*stars*`; the character nods on it.
-2. **Voice.** `edit-video`'s `scripts/voice.py work/<reel> --engine files|hyperframes|elevenlabs`
+2. **Voice.** `edit-video`'s `scripts/voice.py work/<reel> --engine files|hyperframes`
    writes `voice/vo.wav` and every word's time. Use a voice that suits the
    character; `edit-video`'s voice options cover free local voices and cloning.
 3. **Spec.** `build(T)` returns the shots (`full`, `close`, `side`) and when they

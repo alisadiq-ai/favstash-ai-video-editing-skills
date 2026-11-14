@@ -41,7 +41,7 @@ await writeJson(path.join(output, "manifest.json"), {
   schemaVersion: 1,
   title: "FavStash Short-Form SFX Pack",
   generatedBy: "scripts/generate-sfx.mjs",
-  guidance: "Choose a sound for a visible event and audition it against speech. Prefer curated sounds or the creator's established library; ordinary caption changes stay silent.",
+  guidance: "Choose a sound for a visible event and audition it against speech. Prefer the creator's established library when they have one; ordinary caption changes stay silent.",
   count: sounds.length,
   sounds,
 });

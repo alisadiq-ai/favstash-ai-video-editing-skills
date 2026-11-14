@@ -43,15 +43,15 @@ builds such as `product-motion-ads` write it as they go; otherwise write it from
   "fps": 30,
   "total": 32,
   "cues": [
-    { "t": 0, "sound": "curated/hook-impact.wav", "gain": -6, "label": "opening" },
-    { "t": 9.6, "frame": 288, "sound": "curated/ui-click.wav", "gain": 2, "label": "send pressed" },
-    { "t": 7.7, "sound": "typing-tick.wav", "bed": true, "label": "typing" },
+    { "t": 0, "sound": "hook-impact", "gain": -6, "label": "opening" },
+    { "t": 9.6, "frame": 288, "sound": "ui-click", "gain": 2, "label": "send pressed" },
+    { "t": 7.7, "sound": "typing-tick", "bed": true, "label": "typing" },
     { "t": 16.9, "sound": "../sounds/my-riser.wav", "pan": -0.3, "dur": 1.2 }
   ]
 }
 ```
 
-- `sound`: a pack file (`curated/ui-pop.wav`), a pack id (`ui-pop`) or a path
+- `sound`: a pack id (`ui-pop`; older `curated/ui-pop.wav` names still work) or a path
   relative to the cue sheet.
 - `gain`: dB relative to the pack's suggested gain (0 dB for your own files).
 - Give each cue a `frame` (preferred: the first frame that shows the event) or a

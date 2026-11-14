@@ -111,6 +111,7 @@ export async function loadPack(dir = SFX_DIR) {
     const entry = { id: sound.id, file: await packFile(dir, sound), gainDb: sound.suggestedGainDb ?? -12 };
     byKey.set(sound.id, entry);
     byKey.set(sound.file, entry);
+    byKey.set(`curated/${sound.id}.wav`, entry);   // the names these sounds had when they shipped as recordings
   }
   return byKey;
 }

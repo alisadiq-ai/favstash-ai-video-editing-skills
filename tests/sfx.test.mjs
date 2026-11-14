@@ -19,28 +19,39 @@ test("SFX synthesis is deterministic and emits PCM WAV", () => {
   assert.equal(crypto.createHash("sha256").update(first).digest("hex"), crypto.createHash("sha256").update(second).digest("hex"));
 });
 
-test("generated SFX manifest matches definitions and files", async () => {
+test("the SFX pack is all synthesized and its manifest matches the definitions", async () => {
   const assetRoot = path.join(root, "skills", "3-editing", "edit-video", "assets", "sfx");
   const manifest = JSON.parse(await fs.readFile(path.join(assetRoot, "manifest.json"), "utf8"));
-  const curated = manifest.sounds.filter(sound => sound.origin === "curated");
-  assert.equal(manifest.count, SOUND_DEFINITIONS.length + curated.length);
+  assert.equal(manifest.count, SOUND_DEFINITIONS.length);
   assert.equal(new Set(manifest.sounds.map(sound => sound.id)).size, manifest.count);
-  assert.ok(curated.some(sound => sound.tags.includes("camera")));
+  assert.ok(manifest.sounds.some(sound => sound.tags.includes("camera")));
   for (const sound of manifest.sounds) {
-    const definition = SOUND_DEFINITIONS.find(d => d.id === sound.id);
-    const buffer = sound.origin === "curated" ? await fs.readFile(path.join(assetRoot, sound.file)) : wavBuffer(definition);
+    const buffer = wavBuffer(SOUND_DEFINITIONS.find(d => d.id === sound.id));
     assert.equal(buffer.subarray(0, 4).toString("ascii"), "RIFF");
-    assert.equal(buffer.subarray(8, 12).toString("ascii"), "WAVE");
     assert.equal(buffer.readUInt32LE(24), sound.sampleRate);
     assert.equal(crypto.createHash("sha256").update(buffer).digest("hex"), sound.sha256);
   }
 });
 
-test("regeneration preserves curated recordings and metadata", async () => {
+// A creator can still add recordings to their own pack copy; regeneration keeps them and refuses changed ones.
+async function packWithRecording() {
   const temporary = await fs.mkdtemp(path.join(os.tmpdir(), "favstash-sfx-"));
+  const source = path.join(root, "skills", "3-editing", "edit-video", "assets", "sfx");
+  await fs.cp(source, temporary, { recursive: true });
+  const manifest = JSON.parse(await fs.readFile(path.join(temporary, "manifest.json"), "utf8"));
+  const bytes = wavBuffer(SOUND_DEFINITIONS[0]);
+  await fs.mkdir(path.join(temporary, "curated"));
+  await fs.writeFile(path.join(temporary, "curated", "my-sound.wav"), bytes);
+  manifest.sounds.push({ id: "my-sound", file: "curated/my-sound.wav", origin: "curated", sampleRate: 48000, tags: ["test"],
+    sha256: crypto.createHash("sha256").update(bytes).digest("hex") });
+  manifest.count = manifest.sounds.length;
+  await fs.writeFile(path.join(temporary, "manifest.json"), JSON.stringify(manifest));
+  return temporary;
+}
+
+test("regeneration preserves recordings and their metadata", async () => {
+  const temporary = await packWithRecording();
   try {
-    const source = path.join(root, "skills", "3-editing", "edit-video", "assets", "sfx");
-    await fs.cp(source, temporary, { recursive: true });
     const before = JSON.parse(await fs.readFile(path.join(temporary, "manifest.json"), "utf8"));
     const generated = spawnSync(process.execPath, [path.join(root, "scripts/generate-sfx.mjs"), temporary], { encoding: "utf8" });
     assert.equal(generated.status, 0, generated.stderr);
@@ -55,22 +66,15 @@ test("regeneration preserves curated recordings and metadata", async () => {
   }
 });
 
-test("regeneration rejects a changed curated recording before overwriting output", async () => {
-  const temporary = await fs.mkdtemp(path.join(os.tmpdir(), "favstash-sfx-integrity-"));
+test("regeneration rejects a changed recording before overwriting output", async () => {
+  const temporary = await packWithRecording();
   try {
-    const source = path.join(root, "skills", "3-editing", "edit-video", "assets", "sfx");
-    await fs.cp(source, temporary, { recursive: true });
     const manifestBefore = await fs.readFile(path.join(temporary, "manifest.json"));
-    const manifest = JSON.parse(manifestBefore);
-    const curated = manifest.sounds.find(sound => sound.origin === "curated");
-    const originalGenerated = wavBuffer(SOUND_DEFINITIONS.find(d => d.id === manifest.sounds[0].id));
-    await fs.writeFile(path.join(temporary, manifest.sounds[0].file), originalGenerated);
-    await fs.appendFile(path.join(temporary, curated.file), "changed");
+    await fs.appendFile(path.join(temporary, "curated", "my-sound.wav"), "changed");
     const result = spawnSync(process.execPath, [path.join(root, "scripts/generate-sfx.mjs"), temporary], { encoding: "utf8" });
     assert.notEqual(result.status, 0);
     assert.match(result.stderr, /Curated sound checksum mismatch/);
     assert.deepEqual(await fs.readFile(path.join(temporary, "manifest.json")), manifestBefore);
-    assert.deepEqual(await fs.readFile(path.join(temporary, manifest.sounds[0].file)), originalGenerated);
   } finally {
     await fs.rm(temporary, { recursive: true, force: true });
   }

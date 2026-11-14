@@ -12,7 +12,7 @@ import process from "node:process";
 import { parseArgs, optionalNumber } from "../lib/args.mjs";
 import { run } from "../lib/process.mjs";
 import {
-  SAMPLE_RATE, SFX_DIR, alignment, decodeStereo, duckUnder, loadPack, loudness, master, planCues, renderCues,
+  SAMPLE_RATE, alignment, decodeStereo, duckUnder, loadPack, loudness, master, planCues, renderCues,
   strips, syncPoint, verifyPlacement, writeWav,
 } from "../lib/sync.mjs";
 
@@ -37,17 +37,17 @@ async function readSheet(file) {
 }
 
 async function points() {
-  let files = rest;
-  if (!files.length) {
-    const manifest = JSON.parse(await fs.readFile(path.join(SFX_DIR, "manifest.json"), "utf8"));
-    files = manifest.sounds.map((sound) => path.join(SFX_DIR, sound.file));
-  }
+  // Pack sounds go through loadPack, which makes the synthesized ones on first use; anything else is a file path.
+  const pack = await loadPack();
+  const entries = rest.length
+    ? rest.map((sound) => pack.get(sound) ?? { id: path.basename(sound), file: path.resolve(sound) })
+    : [...new Map([...pack.values()].map((entry) => [entry.id, entry])).values()];
   const rows = [];
-  for (const file of files) {
+  for (const { id, file } of entries) {
     const point = syncPoint(await decodeStereo(file));
-    rows.push({ file, ...point });
+    rows.push({ id, file, ...point });
     const kind = point.struck ? "struck: attack" : "swell: peak";
-    console.log(`sync ${point.sync.toFixed(3).padStart(6)} s  ${kind.padEnd(14)}  attack ${point.attack.toFixed(3)}  peak ${point.peak.toFixed(3)}  ${path.basename(file)}`);
+    console.log(`sync ${point.sync.toFixed(3).padStart(6)} s  ${kind.padEnd(14)}  attack ${point.attack.toFixed(3)}  peak ${point.peak.toFixed(3)}  ${id}`);
   }
   if (typeof args.json === "string") await fs.writeFile(args.json, `${JSON.stringify(rows, null, 2)}\n`);
 }

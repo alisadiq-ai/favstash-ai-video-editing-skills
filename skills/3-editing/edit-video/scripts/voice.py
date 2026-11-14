@@ -2,21 +2,22 @@
 """Lock the voice for an animated reel (animated-explainer, 3d-character): one take per line, levelled, placed back to back, with every word's
 start and end. Everything the reel shows or plays is keyed to these word times, so make the voice first.
 
-    python3 <edit-video>/scripts/voice.py <edit>/work/<reel> --engine files|hyperframes|elevenlabs [--tempo 1.05] [--redo 0,3]
+    python3 <edit-video>/scripts/voice.py <edit>/work/<reel> --engine files|hyperframes [--tempo 1.05] [--redo 0,3]
 
 Engines (see edit-video's references/voice.md):
-  files        takes you made elsewhere (your own recording, Chatterbox, any TTS): voice/takes/00.wav, 01.wav, ... one per
-               line, in LINES order (.wav, .mp3 or .m4a). Word times come from `hyperframes transcribe`.
+  files        takes you made elsewhere (your own recording, Chatterbox, ElevenLabs or any TTS): voice/takes/00.wav, 01.wav, ...
+               one per line, in LINES order (.wav, .mp3 or .m4a). Word times come from `hyperframes transcribe`, or from
+               voice/takes/NN.words.json ([{"text", "start", "end"}] in the take's own time) when a service gave timestamps.
   hyperframes  free and local: HyperFrames' Kokoro voices (`hyperframes tts`), then `hyperframes transcribe`.
-  elevenlabs   hosted: ElevenLabs with character timestamps (exact word times). Needs ELEVENLABS_API_KEY.
+This script never calls a hosted voice service and never reads a key.
 
 The reel's spec.py supplies LINES (the same markup the style's build.py reads), GUEST (default 'Agent'), SPOKEN = {'shown word': 'how it is
 said'} for the voice only, and VOICES = {'host': '<voice>', 'guest': '<voice>'}: a Kokoro voice such as 'am_michael' for
-hyperframes, a voice id for elevenlabs. Writes voice/vo.wav and voice/timing.json. Existing takes are reused; --redo
+hyperframes. Writes voice/vo.wav and voice/timing.json. Existing takes are reused; --redo
 regenerates the listed lines. Needs python3, numpy and ffmpeg; HyperFrames comes from edit-video's workspace runtime
 (FAVSTASH_HYPERFRAMES overrides).
 """
-import argparse, base64, difflib, importlib.util, json, os, pathlib, re, shutil, subprocess, sys, tempfile, urllib.request
+import argparse, difflib, importlib.util, json, os, pathlib, re, shutil, subprocess, sys, tempfile
 import numpy as np
 
 SR = 48000
@@ -86,25 +87,6 @@ def tts_hyperframes(hf, text, voice, out):
     if r.returncode or not out.exists(): raise SystemExit(f'hyperframes tts failed: {(r.stdout + r.stderr)[-500:]}')
 
 
-def tts_elevenlabs(text, voice, out, model):
-    key = os.environ.get('ELEVENLABS_API_KEY') or sys.exit('Set ELEVENLABS_API_KEY (from your ElevenLabs account) in the environment.')
-    req = urllib.request.Request(f'https://api.elevenlabs.io/v1/text-to-speech/{voice}/with-timestamps?output_format=mp3_44100_192',
-                                 data=json.dumps({'text': text, 'model_id': model, 'voice_settings': {'stability': .5, 'similarity_boost': .8}}).encode(),
-                                 headers={'xi-api-key': key, 'Content-Type': 'application/json'})
-    with urllib.request.urlopen(req, timeout=300) as r:
-        d = json.loads(r.read())
-    out.write_bytes(base64.b64decode(d['audio_base64']))
-    a = d.get('alignment') or d['normalized_alignment']
-    words, cur = [], None
-    for c, s, e in zip(a['characters'], a['character_start_times_seconds'], a['character_end_times_seconds']):
-        if c.isspace():
-            if cur: words.append(cur); cur = None
-        elif cur is None: cur = {'text': c, 'start': s, 'end': e}
-        else: cur['text'] += c; cur['end'] = e
-    if cur: words.append(cur)
-    out.with_suffix('.words.json').write_text(json.dumps(words))
-
-
 def heard(hf, wav):
     """Word times in a trimmed take, from `hyperframes transcribe`."""
     with tempfile.TemporaryDirectory() as d:
@@ -139,23 +121,21 @@ def place_words(spoken, ndisp, words, offset):
 
 def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    ap.add_argument('reel'); ap.add_argument('--engine', choices=['files', 'hyperframes', 'elevenlabs'], required=True)
+    ap.add_argument('reel'); ap.add_argument('--engine', choices=['files', 'hyperframes'], required=True)
     ap.add_argument('--tempo', type=float, default=1.0, help='speed every take up (pitch kept), e.g. 1.05')
     ap.add_argument('--redo', default='', help='comma-separated line numbers to regenerate')
-    ap.add_argument('--model', default='eleven_v4', help='ElevenLabs model id')
     a = ap.parse_args()
     reel = pathlib.Path(a.reel).resolve(); spec = load_spec(reel)
     voices = getattr(spec, 'VOICES', {}); takes = reel / 'voice/takes'; takes.mkdir(parents=True, exist_ok=True)
     redo = {int(n) for n in a.redo.split(',') if n.strip()}
-    hf = None if a.engine == 'elevenlabs' else find_hyperframes(reel)
+    hf = find_hyperframes(reel) if a.engine == 'hyperframes' else None   # files: only needed to transcribe
     bus, t, LN = np.zeros(SR * 180, np.float32), AT, []
     for i, (who, disp, text, spoken) in enumerate(lines_of(spec)):
         found = sorted(p for p in takes.glob(f'{i:02d}.*') if p.suffix in ('.wav', '.mp3', '.m4a'))
         if a.engine != 'files' and (i in redo or not found):
             if who not in voices: raise SystemExit(f"spec.py VOICES needs a '{who}' voice for the {a.engine} engine")
             for p in found: p.unlink()
-            if a.engine == 'hyperframes': tts_hyperframes(hf, text, voices[who], takes / f'{i:02d}.wav')
-            else: tts_elevenlabs(text, voices[who], takes / f'{i:02d}.mp3', a.model)
+            tts_hyperframes(hf, text, voices[who], takes / f'{i:02d}.wav')
             found = sorted(p for p in takes.glob(f'{i:02d}.*') if p.suffix in ('.wav', '.mp3', '.m4a'))
         if not found: raise SystemExit(f'line {i}: no take at voice/takes/{i:02d}.wav ("{text}")')
         x = trim(decode(found[0]))
@@ -166,13 +146,14 @@ def main():
         x *= 10 ** ((TARGET_RMS - 20 * np.log10(np.sqrt(np.mean(x ** 2)) + 1e-9)) / 20)
         n = int(.008 * SR); x[:n] *= np.linspace(0, 1, n); x[-n:] *= np.linspace(1, 0, n)
         aligned = found[0].with_suffix('.words.json')
-        if aligned.exists():   # ElevenLabs: times in the untrimmed take, so find the trim offset and the tempo
+        if aligned.exists():   # a service's timestamps: times in the untrimmed take, so find the trim offset and the tempo
             raw_take = decode(found[0]); fr = int(.01 * SR); nn = len(raw_take) // fr
             rms = np.sqrt(np.mean(raw_take[:nn * fr].reshape(nn, fr) ** 2, axis=1)) + 1e-9
             lead = max(0, np.where(20 * np.log10(rms / rms.max()) > -40)[0][0] * fr - int(.03 * SR)) / SR
             words = [{'text': w['text'], 'start': (w['start'] - lead) / a.tempo, 'end': (w['end'] - lead) / a.tempo}
                      for w in json.loads(aligned.read_text())]
         else:
+            hf = hf or find_hyperframes(reel)
             with tempfile.TemporaryDirectory() as d:
                 tw = pathlib.Path(d) / 'take.wav'; write_wav(tw, x, 1); words = heard(hf, tw)
         times, guessed = place_words(spoken, len(disp), words, 0)

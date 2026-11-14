@@ -148,7 +148,7 @@ card, click and sound lands on the word it belongs to.
 | Your own recording | Free | The default: a take per line, in your voice |
 | [Chatterbox](https://github.com/resemble-ai/chatterbox) | Free, on your machine | Clones your voice from a ~10 s sample. MIT; Resemble AI stopped updating it in August 2026, but it still runs |
 | Kokoro, through `hyperframes tts` | Free, on your machine | Twelve preset voices with nothing extra to sign up for. Apache-2.0 |
-| [ElevenLabs](https://elevenlabs.io) | Paid per character | The most natural read, voice clones and exact word timings |
+| [ElevenLabs](https://elevenlabs.io) | Paid per character | The most natural read, voice clones and exact word timings; your agent sets it up with your own account |
 
 Clone only your own voice, or one you have permission to use. Setup and examples are
 in [voice options](skills/3-editing/edit-video/references/voice.md).

@@ -14,7 +14,7 @@ This repository provides instructions and media helpers. Apart from the fonts ma
 | [three.js](https://github.com/mrdoob/three.js) 0.168.0 | 3D rendering for 3d-character; edit-video's setup installs it into the workspace runtime and the builder copies it, with its license, into each 3D reel | MIT |
 | [Kokoro-82M](https://huggingface.co/hexgrad/Kokoro-82M) via `hyperframes tts` | Optional free local voice for animated reels | Apache-2.0 upstream; HyperFrames downloads the model, not distributed here |
 | [Chatterbox](https://github.com/resemble-ai/chatterbox) | Optional free local voice that clones the creator's own voice | MIT; archived by Resemble AI in August 2026; installed by the creator with pip; its output carries Resemble's Perth watermark |
-| [ElevenLabs](https://elevenlabs.io) | Optional hosted voice with word timestamps | A paid service with its own terms; used only with the creator's own API key |
+| [ElevenLabs](https://elevenlabs.io) | Optional hosted voice, set up by the creator's agent with the creator's own account; this pack never calls it | A paid service with its own terms |
 | [PDQ](https://github.com/facebook/ThreatExchange/tree/main/pdq) via `pdqhash` | Frame hashing for the optional duplicate check | BSD-style upstream license; installed with pip, verify the installed package |
 | [NumPy](https://numpy.org/), [SciPy](https://scipy.org/), [OpenCV](https://opencv.org/) | Optional duplicate check, breakout-card plates, voice and lip-sync timing, and building a cartoon rig | BSD / Apache-2.0 upstream; installed with pip |
 | [Playwright](https://playwright.dev/python/) | Optional page captures and layout snapshots for paper-grid | Apache-2.0; installed with pip, uses the local Chrome |
@@ -22,7 +22,7 @@ This repository provides instructions and media helpers. Apart from the fonts ma
 
 The adaptive glass CSS is an original implementation informed by the optical-layer model in [liquid-glass-css](https://github.com/turtiesocks/agent-skills/tree/main/liquid-glass-css); no code from it is included.
 
-Generated WAVs are original synthesis covered by Apache-2.0. The separately marked curated recordings were supplied by the maintainer from his public/non-copyright sound library and included at his request; they are not repository-generated recordings or newly relicensed by the code license.
+Every sound in the pack is original synthesis from edit-video's sound definitions, covered by Apache-2.0; no recordings ship. edit-video makes each sound on first use.
 
 The `product-motion-ads` method is informed by [brag](https://github.com/latent-spaces/brag) (MIT); no text or code from it is included. Its preview image shows an ad an agent built with the skill from brag's MIT-licensed "Horse Tinder" example site, a fictional app; its artwork was drawn in code.
 

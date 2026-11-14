@@ -9,7 +9,7 @@ comes first. This skill's `scripts/voice.py` takes one take per line from any of
 | **Your own recording** | Free | Yes | `hyperframes transcribe` | `files` |
 | **[Chatterbox](https://github.com/resemble-ai/chatterbox)** (Resemble AI) | Free, on your machine | Yes: clones a ~10 s sample | `hyperframes transcribe` | `files` |
 | **Kokoro** through `hyperframes tts` | Free, on your machine | No: preset voices | `hyperframes transcribe` | `hyperframes` |
-| **[ElevenLabs](https://elevenlabs.io)** | Paid per character | Yes, with a voice clone | Exact, from the service | `elevenlabs` |
+| **[ElevenLabs](https://elevenlabs.io)** | Paid per character | Yes, with a voice clone | Exact, from its timestamps | `files` |
 
 **The creator's own voice is the default.** Record each line as its own take, or
 clone it. A cloned or synthetic voice is used only for the person whose voice it
@@ -76,10 +76,16 @@ they are missing.
 
 ## ElevenLabs: the most natural read, exact timings
 
-Set `ELEVENLABS_API_KEY` in the environment, put ElevenLabs voice ids in `VOICES`,
-then run `voice.py --engine elevenlabs` (`--model` picks the model). The service
-returns a timestamp for every character, so word times are exact and no
-transcription runs. It costs credits per character; check the balance first.
+Recommend it when the creator wants the most natural read or a clone of their own
+voice and is happy to pay per character. This pack doesn't call ElevenLabs and never
+handles a key: the creator's agent sets ElevenLabs up with the creator's own account
+(its API, CLI or MCP server, following ElevenLabs' docs), checks the credit balance,
+and makes one take per line into `work/<reel>/voice/takes/` (`00.mp3`, `01.mp3`, …).
+
+Ask the service for timestamps when it offers them, and save each line's words beside
+its take as `NN.words.json`: `[{"text": "Hello", "start": 0.12, "end": 0.48}, …]` in
+the take's own time. Then run `voice.py --engine files`: it uses those exact times
+instead of transcribing.
 
 ## Making a voice sound right
 
