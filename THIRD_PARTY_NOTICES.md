@@ -32,4 +32,8 @@ The sample characters in `skills/3-styles-characters/cartoon-character/character
 
 The `animated-explainer` preview (`assets/previews/animated-explainer.jpg`) is three frames of a reel the skill built from its worked example, with the Ali sample as the cursor and a Kokoro voice. The `cartoon-character` preview is composed from the two sample rigs.
 
+Many of the style guides in `skills/3-styles-animated/film-styles/styles/`, and its `references/directing.md`, are adapted from material under the MIT License; the notice that license requires travels with the skill in its [`NOTICE.md`](skills/3-styles-animated/film-styles/NOTICE.md).
+
+The gallery tiles in `assets/previews/tiles/` and the strip in `assets/hero-styles.jpg` are single frames cut from the style previews above. The `film-styles` tile and `assets/previews/youtube-explainers.jpg` are typographic samplers drawn for the README, not frames of a video.
+
 The `3d-character` preview (`assets/previews/3d-character.jpg`) shows frames of the worked example built by the skill.

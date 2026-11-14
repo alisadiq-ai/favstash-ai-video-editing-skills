@@ -15,6 +15,7 @@ const expectedSkills = [
   "3-styles-characters/3d-character",
   "3-styles-on-camera/adaptive-glass",
   "3-styles-animated/animated-explainer",
+  "3-styles-animated/film-styles",
   "3-styles-on-camera/breakout-card",
   "3-styles-characters/cartoon-character",
   "3-styles-on-camera/motion-effects",
@@ -98,6 +99,9 @@ for (const folder of [".dev-private", ".favstash-studio"]) {
   if (ignored.status !== 0) failures.push(`${folder} is not ignored`);
   if (files.some((file) => file.startsWith(`${folder}/`))) failures.push(`${folder} contains tracked private files`);
 }
+// The film-styles index and the README's table of film looks are generated from the STYLE.md files.
+const filmIndex = spawnSync(process.execPath, [path.join(root, "scripts", "film-styles-index.mjs"), "--check"], { encoding: "utf8" });
+if (filmIndex.status !== 0) failures.push(filmIndex.stderr.trim() || "film-styles index check failed");
 if (failures.length) {
   console.error(failures.join("\n"));
   process.exitCode = 1;

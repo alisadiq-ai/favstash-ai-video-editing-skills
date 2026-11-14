@@ -1,6 +1,6 @@
 # FavStash creator skills
 
-Thirteen skills in four stages of the short-form loop. For a user-requested
+Fourteen skills in four stages of the short-form loop. For a user-requested
 installation, follow [INSTALL_FOR_AGENTS.md](INSTALL_FOR_AGENTS.md).
 
 | Stage | Skill | Use it to |
@@ -8,9 +8,11 @@ installation, follow [INSTALL_FOR_AGENTS.md](INSTALL_FOR_AGENTS.md).
 | 1 · Research | [find-ideas](skills/1-research/find-ideas/SKILL.md) | Find proven references and choose the next idea |
 | 2 · Script | [write-script](skills/2-scripting/write-script/SKILL.md) | Write one or more hooks to test, one shared body and the editor brief |
 | 3 · Edit | [edit-video](skills/3-editing/edit-video/SKILL.md) | Cut, caption, sound, motion graphics, safe areas and review: the base for every edit |
-| 3 · Edit, style | [adaptive-glass](skills/3-styles-on-camera/adaptive-glass/SKILL.md), [paper-grid](skills/3-styles-on-camera/paper-grid/SKILL.md), [breakout-card](skills/3-styles-on-camera/breakout-card/SKILL.md), [product-motion-ads](skills/3-styles-animated/product-motion-ads/SKILL.md), [text-over-footage](skills/3-styles-on-camera/text-over-footage/SKILL.md), [animated-explainer](skills/3-styles-animated/animated-explainer/SKILL.md), [3d-character](skills/3-styles-characters/3d-character/SKILL.md) | Add exactly one finished look on top of `edit-video` |
-| 3 · Edit, character | [cartoon-character](skills/3-styles-characters/cartoon-character/SKILL.md) | Add a lip-synced cartoon (a sample, or the creator's own made with AI) to `animated-explainer` or any edit |
-| 3 · Edit, effects | [motion-effects](skills/3-styles-on-camera/motion-effects/SKILL.md) | Add named motion effects (kinetic hook, gravity drop, orbit, vertigo, rewind and 28 more) to any edit |
+| 3 · Style, on camera | [breakout-card](skills/3-styles-on-camera/breakout-card/SKILL.md), [paper-grid](skills/3-styles-on-camera/paper-grid/SKILL.md), [adaptive-glass](skills/3-styles-on-camera/adaptive-glass/SKILL.md), [text-over-footage](skills/3-styles-on-camera/text-over-footage/SKILL.md) | Add exactly one finished look to a reel with the creator or their footage |
+| 3 · Style, on camera | [motion-effects](skills/3-styles-on-camera/motion-effects/SKILL.md) | Add named motion effects (kinetic hook, gravity drop, orbit, vertigo, rewind and 28 more) to any edit |
+| 3 · Style, animated | [animated-explainer](skills/3-styles-animated/animated-explainer/SKILL.md), [product-motion-ads](skills/3-styles-animated/product-motion-ads/SKILL.md) | Make a whole reel with no camera: a voice-keyed explainer, or a product ad |
+| 3 · Style, animated | [film-styles](skills/3-styles-animated/film-styles/SKILL.md) | Make a whole reel or a 16:9 YouTube explainer in one of 99 film looks (whiteboard, stick figures, cel anime, newsreel, 3D maps, tilt-shift…) |
+| 3 · Style, characters | [cartoon-character](skills/3-styles-characters/cartoon-character/SKILL.md), [3d-character](skills/3-styles-characters/3d-character/SKILL.md) | Add a presenter: a lip-synced 2D cartoon (a sample, or the creator's own made with AI) or a cute 3D kid |
 | 4 · Publish & learn | [publish-and-analyze](skills/4-publish-and-learn/publish-and-analyze/SKILL.md) | Export, cover, variants, scheduling after approval and results |
 
 Each skill installs as its own folder, so it must work alone: keep its helpers,

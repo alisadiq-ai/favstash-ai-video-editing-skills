@@ -128,3 +128,29 @@ test("3d-character builds a Three.js reel when installed alone", { skip: !python
   const cues = JSON.parse(await fs.readFile(path.join(reel, "cues.json"), "utf8"));
   assert.deepEqual(cues.cues.map((cue) => cue.sound), ["ui-pop"]);
 });
+
+test("film-styles ships every style with reel and YouTube formats and working links, when installed alone", async (context) => {
+  const installed = await installAlone(context, "film-styles");
+  const files = [];
+  for (const entry of await fs.readdir(installed, { recursive: true })) if (entry.endsWith(".md")) files.push(path.join(installed, entry));
+  const styles = files.filter((file) => path.basename(file) === "STYLE.md");
+  assert.ok(styles.length >= 99, `expected at least 99 styles, found ${styles.length}`);
+  const index = await fs.readFile(path.join(installed, "styles", "README.md"), "utf8");
+  for (const style of styles) {
+    const text = await fs.readFile(style, "utf8");
+    const folder = path.relative(path.join(installed, "styles"), path.dirname(style));
+    assert.match(text, /^### Reel \(1080×1920\)$/m, `${folder}: missing its reel format`);
+    assert.match(text, /^### YouTube \(1920×1080\)$/m, `${folder}: missing its YouTube format`);
+    assert.doesNotMatch(text, /DEMO\.md|Opuscar|Lemo ?Lab|Clawd/i, `${folder}: names its source`);
+    assert.ok(index.includes(`(${folder}/STYLE.md)`), `${folder}: not in the style index`);
+  }
+  for (const file of files) {
+    const text = await fs.readFile(file, "utf8");
+    for (const [, target] of text.matchAll(/\]\(([^)#\s]+)(?:#[^)]*)?\)/g)) {
+      if (/^[a-z]+:/i.test(target)) continue;
+      const resolved = path.resolve(path.dirname(file), target);
+      assert.ok(resolved.startsWith(installed + path.sep), `${path.relative(installed, file)}: ${target} leaves the skill`);
+      await fs.access(resolved);
+    }
+  }
+});

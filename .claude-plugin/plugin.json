@@ -1,8 +1,8 @@
 {
   "name": "favstash-creator-skills",
   "displayName": "FavStash Creator Skills",
-  "version": "0.8.0",
-  "description": "Find proven ideas, write hooks and scripts, edit Reels, TikToks and YouTube Shorts in seven finished styles with 33 motion effects, including fully animated reels, a cute 3D character and a lip-synced cartoon character (yours, made with AI), then publish and learn from results with FavStash.",
+  "version": "0.9.0",
+  "description": "Find proven ideas, write hooks and scripts, edit Reels, TikToks and YouTube Shorts in nine finished styles plus 99 film looks as reels or 16:9 YouTube explainers (whiteboard, stick figures, cel anime, newsreel, 3D maps, tilt-shift and more), 33 motion effects, fully animated reels, a cute 3D character and a lip-synced cartoon character (yours, made with AI), then publish and learn from results with FavStash.",
   "author": {
     "name": "FavStash",
     "url": "https://www.favstash.app"
@@ -14,7 +14,7 @@
   "supportUrl": "https://github.com/alisadiq-ai/favstash-ai-video-editing-skills/issues",
   "privacyPolicyUrl": "https://www.favstash.app/privacy",
   "termsOfServiceUrl": "https://www.favstash.app/terms",
-  "keywords": ["short-form-video", "video-editing", "reels", "tiktok", "youtube-shorts", "captions", "content-creation", "social-media", "animation", "cartoon", "3d", "threejs", "text-to-speech"],
+  "keywords": ["short-form-video", "video-editing", "reels", "tiktok", "youtube-shorts", "captions", "content-creation", "social-media", "animation", "cartoon", "3d", "threejs", "text-to-speech", "explainer-video", "youtube", "whiteboard-animation", "motion-graphics"],
   "skills": [
     "./skills/1-research/",
     "./skills/2-scripting/",
