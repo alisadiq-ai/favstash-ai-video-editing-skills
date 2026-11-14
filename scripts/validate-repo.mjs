@@ -4,7 +4,9 @@ import fs from "node:fs/promises";
 import path from "node:path";
 import process from "node:process";
 import { fileURLToPath } from "node:url";
+import crypto from "node:crypto";
 import { listFilesRecursively, pathExists, readJson, sha256File } from "../skills/3-editing/edit-video/lib/files.mjs";
+import { SOUND_DEFINITIONS, wavBuffer } from "../skills/3-editing/edit-video/lib/sfx.mjs";
 
 const root = fileURLToPath(new URL("..", import.meta.url));
 const failures = [];
@@ -12,12 +14,16 @@ const expectedSkills = [
   "1-research/find-ideas",
   "2-scripting/write-script",
   "3-editing/edit-video",
-  "3-editing-styles/adaptive-glass",
-  "3-editing-styles/breakout-card",
-  "3-editing-styles/motion-effects",
-  "3-editing-styles/paper-grid",
-  "3-editing-styles/product-motion-ads",
-  "3-editing-styles/text-over-footage",
+  "3-styles-characters/3d-character",
+  "3-styles-on-camera/adaptive-glass",
+  "3-styles-animated/animated-explainer",
+  "3-styles-animated/film-styles",
+  "3-styles-on-camera/breakout-card",
+  "3-styles-characters/cartoon-character",
+  "3-styles-on-camera/motion-effects",
+  "3-styles-on-camera/paper-grid",
+  "3-styles-animated/product-motion-ads",
+  "3-styles-on-camera/text-over-footage",
   "4-publish-and-learn/publish-and-analyze",
 ];
 const skillRoot = path.join(root, "skills");
@@ -80,10 +86,16 @@ const assetRoot = path.join(skillRoot, "3-editing", "edit-video", "assets", "sfx
 const manifest = await readJson(path.join(assetRoot, "manifest.json"));
 if (manifest.count !== manifest.sounds?.length) failures.push("Invalid SFX manifest count");
 for (const sound of manifest.sounds ?? []) {
-  const asset = path.join(assetRoot, sound.file);
-  if (!(await pathExists(asset)) || await sha256File(asset) !== sound.sha256) {
-    failures.push(`Missing or changed SFX: ${sound.file}`);
+  if (sound.origin === "curated") {
+    const asset = path.join(assetRoot, sound.file);
+    if (!(await pathExists(asset)) || await sha256File(asset) !== sound.sha256) failures.push(`Missing or changed SFX: ${sound.file}`);
+    continue;
   }
+  // Synthesized sounds ship as their definition only; the manifest checksum must still match what they make.
+  const definition = SOUND_DEFINITIONS.find((d) => d.id === sound.id);
+  const made = definition && crypto.createHash("sha256").update(wavBuffer(definition)).digest("hex");
+  if (made !== sound.sha256) failures.push(`Synthesized SFX no longer matches its manifest: ${sound.id}`);
+  if (await pathExists(path.join(assetRoot, sound.file))) failures.push(`Synthesized SFX committed as audio: ${sound.file}`);
 }
 // Every bundled sound ships to users, so each one must be listed in the manifest.
 const listedSounds = new Set((manifest.sounds ?? []).map((sound) => path.join(assetRoot, sound.file)));
@@ -95,6 +107,9 @@ for (const folder of [".dev-private", ".favstash-studio"]) {
   if (ignored.status !== 0) failures.push(`${folder} is not ignored`);
   if (files.some((file) => file.startsWith(`${folder}/`))) failures.push(`${folder} contains tracked private files`);
 }
+// The film-styles index and the README's table of film looks are generated from the STYLE.md files.
+const filmIndex = spawnSync(process.execPath, [path.join(root, "scripts", "film-styles-index.mjs"), "--check"], { encoding: "utf8" });
+if (filmIndex.status !== 0) failures.push(filmIndex.stderr.trim() || "film-styles index check failed");
 if (failures.length) {
   console.error(failures.join("\n"));
   process.exitCode = 1;

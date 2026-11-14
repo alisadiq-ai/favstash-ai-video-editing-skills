@@ -1,6 +1,6 @@
 ---
 name: edit-video
-description: "Edit Reels, TikToks and YouTube Shorts from a brief, footage or reference: cut, captions, sound, motion graphics, safe areas and review of the encoded export. The base for every edit; add one style skill (adaptive-glass, paper-grid, breakout-card, product-motion-ads, text-over-footage) for the finished look."
+description: "Edit Reels, TikToks and YouTube Shorts from a brief, footage or reference: cut, captions, sound, motion graphics, safe areas and review of the encoded export. The base for every edit; add one style skill (adaptive-glass, paper-grid, breakout-card, product-motion-ads, text-over-footage, animated-explainer, film-styles, 3d-character) for the finished look, and cartoon-character for a lip-synced character."
 ---
 
 # Edit video
@@ -19,6 +19,10 @@ stay simple; a product claim may need moving proof.
 | `breakout-card` | Grid page, speaker in a bottom card with their head breaking out, one-to-two-word captions | Talking-head explainers that alternate graphics and personal lines |
 | `product-motion-ads` | Motion graphics built from the product itself, one continuous piece where each scene turns into the next | Promoting something the creator built, free resources and comment-to-DM giveaways; no camera footage needed |
 | `text-over-footage` | One readable line over B-roll that matches it | Jokes, observations and short setup/payoff reels |
+| `animated-explainer` | Fully animated: a lit colour field and one big hero card per spoken beat, the line word-lit at the top, keyed to a locked voice | Tool, product and idea explainers and two-voice conversations when the creator doesn't film |
+| `film-styles` | One of 99 film looks drawn in code: whiteboard, stick figures, tablet sketch, chalkboard, watercolour, cel anime, manga, newsreel, caption news, data stories, 3D maps, isometric, tilt-shift, brick toy, risograph, neon and more | A whole reel, or a 16:9 YouTube explainer in chapters, with no camera; each style says what goes first |
+| `3d-character` | A cute 3D chibi kid (boy or girl) talking to camera on a pastel stage, camera cuts on the words; Three.js, no Blender | Playful explainers and announcements when the creator doesn't film |
+| `cartoon-character` | A lip-synced 2D cartoon that talks, blinks and gestures (the creator's own, made with AI, or a sample) | A cursor in `animated-explainer`, a corner presenter on any reel, or a cartoon explainer |
 
 Use the creator's own brand and references when they have them. Without a style
 installed, follow this guide alone with clean full-camera framing.
@@ -121,13 +125,18 @@ shutter for a meaningful camera/cut change, swish for a motivated zoom, tick for
 step, thock when something settles, latch when it locks or connects. A short
 riser can build into a reveal; resolve it at the visual payoff. Merge nearby cues
 and keep ordinary caption changes silent. Prefer the creator's established sounds;
-otherwise start with the curated sounds in the [SFX pack](assets/sfx/manifest.json).
+otherwise start with the [SFX pack](assets/sfx/manifest.json).
 Copy only selected files, align audible transients rather than file starts, and
 audition them against speech. The pack's other one-shots (ding, sparkle, impact,
 typing tick, ratchet, shimmer) cover payoffs, typing and product moments.
 Suggested gains are starting points, not a volume ceiling: a demonstrated click
 or reveal build must be audible. Trim/time-stretch a riser to the reveal and check
 the combined mix, not isolated cue levels.
+
+Animated reels (`animated-explainer`, `film-styles`, `3d-character`) start from a locked voice:
+[`scripts/voice.py`](scripts/voice.py) places one take per line and writes every word's
+time, from the creator's own recording, a free local voice or ElevenLabs. See
+[voice options](references/voice.md), including how to clone your own voice for free.
 
 When sounds follow on-screen events, put each one on the **first frame that shows
 its event**: struck sounds on their attack, swells on their peak.

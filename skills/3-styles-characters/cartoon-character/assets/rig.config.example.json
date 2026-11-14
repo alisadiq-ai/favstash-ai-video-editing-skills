@@ -1,0 +1,99 @@
+{
+  "base": "source/base.png",
+  "out": "rig",
+  "size": 1024,
+  "mirror": true,
+  "key": {
+    "lo": 30,
+    "hi": 150
+  },
+  "poses": {
+    "neutral": "source/base.png",
+    "point": "source/pose-point.png",
+    "thumbs": "source/pose-thumbs.png",
+    "wave": "source/pose-wave.png",
+    "shrug": "source/pose-shrug.png"
+  },
+  "patches": [
+    {
+      "name": "m-ah",
+      "from": "source/v-mouth-ah.png",
+      "roi": [
+        850,
+        1150,
+        1500,
+        1610
+      ]
+    },
+    {
+      "name": "m-eh",
+      "from": "source/v-mouth-eh.png",
+      "roi": [
+        850,
+        1150,
+        1500,
+        1610
+      ]
+    },
+    {
+      "name": "m-oo",
+      "from": "source/v-mouth-oo.png",
+      "roi": [
+        850,
+        1150,
+        1500,
+        1610
+      ]
+    },
+    {
+      "name": "m-grin",
+      "from": "source/v-excited.png",
+      "roi": [
+        850,
+        1150,
+        1500,
+        1610
+      ]
+    },
+    {
+      "name": "m-frown",
+      "from": "source/v-worried.png",
+      "roi": [
+        850,
+        1150,
+        1500,
+        1610
+      ]
+    },
+    {
+      "name": "e-closed",
+      "from": "source/v-eyes-closed.png",
+      "roi": [
+        820,
+        840,
+        1600,
+        1180
+      ]
+    },
+    {
+      "name": "u-worried",
+      "from": "source/v-worried.png",
+      "roi": [
+        780,
+        700,
+        1620,
+        1200
+      ]
+    },
+    {
+      "name": "u-excited",
+      "from": "source/v-excited.png",
+      "roi": [
+        780,
+        700,
+        1620,
+        1200
+      ]
+    }
+  ]
+}

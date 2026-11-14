@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "title": "FavStash Short-Form SFX Pack",
   "generatedBy": "scripts/generate-sfx.mjs",
-  "guidance": "Choose a sound for a visible event and audition it against speech. Prefer curated sounds or the creator's established library; ordinary caption changes stay silent.",
+  "guidance": "Choose a sound for a visible event and audition it against speech. Prefer the creator's established library when they have one; ordinary caption changes stay silent.",
   "count": 16,
   "sounds": [
     {
@@ -168,10 +168,45 @@
       "provenance": "Deterministically synthesized by scripts/generate-sfx.mjs; contains no third-party recording."
     },
     {
+      "id": "ui-pop",
+      "title": "UI Pop",
+      "file": "ui-pop.wav",
+      "durationSeconds": 0.2,
+      "sampleRate": 48000,
+      "channels": 1,
+      "bitDepth": 16,
+      "tags": [
+        "arrival",
+        "graphic"
+      ],
+      "recommendedUse": "An element visibly arrives; not every caption.",
+      "suggestedGainDb": -12,
+      "sha256": "9a5ce51433a9a62145c93e68b385664e4d48f19615860dc3b591c64fd11be974",
+      "license": "Apache-2.0",
+      "provenance": "Deterministically synthesized by scripts/generate-sfx.mjs; contains no third-party recording."
+    },
+    {
+      "id": "ui-click",
+      "title": "UI Click",
+      "file": "ui-click.wav",
+      "durationSeconds": 0.3,
+      "sampleRate": 48000,
+      "channels": 1,
+      "bitDepth": 16,
+      "tags": [
+        "ui",
+        "selection"
+      ],
+      "recommendedUse": "A visible click, selection or editing action.",
+      "suggestedGainDb": -13,
+      "sha256": "7a7c8d4f950b2735c526181984612c00aa5ff517aa04f4a78332e326c2968804",
+      "license": "Apache-2.0",
+      "provenance": "Deterministically synthesized by scripts/generate-sfx.mjs; contains no third-party recording."
+    },
+    {
       "id": "camera-shutter",
       "title": "Camera Shutter",
-      "file": "curated/camera-shutter.wav",
-      "origin": "curated",
+      "file": "camera-shutter.wav",
       "durationSeconds": 0.31,
       "sampleRate": 48000,
       "channels": 1,
@@ -181,19 +216,15 @@
         "cut"
       ],
       "recommendedUse": "A substantial camera or layout change.",
-      "transientLeadFramesAt30fps": 4,
       "suggestedGainDb": -11,
-      "sourceFileName": "Camera Shutter.wav",
-      "sourceTrimStartSeconds": 0.02,
-      "preparedTargetPeakDb": -9,
-      "provenance": "Maintainer-supplied recording; included at the maintainer's request.",
-      "sha256": "d3a2b6d91af724fedc04b5c39d157873f644300b321c77ea8fb3a8294c275a02"
+      "sha256": "4c1836fdec8413f11f9537bed2fd3a8a70866283796c3d174cfe51126ea8f791",
+      "license": "Apache-2.0",
+      "provenance": "Deterministically synthesized by scripts/generate-sfx.mjs; contains no third-party recording."
     },
     {
       "id": "camera-shutter-light",
       "title": "Light Shutter",
-      "file": "curated/camera-shutter-light.wav",
-      "origin": "curated",
+      "file": "camera-shutter-light.wav",
       "durationSeconds": 0.16,
       "sampleRate": 48000,
       "channels": 1,
@@ -204,63 +235,15 @@
         "subtle"
       ],
       "recommendedUse": "A smaller framing or take change.",
-      "transientLeadFramesAt30fps": 2,
       "suggestedGainDb": -12,
-      "sourceFileName": "sfx-camera-shutter-photo-click-0s.wav",
-      "sourceTrimStartSeconds": 0.125,
-      "preparedTargetPeakDb": -12,
-      "provenance": "Maintainer-supplied recording; included at the maintainer's request.",
-      "sha256": "eb8e6782b8523bbe7268330a77acc2fec10091716fc2998c87bcde91e83da3b0"
-    },
-    {
-      "id": "ui-pop",
-      "title": "UI Pop",
-      "file": "curated/ui-pop.wav",
-      "origin": "curated",
-      "durationSeconds": 0.2,
-      "sampleRate": 48000,
-      "channels": 1,
-      "bitDepth": 16,
-      "tags": [
-        "arrival",
-        "graphic"
-      ],
-      "recommendedUse": "An element visibly arrives; not every caption.",
-      "transientLeadFramesAt30fps": 0,
-      "suggestedGainDb": -12,
-      "sourceFileName": "sfx-ui-pop-short.mp3",
-      "sourceTrimStartSeconds": 0.03,
-      "preparedTargetPeakDb": -8,
-      "provenance": "Maintainer-supplied recording; included at the maintainer's request.",
-      "sha256": "da8d4e9ab3b9e8bac5309243de329002948e57649fd25685f9c2f5d063eb6e76"
-    },
-    {
-      "id": "ui-click",
-      "title": "UI Click",
-      "file": "curated/ui-click.wav",
-      "origin": "curated",
-      "durationSeconds": 0.3,
-      "sampleRate": 48000,
-      "channels": 1,
-      "bitDepth": 16,
-      "tags": [
-        "ui",
-        "selection"
-      ],
-      "recommendedUse": "A visible click, selection or editing action.",
-      "transientLeadFramesAt30fps": 0,
-      "suggestedGainDb": -13,
-      "sourceFileName": "sfx-ui-mouse-click-single-select-0s.mp3",
-      "sourceTrimStartSeconds": 0.02,
-      "preparedTargetPeakDb": -9,
-      "provenance": "Maintainer-supplied recording; included at the maintainer's request.",
-      "sha256": "2f508c0b362d225d791b34e487bfd7d692ffcf9fd1ba53ade810fd4dd4313ef0"
+      "sha256": "dd95a646e7308078a5b6b9f34d46764dd089b05cc9e86ede1355bc93b9b546f0",
+      "license": "Apache-2.0",
+      "provenance": "Deterministically synthesized by scripts/generate-sfx.mjs; contains no third-party recording."
     },
     {
       "id": "zoom-swish",
       "title": "Zoom Swish",
-      "file": "curated/zoom-swish.wav",
-      "origin": "curated",
+      "file": "zoom-swish.wav",
       "durationSeconds": 0.76,
       "sampleRate": 48000,
       "channels": 1,
@@ -270,19 +253,15 @@
         "movement"
       ],
       "recommendedUse": "A motivated zoom; align its rise with travel.",
-      "transientLeadFramesAt30fps": 12,
       "suggestedGainDb": -8,
-      "sourceFileName": "sfx-transition-swish-whoosh.mp3",
-      "sourceTrimStartSeconds": 0.02,
-      "preparedTargetPeakDb": -8,
-      "provenance": "Maintainer-supplied recording; included at the maintainer's request.",
-      "sha256": "f6abc91c096c49bf6bc3db3a45319fe0bc806d99adea657799ddda553d814453"
+      "sha256": "541441044d8a85cba77e34c96d311fd85a2d955ce82448358d825056efa4f2f2",
+      "license": "Apache-2.0",
+      "provenance": "Deterministically synthesized by scripts/generate-sfx.mjs; contains no third-party recording."
     },
     {
       "id": "hook-impact",
       "title": "Hook Impact",
-      "file": "curated/hook-impact.wav",
-      "origin": "curated",
+      "file": "hook-impact.wav",
       "durationSeconds": 1.9,
       "sampleRate": 48000,
       "channels": 1,
@@ -292,19 +271,15 @@
         "reveal"
       ],
       "recommendedUse": "The payoff of a reveal, below speech.",
-      "transientLeadFramesAt30fps": 2,
       "suggestedGainDb": -6,
-      "sourceFileName": "sfx-hook-bass-impact.mp3",
-      "sourceTrimStartSeconds": 0.07,
-      "preparedTargetPeakDb": -9,
-      "provenance": "Maintainer-supplied recording; included at the maintainer's request.",
-      "sha256": "999a79c38284aa8879a183908db381873ce16eed5015366f3e2273a88138c749"
+      "sha256": "a493793ad707fbbd4f1a366c03172d76e3ddaf73ae687157490b5be6346f58fa",
+      "license": "Apache-2.0",
+      "provenance": "Deterministically synthesized by scripts/generate-sfx.mjs; contains no third-party recording."
     },
     {
       "id": "metallic-riser",
       "title": "Metallic Riser",
-      "file": "curated/metallic-riser.wav",
-      "origin": "curated",
+      "file": "metallic-riser.wav",
       "durationSeconds": 1.64,
       "sampleRate": 48000,
       "channels": 1,
@@ -314,13 +289,10 @@
         "reveal"
       ],
       "recommendedUse": "Build anticipation and end at the reveal.",
-      "transientLeadFramesAt30fps": 0,
       "suggestedGainDb": -6,
-      "sourceFileName": "Metallic Riser.wav",
-      "sourceTrimStartSeconds": 0,
-      "preparedTargetPeakDb": -10,
-      "provenance": "Maintainer-supplied recording; included at the maintainer's request.",
-      "sha256": "6b93fa944a692adf5322a99245a9cc2837377df83e1f87e98103d6e37209e597"
+      "sha256": "3f44c39905b2e99135ed47894549da250a23ee1fd306dfc33ab03dfe5c8bc6b9",
+      "license": "Apache-2.0",
+      "provenance": "Deterministically synthesized by scripts/generate-sfx.mjs; contains no third-party recording."
     }
   ]
 }

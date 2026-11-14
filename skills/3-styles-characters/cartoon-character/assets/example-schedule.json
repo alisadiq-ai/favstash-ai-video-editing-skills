@@ -1,0 +1,9 @@
+{
+  "_from": "SketricGen agent-team reel v3.1 (35.8 s narration); seconds on the video timeline",
+  "total": 35.82,
+  "poses": [[0.0, "shrug"], [3.244, "neutral"], [6.707, "shrug"], [7.649, "point"], [9.922, "neutral"], [11.394, "point"], [12.128, "neutral"], [20.471, "point"], [21.338, "neutral"], [23.493, "thumbs"], [24.4, "neutral"], [27.751, "thumbs"], [28.554, "point"], [29.937, "wave"], [32.553, "neutral"], [33.497, "point"], [34.876, "wave"]],
+  "upper": [[0.0, 7.649, "worried"], [8.179, 9.639, "excited"], [20.471, 21.338, "excited"], [28.554, 30.317, "excited"], [32.603, 33.467, "excited"]],
+  "sleep": [22.511, 23.443],
+  "bounces": [2.155, 8.229, 11.494, 20.571, 27.951, 29.061, 32.327, 33.894],
+  "night": 7.749
+}

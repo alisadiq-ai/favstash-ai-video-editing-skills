@@ -7,14 +7,16 @@ import test from "node:test";
 import { fileURLToPath, pathToFileURL } from "node:url";
 
 const root = fileURLToPath(new URL("..", import.meta.url));
-const styles = path.join(root, "skills", "3-editing-styles");
+const SHELF = { "adaptive-glass": "on-camera", "breakout-card": "on-camera", "motion-effects": "on-camera", "paper-grid": "on-camera", "text-over-footage": "on-camera",
+  "animated-explainer": "animated", "product-motion-ads": "animated", "film-styles": "animated", "cartoon-character": "characters", "3d-character": "characters" };
+const styleDir = (name) => path.join(root, "skills", `3-styles-${SHELF[name]}`, name);
 
 // Skills install one folder each, so every style has to work without its siblings.
 async function installAlone(context, name) {
   const temporary = await fs.mkdtemp(path.join(os.tmpdir(), `favstash-style-${name}-`));
   context.after(async () => fs.rm(temporary, { recursive: true, force: true }));
   const installed = path.join(temporary, name);
-  await fs.cp(path.join(styles, name), installed, { recursive: true });
+  await fs.cp(styleDir(name), installed, { recursive: true });
   return installed;
 }
 
@@ -41,7 +43,124 @@ for (const [name, module] of [["paper-grid", "paper_grid"], ["breakout-card", "b
 }
 
 test("breakout-card bundles its font license", async () => {
-  const fonts = await fs.readdir(path.join(styles, "breakout-card", "assets", "fonts"));
+  const fonts = await fs.readdir(path.join(styleDir("breakout-card"), "assets", "fonts"));
   assert.ok(fonts.includes("OFL.txt"));
   assert.ok(fonts.filter((file) => file.endsWith(".ttf")).length >= 4);
+});
+
+// A minimal reel: two voiced lines and a spec with no character, so it needs only Python.
+async function tinyReel(context, character = "None") {
+  const reel = await fs.mkdtemp(path.join(os.tmpdir(), "favstash-reel-"));
+  context.after(async () => fs.rm(reel, { recursive: true, force: true }));
+  await fs.mkdir(path.join(reel, "voice"));
+  const line = (text, speaker, start) => {
+    const words = text.split(" ").map((w, i) => ({ w, s: start + i * 0.3, e: start + i * 0.3 + 0.25 }));
+    return { text, speaker, start: words[0].s, end: words.at(-1).e, words };
+  };
+  await fs.writeFile(path.join(reel, "voice", "timing.json"),
+    JSON.stringify({ duration: 2.4, lines: [line("Hello there world.", "host", 0.1), line("Hi.", "guest", 1.4)] }));
+  await fs.writeFile(path.join(reel, "spec.py"), [
+    "LINES = ['Hello there *world.*', '[Agent] Hi.']",
+    `CHARACTER = ${character}`,
+    "def build(T):",
+    "    return dict(scenes=[dict(id='s1', t0=0, field='night', html='<div class=\"card\" id=\"c1\"></div>'),",
+    "                        dict(id='s2', t0=T.L(1), field='cream', html='')], sfx=[[T.find('world'), 'ui-pop', 0]])",
+  ].join("\n"));
+  const gsap = path.join(reel, "gsap.min.js");
+  await fs.writeFile(gsap, "/* GSAP stand-in for the build test */");
+  return { reel, env: { ...process.env, FAVSTASH_GSAP: gsap } };
+}
+
+test("animated-explainer builds a reel when installed alone", { skip: !python && "python3 not available" }, async (context) => {
+  const installed = await installAlone(context, "animated-explainer");
+  const { reel, env } = await tinyReel(context);
+  const result = spawnSync("python3", ["-B", path.join(installed, "scripts", "build.py"), reel], { encoding: "utf8", env });
+  assert.equal(result.status, 0, result.stderr);
+  const page = await fs.readFile(path.join(reel, "index.html"), "utf8");
+  assert.match(page, /data-composition-id="main"/);
+  assert.match(page, /@font-face \{ font-family: "Instrument Serif"; font-style: italic; font-weight: 400;/);
+  const cues = JSON.parse(await fs.readFile(path.join(reel, "cues.json"), "utf8"));
+  assert.deepEqual(cues.cues.map((cue) => cue.sound), ["ui-pop"]);
+  await fs.access(path.join(reel, "assets", "fonts", "OFL.txt"));
+});
+
+test("animated-explainer names cartoon-character when a character is missing", { skip: !python && "python3 not available" }, async (context) => {
+  const installed = await installAlone(context, "animated-explainer");
+  const { reel, env } = await tinyReel(context, "'ali'");
+  delete env.FAVSTASH_CARTOON;
+  const result = spawnSync("python3", ["-B", path.join(installed, "scripts", "build.py"), reel], { encoding: "utf8", env });
+  assert.notEqual(result.status, 0);
+  assert.match(result.stderr + result.stdout, /cartoon-character/);
+});
+
+for (const character of ["ali", "stashy"]) {
+  test(`cartoon-character's ${character} rig builds presenter markup when installed alone`, { skip: !python && "python3 not available" }, async (context) => {
+    const installed = await installAlone(context, "cartoon-character");
+    const work = await fs.mkdtemp(path.join(os.tmpdir(), "favstash-presenter-"));
+    context.after(async () => fs.rm(work, { recursive: true, force: true }));
+    await fs.writeFile(path.join(work, "schedule.json"), JSON.stringify({ total: 3, poses: [[0, "neutral"], [1.5, "point"]], upper: [[0, 1, "worried"]] }));
+    await fs.writeFile(path.join(work, "mouth.json"), JSON.stringify([[0.2, 0.5, "ah"], [0.6, 0.8, "oo"]]));
+    const result = spawnSync("python3", ["-B", path.join(installed, "scripts", "presenter.py"),
+      "--rig", path.join(installed, "characters", character, "rig"), "--rig-url", "assets/presenter",
+      "--schedule", path.join(work, "schedule.json"), "--mouth", path.join(work, "mouth.json"),
+      "--out-html", path.join(work, "presenter.html"), "--out-pres", path.join(work, "pres.json")], { encoding: "utf8" });
+    assert.equal(result.status, 0, result.stderr);
+    const html = await fs.readFile(path.join(work, "presenter.html"), "utf8");
+    for (const part of ["pr-neutral", "pr-point", "pr-m-ah", "pr-m-oo", "pr-e-closed", "pr-u-worried"]) assert.match(html, new RegExp(part));
+  });
+}
+
+test("3d-character builds a Three.js reel when installed alone", { skip: !python && "python3 not available" }, async (context) => {
+  const installed = await installAlone(context, "3d-character");
+  const { reel } = await tinyReel(context);
+  await fs.writeFile(path.join(reel, "spec.py"), [
+    "LINES = ['Hello there *world.*', '[Agent] Hi.']",
+    "CHARACTER = {'look': 'girl'}",
+    "def build(T):",
+    "    return dict(shots=[[0, 'full'], [T.L(1), 'close']], acts=[[T.L(1), 'wave']],",
+    "                card={'at': .5, 'lines': ['make(reel)']}, sfx=[[T.find('world'), 'ui-pop', 0]])",
+  ].join("\n"));
+  // three.js comes from the workspace runtime; a stand-in package keeps the test offline.
+  const three = path.join(reel, "three-stand-in");
+  for (const file of ["build/three.module.js", "LICENSE", "examples/jsm/environments/RoomEnvironment.js", "examples/jsm/geometries/RoundedBoxGeometry.js"]) {
+    await fs.mkdir(path.dirname(path.join(three, file)), { recursive: true });
+    await fs.writeFile(path.join(three, file), `// ${file} stand-in`);
+  }
+  const result = spawnSync("python3", ["-B", path.join(installed, "scripts", "build.py"), reel], { encoding: "utf8", env: { ...process.env, FAVSTASH_THREE: three } });
+  assert.equal(result.status, 0, result.stderr);
+  const html = await fs.readFile(path.join(reel, "index.html"), "utf8");
+  assert.match(html, /data-no-timeline/);
+  assert.match(html, /@font-face \{ font-family: "Inter Tight"/);
+  assert.match(html, /"look": "girl"/);
+  await fs.access(path.join(reel, "assets", "vendor", "three", "three.module.js"));
+  await fs.access(path.join(reel, "assets", "vendor", "three", "addons", "geometries", "RoundedBoxGeometry.js"));
+  await fs.access(path.join(reel, "assets", "vendor", "three", "LICENSE"));
+  const cues = JSON.parse(await fs.readFile(path.join(reel, "cues.json"), "utf8"));
+  assert.deepEqual(cues.cues.map((cue) => cue.sound), ["ui-pop"]);
+});
+
+test("film-styles ships every style with reel and YouTube formats and working links, when installed alone", async (context) => {
+  const installed = await installAlone(context, "film-styles");
+  const files = [];
+  for (const entry of await fs.readdir(installed, { recursive: true })) if (entry.endsWith(".md")) files.push(path.join(installed, entry));
+  const styles = files.filter((file) => path.basename(file) === "STYLE.md");
+  assert.ok(styles.length >= 99, `expected at least 99 styles, found ${styles.length}`);
+  const index = await fs.readFile(path.join(installed, "styles", "README.md"), "utf8");
+  for (const style of styles) {
+    const text = await fs.readFile(style, "utf8");
+    const folder = path.relative(path.join(installed, "styles"), path.dirname(style));
+    assert.match(text, /^### Reel \(1080×1920\)$/m, `${folder}: missing its reel format`);
+    assert.match(text, /^### YouTube \(1920×1080\)$/m, `${folder}: missing its YouTube format`);
+    assert.doesNotMatch(text, /DEMO\.md|Opuscar|Lemo ?Lab|Clawd/i, `${folder}: names its source`);
+    assert.ok(index.includes(`(${folder}/STYLE.md)`), `${folder}: not in the style index`);
+  }
+  for (const file of files) {
+    const text = await fs.readFile(file, "utf8");
+    for (const [, target] of text.matchAll(/\]\(([^)#\s]+)(?:#[^)]*)?\)/g)) {
+      if (/^[a-z]+:/i.test(target)) continue;
+      const resolved = path.resolve(path.dirname(file), target);
+      assert.ok(resolved.startsWith(installed + path.sep), `${path.relative(installed, file)}: ${target} leaves the skill`);
+      await fs.access(resolved);
+    }
+  }
 });

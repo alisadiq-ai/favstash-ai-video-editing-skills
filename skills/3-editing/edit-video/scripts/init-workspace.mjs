@@ -11,6 +11,8 @@ import { run } from "../lib/process.mjs";
 const HYPERFRAMES_VERSION = "0.8.32";
 // Coded compositions load GSAP from a local copy, so renders need no network.
 const GSAP_VERSION = "3.14.2";
+// The 3D styles copy three.js from here into each reel (pinned, not bundled in the skills).
+const THREE_VERSION = "0.168.0";
 const skill = fileURLToPath(new URL("..", import.meta.url));
 const args = parseArgs(process.argv.slice(2));
 if (args.help) {
@@ -37,7 +39,7 @@ const runtimePackage = await pathExists(packageTarget) ? await readJson(packageT
 runtimePackage.private = true;
 runtimePackage.dependencies ||= {};
 // Preserve a creator's working renderer and libraries instead of changing them during setup.
-for (const [name, version] of [["hyperframes", HYPERFRAMES_VERSION], ["gsap", GSAP_VERSION]]) {
+for (const [name, version] of [["hyperframes", HYPERFRAMES_VERSION], ["gsap", GSAP_VERSION], ["three", THREE_VERSION]]) {
   if (!runtimePackage.dependencies[name] && !runtimePackage.devDependencies?.[name]) {
     runtimePackage.dependencies[name] = version;
   }

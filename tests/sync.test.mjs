@@ -95,3 +95,16 @@ test("sfx-sync mixes, masters and muxes a cue sheet", { skip: !ffmpeg && "ffmpeg
   assert.match(check.stdout, /audio track vs mix: 0 samples/);
   await fs.access(path.join(work, "strips", "sync-01.jpg"));
 });
+
+test("sfx-sync points reads the whole pack, making synthesized sounds on first use", { skip: !ffmpeg && "ffmpeg not available" }, async (context) => {
+  const dir = await fs.mkdtemp(path.join(os.tmpdir(), "favstash-points-"));
+  context.after(async () => fs.rm(dir, { recursive: true, force: true }));
+  const out = path.join(dir, "points.json");
+  const result = spawnSync(process.execPath, [path.join(root, "skills/3-editing/edit-video/scripts/sfx-sync.mjs"), "points", "--json", out], { encoding: "utf8" });
+  assert.equal(result.status, 0, result.stderr);
+  const rows = JSON.parse(await fs.readFile(out, "utf8"));
+  assert.equal(rows.length, 16);
+  const shutter = rows.find((row) => row.id === "camera-shutter");
+  // Like the recording it replaced (0.084 s): the first strong click of the mechanism.
+  assert.ok(shutter.sync > 0.07 && shutter.sync < 0.1, `camera-shutter syncs on its first strong click, got ${shutter.sync}`);
+});

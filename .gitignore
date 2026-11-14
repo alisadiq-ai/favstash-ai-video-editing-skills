@@ -16,6 +16,9 @@ tmp/
 .env.*
 !.env.example
 
+# The SFX pack is synthesized: edit-video makes each sound on first use, so no audio is committed
+skills/3-editing/edit-video/assets/sfx/*.wav
+
 # Optional adapter installs
 package-lock.json
 pnpm-lock.yaml

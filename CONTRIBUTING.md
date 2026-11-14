@@ -5,8 +5,11 @@ few finished styles, and publishing. Improve judgment with concrete lessons from
 real videos. Prefer a sharper rule in an existing skill over a new skill.
 
 - **A new style** must be a distinct finished look, tested on real footage, with a
-  preview image in `assets/previews/`. It lives in `skills/3-editing-styles/<name>/`
+  preview image in `assets/previews/`. It lives on its shelf, `skills/3-styles-on-camera/`, `skills/3-styles-animated/` or `skills/3-styles-characters/`, in `<name>/`
   with its own builder and assets, and relies on `edit-video` for everything shared.
+- **A new film look** is one `STYLE.md` in `skills/3-styles-animated/film-styles/styles/<group>/<name>/`,
+  shaped like the others (both formats under `## Formats`, sections 1 onwards, a
+  `Build` section). Run `npm run film-index` to add it to the index and the README.
 - **Every skill works when installed alone.** Keep helpers, assets and Markdown
   links inside the skill's folder; refer to other skills by name. Root scripts are
   maintainer tools.
