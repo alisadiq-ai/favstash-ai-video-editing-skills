@@ -15,6 +15,7 @@ const expectedSkills = [
   "2-scripting/write-script",
   "3-editing/edit-video",
   "3-styles-characters/3d-character",
+  "3-styles-characters/blender-director",
   "3-styles-on-camera/adaptive-glass",
   "3-styles-animated/animated-explainer",
   "3-styles-animated/film-styles",

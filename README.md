@@ -1,18 +1,18 @@
 # FavStash Creator Skills: find ideas, script, edit and publish short videos with Claude Code or Codex
 
-[![Ten looks, every frame drawn by an agent in code: an animated explainer, a 3D chibi girl, 99 film looks, a cartoon of the pack's creator, a product ad and five talking-head styles](assets/hero-styles.jpg)](#pick-a-style)
+[![Ten looks, every frame drawn by an agent in code: an animated explainer, a 3D Blender sitcom scene, 99 film looks, a cartoon of the pack's creator, a product ad and five talking-head styles](assets/hero-styles.jpg)](#pick-a-style)
 
 **Turn your coding agent into a video studio.** Hand it a script and it makes the whole
 video, in code, on your laptop: a Reel, a TikTok, a Short, or a 16:9 explainer for
 YouTube. **99 film looks** (whiteboard, stick figures, cel anime, manga, newsreel, 3D
-maps, tilt-shift, risograph…), a cute 3D character, a lip-synced cartoon of you, and
+maps, tilt-shift, risograph…), a cute 3D character, a Blender 3D sitcom, a lip-synced cartoon of you, and
 five styles for when you are on camera. No camera needed, no video model, no stock
 footage, no subscription. Free and open source, for Claude Code, Codex or any
 skills-aware agent.
 
 - 🎬 **99 film looks**, each a full style guide: layout, type, motion, camera, sound and what goes on the first frame.
 - 📺 **Reels and YouTube.** Every look comes as a 9:16 reel and a 16:9 explainer in chapters.
-- 🧸 **Characters.** A chibi 3D kid, or a cartoon of you made from a few photos with any image AI.
+- 🧸 **Characters.** A chibi 3D kid, a Blender sitcom your agent directs from a script, or a cartoon of you made from a few photos with any image AI.
 - 🎙️ **Free voices.** Your own recording, a free local voice, or ElevenLabs, with every word timed.
 - 🔁 **The whole loop.** Find proven ideas, write the script, edit, then publish and learn with [FavStash](https://www.favstash.app/).
 
@@ -23,7 +23,7 @@ Set up FavStash creator skills for my short-form workflow.
 Clone https://github.com/alisadiq-ai/favstash-ai-video-editing-skills and follow:
 https://raw.githubusercontent.com/alisadiq-ai/favstash-ai-video-editing-skills/main/INSTALL_FOR_AGENTS.md
 
-Install all fourteen skills and the local media tools they need in my workspace.
+Install all fifteen skills and the local media tools they need in my workspace.
 Check whether FavStash is connected; if not, connect it with the FavStash CLI
 (Codex or Claude Code) or guide me through sign-in. Verify the setup, then tell
 me how to start my first reel.
@@ -86,7 +86,7 @@ Zoom, the 3D Map Explainer, Isometric Infographic, Line-Art Cutaway or Data Stor
 <table><tr>
 <td width="33%" valign="top"><a href="skills/3-styles-characters/cartoon-character/SKILL.md"><img src="assets/previews/tiles/cartoon-character.jpg" width="100%" alt="Cartoon character: a cartoon of Ali, who made this pack"></a><br><b><a href="skills/3-styles-characters/cartoon-character/SKILL.md">cartoon-character</a></b><br><sub>A lip-synced 2D cartoon that talks, blinks and swaps poses. Two samples ship (Ali and Stashy); make your own from a few photos with any image AI.</sub></td>
 <td width="33%" valign="top"><a href="skills/3-styles-characters/3d-character/SKILL.md"><img src="assets/previews/tiles/3d-character.jpg" width="100%" alt="3D character: a chibi girl waving on a pastel stage"></a><br><b><a href="skills/3-styles-characters/3d-character/SKILL.md">3d-character</a></b><br><sub>A cute 3D chibi boy or girl talks to camera on a pastel stage, with camera cuts on the words. Built in Three.js, no Blender needed.</sub></td>
-<td width="33%" valign="top"></td>
+<td width="33%" valign="top"><a href="skills/3-styles-characters/blender-director/SKILL.md"><img src="assets/previews/tiles/blender-director.jpg" width="100%" alt="Blender director: a silver-haired character and a box mascot at a night desk, lit by a lamp and the city"></a><br><b><a href="skills/3-styles-characters/blender-director/SKILL.md">blender-director</a></b><br><sub>A narrated 3D episode built in Blender from code: lip-synced characters, cameras that cut on words, dark finished lighting and wireframe reveals. Needs Blender (free).</sub></td>
 </tr></table>
 
 ### On camera: you, or your footage
@@ -121,6 +121,11 @@ that works with the sound off.
 ```text
 Use $edit-video with $3d-character to make a 15-second 3D reel where the chibi girl
 announces my launch, with camera cuts on the words and a wave at the end.
+```
+
+```text
+Use $blender-director to turn this two-character script into a 3D episode in Blender,
+in a dark night room, with a wireframe reveal on the line "this whole room is code".
 ```
 
 ```text
@@ -184,7 +189,12 @@ Every skill works on its own. [FavStash](https://www.favstash.app/) closes the l
 your saved reels feed research, approved cuts go to Instagram, TikTok, YouTube or
 LinkedIn, and the analytics pick the next test.
 
-[![FavStash connects Claude Code, Codex and ChatGPT with Instagram, TikTok and YouTube to save inspiration, schedule, publish and analyze short videos](assets/favstash-social-preview-2026.png)](https://www.favstash.app/)
+[![Complete your loop: 1 Save, ideas from your Stash; 2 Edit, your agent edits with these skills; 3 Post, FavStash schedules and runs your calendar; 4 Learn, analytics feed the next reel](assets/creator-loop.png)](https://www.favstash.app/)
+
+**Complete your loop.** These skills make the reel. [FavStash](https://www.favstash.app/)
+adds the other three steps: the reels you save become your ideas, approved cuts go out on
+your calendar, and the numbers pick what you make next. Connect it once and every reel
+makes the next one better.
 
 ## Install
 
@@ -220,7 +230,7 @@ with OAuth ([connection guide](https://www.favstash.app/docs/ai-connect)).
 <details>
 <summary>Install as a Claude plugin</summary>
 
-This repository is also a Claude plugin, `favstash-creator-skills`, with all fourteen
+This repository is also a Claude plugin, `favstash-creator-skills`, with all fifteen
 skills and the FavStash connector. Load it in Claude Code for one session:
 
 ```bash
