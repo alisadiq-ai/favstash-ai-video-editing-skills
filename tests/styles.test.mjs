@@ -8,7 +8,7 @@ import { fileURLToPath, pathToFileURL } from "node:url";
 
 const root = fileURLToPath(new URL("..", import.meta.url));
 const SHELF = { "adaptive-glass": "on-camera", "breakout-card": "on-camera", "motion-effects": "on-camera", "paper-grid": "on-camera", "text-over-footage": "on-camera",
-  "animated-explainer": "animated", "product-motion-ads": "animated", "film-styles": "animated", "cartoon-character": "characters", "3d-character": "characters" };
+  "animated-explainer": "animated", "product-motion-ads": "animated", "film-styles": "animated", "cartoon-character": "characters", "3d-character": "characters", "blender-director": "characters" };
 const styleDir = (name) => path.join(root, "skills", `3-styles-${SHELF[name]}`, name);
 
 // Skills install one folder each, so every style has to work without its siblings.

@@ -1,0 +1,6 @@
+interface:
+  display_name: "Style: Blender Director"
+  short_description: "A narrated 3D episode built in Blender from code: lip-synced characters, cameras that cut on words, dark finished lighting, wireframe reveals"
+  default_prompt: "Use $blender-director to turn this two-character script into a 3D Blender episode: voice each line, place the timeline, light the room dark and warm, and cut the cameras on the words."
+policy:
+  allow_implicit_invocation: true
