@@ -276,9 +276,7 @@ so use the plugin in Claude Code or in Cowork on your own computer.
 
 ## Free to use
 
-The skills are free and open source (Apache-2.0). FavStash's free plan includes
-unlimited saved items and stash searches, 100 transcript and AI enrichments, one
-connected channel and 10 posts a month. See the [current plans](https://www.favstash.app/#pricing).
+The skills are free and open source (Apache-2.0). FavStash's plans are on [favstash.app](https://www.favstash.app/#pricing).
 
 ## FAQ
 
