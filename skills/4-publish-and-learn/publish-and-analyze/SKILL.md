@@ -10,8 +10,8 @@ idea. **Nothing is uploaded or scheduled until the creator approves the exact fi
 caption, account, settings and time.** Prepare everything, show one summary and wait
 for "go".
 
-FavStash does the posting and the analytics: one connected channel and 10 posts a
-month are free. For Codex and Claude Code, its CLI bridge uploads local files; see
+FavStash does the posting and the analytics. For Codex and Claude Code, its CLI
+bridge uploads local files; see
 [connecting FavStash](references/favstash-connection.md). The FavStash tools describe
 their own current parameters, so read them instead of guessing.
 
