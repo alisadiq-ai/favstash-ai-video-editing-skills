@@ -4,7 +4,8 @@
 
 /** Phrases that usually mark a moment worth clipping, in any game or stream. */
 export const HYPE_PHRASES = [
-  "clip that", "clip it", "clipped", "no way", "let's go", "lets go", "oh my god", "oh my gosh",
+  // Speech-to-text often hears "clip that" as "click that"; both count.
+  "clip that", "clip it", "clipped", "click that", "click it", "no way", "let's go", "lets go", "oh my god", "oh my gosh",
   "what the", "are you kidding", "you're kidding", "holy", "insane", "crazy", "let's gooo",
   "did you see", "did that just", "how did", "i can't believe", "bro", "yo", "wait", "run",
   "go go go", "get out", "watch this", "look at this", "oh no", "nooo", "yes yes", "dude",
@@ -163,10 +164,23 @@ export function smooth(values, width = 3) {
   });
 }
 
-/** Loudness in dB per second → 0–6 "louder than the last minute" score. */
+function percentile(values, p) {
+  const sorted = values.filter(Number.isFinite).sort((a, b) => a - b);
+  if (!sorted.length) return 0;
+  return sorted[Math.min(sorted.length - 1, Math.floor(p * sorted.length))];
+}
+
+/**
+ * Loudness in dB per second → a 0–8 score. Half is "louder than the minute
+ * around it" (catches spikes in a quiet stretch), half is "louder than this
+ * stream usually gets" (its 80th percentile, roughly normal talking over the
+ * game), so a scream or an explosion outranks someone simply starting to talk.
+ */
 export function loudnessSignal(dbs, window = 60) {
   // 3 dB of local spread is the floor, so a near-silent stretch can't turn a cough into a peak.
-  return localZ(dbs, window, 3).map((z) => clamp(z, 0, 6));
+  const local = localZ(dbs, window, 3).map((z) => clamp(z, 0, 8));
+  const usual = percentile(dbs, 0.8);
+  return dbs.map((db, i) => 0.5 * local[i] + 0.5 * clamp((db - usual) / 2, 0, 8));
 }
 
 function normalizeWords(text) {
@@ -212,7 +226,7 @@ export function speechSignal(words, duration, { keywords = [], window = 60 } = {
       const window = tokens.slice(i, i + parts.length).map((t) => t.norm).join(" ");
       if (window === phrase) {
         // "clip that" is the streamer asking for a clip: the strongest single cue.
-        const weight = phrase.startsWith("clip") ? 4 : custom.has(phrase) ? 3 : parts.length > 1 ? 2.5 : 1.2;
+        const weight = /^cli(p|ck) (that|it)$|^clipped$/.test(phrase) ? 4 : custom.has(phrase) ? 3 : parts.length > 1 ? 2.5 : 1.2;
         mark(Math.floor(tokens[i].start), phrase, weight);
       }
     }
@@ -351,9 +365,9 @@ export function quoteIn(words, start, end, limit = 220) {
 /** One plain sentence on why a moment was picked, from its strongest signals. */
 export function describeMoment({ loud = 0, speech = 0, chat = 0, scene = 0 }, phrases = []) {
   const parts = [];
-  if (loud >= 1.5) parts.push(loud >= 4 ? "a big volume spike" : "louder than the minute around it");
+  if (loud >= 2) parts.push(loud >= 7 ? "a big volume spike" : "louder than usual");
   if (phrases.length) parts.push(`"${phrases.slice(0, 3).join('", "')}"`);
-  else if (speech >= 1.5) parts.push("fast, excited talking");
+  else if (speech >= 2.5) parts.push("fast, excited talking");
   if (chat >= 1.5) parts.push(chat >= 4 ? "chat exploded" : "chat sped up");
   if (scene >= 1) parts.push("a hard cut on screen");
   if (!parts.length) return "Mild peak; check it before keeping.";

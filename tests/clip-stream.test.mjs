@@ -49,10 +49,13 @@ test("hype phrases and custom keywords mark the second they're said", () => {
     { text: "just", start: 5, end: 5.3 }, { text: "driving", start: 5.3, end: 6 },
     { text: "Clip", start: 40.1, end: 40.4 }, { text: "that!", start: 40.4, end: 40.8 },
     { text: "wanted", start: 90, end: 90.4 }, { text: "level", start: 90.4, end: 90.8 },
+    { text: "Click", start: 100, end: 100.3 }, { text: "that.", start: 100.3, end: 100.6 },
   ]);
   const { score, hits } = speechSignal(words, 120, { keywords: ["wanted level"] });
   assert.deepEqual(hits.get(40), ["clip that"]);
   assert.deepEqual(hits.get(90), ["wanted level"]);
+  assert.deepEqual(hits.get(100), ["click that"]);
+  assert.ok(score[100] >= score[40] - 0.5, "a misheard clip request scores like the real one");
   assert.ok(score[40] > score[5]);
 });
 
@@ -101,7 +104,8 @@ test("edges snap to sentence boundaries so lines aren't cut off", () => {
 });
 
 test("reasons read as a plain sentence", () => {
-  assert.equal(describeMoment({ loud: 4.5, chat: 2 }, ["clip that"]), 'A big volume spike, "clip that", chat sped up.');
+  assert.equal(describeMoment({ loud: 7.5, chat: 2 }, ["clip that"]), 'A big volume spike, "clip that", chat sped up.');
+  assert.equal(describeMoment({ loud: 4 }), "Louder than usual.");
   assert.equal(describeMoment({}), "Mild peak; check it before keeping.");
 });
 
