@@ -14,6 +14,7 @@ skills-aware agent.
 - 📺 **Reels and YouTube.** Every look comes as a 9:16 reel and a 16:9 explainer in chapters.
 - 🧸 **Characters.** A chibi 3D kid, a Blender sitcom your agent directs from a script, or a cartoon of you made from a few photos with any image AI.
 - 🎙️ **Free voices.** Your own recording, a free local voice, or ElevenLabs, with every word timed.
+- ✂️ **Clip your streams.** Hand it a four-hour stream or VOD; it finds the best moments from the volume, your commentary and chat, and cuts them into 9:16 clips.
 - 🔁 **The whole loop.** Find proven ideas, write the script, edit, then publish and learn with [FavStash](https://www.favstash.app/).
 
 **Give this prompt to your agent:**
@@ -23,7 +24,7 @@ Set up FavStash creator skills for my short-form workflow.
 Clone https://github.com/alisadiq-ai/favstash-ai-video-editing-skills and follow:
 https://raw.githubusercontent.com/alisadiq-ai/favstash-ai-video-editing-skills/main/INSTALL_FOR_AGENTS.md
 
-Install all fifteen skills and the local media tools they need in my workspace.
+Install all sixteen skills and the local media tools they need in my workspace.
 Check whether FavStash is connected; if not, connect it with the FavStash CLI
 (Codex or Claude Code) or guide me through sign-in. Verify the setup, then tell
 me how to start my first reel.
@@ -143,6 +144,32 @@ Use $edit-video with $breakout-card to edit these takes into a 40-second reel, a
 a kinetic hook from $motion-effects.
 ```
 
+## Clip a stream
+
+[`clip-stream`](skills/3-editing/clip-stream/SKILL.md) turns a long stream, VOD or
+gameplay recording into vertical clips. It finds the moments worth posting from what
+you can hear and read: volume spikes against the minute around them, what you say
+("no way", "clip that", your own keywords), chat bursts from a chat replay and hard
+cuts on screen. You look at each pick (start, peak and end side by side), keep the
+good ones, and it cuts them to 1080×1920 in one of three layouts:
+
+| Layout | Looks like | Fits |
+| --- | --- | --- |
+| `center` | A 9:16 window cut from the frame, slid left or right per clip | Driving, action, one clear subject |
+| `fill` | The whole frame over a blurred copy of itself | Games where the HUD, minimap or kill feed matters |
+| `split` | Your facecam on top, the game below | Streams where your reaction is half the moment |
+
+Then `edit-video` and `text-over-footage` add the hook line and captions, and
+`publish-and-analyze` schedules the batch through FavStash after you approve it.
+Everything runs on your computer with FFmpeg and a free local transcriber.
+
+```text
+Use $clip-stream to find the 30 best moments in last night's stream, show me the picks,
+then cut the ones I keep with my facecam on top.
+```
+
+Clip your own streams, or streams whose owner lets you clip them.
+
 ## Voices: yours, free on your laptop, or hosted
 
 Animated videos run on a voice, and every word's timing comes back with it, so each
@@ -167,6 +194,7 @@ from what you post.
 flowchart LR
   R[1 · Research<br/>find-ideas] --> S[2 · Script<br/>write-script]
   S --> E[3 · Edit<br/>edit-video + a style]
+  C[Long stream or VOD<br/>clip-stream] --> E
   E --> P[4 · Publish & learn<br/>publish-and-analyze]
   P -->|results pick the next idea| R
 ```
@@ -175,6 +203,7 @@ flowchart LR
 | --- | --- | --- |
 | 1 · Research | [find-ideas](skills/1-research/find-ideas/SKILL.md) | Finds proven reels to adapt (3× their creator's median), reads saved inspiration and suggests what to make next |
 | 2 · Script | [write-script](skills/2-scripting/write-script/SKILL.md) | Copies the proven hook, adds as many equally aggressive alternatives as you want to test, writes one shared body in your voice and hands over a filmable brief |
+| 3 · Clip | [clip-stream](skills/3-editing/clip-stream/SKILL.md) | Finds the best moments in a long stream or VOD from volume, speech and chat, and cuts the ones you keep into 9:16 clips |
 | 3 · Edit | [edit-video](skills/3-editing/edit-video/SKILL.md) + a style | Cuts your takes or builds the animated video, adds captions, sound and motion graphics, keeps everything in safe areas and reviews the actual export |
 | 4 · Publish & learn | [publish-and-analyze](skills/4-publish-and-learn/publish-and-analyze/SKILL.md) | Exports at full quality, picks a real-frame cover, avoids duplicate holds on hook variants, schedules after your approval and compares results |
 
@@ -230,7 +259,7 @@ with OAuth ([connection guide](https://www.favstash.app/docs/ai-connect)).
 <details>
 <summary>Install as a Claude plugin</summary>
 
-This repository is also a Claude plugin, `favstash-creator-skills`, with all fifteen
+This repository is also a Claude plugin, `favstash-creator-skills`, with all sixteen
 skills and the FavStash connector. Load it in Claude Code for one session:
 
 ```bash

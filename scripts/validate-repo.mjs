@@ -13,6 +13,7 @@ const failures = [];
 const expectedSkills = [
   "1-research/find-ideas",
   "2-scripting/write-script",
+  "3-editing/clip-stream",
   "3-editing/edit-video",
   "3-styles-characters/3d-character",
   "3-styles-characters/blender-director",

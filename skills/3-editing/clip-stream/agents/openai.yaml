@@ -1,0 +1,6 @@
+interface:
+  display_name: "Clip a Stream"
+  short_description: "Find a stream's best moments and cut 9:16 clips"
+  default_prompt: "Use $clip-stream to find the best moments in my stream and cut them into vertical clips I can review."
+policy:
+  allow_implicit_invocation: true
