@@ -1,6 +1,6 @@
 ---
 name: clip-stream
-description: "Turn a long stream, VOD or gameplay recording into vertical highlight clips: find the best moments from loudness, speech, chat and scene cuts, review them by eye, then cut 1080×1920 clips ready for edit-video. Use when the creator hands over a stream, VOD or long recording and asks for clips, highlights, Shorts or a week of posts from it."
+description: "Turn a long stream, VOD or gameplay recording into vertical highlight clips, or clip a stream while it is still live: find the best moments from loudness, speech, chat and scene cuts, review them by eye, then cut 1080×1920 clips ready for edit-video. Use when the creator hands over a stream, VOD, long recording or a live stream link and asks for clips, highlights, Shorts or a week of posts from it."
 ---
 
 # Clip a stream
@@ -127,6 +127,40 @@ even.
 - **Learn:** after a few days, compare which clips held viewers. Feed what
   worked back in: the `--keywords`, the layout, the clip length and what review
   keeps.
+
+## Clip while it's live
+
+Hand over the stream link and say "clip this stream". `watch-live` records the
+stream, reads its chat, and every few minutes runs the finder on the new stretch
+and cuts every new moment straight away, so clips are ready while the streamer
+is still playing:
+
+```bash
+node <skill>/scripts/watch-live.mjs --url twitch.tv/<channel> --hours 2 \
+  --layout split --cam 0:432:392:221 --keywords "heist,cops"
+```
+
+| Option | Use |
+| --- | --- |
+| `--hours 2` | How long to watch (`0` = until the stream ends). Ctrl-C stops it early after one last pass |
+| `--every 480` | Seconds between passes; each pass rereads 90 s of the last one so a moment on the seam is seen whole |
+| `--threshold 2 --count 3` | How strong a spike must be, and the most clips per pass. The defaults cut only when chat or the room really goes off |
+| `--layout`, `--cam`, `--focus`, `--zoom` | As in `cut-clips`. Grab one frame first to find the facecam box |
+| `--quality 720p60` | Record lower than the best stream to save disk |
+
+- **Twitch** works best: install [streamlink](https://streamlink.github.io)
+  (`pipx install streamlink`). It skips ad breaks and logs when each piece of
+  video was broadcast, so chat lines up with the picture even after an ad gap.
+  Chat is read anonymously from Twitch's public chat; names are never stored.
+- **YouTube, Kick and others** record with yt-dlp; moments come from loudness
+  (and your keywords if you transcribe afterwards).
+- It writes `stream.ts`, the chat log, `log.jsonl` and `pass-NN/` folders (each
+  with `moments.json`, frame sheets and `clips/`). Review the clips by eye
+  before editing, exactly as in step 4: the finder ranks, you judge.
+- Leave the computer awake and plugged in (macOS: `caffeinate -i node ...`).
+  A 1080p60 stream records at about 4 GB an hour.
+- The rights rules above apply live too: clip streams whose owner runs a
+  clipping program or said yes.
 
 ## Limits
 

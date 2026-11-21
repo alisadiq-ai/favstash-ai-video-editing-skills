@@ -14,7 +14,7 @@ skills-aware agent.
 - 📺 **Reels and YouTube.** Every look comes as a 9:16 reel and a 16:9 explainer in chapters.
 - 🧸 **Characters.** A chibi 3D kid, a Blender sitcom your agent directs from a script, or a cartoon of you made from a few photos with any image AI.
 - 🎙️ **Free voices.** Your own recording, a free local voice, or ElevenLabs, with every word timed.
-- ✂️ **Clip your streams.** Hand it a four-hour stream or VOD; it finds the best moments from the volume, your commentary and chat, and cuts them into 9:16 clips.
+- ✂️ **Clip your streams.** Hand it a four-hour stream or VOD, or a live stream link; it finds the best moments from the volume, your commentary and chat, and cuts them into 9:16 clips, while the stream is still live if you want.
 - 🔁 **The whole loop.** Find proven ideas, write the script, edit, then publish and learn with [FavStash](https://www.favstash.app/).
 
 **Give this prompt to your agent:**
@@ -166,6 +166,14 @@ Everything runs on your computer with FFmpeg and a free local transcriber.
 ```text
 Use $clip-stream to find the 30 best moments in last night's stream, show me the picks,
 then cut the ones I keep with my facecam on top.
+```
+
+It also clips a stream while it's live: paste the link and it records the stream,
+reads its chat and cuts a clip every time the chat goes off (Twitch through
+streamlink, so ads are skipped and chat stays in sync).
+
+```text
+Use $clip-stream to clip this stream live for the next two hours: twitch.tv/<channel>
 ```
 
 Clip your own streams, or streams whose owner lets you clip them.

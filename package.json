@@ -13,6 +13,7 @@
     "new-edit": "node skills/3-editing/edit-video/scripts/new-edit.mjs",
     "find-moments": "node skills/3-editing/clip-stream/scripts/find-moments.mjs",
     "cut-clips": "node skills/3-editing/clip-stream/scripts/cut-clips.mjs",
+    "watch-live": "node skills/3-editing/clip-stream/scripts/watch-live.mjs",
     "index-broll": "node skills/3-editing/edit-video/scripts/index-broll.mjs",
     "analyze-reference": "node skills/3-editing/edit-video/scripts/reference-analyze.mjs",
     "scaffold-glass": "node skills/3-styles-on-camera/adaptive-glass/scripts/scaffold-glass.mjs",
