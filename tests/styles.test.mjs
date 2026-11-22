@@ -148,7 +148,7 @@ test("film-styles ships every style with reel and YouTube formats and working li
   const index = await fs.readFile(path.join(installed, "styles", "README.md"), "utf8");
   for (const style of styles) {
     const text = await fs.readFile(style, "utf8");
-    const folder = path.relative(path.join(installed, "styles"), path.dirname(style));
+    const folder = path.relative(path.join(installed, "styles"), path.dirname(style)).split(path.sep).join("/");
     assert.match(text, /^### Reel \(1080×1920\)$/m, `${folder}: missing its reel format`);
     assert.match(text, /^### YouTube \(1920×1080\)$/m, `${folder}: missing its YouTube format`);
     assert.doesNotMatch(text, /DEMO\.md|Opuscar|Lemo ?Lab|Clawd/i, `${folder}: names its source`);

@@ -31,7 +31,7 @@ const expectedSkills = [
 const skillRoot = path.join(root, "skills");
 const discovered = (await listFilesRecursively(skillRoot))
   .filter((file) => path.basename(file) === "SKILL.md")
-  .map((file) => path.relative(skillRoot, path.dirname(file))).sort();
+  .map((file) => path.relative(skillRoot, path.dirname(file)).split(path.sep).join("/")).sort();
 if (JSON.stringify(discovered) !== JSON.stringify([...expectedSkills].sort())) {
   failures.push(`Expected ${expectedSkills.length} skills; found: ${discovered.join(", ")}`);
 }
