@@ -1,23 +1,86 @@
-# FavStash Creator Skills: find ideas, script, edit and publish short videos with Claude Code or Codex
+<p align="center">
+  <a href="https://www.favstash.app/?utm_source=github&utm_medium=referral&utm_campaign=creator-skills-global-q4&utm_content=readme-logo">
+    <img src=".claude-plugin/icon.png" alt="FavStash" width="88" />
+  </a>
+</p>
 
-[![Ten looks, every frame drawn by an agent in code: an animated explainer, a 3D Blender sitcom scene, 99 film looks, a cartoon of the pack's creator, a product ad and five talking-head styles](assets/hero-styles.jpg)](#pick-a-style)
+<h1 align="center">FavStash Creator Skills</h1>
 
-**Turn your coding agent into a video studio.** Hand it a script and it makes the whole
-video, in code, on your laptop: a Reel, a TikTok, a Short, or a 16:9 explainer for
-YouTube. **99 film looks** (whiteboard, stick figures, cel anime, manga, newsreel, 3D
-maps, tilt-shift, risograph…), a cute 3D character, a Blender 3D sitcom, a lip-synced cartoon of you, and
-five styles for when you are on camera. No camera needed, no video model, no stock
-footage, no subscription. Free and open source, for Claude Code, Codex or any
-skills-aware agent.
+<p align="center">
+  <strong>Turn Claude Code or Codex into a video studio.</strong><br />
+  Tell your agent what you want, and it makes and posts the whole video on your machine:<br />
+  Reels, TikToks, Shorts and YouTube explainers. Free and open source.
+</p>
 
-- 🎬 **99 film looks**, each a full style guide: layout, type, motion, camera, sound and what goes on the first frame.
-- 📺 **Reels and YouTube.** Every look comes as a 9:16 reel and a 16:9 explainer in chapters.
-- 🧸 **Characters.** A chibi 3D kid, a Blender sitcom your agent directs from a script, or a cartoon of you made from a few photos with any image AI.
-- 🎙️ **Free voices.** Your own recording, a free local voice, or ElevenLabs, with every word timed.
-- ✂️ **Clip your streams.** Hand it a four-hour stream or VOD, or a live stream link; it finds the best moments from the volume, your commentary and chat, and cuts them into 9:16 clips, while the stream is still live if you want.
-- 🔁 **The whole loop.** Find proven ideas, write the script, edit, then publish and learn with [FavStash](https://www.favstash.app/).
+<p align="center">
+  <a href="https://github.com/alisadiq-ai/favstash-ai-video-editing-skills/stargazers"><img src="https://img.shields.io/github/stars/alisadiq-ai/favstash-ai-video-editing-skills?style=flat&color=8b5cf6&label=stars" alt="GitHub stars" /></a>
+  <a href="LICENSE"><img src="https://img.shields.io/badge/license-Apache%202.0-3b82f6" alt="License: Apache 2.0" /></a>
+  <img src="https://img.shields.io/badge/skills-16-6366f1" alt="16 skills" />
+  <img src="https://img.shields.io/badge/film%20looks-99-ec4899" alt="99 film looks" />
+</p>
 
-**Give this prompt to your agent:**
+<p align="center">
+  <br />
+  <a href="#install"><strong>Install in one prompt »</strong></a>
+  <br /><br />
+  <a href="skills/3-styles-animated/film-styles/styles/README.md"><strong>Browse all 99 film looks »</strong></a>
+  <br /><br />
+</p>
+
+<p align="center">
+  <a href="#pick-a-style">Pick a style</a>
+  ·
+  <a href="#clip-a-stream">Clip a stream</a>
+  ·
+  <a href="#voices">Voices</a>
+  ·
+  <a href="#the-creator-loop">Creator loop</a>
+  ·
+  <a href="#privacy">Privacy</a>
+  ·
+  <a href="#faq">FAQ</a>
+  ·
+  <a href="https://www.favstash.app/?utm_source=github&utm_medium=referral&utm_campaign=creator-skills-global-q4&utm_content=readme-nav">FavStash</a>
+</p>
+
+<p align="center"><strong>Works with your agent:</strong></p>
+<p align="center">
+  <img src="https://img.shields.io/badge/Claude%20Code-D97757?style=for-the-badge&logo=claude&logoColor=white" alt="Claude Code" />
+  <img src="https://img.shields.io/badge/Codex-111111?style=for-the-badge" alt="Codex" />
+  <img src="https://img.shields.io/badge/Cursor-111111?style=for-the-badge&logo=cursor&logoColor=white" alt="Cursor" />
+  <img src="https://img.shields.io/badge/any%20skills--aware%20agent-6b7280?style=for-the-badge" alt="Any skills-aware agent" />
+</p>
+
+<p align="center"><strong>Publish with <a href="https://www.favstash.app/?utm_source=github&utm_medium=referral&utm_campaign=creator-skills-global-q4&utm_content=readme-publish-row">FavStash</a> to:</strong></p>
+<p align="center">
+  <img src="https://img.shields.io/badge/Instagram-E4405F?style=for-the-badge&logo=instagram&logoColor=white" alt="Instagram" />
+  <img src="https://img.shields.io/badge/TikTok-000000?style=for-the-badge&logo=tiktok&logoColor=white" alt="TikTok" />
+  <img src="https://img.shields.io/badge/YouTube-FF0000?style=for-the-badge&logo=youtube&logoColor=white" alt="YouTube" />
+  <img src="https://img.shields.io/badge/LinkedIn-0A66C2?style=for-the-badge" alt="LinkedIn" />
+</p>
+
+<br />
+
+<p align="center">
+  <a href="#pick-a-style"><img src="assets/hero-styles.jpg" alt="Ten looks, every frame drawn by an agent in code: an animated explainer, a 3D Blender sitcom scene, 99 film looks, a cartoon of the pack's creator, a product ad and five talking-head styles" /></a>
+</p>
+
+## ✨ What you get
+
+No camera, no video model, no stock footage, no subscription.
+
+- 🎬 **99 film looks**: whiteboard, stick figures, cel anime, manga, newsreel, 3D maps, tilt-shift, risograph and more. Each is a full style guide: layout, type, motion, camera, sound and the first frame.
+- 📺 **Reels and YouTube**: every look comes as a 9:16 reel and a 16:9 explainer in chapters.
+- 🧸 **Characters**: a chibi 3D kid, a Blender sitcom your agent directs from a script, or a lip-synced cartoon of you made from a few photos.
+- 🎙️ **Free voices**: your own recording, a free local voice, or ElevenLabs, with every word timed.
+- ✂️ **Clip your streams**: hand it a four-hour VOD or a live link; it finds the best moments and cuts them into 9:16 clips.
+- 🔁 **The whole loop**: find proven ideas, write the script, edit, then publish and learn with [FavStash](https://www.favstash.app/?utm_source=github&utm_medium=referral&utm_campaign=creator-skills-global-q4&utm_content=readme-features).
+
+<a id="install"></a>
+
+## ⚡ Install in one prompt
+
+Paste this into Claude Code, Codex, Cursor or another local coding agent. It installs all sixteen skills and the media tools they need, renders a test video and connects FavStash. You only sign in.
 
 ```text
 Set up FavStash creator skills for my short-form workflow.
@@ -30,26 +93,50 @@ Check whether FavStash is connected; if not, connect it with the FavStash CLI
 me how to start my first reel.
 ```
 
-## Pick a style
+<sub>Prefer to do it yourself? See [other ways to install](#other-ways-to-install): `npx skills` or the Claude plugin.</sub>
 
-[`edit-video`](skills/3-editing/edit-video/SKILL.md) is the base for every edit: the cut,
-captions, voice, sound and review. Add one style on top. The styles sit on three
-shelves, and each shelf is a folder.
+<a id="pick-a-style"></a>
+
+## 🎬 Pick a style
+
+[`edit-video`](skills/3-editing/edit-video/SKILL.md) is the base for every edit: the cut, captions, voice, sound and review. Add one style on top. The styles sit on three shelves.
 
 ### No camera: fully animated
 
-[`skills/3-styles-animated/`](skills/3-styles-animated)
-
 <table><tr>
-<td width="33%" valign="top"><a href="skills/3-styles-animated/film-styles/SKILL.md"><img src="assets/previews/tiles/film-styles.jpg" width="100%" alt="Film styles: 99 film looks, a sampler of whiteboard, chalkboard, newsreel, pixel RPG, risograph, blueprint, caption news, keynote, watercolour, cel anime, tilt-shift and ink wash"></a><br><b><a href="skills/3-styles-animated/film-styles/SKILL.md">film-styles</a></b><br><sub>99 film looks, each a full style guide with a reel format and a YouTube format. Name one and bring a story.</sub></td>
-<td width="33%" valign="top"><a href="skills/3-styles-animated/animated-explainer/SKILL.md"><img src="assets/previews/tiles/animated-explainer.jpg" width="100%" alt="Animated explainer: a lit colour field with one hero card, the spoken line at the top and a cartoon cursor"></a><br><b><a href="skills/3-styles-animated/animated-explainer/SKILL.md">animated-explainer</a></b><br><sub>A whole reel keyed to the voice: one hero card per beat, the line lit word by word, every click and sound on its word. Two voices can talk.</sub></td>
-<td width="33%" valign="top"><a href="skills/3-styles-animated/product-motion-ads/SKILL.md"><img src="assets/previews/tiles/product-motion-ads.jpg" width="100%" alt="Product motion ads: a hook over the product's phone screen"></a><br><b><a href="skills/3-styles-animated/product-motion-ads/SKILL.md">product-motion-ads</a></b><br><sub>A motion-graphics ad built from your product itself (an app, a site, a gadget), ending on a comment-to-DM giveaway. Also cuts a 16:9 launch film.</sub></td>
+<td width="33%" valign="top" align="center"><a href="skills/3-styles-animated/film-styles/SKILL.md"><img src="assets/previews/tiles/film-styles.jpg" width="100%" alt="Film styles: a sampler of whiteboard, chalkboard, newsreel, pixel RPG, risograph, blueprint and more"></a><br><b><a href="skills/3-styles-animated/film-styles/SKILL.md">film-styles</a></b><br><sub>99 film looks for reels and YouTube. Name one, bring a story.</sub></td>
+<td width="33%" valign="top" align="center"><a href="skills/3-styles-animated/animated-explainer/SKILL.md"><img src="assets/previews/tiles/animated-explainer.jpg" width="100%" alt="Animated explainer: one hero card per beat with the spoken line lit word by word"></a><br><b><a href="skills/3-styles-animated/animated-explainer/SKILL.md">animated-explainer</a></b><br><sub>A reel keyed to the voice, one hero card per beat.</sub></td>
+<td width="33%" valign="top" align="center"><a href="skills/3-styles-animated/product-motion-ads/SKILL.md"><img src="assets/previews/tiles/product-motion-ads.jpg" width="100%" alt="Product motion ads: a hook over the product's phone screen"></a><br><b><a href="skills/3-styles-animated/product-motion-ads/SKILL.md">product-motion-ads</a></b><br><sub>A motion ad built from your own product.</sub></td>
 </tr></table>
 
-#### The 99 film looks
+### Characters: a presenter for any reel
 
-Grouped by what the picture looks like. Each name opens its style guide; the
-[style index](skills/3-styles-animated/film-styles/styles/README.md) says what each looks like and what it's good for.
+<table><tr>
+<td width="33%" valign="top" align="center"><a href="skills/3-styles-characters/cartoon-character/SKILL.md"><img src="assets/previews/tiles/cartoon-character.jpg" width="100%" alt="Cartoon character: a cartoon of Ali, who made this pack"></a><br><b><a href="skills/3-styles-characters/cartoon-character/SKILL.md">cartoon-character</a></b><br><sub>A lip-synced cartoon of you, made from a few photos.</sub></td>
+<td width="33%" valign="top" align="center"><a href="skills/3-styles-characters/3d-character/SKILL.md"><img src="assets/previews/tiles/3d-character.jpg" width="100%" alt="3D character: a chibi girl waving on a pastel stage"></a><br><b><a href="skills/3-styles-characters/3d-character/SKILL.md">3d-character</a></b><br><sub>A chibi 3D presenter, camera cuts on the words.</sub></td>
+<td width="33%" valign="top" align="center"><a href="skills/3-styles-characters/blender-director/SKILL.md"><img src="assets/previews/tiles/blender-director.jpg" width="100%" alt="Blender director: two characters at a night desk lit by a lamp and the city"></a><br><b><a href="skills/3-styles-characters/blender-director/SKILL.md">blender-director</a></b><br><sub>A narrated 3D episode built in Blender from code.</sub></td>
+</tr></table>
+
+### On camera: you, or your footage
+
+<table><tr>
+<td width="20%" valign="top" align="center"><a href="skills/3-styles-on-camera/breakout-card/SKILL.md"><img src="assets/previews/tiles/breakout-card.jpg" width="100%" alt="Breakout card: a dark card with a one-word caption above the speaker"></a><br><b><a href="skills/3-styles-on-camera/breakout-card/SKILL.md">breakout-card</a></b><br><sub>Your head breaks out of a card.</sub></td>
+<td width="20%" valign="top" align="center"><a href="skills/3-styles-on-camera/paper-grid/SKILL.md"><img src="assets/previews/tiles/paper-grid.jpg" width="100%" alt="Paper grid: a white grid pane with an animated UI card above the speaker"></a><br><b><a href="skills/3-styles-on-camera/paper-grid/SKILL.md">paper-grid</a></b><br><sub>One animated UI per line.</sub></td>
+<td width="20%" valign="top" align="center"><a href="skills/3-styles-on-camera/adaptive-glass/SKILL.md"><img src="assets/previews/tiles/adaptive-glass.jpg" width="100%" alt="Adaptive glass: glass panels with real proof above the speaker"></a><br><b><a href="skills/3-styles-on-camera/adaptive-glass/SKILL.md">adaptive-glass</a></b><br><sub>Proof in glass panels.</sub></td>
+<td width="20%" valign="top" align="center"><a href="skills/3-styles-on-camera/motion-effects/SKILL.md"><img src="assets/previews/tiles/motion-effects.jpg" width="100%" alt="Motion effects: a kinetic hook behind the speaker"></a><br><b><a href="skills/3-styles-on-camera/motion-effects/SKILL.md">motion-effects</a></b><br><sub>33 named effects.</sub></td>
+<td width="20%" valign="top" align="center"><a href="skills/3-styles-on-camera/text-over-footage/SKILL.md"><img src="assets/previews/tiles/text-over-footage.jpg" width="100%" alt="Text over footage: one line of text over matching B-roll"></a><br><b><a href="skills/3-styles-on-camera/text-over-footage/SKILL.md">text-over-footage</a></b><br><sub>One line over B-roll.</sub></td>
+</tr></table>
+
+<a id="film-looks"></a>
+
+## 🎞️ 99 film looks, for Reels and YouTube
+
+[![The same looks in 16:9 for YouTube: a stick-figure explainer, a tablet sketch, a 3D map explainer, an isometric infographic, a sketchnote and a line-art cutaway](assets/previews/youtube-explainers.jpg)](skills/3-styles-animated/film-styles/SKILL.md)
+
+Every look makes a 9:16 reel and a 16:9 YouTube explainer: 2–8 minutes in chapters, a hook in the first ten seconds, a re-hook every half minute and a thumbnail frame. For YouTube, start with Whiteboard, Stick-figure, Tablet Sketch, Sketchnote, Scale Zoom, 3D Map Explainer, Isometric Infographic, Line-Art Cutaway or Data Storytelling. The [style index](skills/3-styles-animated/film-styles/styles/README.md) says what each look is good for.
+
+<details>
+<summary><b>See all 99 looks by group</b></summary>
 
 <!-- film-looks:start -->
 | Group | Looks |
@@ -71,43 +158,27 @@ Grouped by what the picture looks like. Each name opens its style guide; the
 | Data & maps | [3D Map Explainer](skills/3-styles-animated/film-styles/styles/15-data-maps/map-explainer/STYLE.md), [Blob Simulation](skills/3-styles-animated/film-styles/styles/15-data-maps/pip-simulation/STYLE.md), [Data Physicalization](skills/3-styles-animated/film-styles/styles/15-data-maps/data-physical/STYLE.md), [Data Storytelling](skills/3-styles-animated/film-styles/styles/15-data-maps/dataviz/STYLE.md), [Projection on White Model](skills/3-styles-animated/film-styles/styles/15-data-maps/white-model/STYLE.md), [Transit Map](skills/3-styles-animated/film-styles/styles/15-data-maps/transit-map/STYLE.md) |
 <!-- film-looks:end -->
 
-#### Explainers for YouTube
+</details>
 
-[![The same looks in 16:9 for YouTube: a stick-figure explainer, a tablet sketch, a 3D map explainer, an isometric infographic, a sketchnote and a line-art cutaway](assets/previews/youtube-explainers.jpg)](skills/3-styles-animated/film-styles/SKILL.md)
-
-Every film look also makes a landscape explainer: 2–8 minutes in chapters, a hook in
-the first ten seconds, a re-hook every half minute and a thumbnail frame. Start with
-the whiteboard, stick-figure, tablet-sketch, sketchnote and marker explainers, Scale
-Zoom, the 3D Map Explainer, Isometric Infographic, Line-Art Cutaway or Data Storytelling.
-
-### Characters: a presenter for any reel
-
-[`skills/3-styles-characters/`](skills/3-styles-characters)
-
-<table><tr>
-<td width="33%" valign="top"><a href="skills/3-styles-characters/cartoon-character/SKILL.md"><img src="assets/previews/tiles/cartoon-character.jpg" width="100%" alt="Cartoon character: a cartoon of Ali, who made this pack"></a><br><b><a href="skills/3-styles-characters/cartoon-character/SKILL.md">cartoon-character</a></b><br><sub>A lip-synced 2D cartoon that talks, blinks and swaps poses. Two samples ship (Ali and Stashy); make your own from a few photos with any image AI.</sub></td>
-<td width="33%" valign="top"><a href="skills/3-styles-characters/3d-character/SKILL.md"><img src="assets/previews/tiles/3d-character.jpg" width="100%" alt="3D character: a chibi girl waving on a pastel stage"></a><br><b><a href="skills/3-styles-characters/3d-character/SKILL.md">3d-character</a></b><br><sub>A cute 3D chibi boy or girl talks to camera on a pastel stage, with camera cuts on the words. Built in Three.js, no Blender needed.</sub></td>
-<td width="33%" valign="top"><a href="skills/3-styles-characters/blender-director/SKILL.md"><img src="assets/previews/tiles/blender-director.jpg" width="100%" alt="Blender director: a silver-haired character and a box mascot at a night desk, lit by a lamp and the city"></a><br><b><a href="skills/3-styles-characters/blender-director/SKILL.md">blender-director</a></b><br><sub>A narrated 3D episode built in Blender from code: lip-synced characters, cameras that cut on words, dark finished lighting and wireframe reveals. Needs Blender (free).</sub></td>
-</tr></table>
-
-### On camera: you, or your footage
-
-[`skills/3-styles-on-camera/`](skills/3-styles-on-camera)
-
-<table><tr>
-<td width="20%" valign="top"><a href="skills/3-styles-on-camera/breakout-card/SKILL.md"><img src="assets/previews/tiles/breakout-card.jpg" width="100%" alt="Breakout card: a dark card on a grid page and a one-word caption above the speaker"></a><br><b><a href="skills/3-styles-on-camera/breakout-card/SKILL.md">breakout-card</a></b><br><sub>Your head breaks out of a card at the bottom; one-to-two-word captions.</sub></td>
-<td width="20%" valign="top"><a href="skills/3-styles-on-camera/paper-grid/SKILL.md"><img src="assets/previews/tiles/paper-grid.jpg" width="100%" alt="Paper grid: a white grid pane with an animated UI card above the speaker"></a><br><b><a href="skills/3-styles-on-camera/paper-grid/SKILL.md">paper-grid</a></b><br><sub>A white grid pane, one animated UI artifact per line.</sub></td>
-<td width="20%" valign="top"><a href="skills/3-styles-on-camera/adaptive-glass/SKILL.md"><img src="assets/previews/tiles/adaptive-glass.jpg" width="100%" alt="Adaptive glass: glass panels with real proof above the speaker"></a><br><b><a href="skills/3-styles-on-camera/adaptive-glass/SKILL.md">adaptive-glass</a></b><br><sub>Moving proof in glass panels, coloured to match your footage.</sub></td>
-<td width="20%" valign="top"><a href="skills/3-styles-on-camera/motion-effects/SKILL.md"><img src="assets/previews/tiles/motion-effects.jpg" width="100%" alt="Motion effects: a kinetic hook behind the speaker"></a><br><b><a href="skills/3-styles-on-camera/motion-effects/SKILL.md">motion-effects</a></b><br><sub>33 named effects for any talking head: kinetic hook, gravity drop, orbit, vertigo, rewind…</sub></td>
-<td width="20%" valign="top"><a href="skills/3-styles-on-camera/text-over-footage/SKILL.md"><img src="assets/previews/tiles/text-over-footage.jpg" width="100%" alt="Text over footage: one line of text over B-roll that matches it"></a><br><b><a href="skills/3-styles-on-camera/text-over-footage/SKILL.md">text-over-footage</a></b><br><sub>One readable line over B-roll that matches the joke.</sub></td>
-</tr></table>
-
-## One sentence is enough
+## 💬 One sentence is enough
 
 ```text
 Use $film-styles with $edit-video to make a 30-second reel in the Whiteboard style
 about how a credit score works, with a free local voice.
 ```
+
+```text
+Use $edit-video with $3d-character to make a 15-second 3D reel where the chibi girl
+announces my launch, with camera cuts on the words and a wave at the end.
+```
+
+```text
+Use $edit-video with $breakout-card to edit these takes into a 40-second reel, and add
+a kinetic hook from $motion-effects.
+```
+
+<details>
+<summary><b>More examples</b></summary>
 
 ```text
 Use $film-styles with $edit-video to make a 5-minute Stick-figure Explainer for YouTube
@@ -117,11 +188,6 @@ on why planes fly, in chapters, with a thumbnail.
 ```text
 Use $film-styles with $edit-video to turn this report into a Caption News reel
 that works with the sound off.
-```
-
-```text
-Use $edit-video with $3d-character to make a 15-second 3D reel where the chibi girl
-announces my launch, with camera cuts on the words and a wave at the end.
 ```
 
 ```text
@@ -139,19 +205,13 @@ Use $edit-video with $product-motion-ads to make a 25-second ad for my app from 
 ending on "comment TEMPLATE".
 ```
 
-```text
-Use $edit-video with $breakout-card to edit these takes into a 40-second reel, and add
-a kinetic hook from $motion-effects.
-```
+</details>
 
-## Clip a stream
+<a id="clip-a-stream"></a>
 
-[`clip-stream`](skills/3-editing/clip-stream/SKILL.md) turns a long stream, VOD or
-gameplay recording into vertical clips. It finds the moments worth posting from what
-you can hear and read: volume spikes against the minute around them, what you say
-("no way", "clip that", your own keywords), chat bursts from a chat replay and hard
-cuts on screen. You look at each pick (start, peak and end side by side), keep the
-good ones, and it cuts them to 1080×1920 in one of three layouts:
+## ✂️ Clip a stream
+
+[`clip-stream`](skills/3-editing/clip-stream/SKILL.md) turns a long stream, VOD or gameplay recording into vertical clips. It finds the moments worth posting from volume spikes, what you say ("no way", "clip that", your own keywords), chat bursts and hard cuts on screen. You check each pick, keep the good ones, and it cuts them to 1080×1920:
 
 | Layout | Looks like | Fits |
 | --- | --- | --- |
@@ -159,29 +219,20 @@ good ones, and it cuts them to 1080×1920 in one of three layouts:
 | `fill` | The whole frame over a blurred copy of itself | Games where the HUD, minimap or kill feed matters |
 | `split` | Your facecam on top, the game below | Streams where your reaction is half the moment |
 
-Then `edit-video` and `text-over-footage` add the hook line and captions, and
-`publish-and-analyze` schedules the batch through FavStash after you approve it.
-Everything runs on your computer with FFmpeg and a free local transcriber.
+It can also clip a stream while it's live: paste the link and it records, reads chat and cuts a clip every time the chat goes off (Twitch through streamlink, so ads are skipped and chat stays in sync). Everything runs on your computer with FFmpeg and a free local transcriber.
 
 ```text
 Use $clip-stream to find the 30 best moments in last night's stream, show me the picks,
 then cut the ones I keep with my facecam on top.
 ```
 
-It also clips a stream while it's live: paste the link and it records the stream,
-reads its chat and cuts a clip every time the chat goes off (Twitch through
-streamlink, so ads are skipped and chat stays in sync).
+<sub>Clip your own streams, or streams whose owner lets you clip them.</sub>
 
-```text
-Use $clip-stream to clip this stream live for the next two hours: twitch.tv/<channel>
-```
+<a id="voices"></a>
 
-Clip your own streams, or streams whose owner lets you clip them.
+## 🎙️ Voices: yours, free on your laptop, or hosted
 
-## Voices: yours, free on your laptop, or hosted
-
-Animated videos run on a voice, and every word's timing comes back with it, so each
-card, click and sound lands on the word it belongs to.
+Every word's timing comes back with the voice, so each card, click and sound lands on the word it belongs to.
 
 | Voice | Cost | What you get |
 | --- | --- | --- |
@@ -190,13 +241,13 @@ card, click and sound lands on the word it belongs to.
 | Kokoro, through `hyperframes tts` | Free, on your machine | Twelve preset voices with nothing extra to sign up for. Apache-2.0 |
 | [ElevenLabs](https://elevenlabs.io) | Paid per character | The most natural read, voice clones and exact word timings; your agent sets it up with your own account |
 
-Clone only your own voice, or one you have permission to use. Setup and examples are
-in [voice options](skills/3-editing/edit-video/references/voice.md).
+<sub>Clone only your own voice, or one you have permission to use. Setup and examples: [voice options](skills/3-editing/edit-video/references/voice.md).</sub>
 
-## The creator loop
+<a id="the-creator-loop"></a>
 
-The styles are stage 3. The other stages find the idea, write the script and learn
-from what you post.
+## 🔁 The creator loop
+
+The styles are stage 3. The other stages find the idea, write the script and learn from what you post.
 
 ```mermaid
 flowchart LR
@@ -210,35 +261,40 @@ flowchart LR
 | Stage | Skill | What your agent does |
 | --- | --- | --- |
 | 1 · Research | [find-ideas](skills/1-research/find-ideas/SKILL.md) | Finds proven reels to adapt (3× their creator's median), reads saved inspiration and suggests what to make next |
-| 2 · Script | [write-script](skills/2-scripting/write-script/SKILL.md) | Copies the proven hook, adds as many equally aggressive alternatives as you want to test, writes one shared body in your voice and hands over a filmable brief |
-| 3 · Clip | [clip-stream](skills/3-editing/clip-stream/SKILL.md) | Finds the best moments in a long stream or VOD from volume, speech and chat, and cuts the ones you keep into 9:16 clips |
-| 3 · Edit | [edit-video](skills/3-editing/edit-video/SKILL.md) + a style | Cuts your takes or builds the animated video, adds captions, sound and motion graphics, keeps everything in safe areas and reviews the actual export |
-| 4 · Publish & learn | [publish-and-analyze](skills/4-publish-and-learn/publish-and-analyze/SKILL.md) | Exports at full quality, picks a real-frame cover, avoids duplicate holds on hook variants, schedules after your approval and compares results |
+| 2 · Script | [write-script](skills/2-scripting/write-script/SKILL.md) | Copies the proven hook, adds alternatives to test, writes one shared body in your voice and hands over a filmable brief |
+| 3 · Clip | [clip-stream](skills/3-editing/clip-stream/SKILL.md) | Finds the best moments in a long stream or VOD and cuts the ones you keep into 9:16 clips |
+| 3 · Edit | [edit-video](skills/3-editing/edit-video/SKILL.md) + a style | Cuts your takes or builds the animated video, adds captions, sound and motion graphics, and reviews the actual export |
+| 4 · Publish & learn | [publish-and-analyze](skills/4-publish-and-learn/publish-and-analyze/SKILL.md) | Exports at full quality, picks a real-frame cover, schedules after your approval and compares results |
 
-```text
-Use $find-ideas to find three proven reels about AI coding tools I could adapt.
-Use $write-script to adapt this reel into a few hooks to test and one body in my voice.
-Use $publish-and-analyze to prepare covers and a caption for this cut, then compare
-last week's hook test once I approve.
-```
+[![Complete your loop: 1 Save, ideas from your Stash; 2 Edit, your agent edits with these skills; 3 Post, FavStash schedules and runs your calendar; 4 Learn, analytics feed the next reel](assets/creator-loop.png)](https://www.favstash.app/?utm_source=github&utm_medium=referral&utm_campaign=creator-skills-global-q4&utm_content=readme-loop)
 
-Every skill works on its own. [FavStash](https://www.favstash.app/) closes the loop:
-your saved reels feed research, approved cuts go to Instagram, TikTok, YouTube or
-LinkedIn, and the analytics pick the next test.
+<a id="compare"></a>
 
-[![Complete your loop: 1 Save, ideas from your Stash; 2 Edit, your agent edits with these skills; 3 Post, FavStash schedules and runs your calendar; 4 Learn, analytics feed the next reel](assets/creator-loop.png)](https://www.favstash.app/)
+## 🆚 Skills alone, or with FavStash
 
-**Complete your loop.** These skills make the reel. [FavStash](https://www.favstash.app/)
-adds the other three steps: the reels you save become your ideas, approved cuts go out on
-your calendar, and the numbers pick what you make next. Connect it once and every reel
-makes the next one better.
+Every skill works on its own. [FavStash](https://www.favstash.app/?utm_source=github&utm_medium=referral&utm_campaign=creator-skills-global-q4&utm_content=readme-compare) closes the loop.
 
-## Install
+| | Skills only | Skills + FavStash |
+| --- | --- | --- |
+| **Cost** | Free and open source (Apache-2.0) | The skills stay free; FavStash [plans](https://www.favstash.app/?utm_source=github&utm_medium=referral&utm_campaign=creator-skills-global-q4&utm_content=readme-pricing#pricing) |
+| **Research** | Finds proven reels to adapt | Also reads the reels you saved to your stash |
+| **Script and edit** | Runs on your laptop | Same |
+| **Publishing** | You get a local file to post yourself | Schedules to Instagram, TikTok, YouTube or LinkedIn after you approve |
+| **Learning** | You compare results by hand | Analytics compare your posts and pick the next test |
+| **Setup** | Nothing to sign up for | Connect once with OAuth or the FavStash CLI |
 
-Paste the prompt at the top into Claude Code, Codex, Cursor or another local coding
-agent. It follows [INSTALL_FOR_AGENTS.md](INSTALL_FOR_AGENTS.md) to install the skills,
-prepare FFmpeg, HyperFrames and GSAP in your workspace, render a smoke test and
-connect FavStash. You only sign in; the agent does the rest.
+<a id="privacy"></a>
+
+## 🔒 Privacy and approvals
+
+- The bundled scripts run on your machine and make no network requests. Your footage, renders and preferences stay in your workspace.
+- Your agent delivers a local file. Nothing is posted until you approve the exact file, cover, caption, account and time.
+- Data leaves your machine only through FavStash tools you connect: the remote MCP server at `https://mcp.favstash.app/mcp` (OAuth) or the FavStash CLI. See the [FavStash privacy policy](https://www.favstash.app/privacy).
+- Saved reels are references: adapt their hook, structure and pacing, and make the video from your own footage. Downloaded footage and music stay analysis-only unless you have reuse rights.
+
+<a id="other-ways-to-install"></a>
+
+## 📦 Other ways to install
 
 <details>
 <summary>Install the skills yourself</summary>
@@ -282,69 +338,46 @@ so use the plugin in Claude Code or in Cowork on your own computer.
 
 </details>
 
-## Free to use
+<a id="faq"></a>
 
-The skills are free and open source (Apache-2.0). FavStash's plans are on [favstash.app](https://www.favstash.app/#pricing).
-
-## FAQ
+## ❓ FAQ
 
 <details>
-<summary><h3>Do I need FavStash?</h3></summary>
+<summary><b>Do I need FavStash?</b></summary>
 
-No. Research, scripting and editing work without it. FavStash adds your saved inspiration, scheduling and analytics so the loop closes.
+No. Research, scripting and editing work without it. FavStash adds your saved inspiration, scheduling and analytics so the loop closes. See [skills alone, or with FavStash](#compare).
 
 </details>
 
 <details>
-<summary><h3>Will my agent post without asking?</h3></summary>
-
-No. It delivers a local file. Posting needs your approval for the exact file, cover, caption, account and time.
-
-</details>
-
-<details>
-<summary><h3>How long does a film-style video take?</h3></summary>
+<summary><b>How long does a film-style video take?</b></summary>
 
 The agent writes a treatment, draws two or three style frames for you to check, then builds and renders. Expect an agent session of about half an hour for a 30-second reel, longer for a YouTube explainer, plus the render (about ten seconds of rendering per second of video).
 
 </details>
 
 <details>
-<summary><h3>Does it make YouTube videos?</h3></summary>
+<summary><b>Does it make YouTube videos?</b></summary>
 
 Yes. Every film look has a 16:9 format for 2–8 minute explainers in chapters, with the first ten seconds and the thumbnail planned. The other styles are built for 9:16; `product-motion-ads` also cuts a 16:9 launch film.
 
 </details>
 
 <details>
-<summary><h3>What runs where?</h3></summary>
+<summary><b>What runs where?</b></summary>
 
 Editing runs locally with FFmpeg and HyperFrames (Node 22+). `paper-grid`, `breakout-card`, `animated-explainer`, `3d-character`, `cartoon-character` and the duplicate check also use Python. The breakout card's built-in person matte uses Apple Vision on macOS; on other systems, supply a matte from any segmentation tool.
 
 </details>
 
 <details>
-<summary><h3>What does it send, and where?</h3></summary>
-
-The bundled scripts run on your machine and make no network requests; your footage, renders and preferences stay in your workspace. Data leaves your machine only through FavStash tools you connect: the remote MCP server at `https://mcp.favstash.app/mcp` (OAuth) or the FavStash CLI. They search your stash, read your connected accounts' analytics, and upload and schedule a post only after you approve the exact file, caption, account and time. See the [FavStash privacy policy](https://www.favstash.app/privacy).
-
-</details>
-
-<details>
-<summary><h3>Can I use Ali's cartoon or Stashy?</h3></summary>
+<summary><b>Can I use Ali's cartoon or Stashy?</b></summary>
 
 To try and demo the skills, yes. For your own channel, make your own character; the samples' [terms](skills/3-styles-characters/cartoon-character/characters/README.md) say what's allowed.
 
 </details>
 
-<details>
-<summary><h3>Can I use a saved reel as a reference?</h3></summary>
-
-Yes, for analysis. Adapt its hook, structure and pacing, and make the video from your own footage. Downloaded footage and music stay analysis-only unless you have reuse rights.
-
-</details>
-
-## Contributing
+## 🤝 Contributing
 
 ```bash
 npm test
@@ -356,4 +389,16 @@ and original SFX use [Apache-2.0](LICENSE); external tools, the bundled fonts, t
 film-style guides and the sample characters keep their own [licenses](THIRD_PARTY_NOTICES.md).
 Most style previews come from the maintainer's own reels, with the speaker replaced
 by a placeholder; the animated previews are reels the skills built from their own
-worked examples. If this pack saves you an edit, a ⭐ helps other creators find it.
+worked examples.
+
+<br />
+
+<p align="center">
+  <strong>If this pack saves you an edit, a ⭐ helps other creators find it.</strong>
+  <br /><br />
+  <a href="https://www.favstash.app/?utm_source=github&utm_medium=referral&utm_campaign=creator-skills-global-q4&utm_content=readme-footer">
+    <img src=".claude-plugin/icon.png" alt="FavStash" width="32" />
+  </a>
+  <br />
+  <sub>Made by <a href="https://www.favstash.app/?utm_source=github&utm_medium=referral&utm_campaign=creator-skills-global-q4&utm_content=readme-footer">FavStash</a></sub>
+</p>
